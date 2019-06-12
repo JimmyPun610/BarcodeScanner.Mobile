@@ -1,0 +1,8 @@
+/GoogleVisionBarCodeScanner.Droid/obj
+/GoogleVisionBarCodeScanner.Droid/bin
+/GoogleVisionBarCodeScanner.Droid/*.nupkg
+/GoogleVisionBarCodeScanner.Droid/nuget.exe
+/.vs/GoogleVisionBarCodeScanner/v16/.suo
+/GoogleVisionBarCodeScanner.Droid/.vs/GoogleVisionBarCodeScanner/v16/.suo
+/GoogleVisionBarCodeScanner.Droid/.vs/GoogleVisionBarCodeScanner/v16/Server/sqlite3/db.lock
+/GoogleVisionBarCodeScanner.Droid/.vs/GoogleVisionBarCodeScanner/v16/Server/sqlite3/storage.ide
