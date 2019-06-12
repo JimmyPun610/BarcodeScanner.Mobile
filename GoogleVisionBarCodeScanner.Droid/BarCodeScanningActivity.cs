@@ -20,7 +20,10 @@ namespace GoogleVisionBarCodeScanner.Droid
         
         BarcodeDetector barcodeDetector;
         CameraSource cameraSource;
+
+        Android.Widget.Button cancelBtn;
         Android.Widget.Button flashLightBtn;
+
         const int RequestCameraPermissionID = 1001;
         bool isTorch = false;
         protected override void OnCreate(Bundle savedInstanceState)
@@ -31,7 +34,9 @@ namespace GoogleVisionBarCodeScanner.Droid
             cameraPreview = FindViewById<SurfaceView>(Resource.Id.cameraPreview);
             txtResult = FindViewById<TextView>(Resource.Id.txtResult);
             flashLightBtn = FindViewById<Android.Widget.Button>(Resource.Id.flashlight_button);
+            cancelBtn = FindViewById<Android.Widget.Button>(Resource.Id.cancel_button);
 
+            cancelBtn.Text = Configuration.CancelText;
             txtResult.Text = Configuration.ScanningDescription;
             flashLightBtn.Text = Configuration.FlashlightMessage;
             this.Title = Configuration.Title;
@@ -47,7 +52,14 @@ namespace GoogleVisionBarCodeScanner.Droid
             cameraPreview.Holder.AddCallback(new SurfaceHolderCallback(cameraSource, cameraPreview));
             barcodeDetector.SetProcessor(new DetectorProcessor(txtResult, this));
             flashLightBtn.Click += FlashLightBtn_Click;
+            cancelBtn.Click += CancelBtn_Click;
         }
+
+        private void CancelBtn_Click(object sender, EventArgs e)
+        {
+            this.Finish();
+        }
+
         public static Android.Hardware.Camera GetCamera(CameraSource cameraSource)
         {
             var javaHero = cameraSource.JavaCast<Java.Lang.Object>();
