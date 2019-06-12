@@ -1,6 +1,6 @@
 # GoogleVisionBarCodeScanner
-BarCodeScanner using GoogleVision API for Xamarin Form Android
-
+BarCodeScanner using GoogleVision API for Xamarin Form
+Currently works on android only
 # Android setup
 1. Install Nuget package
 ```
