@@ -4,7 +4,7 @@ Currently works on android only
 # Android setup
 1. Install Nuget package
 ```
-Install-Package GoogleVisionBarCodeScanner.Droid -Version 1.0.0.4
+Install-Package GoogleVisionBarCodeScanner.Droid -Version 1.0.0.5
 ```
 
 2. Manifest.xml
