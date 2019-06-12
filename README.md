@@ -15,9 +15,9 @@ Install-Package GoogleVisionBarCodeScanner.Droid -Version 1.0.0.4
 
 3. Config scanning page and support format
 ```C#
-GoogleVisionBarCodeScanner.Droid.Configuration.FlashlightMessage = "電筒";
-GoogleVisionBarCodeScanner.Droid.Configuration.Title = "掃瞄QR";
-GoogleVisionBarCodeScanner.Droid.Configuration.ScanningDescription = "掃瞄QRCode";
+GoogleVisionBarCodeScanner.Droid.Configuration.FlashlightMessage = "Flashlight";
+GoogleVisionBarCodeScanner.Droid.Configuration.Title = "Scan QR";
+GoogleVisionBarCodeScanner.Droid.Configuration.ScanningDescription = "Please scan QRCode";
 GoogleVisionBarCodeScanner.Droid.Configuration.BarcodeFormats = BarcodeFormat.QrCode;
 ```
 
