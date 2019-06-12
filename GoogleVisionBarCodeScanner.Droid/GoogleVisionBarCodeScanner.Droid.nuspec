@@ -2,7 +2,7 @@
 <package>
   <metadata>
     <id>GoogleVisionBarCodeScanner.Droid</id>
-    <version>1.0.0.4</version>
+    <version>1.0.0.5</version>
     <title>GoogleVisionBarCodeScanner.Droid</title>
     <authors>Jimmy Pun</authors>
     <owners>Jimmy Pun</owners>
@@ -12,7 +12,7 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>This is a library to implement Google Mobile Vision API for barcode scanning for Xamarin Forms Android</description>
     <releaseNotes>
-		1.0.0.4 Google Mobile Vision API to scan barcode For Xamarin Forms Android
+		1.0.0.5 Google Mobile Vision API to scan barcode For Xamarin Forms Android
 	</releaseNotes>
     <copyright>Copyright 2019</copyright>
     <tags>Xamarin.Forms Android Barcode QRCode scanning Google-Vision</tags>
