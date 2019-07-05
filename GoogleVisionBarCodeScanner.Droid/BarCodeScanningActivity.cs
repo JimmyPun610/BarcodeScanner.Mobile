@@ -36,10 +36,10 @@ namespace GoogleVisionBarCodeScanner.Droid
             flashLightBtn = FindViewById<Android.Widget.Button>(Resource.Id.flashlight_button);
             cancelBtn = FindViewById<Android.Widget.Button>(Resource.Id.cancel_button);
 
-            cancelBtn.Text = Configuration.CancelText;
-            txtResult.Text = Configuration.ScanningDescription;
-            flashLightBtn.Text = Configuration.FlashlightMessage;
-            this.Title = Configuration.Title;
+            //cancelBtn.Text = Configuration.CancelText;
+            //txtResult.Text = Configuration.ScanningDescription;
+            //flashLightBtn.Text = Configuration.FlashlightMessage;
+            //this.Title = Configuration.Title;
 
             barcodeDetector = new BarcodeDetector.Builder(this)
                 .SetBarcodeFormats(Configuration.BarcodeFormats)
@@ -111,7 +111,7 @@ namespace GoogleVisionBarCodeScanner.Droid
                         isScanning = false;
                         Vibrator vib = (Vibrator)_activity.GetSystemService(Context.VibratorService);
                         vib.Vibrate(200);
-                        Configuration.ScannedQRCode?.Invoke(((Barcode)qrcodes.ValueAt(0)).RawValue);
+                        //Configuration.ScannedQRCode?.Invoke(((Barcode)qrcodes.ValueAt(0)).RawValue);
                         _activity.Finish();
                     }
                     //_txtResult.Post(() => {

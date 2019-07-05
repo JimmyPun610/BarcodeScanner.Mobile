@@ -17,8 +17,8 @@ namespace GoogleVisionBarCodeScanner.Droid
     {
         public static void StartScanning(Action<string> callback)
         {
-            Configuration.ScannedQRCode = callback;
-            (Forms.Context).StartActivity(typeof(BarCodeScanningActivity));
+            //Configuration.ScannedQRCode = callback;
+            //(Forms.Context).StartActivity(typeof(BarCodeScanningActivity));
         }
     }
 }

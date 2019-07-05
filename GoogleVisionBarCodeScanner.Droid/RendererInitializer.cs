@@ -12,7 +12,11 @@ using Android.Widget;
 
 namespace GoogleVisionBarCodeScanner.Droid
 {
-    class RendererInitializer
+    public class RendererInitializer
     {
+        public static void Init()
+        {
+            Renderer.CameraViewRenderer.Init();
+        }
     }
 }
