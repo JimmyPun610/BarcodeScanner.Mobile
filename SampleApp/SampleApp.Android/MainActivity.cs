@@ -20,6 +20,9 @@ namespace SampleApp.Droid
             base.OnCreate(savedInstanceState);
 
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
+
+            GoogleVisionBarCodeScanner.Droid.RendererInitializer.Init();
+
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             LoadApplication(new App());
         }
