@@ -9,6 +9,7 @@ using CoreMedia;
 using CoreVideo;
 using Firebase.MLKit.Vision;
 using Foundation;
+using AudioToolbox;
 using UIKit;
 
 namespace GoogleVisionBarCodeScanner.iOS
@@ -217,6 +218,8 @@ namespace GoogleVisionBarCodeScanner.iOS
                             return;
                         }
                         Configuration.IsScanning = false;
+                        if (Configuration.IsVibrate)
+                            SystemSound.Vibrate.PlayAlertSound();
                         List<BarcodeResult> resultList = new List<BarcodeResult>();
                         foreach (var barcode in barcodes)
                         {
