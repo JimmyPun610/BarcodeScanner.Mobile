@@ -51,6 +51,7 @@
     <CodesignKey>iPhone Developer</CodesignKey>
     <MtouchDebug>true</MtouchDebug>
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
+    <MtouchLink>None</MtouchLink>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhone' ">
     <DebugType>none</DebugType>
@@ -125,6 +126,9 @@
     <Reference Include="System.Numerics.Vectors" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="BarcodeScanner.XF">
+      <Version>2.0.1</Version>
+    </PackageReference>
     <PackageReference Include="Xamarin.Firebase.iOS.MLKit">
       <Version>0.13.0.1</Version>
     </PackageReference>
@@ -133,14 +137,6 @@
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>
-    <ProjectReference Include="..\..\GoogleVisionBarCodeScanner.iOS\GoogleVisionBarCodeScanner.iOS.csproj">
-      <Project>{00d2c7dd-8048-47e5-b1e1-e8e127ef94c1}</Project>
-      <Name>GoogleVisionBarCodeScanner.iOS</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\GoogleVisionBarCodeScanner\GoogleVisionBarCodeScanner.csproj">
-      <Project>{8cda11d6-38f2-485e-9acf-61133cceec7b}</Project>
-      <Name>GoogleVisionBarCodeScanner</Name>
-    </ProjectReference>
     <ProjectReference Include="..\SampleApp\SampleApp.csproj">
       <Project>{03240C5B-45BB-488F-A7D9-BC61B47D9E9B}</Project>
       <Name>SampleApp</Name>

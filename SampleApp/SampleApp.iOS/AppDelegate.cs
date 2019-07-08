@@ -24,8 +24,8 @@ namespace SampleApp.iOS
         {
             global::Xamarin.Forms.Forms.Init();
             LoadApplication(new App());
-            GoogleVisionBarCodeScanner.iOS.Initializer.Init();
-            Firebase.Core.App.Configure();
+            //GoogleVisionBarCodeScanner.iOS.Initializer.Init();
+            //Firebase.Core.App.Configure();
             return base.FinishedLaunching(app, options);
         }
     }
