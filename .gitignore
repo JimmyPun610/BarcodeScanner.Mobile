@@ -10,13 +10,3 @@
 /BarcodeScanner.XF/bin/Debug/netstandard2.0
 /BarcodeScanner.XF/obj
 /GoogleVisionBarCodeScanner/bin/Debug/netstandard2.0
-/GoogleVisionBarCodeScanner/obj
-/GoogleVisionBarCodeScanner.iOS/bin/Debug
-/GoogleVisionBarCodeScanner.iOS/obj/Debug
-/packages
-/SampleApp/SampleApp/bin/Debug/netstandard2.0
-/SampleApp/SampleApp/obj
-/SampleApp/SampleApp.Android/bin/Debug
-/SampleApp/SampleApp.Android/obj
-/SampleApp/SampleApp.iOS/bin/iPhone/Debug
-/SampleApp/SampleApp.iOS/obj
