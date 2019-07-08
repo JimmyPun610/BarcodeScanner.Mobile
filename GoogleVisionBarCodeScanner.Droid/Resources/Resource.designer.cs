@@ -3847,8 +3847,8 @@ namespace GoogleVisionBarCodeScanner.Droid
 			// aapt resource value: 0x7f0c0046
 			public static int SYM = 2131492934;
 			
-			// aapt resource value: 0x7f0c00ef
-			public static int action0 = 2131493103;
+			// aapt resource value: 0x7f0c00f0
+			public static int action0 = 2131493104;
 			
 			// aapt resource value: 0x7f0c0094
 			public static int action_bar = 2131493012;
@@ -3871,17 +3871,17 @@ namespace GoogleVisionBarCodeScanner.Droid
 			// aapt resource value: 0x7f0c0070
 			public static int action_bar_title = 2131492976;
 			
-			// aapt resource value: 0x7f0c00ec
-			public static int action_container = 2131493100;
+			// aapt resource value: 0x7f0c00ed
+			public static int action_container = 2131493101;
 			
 			// aapt resource value: 0x7f0c0095
 			public static int action_context_bar = 2131493013;
 			
-			// aapt resource value: 0x7f0c00f3
-			public static int action_divider = 2131493107;
+			// aapt resource value: 0x7f0c00f4
+			public static int action_divider = 2131493108;
 			
-			// aapt resource value: 0x7f0c00ed
-			public static int action_image = 2131493101;
+			// aapt resource value: 0x7f0c00ee
+			public static int action_image = 2131493102;
 			
 			// aapt resource value: 0x7f0c0003
 			public static int action_menu_divider = 2131492867;
@@ -3898,11 +3898,11 @@ namespace GoogleVisionBarCodeScanner.Droid
 			// aapt resource value: 0x7f0c0072
 			public static int action_mode_close_button = 2131492978;
 			
-			// aapt resource value: 0x7f0c00ee
-			public static int action_text = 2131493102;
+			// aapt resource value: 0x7f0c00ef
+			public static int action_text = 2131493103;
 			
-			// aapt resource value: 0x7f0c00fc
-			public static int actions = 2131493116;
+			// aapt resource value: 0x7f0c00fd
+			public static int actions = 2131493117;
 			
 			// aapt resource value: 0x7f0c0073
 			public static int activity_chooser_view_content = 2131492979;
@@ -3967,8 +3967,11 @@ namespace GoogleVisionBarCodeScanner.Droid
 			// aapt resource value: 0x7f0c00a4
 			public static int cameraPreview = 2131493028;
 			
-			// aapt resource value: 0x7f0c00f0
-			public static int cancel_action = 2131493104;
+			// aapt resource value: 0x7f0c00af
+			public static int cameraPreviewSurface = 2131493039;
+			
+			// aapt resource value: 0x7f0c00f1
+			public static int cancel_action = 2131493105;
 			
 			// aapt resource value: 0x7f0c00a6
 			public static int cancel_button = 2131493030;
@@ -3985,8 +3988,8 @@ namespace GoogleVisionBarCodeScanner.Droid
 			// aapt resource value: 0x7f0c008d
 			public static int checkbox = 2131493005;
 			
-			// aapt resource value: 0x7f0c00f8
-			public static int chronometer = 2131493112;
+			// aapt resource value: 0x7f0c00f9
+			public static int chronometer = 2131493113;
 			
 			// aapt resource value: 0x7f0c0068
 			public static int clip_horizontal = 2131492968;
@@ -3997,8 +4000,8 @@ namespace GoogleVisionBarCodeScanner.Droid
 			// aapt resource value: 0x7f0c0048
 			public static int collapseActionView = 2131492936;
 			
-			// aapt resource value: 0x7f0c00b1
-			public static int container = 2131493041;
+			// aapt resource value: 0x7f0c00b2
+			public static int container = 2131493042;
 			
 			// aapt resource value: 0x7f0c0089
 			public static int content = 2131493001;
@@ -4006,8 +4009,8 @@ namespace GoogleVisionBarCodeScanner.Droid
 			// aapt resource value: 0x7f0c007c
 			public static int contentPanel = 2131492988;
 			
-			// aapt resource value: 0x7f0c00b2
-			public static int coordinator = 2131493042;
+			// aapt resource value: 0x7f0c00b3
+			public static int coordinator = 2131493043;
 			
 			// aapt resource value: 0x7f0c0083
 			public static int custom = 2131492995;
@@ -4024,20 +4027,20 @@ namespace GoogleVisionBarCodeScanner.Droid
 			// aapt resource value: 0x7f0c0076
 			public static int default_activity_button = 2131492982;
 			
-			// aapt resource value: 0x7f0c00b4
-			public static int design_bottom_sheet = 2131493044;
+			// aapt resource value: 0x7f0c00b5
+			public static int design_bottom_sheet = 2131493045;
+			
+			// aapt resource value: 0x7f0c00ba
+			public static int design_menu_item_action_area = 2131493050;
 			
 			// aapt resource value: 0x7f0c00b9
-			public static int design_menu_item_action_area = 2131493049;
+			public static int design_menu_item_action_area_stub = 2131493049;
 			
 			// aapt resource value: 0x7f0c00b8
-			public static int design_menu_item_action_area_stub = 2131493048;
+			public static int design_menu_item_text = 2131493048;
 			
 			// aapt resource value: 0x7f0c00b7
-			public static int design_menu_item_text = 2131493047;
-			
-			// aapt resource value: 0x7f0c00b6
-			public static int design_navigation_view = 2131493046;
+			public static int design_navigation_view = 2131493047;
 			
 			// aapt resource value: 0x7f0c0030
 			public static int disableHome = 2131492912;
@@ -4048,8 +4051,8 @@ namespace GoogleVisionBarCodeScanner.Droid
 			// aapt resource value: 0x7f0c003f
 			public static int end = 2131492927;
 			
-			// aapt resource value: 0x7f0c00fe
-			public static int end_padder = 2131493118;
+			// aapt resource value: 0x7f0c00ff
+			public static int end_padder = 2131493119;
 			
 			// aapt resource value: 0x7f0c004e
 			public static int enterAlways = 2131492942;
@@ -4084,11 +4087,11 @@ namespace GoogleVisionBarCodeScanner.Droid
 			// aapt resource value: 0x7f0c00a7
 			public static int flashlight_button = 2131493031;
 			
-			// aapt resource value: 0x7f0c00bb
-			public static int flyoutcontent_appbar = 2131493051;
-			
 			// aapt resource value: 0x7f0c00bc
-			public static int flyoutcontent_recycler = 2131493052;
+			public static int flyoutcontent_appbar = 2131493052;
+			
+			// aapt resource value: 0x7f0c00bd
+			public static int flyoutcontent_recycler = 2131493053;
 			
 			// aapt resource value: 0x7f0c006e
 			public static int forever = 2131492974;
@@ -4108,8 +4111,8 @@ namespace GoogleVisionBarCodeScanner.Droid
 			// aapt resource value: 0x7f0c0078
 			public static int icon = 2131492984;
 			
-			// aapt resource value: 0x7f0c00fd
-			public static int icon_group = 2131493117;
+			// aapt resource value: 0x7f0c00fe
+			public static int icon_group = 2131493118;
 			
 			// aapt resource value: 0x7f0c0027
 			public static int icon_only = 2131492903;
@@ -4120,8 +4123,8 @@ namespace GoogleVisionBarCodeScanner.Droid
 			// aapt resource value: 0x7f0c0075
 			public static int image = 2131492981;
 			
-			// aapt resource value: 0x7f0c00f9
-			public static int info = 2131493113;
+			// aapt resource value: 0x7f0c00fa
+			public static int info = 2131493114;
 			
 			// aapt resource value: 0x7f0c006f
 			public static int italic = 2131492975;
@@ -4132,8 +4135,8 @@ namespace GoogleVisionBarCodeScanner.Droid
 			// aapt resource value: 0x7f0c0055
 			public static int labeled = 2131492949;
 			
-			// aapt resource value: 0x7f0c00b0
-			public static int largeLabel = 2131493040;
+			// aapt resource value: 0x7f0c00b1
+			public static int largeLabel = 2131493041;
 			
 			// aapt resource value: 0x7f0c005b
 			public static int left = 2131492955;
@@ -4153,23 +4156,23 @@ namespace GoogleVisionBarCodeScanner.Droid
 			// aapt resource value: 0x7f0c0077
 			public static int list_item = 2131492983;
 			
-			// aapt resource value: 0x7f0c00ff
-			public static int main_appbar = 2131493119;
+			// aapt resource value: 0x7f0c0100
+			public static int main_appbar = 2131493120;
+			
+			// aapt resource value: 0x7f0c0103
+			public static int main_scrollview = 2131493123;
 			
 			// aapt resource value: 0x7f0c0102
-			public static int main_scrollview = 2131493122;
+			public static int main_tablayout = 2131493122;
 			
 			// aapt resource value: 0x7f0c0101
-			public static int main_tablayout = 2131493121;
+			public static int main_toolbar = 2131493121;
 			
-			// aapt resource value: 0x7f0c0100
-			public static int main_toolbar = 2131493120;
+			// aapt resource value: 0x7f0c0108
+			public static int masked = 2131493128;
 			
-			// aapt resource value: 0x7f0c0107
-			public static int masked = 2131493127;
-			
-			// aapt resource value: 0x7f0c00f2
-			public static int media_actions = 2131493106;
+			// aapt resource value: 0x7f0c00f3
+			public static int media_actions = 2131493107;
 			
 			// aapt resource value: 0x7f0c00a3
 			public static int message = 2131493027;
@@ -4180,143 +4183,143 @@ namespace GoogleVisionBarCodeScanner.Droid
 			// aapt resource value: 0x7f0c0060
 			public static int mini = 2131492960;
 			
-			// aapt resource value: 0x7f0c00d9
-			public static int mr_art = 2131493081;
-			
-			// aapt resource value: 0x7f0c00ca
-			public static int mr_cast_checkbox = 2131493066;
-			
-			// aapt resource value: 0x7f0c00c3
-			public static int mr_cast_close_button = 2131493059;
-			
-			// aapt resource value: 0x7f0c00be
-			public static int mr_cast_group_icon = 2131493054;
-			
-			// aapt resource value: 0x7f0c00bf
-			public static int mr_cast_group_name = 2131493055;
-			
-			// aapt resource value: 0x7f0c00bd
-			public static int mr_cast_list = 2131493053;
-			
-			// aapt resource value: 0x7f0c00c2
-			public static int mr_cast_meta = 2131493058;
-			
-			// aapt resource value: 0x7f0c00c4
-			public static int mr_cast_meta_art = 2131493060;
-			
-			// aapt resource value: 0x7f0c00c6
-			public static int mr_cast_meta_subtitle = 2131493062;
-			
-			// aapt resource value: 0x7f0c00c5
-			public static int mr_cast_meta_title = 2131493061;
-			
-			// aapt resource value: 0x7f0c00c8
-			public static int mr_cast_route_icon = 2131493064;
-			
-			// aapt resource value: 0x7f0c00c9
-			public static int mr_cast_route_name = 2131493065;
-			
-			// aapt resource value: 0x7f0c00c7
-			public static int mr_cast_stop_button = 2131493063;
+			// aapt resource value: 0x7f0c00da
+			public static int mr_art = 2131493082;
 			
 			// aapt resource value: 0x7f0c00cb
-			public static int mr_cast_volume_layout = 2131493067;
+			public static int mr_cast_checkbox = 2131493067;
 			
-			// aapt resource value: 0x7f0c00cc
-			public static int mr_cast_volume_slider = 2131493068;
+			// aapt resource value: 0x7f0c00c4
+			public static int mr_cast_close_button = 2131493060;
 			
-			// aapt resource value: 0x7f0c00ce
-			public static int mr_chooser_list = 2131493070;
-			
-			// aapt resource value: 0x7f0c00d1
-			public static int mr_chooser_route_desc = 2131493073;
-			
-			// aapt resource value: 0x7f0c00cf
-			public static int mr_chooser_route_icon = 2131493071;
-			
-			// aapt resource value: 0x7f0c00d0
-			public static int mr_chooser_route_name = 2131493072;
-			
-			// aapt resource value: 0x7f0c00cd
-			public static int mr_chooser_title = 2131493069;
-			
-			// aapt resource value: 0x7f0c00d6
-			public static int mr_close = 2131493078;
-			
-			// aapt resource value: 0x7f0c00dc
-			public static int mr_control_divider = 2131493084;
-			
-			// aapt resource value: 0x7f0c00e7
-			public static int mr_control_playback_ctrl = 2131493095;
-			
-			// aapt resource value: 0x7f0c00ea
-			public static int mr_control_subtitle = 2131493098;
-			
-			// aapt resource value: 0x7f0c00e9
-			public static int mr_control_title = 2131493097;
-			
-			// aapt resource value: 0x7f0c00e8
-			public static int mr_control_title_container = 2131493096;
-			
-			// aapt resource value: 0x7f0c00d7
-			public static int mr_custom_control = 2131493079;
-			
-			// aapt resource value: 0x7f0c00d8
-			public static int mr_default_control = 2131493080;
-			
-			// aapt resource value: 0x7f0c00d3
-			public static int mr_dialog_area = 2131493075;
-			
-			// aapt resource value: 0x7f0c00e2
-			public static int mr_dialog_header_name = 2131493090;
-			
-			// aapt resource value: 0x7f0c00d2
-			public static int mr_expandable_area = 2131493074;
-			
-			// aapt resource value: 0x7f0c00eb
-			public static int mr_group_expand_collapse = 2131493099;
+			// aapt resource value: 0x7f0c00bf
+			public static int mr_cast_group_icon = 2131493055;
 			
 			// aapt resource value: 0x7f0c00c0
-			public static int mr_group_volume_route_name = 2131493056;
+			public static int mr_cast_group_name = 2131493056;
 			
-			// aapt resource value: 0x7f0c00c1
-			public static int mr_group_volume_slider = 2131493057;
+			// aapt resource value: 0x7f0c00be
+			public static int mr_cast_list = 2131493054;
 			
-			// aapt resource value: 0x7f0c00da
-			public static int mr_media_main_control = 2131493082;
+			// aapt resource value: 0x7f0c00c3
+			public static int mr_cast_meta = 2131493059;
 			
-			// aapt resource value: 0x7f0c00d5
-			public static int mr_name = 2131493077;
+			// aapt resource value: 0x7f0c00c5
+			public static int mr_cast_meta_art = 2131493061;
 			
-			// aapt resource value: 0x7f0c00e3
-			public static int mr_picker_close_button = 2131493091;
+			// aapt resource value: 0x7f0c00c7
+			public static int mr_cast_meta_subtitle = 2131493063;
 			
-			// aapt resource value: 0x7f0c00e4
-			public static int mr_picker_list = 2131493092;
+			// aapt resource value: 0x7f0c00c6
+			public static int mr_cast_meta_title = 2131493062;
 			
-			// aapt resource value: 0x7f0c00e5
-			public static int mr_picker_route_icon = 2131493093;
+			// aapt resource value: 0x7f0c00c9
+			public static int mr_cast_route_icon = 2131493065;
 			
-			// aapt resource value: 0x7f0c00e6
-			public static int mr_picker_route_name = 2131493094;
+			// aapt resource value: 0x7f0c00ca
+			public static int mr_cast_route_name = 2131493066;
 			
-			// aapt resource value: 0x7f0c00db
-			public static int mr_playback_control = 2131493083;
+			// aapt resource value: 0x7f0c00c8
+			public static int mr_cast_stop_button = 2131493064;
 			
-			// aapt resource value: 0x7f0c00d4
-			public static int mr_title_bar = 2131493076;
+			// aapt resource value: 0x7f0c00cc
+			public static int mr_cast_volume_layout = 2131493068;
+			
+			// aapt resource value: 0x7f0c00cd
+			public static int mr_cast_volume_slider = 2131493069;
+			
+			// aapt resource value: 0x7f0c00cf
+			public static int mr_chooser_list = 2131493071;
+			
+			// aapt resource value: 0x7f0c00d2
+			public static int mr_chooser_route_desc = 2131493074;
+			
+			// aapt resource value: 0x7f0c00d0
+			public static int mr_chooser_route_icon = 2131493072;
+			
+			// aapt resource value: 0x7f0c00d1
+			public static int mr_chooser_route_name = 2131493073;
+			
+			// aapt resource value: 0x7f0c00ce
+			public static int mr_chooser_title = 2131493070;
+			
+			// aapt resource value: 0x7f0c00d7
+			public static int mr_close = 2131493079;
 			
 			// aapt resource value: 0x7f0c00dd
-			public static int mr_volume_control = 2131493085;
+			public static int mr_control_divider = 2131493085;
+			
+			// aapt resource value: 0x7f0c00e8
+			public static int mr_control_playback_ctrl = 2131493096;
+			
+			// aapt resource value: 0x7f0c00eb
+			public static int mr_control_subtitle = 2131493099;
+			
+			// aapt resource value: 0x7f0c00ea
+			public static int mr_control_title = 2131493098;
+			
+			// aapt resource value: 0x7f0c00e9
+			public static int mr_control_title_container = 2131493097;
+			
+			// aapt resource value: 0x7f0c00d8
+			public static int mr_custom_control = 2131493080;
+			
+			// aapt resource value: 0x7f0c00d9
+			public static int mr_default_control = 2131493081;
+			
+			// aapt resource value: 0x7f0c00d4
+			public static int mr_dialog_area = 2131493076;
+			
+			// aapt resource value: 0x7f0c00e3
+			public static int mr_dialog_header_name = 2131493091;
+			
+			// aapt resource value: 0x7f0c00d3
+			public static int mr_expandable_area = 2131493075;
+			
+			// aapt resource value: 0x7f0c00ec
+			public static int mr_group_expand_collapse = 2131493100;
+			
+			// aapt resource value: 0x7f0c00c1
+			public static int mr_group_volume_route_name = 2131493057;
+			
+			// aapt resource value: 0x7f0c00c2
+			public static int mr_group_volume_slider = 2131493058;
+			
+			// aapt resource value: 0x7f0c00db
+			public static int mr_media_main_control = 2131493083;
+			
+			// aapt resource value: 0x7f0c00d6
+			public static int mr_name = 2131493078;
+			
+			// aapt resource value: 0x7f0c00e4
+			public static int mr_picker_close_button = 2131493092;
+			
+			// aapt resource value: 0x7f0c00e5
+			public static int mr_picker_list = 2131493093;
+			
+			// aapt resource value: 0x7f0c00e6
+			public static int mr_picker_route_icon = 2131493094;
+			
+			// aapt resource value: 0x7f0c00e7
+			public static int mr_picker_route_name = 2131493095;
+			
+			// aapt resource value: 0x7f0c00dc
+			public static int mr_playback_control = 2131493084;
+			
+			// aapt resource value: 0x7f0c00d5
+			public static int mr_title_bar = 2131493077;
 			
 			// aapt resource value: 0x7f0c00de
-			public static int mr_volume_group_list = 2131493086;
+			public static int mr_volume_control = 2131493086;
 			
-			// aapt resource value: 0x7f0c00e0
-			public static int mr_volume_item_icon = 2131493088;
+			// aapt resource value: 0x7f0c00df
+			public static int mr_volume_group_list = 2131493087;
 			
 			// aapt resource value: 0x7f0c00e1
-			public static int mr_volume_slider = 2131493089;
+			public static int mr_volume_item_icon = 2131493089;
+			
+			// aapt resource value: 0x7f0c00e2
+			public static int mr_volume_slider = 2131493090;
 			
 			// aapt resource value: 0x7f0c0014
 			public static int mtrl_child_content_container = 2131492884;
@@ -4327,8 +4330,8 @@ namespace GoogleVisionBarCodeScanner.Droid
 			// aapt resource value: 0x7f0c0037
 			public static int multiply = 2131492919;
 			
-			// aapt resource value: 0x7f0c00b5
-			public static int navigation_header_container = 2131493045;
+			// aapt resource value: 0x7f0c00b6
+			public static int navigation_header_container = 2131493046;
 			
 			// aapt resource value: 0x7f0c004a
 			public static int never = 2131492938;
@@ -4339,14 +4342,14 @@ namespace GoogleVisionBarCodeScanner.Droid
 			// aapt resource value: 0x7f0c002e
 			public static int normal = 2131492910;
 			
-			// aapt resource value: 0x7f0c00fb
-			public static int notification_background = 2131493115;
+			// aapt resource value: 0x7f0c00fc
+			public static int notification_background = 2131493116;
+			
+			// aapt resource value: 0x7f0c00f6
+			public static int notification_main_column = 2131493110;
 			
 			// aapt resource value: 0x7f0c00f5
-			public static int notification_main_column = 2131493109;
-			
-			// aapt resource value: 0x7f0c00f4
-			public static int notification_main_column_container = 2131493108;
+			public static int notification_main_column_container = 2131493109;
 			
 			// aapt resource value: 0x7f0c0067
 			public static int outline = 2131492967;
@@ -4375,11 +4378,11 @@ namespace GoogleVisionBarCodeScanner.Droid
 			// aapt resource value: 0x7f0c005c
 			public static int right = 2131492956;
 			
-			// aapt resource value: 0x7f0c00fa
-			public static int right_icon = 2131493114;
+			// aapt resource value: 0x7f0c00fb
+			public static int right_icon = 2131493115;
 			
-			// aapt resource value: 0x7f0c00f6
-			public static int right_side = 2131493110;
+			// aapt resource value: 0x7f0c00f7
+			public static int right_side = 2131493111;
 			
 			// aapt resource value: 0x7f0c000c
 			public static int save_image_matrix = 2131492876;
@@ -4444,14 +4447,14 @@ namespace GoogleVisionBarCodeScanner.Droid
 			// aapt resource value: 0x7f0c0056
 			public static int selected = 2131492950;
 			
-			// aapt resource value: 0x7f0c0103
-			public static int shellcontent_appbar = 2131493123;
+			// aapt resource value: 0x7f0c0104
+			public static int shellcontent_appbar = 2131493124;
+			
+			// aapt resource value: 0x7f0c0106
+			public static int shellcontent_scrollview = 2131493126;
 			
 			// aapt resource value: 0x7f0c0105
-			public static int shellcontent_scrollview = 2131493125;
-			
-			// aapt resource value: 0x7f0c0104
-			public static int shellcontent_toolbar = 2131493124;
+			public static int shellcontent_toolbar = 2131493125;
 			
 			// aapt resource value: 0x7f0c008a
 			public static int shortcut = 2131493002;
@@ -4465,8 +4468,8 @@ namespace GoogleVisionBarCodeScanner.Droid
 			// aapt resource value: 0x7f0c0034
 			public static int showTitle = 2131492916;
 			
-			// aapt resource value: 0x7f0c00af
-			public static int smallLabel = 2131493039;
+			// aapt resource value: 0x7f0c00b0
+			public static int smallLabel = 2131493040;
 			
 			// aapt resource value: 0x7f0c0016
 			public static int snackbar_action = 2131492886;
@@ -4501,8 +4504,8 @@ namespace GoogleVisionBarCodeScanner.Droid
 			// aapt resource value: 0x7f0c005d
 			public static int start = 2131492957;
 			
-			// aapt resource value: 0x7f0c00f1
-			public static int status_bar_latest_event_content = 2131493105;
+			// aapt resource value: 0x7f0c00f2
+			public static int status_bar_latest_event_content = 2131493106;
 			
 			// aapt resource value: 0x7f0c0062
 			public static int stretch = 2131492962;
@@ -4540,8 +4543,8 @@ namespace GoogleVisionBarCodeScanner.Droid
 			// aapt resource value: 0x7f0c0061
 			public static int textStart = 2131492961;
 			
-			// aapt resource value: 0x7f0c00ba
-			public static int text_input_password_toggle = 2131493050;
+			// aapt resource value: 0x7f0c00bb
+			public static int text_input_password_toggle = 2131493051;
 			
 			// aapt resource value: 0x7f0c0018
 			public static int textinput_counter = 2131492888;
@@ -4552,8 +4555,8 @@ namespace GoogleVisionBarCodeScanner.Droid
 			// aapt resource value: 0x7f0c001a
 			public static int textinput_helper_text = 2131492890;
 			
-			// aapt resource value: 0x7f0c00f7
-			public static int time = 2131493111;
+			// aapt resource value: 0x7f0c00f8
+			public static int time = 2131493112;
 			
 			// aapt resource value: 0x7f0c0023
 			public static int title = 2131492899;
@@ -4570,8 +4573,8 @@ namespace GoogleVisionBarCodeScanner.Droid
 			// aapt resource value: 0x7f0c0084
 			public static int topPanel = 2131492996;
 			
-			// aapt resource value: 0x7f0c00b3
-			public static int touch_outside = 2131493043;
+			// aapt resource value: 0x7f0c00b4
+			public static int touch_outside = 2131493044;
 			
 			// aapt resource value: 0x7f0c000f
 			public static int transition_current_scene = 2131492879;
@@ -4606,11 +4609,11 @@ namespace GoogleVisionBarCodeScanner.Droid
 			// aapt resource value: 0x7f0c001b
 			public static int view_offset_helper = 2131492891;
 			
-			// aapt resource value: 0x7f0c0106
-			public static int visible = 2131493126;
+			// aapt resource value: 0x7f0c0107
+			public static int visible = 2131493127;
 			
-			// aapt resource value: 0x7f0c00df
-			public static int volume_item_container = 2131493087;
+			// aapt resource value: 0x7f0c00e0
+			public static int volume_item_container = 2131493088;
 			
 			// aapt resource value: 0x7f0c0029
 			public static int wide = 2131492905;
@@ -4835,160 +4838,163 @@ namespace GoogleVisionBarCodeScanner.Droid
 			public static int browser_actions_context_menu_row = 2130903071;
 			
 			// aapt resource value: 0x7f030020
-			public static int design_bottom_navigation_item = 2130903072;
+			public static int CameraPreviewLayout = 2130903072;
 			
 			// aapt resource value: 0x7f030021
-			public static int design_bottom_sheet_dialog = 2130903073;
+			public static int design_bottom_navigation_item = 2130903073;
 			
 			// aapt resource value: 0x7f030022
-			public static int design_layout_snackbar = 2130903074;
+			public static int design_bottom_sheet_dialog = 2130903074;
 			
 			// aapt resource value: 0x7f030023
-			public static int design_layout_snackbar_include = 2130903075;
+			public static int design_layout_snackbar = 2130903075;
 			
 			// aapt resource value: 0x7f030024
-			public static int design_layout_tab_icon = 2130903076;
+			public static int design_layout_snackbar_include = 2130903076;
 			
 			// aapt resource value: 0x7f030025
-			public static int design_layout_tab_text = 2130903077;
+			public static int design_layout_tab_icon = 2130903077;
 			
 			// aapt resource value: 0x7f030026
-			public static int design_menu_item_action_area = 2130903078;
+			public static int design_layout_tab_text = 2130903078;
 			
 			// aapt resource value: 0x7f030027
-			public static int design_navigation_item = 2130903079;
+			public static int design_menu_item_action_area = 2130903079;
 			
 			// aapt resource value: 0x7f030028
-			public static int design_navigation_item_header = 2130903080;
+			public static int design_navigation_item = 2130903080;
 			
 			// aapt resource value: 0x7f030029
-			public static int design_navigation_item_separator = 2130903081;
+			public static int design_navigation_item_header = 2130903081;
 			
 			// aapt resource value: 0x7f03002a
-			public static int design_navigation_item_subheader = 2130903082;
+			public static int design_navigation_item_separator = 2130903082;
 			
 			// aapt resource value: 0x7f03002b
-			public static int design_navigation_menu = 2130903083;
+			public static int design_navigation_item_subheader = 2130903083;
 			
 			// aapt resource value: 0x7f03002c
-			public static int design_navigation_menu_item = 2130903084;
+			public static int design_navigation_menu = 2130903084;
 			
 			// aapt resource value: 0x7f03002d
-			public static int design_text_input_password_icon = 2130903085;
+			public static int design_navigation_menu_item = 2130903085;
 			
 			// aapt resource value: 0x7f03002e
-			public static int FlyoutContent = 2130903086;
+			public static int design_text_input_password_icon = 2130903086;
 			
 			// aapt resource value: 0x7f03002f
-			public static int mr_cast_dialog = 2130903087;
+			public static int FlyoutContent = 2130903087;
 			
 			// aapt resource value: 0x7f030030
-			public static int mr_cast_group_item = 2130903088;
+			public static int mr_cast_dialog = 2130903088;
 			
 			// aapt resource value: 0x7f030031
-			public static int mr_cast_group_volume_item = 2130903089;
+			public static int mr_cast_group_item = 2130903089;
 			
 			// aapt resource value: 0x7f030032
-			public static int mr_cast_media_metadata = 2130903090;
+			public static int mr_cast_group_volume_item = 2130903090;
 			
 			// aapt resource value: 0x7f030033
-			public static int mr_cast_route_item = 2130903091;
+			public static int mr_cast_media_metadata = 2130903091;
 			
 			// aapt resource value: 0x7f030034
-			public static int mr_chooser_dialog = 2130903092;
+			public static int mr_cast_route_item = 2130903092;
 			
 			// aapt resource value: 0x7f030035
-			public static int mr_chooser_list_item = 2130903093;
+			public static int mr_chooser_dialog = 2130903093;
 			
 			// aapt resource value: 0x7f030036
-			public static int mr_controller_material_dialog_b = 2130903094;
+			public static int mr_chooser_list_item = 2130903094;
 			
 			// aapt resource value: 0x7f030037
-			public static int mr_controller_volume_item = 2130903095;
+			public static int mr_controller_material_dialog_b = 2130903095;
 			
 			// aapt resource value: 0x7f030038
-			public static int mr_dialog_header_item = 2130903096;
+			public static int mr_controller_volume_item = 2130903096;
 			
 			// aapt resource value: 0x7f030039
-			public static int mr_picker_dialog = 2130903097;
+			public static int mr_dialog_header_item = 2130903097;
 			
 			// aapt resource value: 0x7f03003a
-			public static int mr_picker_route_item = 2130903098;
+			public static int mr_picker_dialog = 2130903098;
 			
 			// aapt resource value: 0x7f03003b
-			public static int mr_playback_control = 2130903099;
+			public static int mr_picker_route_item = 2130903099;
 			
 			// aapt resource value: 0x7f03003c
-			public static int mr_volume_control = 2130903100;
+			public static int mr_playback_control = 2130903100;
 			
 			// aapt resource value: 0x7f03003d
-			public static int mtrl_layout_snackbar = 2130903101;
+			public static int mr_volume_control = 2130903101;
 			
 			// aapt resource value: 0x7f03003e
-			public static int mtrl_layout_snackbar_include = 2130903102;
+			public static int mtrl_layout_snackbar = 2130903102;
 			
 			// aapt resource value: 0x7f03003f
-			public static int notification_action = 2130903103;
+			public static int mtrl_layout_snackbar_include = 2130903103;
 			
 			// aapt resource value: 0x7f030040
-			public static int notification_action_tombstone = 2130903104;
+			public static int notification_action = 2130903104;
 			
 			// aapt resource value: 0x7f030041
-			public static int notification_media_action = 2130903105;
+			public static int notification_action_tombstone = 2130903105;
 			
 			// aapt resource value: 0x7f030042
-			public static int notification_media_cancel_action = 2130903106;
+			public static int notification_media_action = 2130903106;
 			
 			// aapt resource value: 0x7f030043
-			public static int notification_template_big_media = 2130903107;
+			public static int notification_media_cancel_action = 2130903107;
 			
 			// aapt resource value: 0x7f030044
-			public static int notification_template_big_media_custom = 2130903108;
+			public static int notification_template_big_media = 2130903108;
 			
 			// aapt resource value: 0x7f030045
-			public static int notification_template_big_media_narrow = 2130903109;
+			public static int notification_template_big_media_custom = 2130903109;
 			
 			// aapt resource value: 0x7f030046
-			public static int notification_template_big_media_narrow_custom = 2130903110;
+			public static int notification_template_big_media_narrow = 2130903110;
 			
 			// aapt resource value: 0x7f030047
-			public static int notification_template_custom_big = 2130903111;
+			public static int notification_template_big_media_narrow_custom = 2130903111;
 			
 			// aapt resource value: 0x7f030048
-			public static int notification_template_icon_group = 2130903112;
+			public static int notification_template_custom_big = 2130903112;
 			
 			// aapt resource value: 0x7f030049
-			public static int notification_template_lines_media = 2130903113;
+			public static int notification_template_icon_group = 2130903113;
 			
 			// aapt resource value: 0x7f03004a
-			public static int notification_template_media = 2130903114;
+			public static int notification_template_lines_media = 2130903114;
 			
 			// aapt resource value: 0x7f03004b
-			public static int notification_template_media_custom = 2130903115;
+			public static int notification_template_media = 2130903115;
 			
 			// aapt resource value: 0x7f03004c
-			public static int notification_template_part_chronometer = 2130903116;
+			public static int notification_template_media_custom = 2130903116;
 			
 			// aapt resource value: 0x7f03004d
-			public static int notification_template_part_time = 2130903117;
+			public static int notification_template_part_chronometer = 2130903117;
 			
 			// aapt resource value: 0x7f03004e
-			public static int RootLayout = 2130903118;
+			public static int notification_template_part_time = 2130903118;
 			
 			// aapt resource value: 0x7f03004f
-			public static int select_dialog_item_material = 2130903119;
+			public static int RootLayout = 2130903119;
 			
 			// aapt resource value: 0x7f030050
-			public static int select_dialog_multichoice_material = 2130903120;
+			public static int select_dialog_item_material = 2130903120;
 			
 			// aapt resource value: 0x7f030051
-			public static int select_dialog_singlechoice_material = 2130903121;
+			public static int select_dialog_multichoice_material = 2130903121;
 			
 			// aapt resource value: 0x7f030052
-			public static int ShellContent = 2130903122;
+			public static int select_dialog_singlechoice_material = 2130903122;
 			
 			// aapt resource value: 0x7f030053
-			public static int support_simple_spinner_dropdown_item = 2130903123;
+			public static int ShellContent = 2130903123;
+			
+			// aapt resource value: 0x7f030054
+			public static int support_simple_spinner_dropdown_item = 2130903124;
 			
 			static Layout()
 			{

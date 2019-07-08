@@ -17,12 +17,13 @@ namespace GoogleVisionBarCodeScanner.Droid
     {
         public void SetSupportFormat(BarcodeFormats barcodeFormats)
         {
-            throw new NotImplementedException();
+            Android.Gms.Vision.Barcodes.BarcodeFormat supportFormats = Methods.ConvertBarcodeFormats(barcodeFormats);
+            Configuration.BarcodeFormats = supportFormats;
         }
 
         public void ToggleFlashlight()
         {
-            var _myCamera = GetCamera(Configuration.CameraSource);
+            var _myCamera = Methods.GetCamera(Configuration.CameraSource);
             var prams = _myCamera.GetParameters();
             //prams.focus.setFocusMode(Camera.Parameters.FOCUS_MODE_CONTINUOUS_PICTURE);
             if (!Configuration.isTorch)
@@ -31,25 +32,5 @@ namespace GoogleVisionBarCodeScanner.Droid
             Configuration.isTorch = !Configuration.isTorch;
             _myCamera.SetParameters(prams);
         }
-
-        private  Android.Hardware.Camera GetCamera(CameraSource cameraSource)
-        {
-            var javaHero = cameraSource.JavaCast<Java.Lang.Object>();
-            var fields = javaHero.Class.GetDeclaredFields();
-            foreach (var field in fields)
-            {
-                if (field.Type.CanonicalName.Equals("android.hardware.camera", StringComparison.OrdinalIgnoreCase))
-                {
-                    field.Accessible = true;
-                    var camera = field.Get(javaHero);
-                    var cCamera = (Android.Hardware.Camera)camera;
-                    return cCamera;
-                }
-            }
-
-            return null;
-        }
-
-
     }
 }

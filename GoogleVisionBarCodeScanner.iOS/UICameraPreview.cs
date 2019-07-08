@@ -228,28 +228,6 @@ namespace GoogleVisionBarCodeScanner.iOS
                                 BarcodeType = Methods.ConvertBarcodeResultTypes(barcode.ValueType),
                                 DisplayValue = barcode.DisplayValue
                             });
-                            //var corners = barcode.CornerPoints;
-                            //var displayValue = barcode.DisplayValue;
-                            //var rawValue = barcode.RawValue;
-                            //var valueType = barcode.ValueType;
-                            //switch (valueType)
-                            //{
-                            //    case VisionBarcodeValueType.WiFi:
-                            //        var ssid = barcode.Wifi.Ssid;
-                            //        var password = barcode.Wifi.Password;
-                            //        var encryptionType = barcode.Wifi.Type;
-                            //        break;
-                            //    case VisionBarcodeValueType.Url:
-                            //        var title = barcode.Url.Title;
-                            //        var url = barcode.Url.Url;
-                            //        break;
-                            //    case VisionBarcodeValueType.Text:
-                            //        var text = barcode.ToString();
-                            //        bre
-                            //    default:
-                            //        // See API reference for all supported value types
-                            //        break;
-                            //}
                         }
                         OnDetected?.Invoke(resultList);
                     }

@@ -2,35 +2,23 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>CLIENT_ID</key>
-	<string>140958798469-snm6pf32uoj5rhea8c2b3i2l67pdstnv.apps.googleusercontent.com</string>
-	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.140958798469-snm6pf32uoj5rhea8c2b3i2l67pdstnv</string>
-	<key>API_KEY</key>
-	<string>AIzaSyAVjrE2rUS62MNKquC8OLtTj1XyIOvVfvQ</string>
-	<key>GCM_SENDER_ID</key>
-	<string>140958798469</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
-	<key>BUNDLE_ID</key>
-	<string>NWCON.eTalent.Dev</string>
-	<key>PROJECT_ID</key>
-	<string>etalent-uat</string>
-	<key>STORAGE_BUCKET</key>
-	<string>etalent-uat.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
-	<false></false>
-	<key>IS_ANALYTICS_ENABLED</key>
-	<false></false>
-	<key>IS_APPINVITE_ENABLED</key>
-	<true></true>
-	<key>IS_GCM_ENABLED</key>
-	<true></true>
-	<key>IS_SIGNIN_ENABLED</key>
-	<true></true>
-	<key>GOOGLE_APP_ID</key>
-	<string>1:140958798469:ios:66201569f496baee</string>
-	<key>DATABASE_URL</key>
-	<string>https://etalent-uat.firebaseio.com</string>
+	<false/>
+	<key>BUNDLE_ID</key>
+	<string></string>
+	<key>PROJECT_ID</key>
+	<string></string>
+	<key>STORAGE_BUCKET</key>
+	<string></string>
+	<key>API_KEY</key>
+	<string></string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string></string>
+	<key>CLIENT_ID</key>
+	<string></string>
+	<key>GCM_SENDER_ID</key>
+	<string></string>
 </dict>
 </plist>

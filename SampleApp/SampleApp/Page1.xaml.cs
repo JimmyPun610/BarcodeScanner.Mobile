@@ -40,8 +40,12 @@ namespace SampleApp
             {
                 result += $"{i + 1}. Type : {obj[i].BarcodeType}, Value : {obj[i].DisplayValue}{Environment.NewLine}";
             }
-            await DisplayAlert("Result", result, "OK");
-            await Navigation.PopModalAsync();
+            Device.BeginInvokeOnMainThread(async() =>
+            {
+                await DisplayAlert("Result", result, "OK");
+                await Navigation.PopModalAsync();
+            });
+            
         }
     }
 }
