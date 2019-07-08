@@ -25,7 +25,7 @@
 	<key>CFBundleDisplayName</key>
 	<string>SampleApp</string>
 	<key>CFBundleIdentifier</key>
-	<string>NWCON.eTalent.Dev</string>
+	<string>testing</string>
 	<key>CFBundleVersion</key>
 	<string>1.0</string>
 	<key>UILaunchStoryboardName</key>
@@ -34,7 +34,7 @@
 	<string>SampleApp</string>
 	<key>XSAppIconAssets</key>
 	<string>Assets.xcassets/AppIcon.appiconset</string>
-  <key>NSCameraUsageDescription</key>
-  <string>Require to use camera</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Require to use camera</string>
 </dict>
 </plist>

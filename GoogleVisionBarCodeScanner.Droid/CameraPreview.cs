@@ -1,155 +1,165 @@
 ﻿using System;
 using System.Collections.Generic;
 using Android.Content;
+using Android.Gms.Vision;
+using Android.Gms.Vision.Barcodes;
+using Android.Graphics;
 using Android.Hardware;
+using Android.OS;
 using Android.Runtime;
+using Android.Util;
 using Android.Views;
-
+using Android.Widget;
 
 namespace GoogleVisionBarCodeScanner.Droid
 {
-    public sealed class CameraPreview : ViewGroup, ISurfaceHolderCallback
+    public sealed class CameraPreview : ViewGroup
     {
-        public bool IsPreviewing { get; set; }
+        BarcodeDetector barcodeDetector;
+        CameraSource cameraSource;
         SurfaceView surfaceView;
-        //public Camera Preview
-        //{
-        //    get { return camera; }
-        //    set
-        //    {
-        //        camera = value;
-        //        if (camera != null)
-        //        {
-        //            supportedPreviewSizes = Preview.GetParameters().SupportedPreviewSizes;
-        //            RequestLayout();
-        //        }
-        //    }
-        //}
+        IWindowManager windowManager;
+        public event Action<List<BarcodeResult>> OnDetected;
 
         public CameraPreview(Context context)
             : base(context)
         {
+            windowManager = Context.GetSystemService(Context.WindowService).JavaCast<IWindowManager>();
+
+            barcodeDetector = new BarcodeDetector.Builder(context)
+               .SetBarcodeFormats(Configuration.BarcodeFormats)
+               .Build();
+            cameraSource = new CameraSource
+                .Builder(context, barcodeDetector)
+                .SetRequestedPreviewSize(640, 480)
+                .SetAutoFocusEnabled(true)
+                .Build();
+            Configuration.CameraSource = cameraSource;
             surfaceView = new SurfaceView(context);
-            LayoutInflater _inflatorservice = (LayoutInflater)context.GetSystemService(Context.LayoutInflaterService);
-            surfaceView = _inflatorservice.Inflate(Resource.Layout.CameraPreviewLayout, null) as SurfaceView;
+      
+            surfaceView.Holder.AddCallback(new SurfaceHolderCallback(cameraSource, surfaceView));
             AddView(surfaceView);
 
-            //windowManager = Context.GetSystemService(Context.WindowService).JavaCast<IWindowManager>();
-
-            //IsPreviewing = false;
-            //holder = surfaceView.Holder;
-            //holder.AddCallback(this);
+            var detectProcessor = new DetectorProcessor(context);
+            detectProcessor.OnDetected += DetectProcessor_OnDetected;
+            barcodeDetector.SetProcessor(detectProcessor);
         }
 
-        protected override void OnMeasure(int widthMeasureSpec, int heightMeasureSpec)
+        private void DetectProcessor_OnDetected(List<BarcodeResult> obj)
         {
-            int width = ResolveSize(SuggestedMinimumWidth, widthMeasureSpec);
-            int height = ResolveSize(SuggestedMinimumHeight, heightMeasureSpec);
-            SetMeasuredDimension(width, height);
-
-            //if (supportedPreviewSizes != null)
-            //{
-            //    previewSize = GetOptimalPreviewSize(supportedPreviewSizes, width, height);
-            //}
+            OnDetected?.Invoke(obj);
         }
 
+ 
         protected override void OnLayout(bool changed, int l, int t, int r, int b)
         {
             var msw = MeasureSpec.MakeMeasureSpec(r - l, MeasureSpecMode.Exactly);
             var msh = MeasureSpec.MakeMeasureSpec(b - t, MeasureSpecMode.Exactly);
 
-            //surfaceView.Measure(msw, msh);
-            //surfaceView.Layout(0, 0, r - l, b - t);
+            surfaceView.Measure(msw, msh);
+            surfaceView.Layout(0, 0, r - l, r - l);
+            SetOrientation();
         }
 
-        public void SurfaceCreated(ISurfaceHolder holder)
+
+        public void SetOrientation()
         {
-            try
+
+            Android.Hardware.Camera camera = Methods.GetCamera(cameraSource);
+            switch (windowManager.DefaultDisplay.Rotation)
             {
-                //if (Preview != null)
-                //{
-                //    Preview.SetPreviewDisplay(holder);
-                //}
+                case SurfaceOrientation.Rotation0:
+                    camera?.SetDisplayOrientation(90);
+                    break;
+                case SurfaceOrientation.Rotation90:
+                    camera?.SetDisplayOrientation(0);
+                    break;
+                case SurfaceOrientation.Rotation180:
+                    camera?.SetDisplayOrientation(270);
+                    break;
+                case SurfaceOrientation.Rotation270:
+                    camera?.SetDisplayOrientation(180);
+                    break;
             }
-            catch (Exception ex)
+        }
+
+
+     
+
+
+        class DetectorProcessor : Java.Lang.Object, Detector.IProcessor
+        {
+            bool isScanning = true;
+            public event Action<List<BarcodeResult>> OnDetected;
+            Context _context;
+            public DetectorProcessor(Context context)
             {
-                System.Diagnostics.Debug.WriteLine(@"			ERROR: ", ex.Message);
+                _context = context;
             }
-        }
-
-        public void SurfaceDestroyed(ISurfaceHolder holder)
-        {
-            //if (Preview != null)
-            //{
-            //    Preview.StopPreview();
-            //}
-        }
-
-        public void SurfaceChanged(ISurfaceHolder holder, Android.Graphics.Format format, int width, int height)
-        {
-            //var parameters = Preview.GetParameters();
-            //parameters.SetPreviewSize(previewSize.Width, previewSize.Height);
-            //RequestLayout();
-
-            //switch (windowManager.DefaultDisplay.Rotation)
-            //{
-            //    case SurfaceOrientation.Rotation0:
-            //        camera.SetDisplayOrientation(90);
-            //        break;
-            //    case SurfaceOrientation.Rotation90:
-            //        camera.SetDisplayOrientation(0);
-            //        break;
-            //    case SurfaceOrientation.Rotation270:
-            //        camera.SetDisplayOrientation(180);
-            //        break;
-            //}
-
-            //Preview.SetParameters(parameters);
-            //Preview.StartPreview();
-            IsPreviewing = true;
-        }
-
-        Camera.Size GetOptimalPreviewSize(IList<Camera.Size> sizes, int w, int h)
-        {
-            const double AspectTolerance = 0.1;
-            double targetRatio = (double)w / h;
-
-            if (sizes == null)
+            public void ReceiveDetections(Detector.Detections detections)
             {
-                return null;
-            }
-
-            Camera.Size optimalSize = null;
-            double minDiff = double.MaxValue;
-
-            int targetHeight = h;
-            foreach (Camera.Size size in sizes)
-            {
-                double ratio = (double)size.Width / size.Height;
-
-                if (Math.Abs(ratio - targetRatio) > AspectTolerance)
-                    continue;
-                if (Math.Abs(size.Height - targetHeight) < minDiff)
+                SparseArray qrcodes = detections.DetectedItems;
+                if (qrcodes.Size() != 0)
                 {
-                    optimalSize = size;
-                    minDiff = Math.Abs(size.Height - targetHeight);
-                }
-            }
-
-            if (optimalSize == null)
-            {
-                minDiff = double.MaxValue;
-                foreach (Camera.Size size in sizes)
-                {
-                    if (Math.Abs(size.Height - targetHeight) < minDiff)
+                    if (isScanning)
                     {
-                        optimalSize = size;
-                        minDiff = Math.Abs(size.Height - targetHeight);
-                    }
+                        isScanning = false;
+                        Vibrator vib = (Vibrator)_context.GetSystemService(Context.VibratorService);
+                        vib.Vibrate(200);
+                        List<BarcodeResult> barcodeResults = new List<BarcodeResult>();
+                        for(int i = 0; i < qrcodes.Size(); i++)
+                        {
+                            Barcode barcode = qrcodes.ValueAt(i) as Barcode;
+                            var type = Methods.ConvertBarcodeResultTypes(barcode.ValueFormat);
+                            var value = barcode.DisplayValue;
+                            barcodeResults.Add(new BarcodeResult
+                            {
+                                BarcodeType = type,
+                                DisplayValue = value
+                            });
+                        }
+                        OnDetected?.Invoke(barcodeResults);
+                    } 
                 }
             }
 
-            return optimalSize;
+            public void Release()
+            {
+            }
+        }
+
+        class SurfaceHolderCallback : Java.Lang.Object, ISurfaceHolderCallback
+        {
+            SurfaceView _cameraPreview;
+            CameraSource _cameraSource;
+            public SurfaceHolderCallback(CameraSource cameraSource, SurfaceView cameraPreview)
+            {
+                _cameraSource = cameraSource;
+                _cameraPreview = cameraPreview;
+            }
+       
+
+            public void SurfaceChanged(ISurfaceHolder holder, [GeneratedEnum] Format format, int width, int height)
+            {
+             
+            }
+
+            public void SurfaceCreated(ISurfaceHolder holder)
+            {
+                try
+                {
+                    _cameraSource.Start(_cameraPreview.Holder);
+                }
+                catch (InvalidOperationException)
+                {
+
+                }
+            }
+
+            public void SurfaceDestroyed(ISurfaceHolder holder)
+            {
+                _cameraSource.Stop();
+            }
         }
     }
 }

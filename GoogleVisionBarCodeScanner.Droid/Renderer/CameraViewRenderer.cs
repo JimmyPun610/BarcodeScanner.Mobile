@@ -21,6 +21,9 @@ namespace GoogleVisionBarCodeScanner.Droid.Renderer
     {
         CameraPreview cameraPreview;
 
+        public CameraViewRenderer(Context context) : base(context)
+        {
+        }
 
         public static void Init() { }
 
@@ -33,11 +36,14 @@ namespace GoogleVisionBarCodeScanner.Droid.Renderer
             {
                 if (Control == null)
                 {
-                    if (Control == null)
+                    cameraPreview = new CameraPreview(Context);
+                    var cameraView = ((CameraView)e.NewElement);
+                    cameraPreview.OnDetected += (list) =>
                     {
-                        cameraPreview = new CameraPreview(Context);
-                        SetNativeControl(cameraPreview);
-                    }
+                        cameraView?.TriggerOnDetected(list);
+                    };
+                    SetNativeControl(cameraPreview);
+
                     //liveCameraStream = new UICameraPreview();
                     //SetNativeControl(liveCameraStream);
                     //var cameraView = ((CameraView)e.NewElement);

@@ -46,10 +46,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BarcodeScanning.cs" />
-    <Compile Include="BarCodeScanningActivity.cs" />
     <Compile Include="CameraPreview.cs" />
     <Compile Include="Configuration.cs" />
-    <Compile Include="Operation.cs" />
+    <Compile Include="Methods.cs" />
     <Compile Include="RendererInitializer.cs" />
     <Compile Include="Renderer\CameraViewRenderer.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
@@ -81,23 +80,13 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\drawable\" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\layout\BarCodeScanningView.axml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:UpdateGeneratedFiles</Generator>
-    </AndroidResource>
+    <Folder Include="Resources\layout\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\GoogleVisionBarCodeScanner\GoogleVisionBarCodeScanner.csproj">
       <Project>{8cda11d6-38f2-485e-9acf-61133cceec7b}</Project>
       <Name>GoogleVisionBarCodeScanner</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Resources\layout\CameraPreviewLayout.axml">
-      <Generator>MSBuild:UpdateGeneratedFiles</Generator>
-    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
