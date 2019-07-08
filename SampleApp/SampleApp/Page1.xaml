@@ -7,21 +7,19 @@
              mc:Ignorable="d"
              x:Class="SampleApp.Page1">
     <ContentPage.Content>
-        <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
-            <StackLayout Orientation="Horizontal" VerticalOptions="Start" HorizontalOptions="FillAndExpand" Grid.Row="0">
-                <Button x:Name="CancelButton" Text="Cancel" BackgroundColor="#FF0000" TextColor="White" Clicked="CancelButton_Clicked" HorizontalOptions="StartAndExpand"
+        <ScrollView  HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                <StackLayout Orientation="Horizontal" VerticalOptions="Start" HorizontalOptions="FillAndExpand">
+                    <Button x:Name="CancelButton" Text="Cancel" BackgroundColor="#FF0000" TextColor="White" Clicked="CancelButton_Clicked" HorizontalOptions="StartAndExpand"
                         WidthRequest="150" CornerRadius="0"/>
-                <Button x:Name="FlashlightButton" Text="Flashlight" BackgroundColor="#0075FF" TextColor="White" Clicked="FlashlightButton_Clicked" HorizontalOptions="EndAndExpand"
+                    <Button x:Name="FlashlightButton" Text="Flashlight" BackgroundColor="#0075FF" TextColor="White" Clicked="FlashlightButton_Clicked" HorizontalOptions="EndAndExpand"
                         WidthRequest="150" CornerRadius="0"/>
-            </StackLayout>
-            <gv:CameraView HorizontalOptions="FillAndExpand" Margin="0,30,0,0" OnDetected="CameraView_OnDetected" Grid.Row="1"/>
-            <Label Text="Scan QRCode" FontSize="Medium" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Center" Grid.Row="2"
+                </StackLayout>
+                <gv:CameraView HorizontalOptions="FillAndExpand" Margin="0,30,0,0" OnDetected="CameraView_OnDetected"/>
+                <Label Text="Scan QRCode" FontSize="Medium" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Center"
                        VerticalOptions="FillAndExpand" VerticalTextAlignment="Start" TextColor="Red"/>
-        </Grid>
+            </StackLayout>
+        </ScrollView>
+       
     </ContentPage.Content>
 </ContentPage>

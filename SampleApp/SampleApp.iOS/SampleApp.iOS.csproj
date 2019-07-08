@@ -136,8 +136,6 @@
     <ProjectReference Include="..\..\GoogleVisionBarCodeScanner.iOS\GoogleVisionBarCodeScanner.iOS.csproj">
       <Project>{00d2c7dd-8048-47e5-b1e1-e8e127ef94c1}</Project>
       <Name>GoogleVisionBarCodeScanner.iOS</Name>
-      <IsAppExtension>false</IsAppExtension>
-      <IsWatchApp>false</IsWatchApp>
     </ProjectReference>
     <ProjectReference Include="..\..\GoogleVisionBarCodeScanner\GoogleVisionBarCodeScanner.csproj">
       <Project>{8cda11d6-38f2-485e-9acf-61133cceec7b}</Project>

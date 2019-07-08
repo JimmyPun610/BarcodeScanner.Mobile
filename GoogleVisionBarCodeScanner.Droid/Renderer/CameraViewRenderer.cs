@@ -20,13 +20,12 @@ namespace GoogleVisionBarCodeScanner.Droid.Renderer
     public class CameraViewRenderer : ViewRenderer<CameraView, GoogleVisionBarCodeScanner.Droid.CameraPreview>
     {
         CameraPreview cameraPreview;
-
+        CameraView cameraView;
         public CameraViewRenderer(Context context) : base(context)
         {
         }
 
         public static void Init() { }
-
         protected override void OnElementChanged(ElementChangedEventArgs<CameraView> e)
         {
             base.OnElementChanged(e);
@@ -37,27 +36,20 @@ namespace GoogleVisionBarCodeScanner.Droid.Renderer
                 if (Control == null)
                 {
                     cameraPreview = new CameraPreview(Context);
-                    var cameraView = ((CameraView)e.NewElement);
+                    cameraView = ((CameraView)e.NewElement);
                     cameraPreview.OnDetected += (list) =>
                     {
                         cameraView?.TriggerOnDetected(list);
                     };
+                    cameraView.SizeChanged += CameraView_SizeChanged;
                     SetNativeControl(cameraPreview);
-
-                    //liveCameraStream = new UICameraPreview();
-                    //SetNativeControl(liveCameraStream);
-                    //var cameraView = ((CameraView)e.NewElement);
-                    //liveCameraStream.OnDetected += (list) =>
-                    //{
-                    //    cameraView?.TriggerOnDetected(list);
-                    //};
-                    //cameraView.ViewSizeChanged += (obj, arg) =>
-                    //{
-                    //    liveCameraStream.SizeChange();
-                    //};
                 }
             }
         }
 
+        private void CameraView_SizeChanged(object sender, EventArgs e)
+        {
+            cameraView.HeightRequest = cameraView.Width;
+        }
     }
 }

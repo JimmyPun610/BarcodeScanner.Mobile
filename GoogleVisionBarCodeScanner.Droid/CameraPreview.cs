@@ -20,12 +20,11 @@ namespace GoogleVisionBarCodeScanner.Droid
         SurfaceView surfaceView;
         IWindowManager windowManager;
         public event Action<List<BarcodeResult>> OnDetected;
-
+       
         public CameraPreview(Context context)
             : base(context)
         {
             windowManager = Context.GetSystemService(Context.WindowService).JavaCast<IWindowManager>();
-
             barcodeDetector = new BarcodeDetector.Builder(context)
                .SetBarcodeFormats(Configuration.BarcodeFormats)
                .Build();
@@ -36,7 +35,7 @@ namespace GoogleVisionBarCodeScanner.Droid
                 .Build();
             Configuration.CameraSource = cameraSource;
             surfaceView = new SurfaceView(context);
-      
+
             surfaceView.Holder.AddCallback(new SurfaceHolderCallback(cameraSource, surfaceView));
             AddView(surfaceView);
 
@@ -49,8 +48,7 @@ namespace GoogleVisionBarCodeScanner.Droid
         {
             OnDetected?.Invoke(obj);
         }
-
- 
+       
         protected override void OnLayout(bool changed, int l, int t, int r, int b)
         {
             var msw = MeasureSpec.MakeMeasureSpec(r - l, MeasureSpecMode.Exactly);
@@ -58,6 +56,7 @@ namespace GoogleVisionBarCodeScanner.Droid
 
             surfaceView.Measure(msw, msh);
             surfaceView.Layout(0, 0, r - l, r - l);
+
             SetOrientation();
         }
 
