@@ -10,7 +10,10 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using GoogleVisionBarCodeScanner.Droid;
+using Xamarin.Forms;
 
+[assembly: Dependency(typeof(BarcodeScanning))]
 namespace GoogleVisionBarCodeScanner.Droid
 {
     public class BarcodeScanning : Interface.IBarcodeScanning

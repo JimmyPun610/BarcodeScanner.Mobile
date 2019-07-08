@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<package>
+  <metadata>
+    <id>BarcodeScanner.XF</id>
+    <version>2.0</version>
+    <title>BarcodeScanner.XF</title>
+    <authors>Jimmy Pun</authors>
+    <owners>Jimmy Pun</owners>
+    <licenseUrl>https://github.com/JimmyPun610/GoogleVisionBarCodeScanner</licenseUrl>
+    <projectUrl>https://github.com/JimmyPun610/GoogleVisionBarCodeScanner</projectUrl>
+    <iconUrl>https://banner2.kisspng.com/20180713/olo/kisspng-nuget-net-framework-package-manager-software-repo-nuget-5b487dc3ba81a7.452233091531477443764.jpg</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>This is a library to implement biometric id feature in Xamarin Forms(iOS and Android only)</description>
+    <releaseNotes>
+		2.0 : Support on iOS and Android, use Xamarin Form design
+	</releaseNotes>
+    <copyright>Copyright 2019</copyright>
+    <tags>Xamarin.Forms Barcode Scanning Tools</tags>
+	<dependencies>
+		<group targetFramework="netstandard2.0">
+			<!--MonoAndroid dependencies go here-->
+			<dependency id="Xamarin.Essentials" version="1.0.1" />
+			<dependency id="Rg.Plugins.Popup" version="1.1.5.118" />
+			<dependency id="Xamarin.Forms" version="3.3.0.967" />
+		</group>
+		<group targetFramework="Xamarin.iOS10">
+			<!--MonoAndroid dependencies go here-->
+			<dependency id="Xamarin.Essentials" version="1.0.1" />
+			<dependency id="Rg.Plugins.Popup" version="1.1.5.118" />
+			<dependency id="Xamarin.Forms" version="3.3.0.967" />
+		</group>
+		<group targetFramework="MonoAndroid90">
+			<!--MonoAndroid dependencies go here-->
+			<dependency id="Xamarin.Essentials" version="1.0.1" />
+			<dependency id="Rg.Plugins.Popup" version="1.1.5.118" />
+			<dependency id="Xamarin.Forms" version="3.3.0.967" />
+			<dependency id="Xamarin.Android.Support.v7.MediaRouter" version="28.0.0.1" />
+			<dependency id="Xamarin.Android.Support.v7.CardView" version="28.0.0.1" />
+			<dependency id="Xamarin.Android.Support.v7.AppCompat" version="28.0.0.1" />
+			<dependency id="Xamarin.Android.Support.v4" version="28.0.0.1" />
+			<dependency id="Xamarin.Android.Support.Design" version="28.0.0.1" />
+			<dependency id="Xamarin.Android.Support.Core.Utils" version="28.0.0.1" />
+			<dependency id="Xamarin.Android.Support.CustomTabs" version="28.0.0.1" />
+		</group>
+	</dependencies>
+  </metadata>
+  <!-- Insert below <metadata> element -->
+<files>
+    <!-- Cross-platform reference assemblies -->
+    <file src="Plugin.XF.TouchID\bin\Debug\*.dll" target="lib\netstandard2.0" />
+    <file src="Plugin.XF.TouchID.Abstractions\bin\Debug\*.dll" target="lib\netstandard2.0" />
+    <file src="Plugin.XF.TouchID.iOS\bin\Debug\*.dll" target="lib\xamarin.ios10" />
+	<file src="Plugin.XF.TouchID.Droid\bin\Debug\*.dll" target="lib\monoandroid" />
+</files>
+</package>
