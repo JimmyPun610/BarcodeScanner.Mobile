@@ -5,6 +5,7 @@ using System.Text;
 
 using Android.App;
 using Android.Content;
+using Android.Gms.Vision;
 using Android.OS;
 using Android.Runtime;
 using Android.Views;
@@ -14,12 +15,12 @@ namespace GoogleVisionBarCodeScanner.Droid
 {
     public static class Configuration
     {
-        public static string Title = "掃瞄QRCode";
-        public static string FlashlightMessage = "Flashlight";
-        public static string ScanningDescription = "請掃瞄QRCode";
-        public static string CancelText = "取消";
-        public static Action<string> ScannedQRCode;
-        public static Android.Gms.Vision.Barcodes.BarcodeFormat BarcodeFormats = Android.Gms.Vision.Barcodes.BarcodeFormat.QrCode;
-        
+        public static Android.Gms.Vision.Barcodes.BarcodeFormat BarcodeFormats = Android.Gms.Vision.Barcodes.BarcodeFormat.Code128 | Android.Gms.Vision.Barcodes.BarcodeFormat.Codabar |
+             Android.Gms.Vision.Barcodes.BarcodeFormat.Code39 | Android.Gms.Vision.Barcodes.BarcodeFormat.Code93 | Android.Gms.Vision.Barcodes.BarcodeFormat.DataMatrix |
+             Android.Gms.Vision.Barcodes.BarcodeFormat.Ean13 | Android.Gms.Vision.Barcodes.BarcodeFormat.Ean8 | Android.Gms.Vision.Barcodes.BarcodeFormat.Itf |
+             Android.Gms.Vision.Barcodes.BarcodeFormat.Pdf417 | Android.Gms.Vision.Barcodes.BarcodeFormat.QrCode | Android.Gms.Vision.Barcodes.BarcodeFormat.UpcA | Android.Gms.Vision.Barcodes.BarcodeFormat.UpcE;
+
+        internal static bool isTorch = false;
+        internal static CameraSource CameraSource;
     }
 }
