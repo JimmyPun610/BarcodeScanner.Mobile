@@ -2,7 +2,7 @@
 <package>
   <metadata>
     <id>BarcodeScanner.XF</id>
-    <version>2.0.1</version>
+    <version>2.0.0</version>
     <title>BarcodeScanner.XF</title>
     <authors>Jimmy Pun</authors>
     <owners>Jimmy Pun</owners>
@@ -12,7 +12,7 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>This is a library to implement barcode scanning feature in Xamarin Forms(iOS and Android only)</description>
     <releaseNotes>
-		2.0.1 : Support on iOS and Android, use Xamarin Form design
+		2.0.0 : Support on iOS and Android, use Xamarin Form design
 	</releaseNotes>
     <copyright>Copyright 2019</copyright>
     <tags>Xamarin.Forms Barcode Scanning Tools</tags>
