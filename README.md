@@ -64,7 +64,7 @@ https://console.firebase.google.com/
 
 
 # Usage
-1. It is all about the camera will, use it on the page.xaml. For now, it will spend your whole width of the screen and the height will be equal to width.
+1. It is all about the camera view, use it on the page.xaml. For now, it will spend your whole width of the screen and the height will be equal to width.
 ```
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
