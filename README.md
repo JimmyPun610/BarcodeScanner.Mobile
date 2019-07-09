@@ -5,6 +5,8 @@ Works on Android and iOS 10+
 For Android, it use Xamarin.GooglePlayServices.Vision
 For iOS, it use GoogleMobileVision under MLKit library
 
+Please feel free to improve my source code.
+
 # Installation
 1. Install Nuget package to Forms, Android and iOS project
 ```
