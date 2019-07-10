@@ -64,7 +64,12 @@ https://console.firebase.google.com/
 
 
 # Usage
-1. It is all about the camera view, use it on the page.xaml. For now, it will spend your whole width of the screen and the height will be equal to width.
+1. Set support barcode format (Default is all), call it before you start to init CameraView
+```
+GoogleVisionBarCodeScanner.Methods.SetSupportBarcodeFormat(BarcodeFormats.QRCode);
+```
+
+2. It is all about the camera view, use it on the page.xaml. For now, it will spend your whole width of the screen and the height will be equal to width.
 ```
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
@@ -81,7 +86,7 @@ https://console.firebase.google.com/
 </ContentPage>
 ```
 
-2. Once barcode detected, "OnDetected" event will be triggered, do the stuff you want with the barcode, it will contains type and display value
+3. Once barcode detected, "OnDetected" event will be triggered, do the stuff you want with the barcode, it will contains type and display value
 ```
    private async void CameraView_OnDetected(object sender, GoogleVisionBarCodeScanner.OnDetectedEventArg e)
         {
@@ -101,7 +106,7 @@ https://console.firebase.google.com/
         }
 ```
 
-3. To use torch, please call 
+4. To use torch, please call 
 ```
    GoogleVisionBarCodeScanner.Methods.ToggleFlashlight();
 ```
