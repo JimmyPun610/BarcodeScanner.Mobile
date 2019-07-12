@@ -13,18 +13,14 @@ Please feel free to improve my source code.
 Install-Package BarcodeScanner.XF -Version 2.0.1
 ```
 # Android setup
-1. Make sure Xamarin.GooglePlayServices.Vision installed
-```
-Install-Package Xamarin.GooglePlayServices.Vision -Version 60.1142.1
-```
-2. Manifest.xml
+1. Manifest.xml
 ```xml
 <uses-permission android:name="android.permission.VIBRATE" />
 <uses-permission android:name="android.permission.FLASHLIGHT" />
 <uses-permission android:name="android.permission.CAMERA" />
 ```
 
-3. Init the library in MainActivity.cs
+2. Init the library in MainActivity.cs
 ```    
   base.OnCreate(savedInstanceState);
 ...
@@ -35,25 +31,18 @@ Install-Package Xamarin.GooglePlayServices.Vision -Version 60.1142.1
 ```
 
 # iOS Setup
-1. Make sure MLKit is installed
-```
-Install-Package Xamarin.Firebase.iOS.MLKit -Version 0.13.0.1
-Install-Package Xamarin.Firebase.iOS.MLKit.Common -Version 0.13.0
-Install-Package Xamarin.Firebase.iOS.Core -Version 5.1.8
-```
-
-2. Edit Info.plist, add camera rights
+1. Edit Info.plist, add camera rights
 ```
 	<key>NSCameraUsageDescription</key>
 	<string>Require to use camera</string>
 ```
 
-3. Create an project in Google Firebase Console, download GoogleService-Info.plist
+2. Create an project in Google Firebase Console, download GoogleService-Info.plist
 https://console.firebase.google.com/
 
-4. Put GoogleService-Info.plist into root folder of iOS project,  set Build Action as BundleResource
+3. Put GoogleService-Info.plist into root folder of iOS project,  set Build Action as BundleResource
 
-5. Init project and firebase on AppDelegate.cs
+4. Init project and firebase on AppDelegate.cs
 ```
             global::Xamarin.Forms.Forms.Init();
             LoadApplication(new App());
