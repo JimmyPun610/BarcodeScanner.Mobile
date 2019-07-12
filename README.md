@@ -10,7 +10,7 @@ Please feel free to improve my source code.
 # Installation
 1. Install Nuget package to Forms, Android and iOS project
 ```
-Install-Package BarcodeScanner.XF -Version 2.0.0
+Install-Package BarcodeScanner.XF -Version 2.0.1
 ```
 # Android setup
 1. Make sure Xamarin.GooglePlayServices.Vision installed
@@ -38,6 +38,8 @@ Install-Package Xamarin.GooglePlayServices.Vision -Version 60.1142.1
 1. Make sure MLKit is installed
 ```
 Install-Package Xamarin.Firebase.iOS.MLKit -Version 0.13.0.1
+Install-Package Xamarin.Firebase.iOS.MLKit.Common -Version 0.13.0
+Install-Package Xamarin.Firebase.iOS.Core -Version 5.1.8
 ```
 
 2. Edit Info.plist, add camera rights
@@ -64,6 +66,7 @@ https://console.firebase.google.com/
 
 
 # Usage
+
 1. Set support barcode format (Default is all), call it before you start to init CameraView
 ```
 GoogleVisionBarCodeScanner.Methods.SetSupportBarcodeFormat(BarcodeFormats.QRCode);
