@@ -7,6 +7,9 @@ For iOS, it use GoogleMobileVision under MLKit library
 
 Please feel free to improve my source code.
 
+# Pending to fix
+1. CameraView is not shown in Android 10 device
+
 # Installation
 1. Install Nuget package to Forms, Android and iOS project
 ```
