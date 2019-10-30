@@ -12,8 +12,13 @@ Please feel free to improve my source code.
 
 # Installation
 1. Install Nuget package to Forms, Android and iOS project
+For Xamarin Forms 4.2 or above
 ```
-Install-Package BarcodeScanner.XF -Version 2.0.1
+Install-Package BarcodeScanner.XF -Version 4.2.0.709249
+```
+For Xamarin Forms 3.5 or above
+```
+Install-Package BarcodeScanner.XF -Version 4.2.0.709249
 ```
 # Android setup
 1. Manifest.xml
