@@ -18,6 +18,11 @@ namespace GoogleVisionBarCodeScanner.Droid
 {
     public class BarcodeScanning : Interface.IBarcodeScanning
     {
+        public bool IsTorchOn()
+        {
+            return Configuration.isTorch;
+        }
+
         public void SetSupportFormat(BarcodeFormats barcodeFormats)
         {
             Android.Gms.Vision.Barcodes.BarcodeFormat supportFormats = Methods.ConvertBarcodeFormats(barcodeFormats);

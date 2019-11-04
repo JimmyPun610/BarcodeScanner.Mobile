@@ -14,6 +14,16 @@ namespace GoogleVisionBarCodeScanner.iOS
 {
     public class BarcodeScanning : Interface.IBarcodeScanning
     {
+        public bool IsTorchOn()
+        {
+            var videoDevices = AVCaptureDevice.GetDefaultDevice(AVMediaType.Video);
+            if (videoDevices.HasTorch)
+            {
+                return videoDevices.TorchMode == AVCaptureTorchMode.On;
+            }
+            return false;
+        }
+
         public void SetSupportFormat(BarcodeFormats barcodeFormats)
         {
             VisionBarcodeFormat supportFormats = Methods.ConvertBarcodeFormats(barcodeFormats);
