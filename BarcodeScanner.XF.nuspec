@@ -2,7 +2,7 @@
 <package>
   <metadata>
     <id>BarcodeScanner.XF</id>
-    <version>2.0.1</version>
+    <version>4.2.0.709249</version>
     <title>BarcodeScanner.XF</title>
     <authors>Jimmy Pun</authors>
     <owners>Jimmy Pun</owners>
@@ -12,32 +12,48 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>This is a library to implement barcode scanning feature by Google Mobile Vision in Xamarin Forms(iOS and Android only)</description>
     <releaseNotes>
-		2.0.1 : Support on iOS and Android, use Xamarin Form design
+		4.2.0.709249 : Update to Xamarin Form 4.2.0.709249. Version number will align to XF version now.
 	</releaseNotes>
     <copyright>Copyright 2019</copyright>
     <tags>Xamarin.Forms Barcode Scanning Tools</tags>
 	<dependencies>
 		<group targetFramework="netstandard2.0">
 			<!--MonoAndroid dependencies go here-->
-			<dependency id="Xamarin.Essentials" version="1.1.0" />
-			<dependency id="Xamarin.Forms" version="3.5.0.274416" />
+			<dependency id="Xamarin.Essentials" version="1.3.1" />
+			<dependency id="Xamarin.Forms" version="4.2.0.709249" />
 		</group>
 		<group targetFramework="Xamarin.iOS10">
 			<!--MonoAndroid dependencies go here-->
-			<dependency id="Xamarin.Essentials" version="1.1.0" />
-			<dependency id="Xamarin.Forms" version="3.5.0.274416" />
-			<dependency id="Xamarin.Firebase.iOS.Core" version="5.1.8" />
+			<dependency id="Xamarin.Essentials" version="1.3.1" />
+			<dependency id="Xamarin.Forms" version="4.2.0.709249" />
+			<dependency id="Xamarin.Firebase.iOS.Core" version="6.1.0" />
 			<dependency id="Xamarin.Firebase.iOS.MLKit" version="0.13.0.1" />
 			<dependency id="Xamarin.Firebase.iOS.MLKit.Common" version="0.13.0" />
+			<dependency id="System.Numerics.Vectors" version="4.5" />
+			<dependency id="Xamarin.Build.Download" version="0.4.11" />
 		</group>
 		<group targetFramework="MonoAndroid90">
 			<!--MonoAndroid dependencies go here-->
-			<dependency id="Xamarin.Essentials" version="1.1.0" />
-			<dependency id="Xamarin.Forms" version="3.5.0.274416" />
-			<dependency id="Xamarin.Android.Support.v7.MediaRouter" version="28.0.0.1" />
-			<dependency id="Xamarin.Android.Support.v7.AppCompat" version="28.0.0.1" />
-			<dependency id="Xamarin.Android.Support.v4" version="28.0.0.1" />	
-			<dependency id="Xamarin.GooglePlayServices.Vision" version="60.1142.1" />
+			<dependency id="Xamarin.Essentials" version="1.3.1" />
+			<dependency id="Xamarin.Forms" version="4.2.0.709249" />
+			<dependency id="Xamarin.Android.Support.v7.MediaRouter" version="28.0.0.3" />
+			<dependency id="Xamarin.Android.Support.v7.AppCompat" version="28.0.0.3" />
+			<dependency id="Xamarin.Android.Support.v4" version="28.0.0.3" />	
+			<dependency id="Xamarin.Android.Support.Annotations" version="28.0.0.3" />	
+			<dependency id="Xamarin.Android.Support.Collections" version="28.0.0.3" />	
+			<dependency id="Xamarin.Android.Support.Compat" version="28.0.0.3" />	
+			<dependency id="Xamarin.Android.Support.Core.UI" version="28.0.0.3" />	
+			<dependency id="Xamarin.Android.Support.Core.Utils" version="28.0.0.3" />	
+			<dependency id="Xamarin.Android.Support.CursorAdapter" version="28.0.0.3" />	
+			<dependency id="Xamarin.Android.Support.Design" version="28.0.0.3" />	
+			<dependency id="Xamarin.Android.Support.Fragment" version="28.0.0.3" />	
+			<dependency id="Xamarin.Android.Support.Interpolator" version="28.0.0.3" />	
+			<dependency id="Xamarin.Android.Support.Media.Compat" version="28.0.0.3" />	
+			<dependency id="Xamarin.Android.Support.v7.RecyclerView" version="28.0.0.3" />	
+			<dependency id="Xamarin.Android.Support.VersionedParcelable" version="28.0.0.3" />	
+			<dependency id="Xamarin.Android.Support.v7.RecyclerView" version="28.0.0.3" />	
+			<dependency id="Xamarin.Android.Support.v7.RecyclerView" version="28.0.0.3" />	
+			<dependency id="Xamarin.GooglePlayServices.Vision" version="71.1702.1" />
 		</group>
 	</dependencies>
   </metadata>

@@ -34,8 +34,7 @@ namespace GoogleVisionBarCodeScanner.Droid
                 .SetAutoFocusEnabled(true)
                 .Build();
             Configuration.CameraSource = cameraSource;
-            surfaceView = new SurfaceView(context);
-
+            surfaceView = new SurfaceView(context);            
             surfaceView.Holder.AddCallback(new SurfaceHolderCallback(cameraSource, surfaceView));
             AddView(surfaceView);
 
