@@ -17,8 +17,6 @@ namespace GoogleVisionBarCodeScanner.iOS.Renderer
     public class CameraViewRenderer : ViewRenderer
     {
         UICameraPreview liveCameraStream;
-      
-
         public static void Init() { }
 
         protected override void OnElementChanged(ElementChangedEventArgs<View> e)
@@ -36,10 +34,6 @@ namespace GoogleVisionBarCodeScanner.iOS.Renderer
                     liveCameraStream.OnDetected += (list) =>
                     {
                         cameraView?.TriggerOnDetected(list);
-                    };
-                    cameraView.ViewSizeChanged += (obj, arg) =>
-                    {
-                        liveCameraStream.SizeChange();
                     };
                 }
             }

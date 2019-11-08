@@ -30,7 +30,7 @@ namespace GoogleVisionBarCodeScanner.Droid
                .Build();
             cameraSource = new CameraSource
                 .Builder(context, barcodeDetector)
-                .SetRequestedPreviewSize(640, 480)
+                .SetRequestedPreviewSize(1280, 720)
                 .SetAutoFocusEnabled(true)
                 .Build();
             Configuration.CameraSource = cameraSource;
@@ -54,7 +54,7 @@ namespace GoogleVisionBarCodeScanner.Droid
             var msh = MeasureSpec.MakeMeasureSpec(b - t, MeasureSpecMode.Exactly);
 
             surfaceView.Measure(msw, msh);
-            surfaceView.Layout(0, 0, r - l, r - l);
+            surfaceView.Layout(0, 0, r - l, b - t);
 
             SetOrientation();
         }
@@ -146,6 +146,7 @@ namespace GoogleVisionBarCodeScanner.Droid
             {
                 try
                 {
+
                     _cameraSource.Start(_cameraPreview.Holder);
                 }
                 catch (InvalidOperationException)

@@ -23,6 +23,7 @@ namespace GoogleVisionBarCodeScanner.Droid.Renderer
         CameraView cameraView;
         public CameraViewRenderer(Context context) : base(context)
         {
+
         }
 
         public static void Init() { }
@@ -41,15 +42,12 @@ namespace GoogleVisionBarCodeScanner.Droid.Renderer
                     {
                         cameraView?.TriggerOnDetected(list);
                     };
-                    cameraView.SizeChanged += CameraView_SizeChanged;
+                    
                     SetNativeControl(cameraPreview);
                 }
             }
         }
 
-        private void CameraView_SizeChanged(object sender, EventArgs e)
-        {
-            cameraView.HeightRequest = cameraView.Width;
-        }
+      
     }
 }

@@ -10,17 +10,15 @@ Please feel free to improve my source code.
 # Pending to fix
 1. CameraView is not shown in Android 10 device
 
+# Update on 4.2.0.815419
+1. CameraView size can be adjusted in Xamarin Forms UserControl now.
+
 # Installation
 1. Install Nuget package to Forms, Android and iOS project
+```
+Install-Package BarcodeScanner.XF
+```
 
-For Xamarin Forms 4.2 or above
-```
-Install-Package BarcodeScanner.XF -Version 4.2.0.709249
-```
-For Xamarin Forms 3.5 or above
-```
-Install-Package BarcodeScanner.XF -Version 4.2.0.709249
-```
 # Android setup
 1. Manifest.xml
 ```xml
@@ -49,7 +47,7 @@ Install-Package BarcodeScanner.XF -Version 4.2.0.709249
 2. Create an project in Google Firebase Console, download GoogleService-Info.plist
 https://console.firebase.google.com/
 
-3. Put GoogleService-Info.plist into root folder of iOS project,  set Build Action as BundleResource
+3. Put GoogleService-Info.plist into Resources folder of iOS project,  set Build Action as BundleResource
 
 4. Init project and firebase on AppDelegate.cs
 ```

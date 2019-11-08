@@ -11,6 +11,7 @@ using Firebase.MLKit.Vision;
 using Foundation;
 using AudioToolbox;
 using UIKit;
+using System.Drawing;
 
 namespace GoogleVisionBarCodeScanner.iOS
 {
@@ -35,52 +36,58 @@ namespace GoogleVisionBarCodeScanner.iOS
             //cameraOptions = options;
             Initialize();
         }
-
-        public void SizeChange()
+        public override void LayoutSubviews()
         {
-            this.Frame = new CGRect(0f, 0f, UIScreen.MainScreen.Bounds.Width, UIScreen.MainScreen.Bounds.Width);
-            if (previewLayer != null)
-            {
-                previewLayer.Frame = new CGRect(0f, 0f, UIScreen.MainScreen.Bounds.Width, UIScreen.MainScreen.Bounds.Width);
-                setPreviewOrientation();
-            }
-                
+            base.LayoutSubviews();
+            setPreviewOrientation();
+        }
+        private void updatePreviewLayer(AVCaptureConnection layer, AVCaptureVideoOrientation orientation)
+        {
+            layer.VideoOrientation = orientation;
+            previewLayer.Frame = Bounds;
         }
         private void setPreviewOrientation()
         {
-            UIInterfaceOrientation orientation = UIApplication.SharedApplication.StatusBarOrientation;
-            switch (orientation)
+            var connection = previewLayer.Connection;
+            if(connection != null)
             {
-                case UIInterfaceOrientation.LandscapeLeft:
-                    previewLayer.Orientation = AVCaptureVideoOrientation.LandscapeLeft;
-                    break;
-                case UIInterfaceOrientation.LandscapeRight:
-                    previewLayer.Orientation = AVCaptureVideoOrientation.LandscapeRight;
-                    break;
-                case UIInterfaceOrientation.Portrait:
-                    previewLayer.Orientation = AVCaptureVideoOrientation.Portrait;
-                    break;
-                case UIInterfaceOrientation.PortraitUpsideDown:
-                    previewLayer.Orientation = AVCaptureVideoOrientation.PortraitUpsideDown;
-                    break;
-                default:
-                    previewLayer.Orientation = AVCaptureVideoOrientation.Portrait;
-                    break;
+                var curentDevice = UIDevice.CurrentDevice;
+                var orientation = curentDevice.Orientation;
+                var previewLayerConnection = connection;
+                if (previewLayerConnection.SupportsVideoOrientation)
+                {
+                    switch (orientation)
+                    {
+                        case UIDeviceOrientation.Portrait:
+                            updatePreviewLayer(previewLayerConnection, AVCaptureVideoOrientation.Portrait);
+                            break;
+                        case UIDeviceOrientation.LandscapeRight:
+                            updatePreviewLayer(previewLayerConnection, AVCaptureVideoOrientation.LandscapeLeft);
+                            break;
+                        case UIDeviceOrientation.LandscapeLeft:
+                            updatePreviewLayer(previewLayerConnection, AVCaptureVideoOrientation.LandscapeRight);
+                            break;
+                        case UIDeviceOrientation.PortraitUpsideDown:
+                            updatePreviewLayer(previewLayerConnection, AVCaptureVideoOrientation.PortraitUpsideDown);
+                            break;
+                        default:
+                            updatePreviewLayer(previewLayerConnection, AVCaptureVideoOrientation.Portrait);
+                            break;
+                    }
+                }
             }
         }
         void Initialize()
         {
             Configuration.IsScanning = true;
-            SizeChange();
             CaptureSession = new AVCaptureSession();
             CaptureSession.BeginConfiguration();
-            this.Frame = new CGRect(0f, 0f, UIScreen.MainScreen.Bounds.Width, UIScreen.MainScreen.Bounds.Width);
+            this.AutoresizingMask = UIViewAutoresizing.FlexibleDimensions;
             previewLayer = new AVCaptureVideoPreviewLayer(CaptureSession)
             {
-                Frame = new CGRect(0f, 0f, UIScreen.MainScreen.Bounds.Width, UIScreen.MainScreen.Bounds.Width),
-                VideoGravity = AVLayerVideoGravity.ResizeAspectFill,
+                Frame = this.Bounds,
+                VideoGravity = AVLayerVideoGravity.ResizeAspectFill
             };
-            setPreviewOrientation();
             var videoDevices = AVCaptureDevice.DevicesWithMediaType(AVMediaType.Video);
             var cameraPosition = AVCaptureDevicePosition.Back;
             //var cameraPosition = (cameraOptions == CameraOptions.Front) ? AVCaptureDevicePosition.Front : AVCaptureDevicePosition.Back;
@@ -92,7 +99,7 @@ namespace GoogleVisionBarCodeScanner.iOS
             NSError error;
             var input = new AVCaptureDeviceInput(device, out error);
             CaptureSession.AddInput(input);
-            CaptureSession.SessionPreset = AVFoundation.AVCaptureSession.Preset640x480;
+            CaptureSession.SessionPreset = AVFoundation.AVCaptureSession.Preset1280x720;
             Layer.AddSublayer(previewLayer);
 
             CaptureSession.CommitConfiguration();

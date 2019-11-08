@@ -127,13 +127,15 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="BarcodeScanner.XF">
-      <Version>4.2.0.709249</Version>
+      <Version>4.2.0.815419</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.Firebase.iOS.MLKit">
       <Version>0.13.0.1</Version>
     </PackageReference>
-    <PackageReference Include="Xamarin.Forms" Version="4.2.0.709249" />
     <PackageReference Include="Xamarin.Essentials" Version="1.3.1" />
+    <PackageReference Include="Xamarin.Forms">
+      <Version>4.2.0.815419</Version>
+    </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>
