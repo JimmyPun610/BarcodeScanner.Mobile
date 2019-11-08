@@ -8,5 +8,7 @@ namespace GoogleVisionBarCodeScanner.Interface
     {
         void SetSupportFormat(BarcodeFormats barcodeFormats);
         void ToggleFlashlight();
+
+        bool IsTorchOn();
     }
 }
