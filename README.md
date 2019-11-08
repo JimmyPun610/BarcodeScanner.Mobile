@@ -10,8 +10,9 @@ Please feel free to improve my source code.
 # Pending to fix
 1. CameraView is not shown in Android 10 device
 
-# Update on 4.2.0.815419
+# Update on 4.2.0.815420
 1. CameraView size can be adjusted in Xamarin Forms UserControl now.
+2. IsTorchOn method merged
 
 # Installation
 1. Install Nuget package to Forms, Android and iOS project
