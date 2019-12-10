@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using AVFoundation;
 using Firebase.MLKit.Vision;
 using Foundation;
@@ -14,6 +15,8 @@ namespace GoogleVisionBarCodeScanner.iOS
 {
     public class BarcodeScanning : Interface.IBarcodeScanning
     {
+
+
         public bool IsTorchOn()
         {
             var videoDevices = AVCaptureDevice.GetDefaultDevice(AVMediaType.Video);

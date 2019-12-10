@@ -28,13 +28,15 @@ namespace GoogleVisionBarCodeScanner.iOS.Renderer
             {
                 if(Control == null)
                 {
-                    liveCameraStream = new UICameraPreview();
-                    SetNativeControl(liveCameraStream);
                     var cameraView = ((CameraView)e.NewElement);
+                    liveCameraStream = new UICameraPreview(cameraView.DefaultTorchOn);
+                    SetNativeControl(liveCameraStream);
                     liveCameraStream.OnDetected += (list) =>
                     {
                         cameraView?.TriggerOnDetected(list);
                     };
+         
+
                 }
             }
         }

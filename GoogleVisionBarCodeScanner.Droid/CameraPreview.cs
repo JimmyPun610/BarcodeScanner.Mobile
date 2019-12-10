@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Android.Content;
 using Android.Gms.Vision;
 using Android.Gms.Vision.Barcodes;
@@ -21,7 +22,7 @@ namespace GoogleVisionBarCodeScanner.Droid
         IWindowManager windowManager;
         public event Action<List<BarcodeResult>> OnDetected;
        
-        public CameraPreview(Context context)
+        public CameraPreview(Context context, bool defaultTorchOn)
             : base(context)
         {
             windowManager = Context.GetSystemService(Context.WindowService).JavaCast<IWindowManager>();
@@ -41,6 +42,49 @@ namespace GoogleVisionBarCodeScanner.Droid
             var detectProcessor = new DetectorProcessor(context);
             detectProcessor.OnDetected += DetectProcessor_OnDetected;
             barcodeDetector.SetProcessor(detectProcessor);
+            if (defaultTorchOn)
+                AutoSwitchOnTorch();
+        }
+
+        private void AutoSwitchOnTorch()
+        {
+            var ts = new System.Threading.CancellationTokenSource();
+            System.Threading.CancellationToken ct = ts.Token;
+            Task.Factory.StartNew(async () =>
+            {
+                bool isTorchOn = false;
+                do
+                {
+                    try
+                    {
+                        isTorchOn = GoogleVisionBarCodeScanner.Methods.IsTorchOn();
+                        if (!isTorchOn)
+                        {
+                            //Try to switch on the torch
+                            GoogleVisionBarCodeScanner.Methods.ToggleFlashlight();
+                            //break the loop if the torch on succesfully
+                            isTorchOn = GoogleVisionBarCodeScanner.Methods.IsTorchOn();
+                            if (isTorchOn)
+                                break;
+                            else
+                            {
+                                //Wait 500ms to run the loop again
+                                await Task.Delay(500);
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        //May be the view is not loaded
+                        //Wait 500ms to run the loop again
+                        await Task.Delay(500);
+                    }
+                } while (!isTorchOn);
+                //Stop the task
+                ts.Cancel();
+
+
+            }, ct);
         }
 
         private void DetectProcessor_OnDetected(List<BarcodeResult> obj)

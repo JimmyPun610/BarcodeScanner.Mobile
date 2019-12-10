@@ -31,11 +31,12 @@ namespace GoogleVisionBarCodeScanner.iOS
         //    Initialize();
         //}
 
-        public UICameraPreview()
+        public UICameraPreview(bool defaultTorchOn)
         {
             //cameraOptions = options;
-            Initialize();
+            Initialize(defaultTorchOn);
         }
+
         public override void LayoutSubviews()
         {
             base.LayoutSubviews();
@@ -77,7 +78,7 @@ namespace GoogleVisionBarCodeScanner.iOS
                 }
             }
         }
-        void Initialize()
+        void Initialize(bool defaultTorchOn)
         {
             Configuration.IsScanning = true;
             CaptureSession = new AVCaptureSession();
@@ -92,19 +93,22 @@ namespace GoogleVisionBarCodeScanner.iOS
             var cameraPosition = AVCaptureDevicePosition.Back;
             //var cameraPosition = (cameraOptions == CameraOptions.Front) ? AVCaptureDevicePosition.Front : AVCaptureDevicePosition.Back;
             var device = videoDevices.FirstOrDefault(d => d.Position == cameraPosition);
-
+          
+            
             if (device == null)
                 return;
 
             NSError error;
             var input = new AVCaptureDeviceInput(device, out error);
+
             CaptureSession.AddInput(input);
             CaptureSession.SessionPreset = AVFoundation.AVCaptureSession.Preset1280x720;
             Layer.AddSublayer(previewLayer);
 
             CaptureSession.CommitConfiguration();
-            CaptureSession.StartRunning();
-   
+      
+            
+
             VideoDataOutput = new AVCaptureVideoDataOutput();
             VideoDataOutput.AlwaysDiscardsLateVideoFrames = true;
             VideoDataOutput.WeakVideoSettings = new CVPixelBufferAttributes { PixelFormatType = CVPixelFormatType.CV32BGRA }.Dictionary;
@@ -113,13 +117,23 @@ namespace GoogleVisionBarCodeScanner.iOS
             captureVideoDelegate = new CaptureVideoDelegate();
             captureVideoDelegate.OnDetected += (list) =>
             {
-                this.OnDetected?.Invoke(list);
-                CaptureSession.StopRunning();
+                InvokeOnMainThread(() => {
+                    CaptureSession.StopRunning();
+                    this.OnDetected?.Invoke(list); 
+                });
+                
             };
             VideoDataOutput.SetSampleBufferDelegateQueue(captureVideoDelegate, CoreFoundation.DispatchQueue.MainQueue);
 
             CaptureSession.AddOutput(VideoDataOutput);
-
+            InvokeOnMainThread(() =>
+            {
+                CaptureSession.StartRunning();
+                //Torch on by default
+                if(defaultTorchOn && !GoogleVisionBarCodeScanner.Methods.IsTorchOn())
+                    GoogleVisionBarCodeScanner.Methods.ToggleFlashlight();
+            });
+            
         }
 
         public class CaptureVideoDelegate : AVCaptureVideoDataOutputSampleBufferDelegate

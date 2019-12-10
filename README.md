@@ -10,9 +10,11 @@ Please feel free to improve my source code.
 # Pending to fix
 1. CameraView is not shown in Android 10 device
 
-# Update on 4.2.0.815420
-1. CameraView size can be adjusted in Xamarin Forms UserControl now.
-2. IsTorchOn method merged
+# Update on 4.2.1
+1. Added ask permission methods
+2. Added IsTorchOn methods
+3. Added DefaultTorchOn property
+4. Move some code on iOS to UIThread
 
 # Installation
 1. Install Nuget package to Forms, Android and iOS project
@@ -33,11 +35,19 @@ Install-Package BarcodeScanner.XF
   base.OnCreate(savedInstanceState);
 ...
   GoogleVisionBarCodeScanner.Droid.RendererInitializer.Init();
+  Plugin.CurrentActivity.CrossCurrentActivity.Current.Init(this, savedInstanceState);
 ...
   global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
   LoadApplication(new App());
 ```
-
+```
+public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
+{
+    Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
+    Plugin.Permissions.PermissionsImplementation.Current.OnRequestPermissionsResult(requestCode, permissions, grantResults);
+    base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
+}
+```
 # iOS Setup
 1. Edit Info.plist, add camera rights
 ```
@@ -70,7 +80,7 @@ GoogleVisionBarCodeScanner.Methods.SetSupportBarcodeFormat(BarcodeFormats.QRCode
 ```
 
 2. It is all about the camera view, use it on the page.xaml. For now, it will spend your whole width of the screen and the height will be equal to width.
-```
+```XAML
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
@@ -80,10 +90,22 @@ GoogleVisionBarCodeScanner.Methods.SetSupportBarcodeFormat(BarcodeFormats.QRCode
              x:Class="SampleApp.Page1">
    <ContentPage.Content>
      <ScrollView HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-       <gv:CameraView HorizontalOptions="FillAndExpand" Margin="0,30,0,0" OnDetected="CameraView_OnDetected"/>
+	 <!--If true on DefaultTorchOn, Torch will be on when the UI loaded-->
+             <gv:CameraView HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" OnDetected="CameraView_OnDetected" Grid.Row="1"
+                            DefaultTorchOn="True"/>
      </ScrollView>
    </ContentPage.Content>
 </ContentPage>
+```
+#### In the page.cs, below code are making sure that torch is off when leaving
+```C#
+  protected override void OnDisappearing()
+        {
+            base.OnDisappearing();
+            //Off the torch when exit page
+            if (GoogleVisionBarCodeScanner.Methods.IsTorchOn())
+                GoogleVisionBarCodeScanner.Methods.ToggleFlashlight();
+        }
 ```
 
 3. Once barcode detected, "OnDetected" event will be triggered, do the stuff you want with the barcode, it will contains type and display value
@@ -109,4 +131,9 @@ GoogleVisionBarCodeScanner.Methods.SetSupportBarcodeFormat(BarcodeFormats.QRCode
 4. To use torch, please call 
 ```
    GoogleVisionBarCodeScanner.Methods.ToggleFlashlight();
+```
+
+5. To ask for permission
+```
+bool allowed = await GoogleVisionBarCodeScanner.Methods.AskForRequiredPermission();
 ```

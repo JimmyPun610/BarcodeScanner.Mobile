@@ -20,7 +20,6 @@ namespace GoogleVisionBarCodeScanner.Droid
              Android.Gms.Vision.Barcodes.BarcodeFormat.Ean13 | Android.Gms.Vision.Barcodes.BarcodeFormat.Ean8 | Android.Gms.Vision.Barcodes.BarcodeFormat.Itf |
              Android.Gms.Vision.Barcodes.BarcodeFormat.Pdf417 | Android.Gms.Vision.Barcodes.BarcodeFormat.QrCode | Android.Gms.Vision.Barcodes.BarcodeFormat.UpcA | Android.Gms.Vision.Barcodes.BarcodeFormat.UpcE;
 
-        internal static bool isTorch = false;
         internal static CameraSource CameraSource;
     }
 }

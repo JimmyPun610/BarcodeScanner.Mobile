@@ -18,12 +18,18 @@ namespace SampleApp
             InitializeComponent();
         }
         
-        private void Button_Clicked(object sender, EventArgs e)
+        private async void Button_Clicked(object sender, EventArgs e)
         {
             //var p = new GoogleVisionBarCodeScanner.BarcodeScanningPage();
             //p.SetupBarcodeScanningPage("AD", "Cancel", "ScanningDesc", "Flashlight");
             //Navigation.PushModalAsync(new NavigationPage(p));
-            Navigation.PushModalAsync(new NavigationPage(new Page1()));
+
+            //Ask for permission first
+            bool allowed = false;
+            allowed = await GoogleVisionBarCodeScanner.Methods.AskForRequiredPermission();
+            if (allowed)
+                Navigation.PushModalAsync(new NavigationPage(new Page1()));
+            else DisplayAlert("Alert", "You have to provide Camera permission", "Ok");
 
         }
     }

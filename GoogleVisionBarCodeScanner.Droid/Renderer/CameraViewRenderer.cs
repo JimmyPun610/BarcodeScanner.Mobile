@@ -13,6 +13,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 using Android.Hardware;
 using GoogleVisionBarCodeScanner.Droid.Renderer;
+using System.Threading.Tasks;
 
 [assembly: ExportRenderer(typeof(GoogleVisionBarCodeScanner.CameraView), typeof(GoogleVisionBarCodeScanner.Droid.Renderer.CameraViewRenderer))]
 namespace GoogleVisionBarCodeScanner.Droid.Renderer
@@ -36,18 +37,19 @@ namespace GoogleVisionBarCodeScanner.Droid.Renderer
             {
                 if (Control == null)
                 {
-                    cameraPreview = new CameraPreview(Context);
                     cameraView = ((CameraView)e.NewElement);
+                    cameraPreview = new CameraPreview(Context, cameraView.DefaultTorchOn);
                     cameraPreview.OnDetected += (list) =>
                     {
                         cameraView?.TriggerOnDetected(list);
                     };
                     
                     SetNativeControl(cameraPreview);
+               
                 }
             }
         }
 
-      
+     
     }
 }

@@ -127,7 +127,10 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="BarcodeScanner.XF">
-      <Version>4.2.0.815420</Version>
+      <Version>4.2.1</Version>
+    </PackageReference>
+    <PackageReference Include="Plugin.Permissions">
+      <Version>3.0.0.12</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.Firebase.iOS.MLKit">
       <Version>0.13.0.1</Version>
