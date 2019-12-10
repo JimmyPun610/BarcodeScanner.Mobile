@@ -137,3 +137,8 @@ GoogleVisionBarCodeScanner.Methods.SetSupportBarcodeFormat(BarcodeFormats.QRCode
 ```
 bool allowed = await GoogleVisionBarCodeScanner.Methods.AskForRequiredPermission();
 ```
+
+6. To check the condition of torch
+```
+   GoogleVisionBarCodeScanner.Methods.IsTorchOn();
+```
