@@ -38,7 +38,7 @@ namespace GoogleVisionBarCodeScanner.Droid.Renderer
                 if (Control == null)
                 {
                     cameraView = ((CameraView)e.NewElement);
-                    cameraPreview = new CameraPreview(Context, cameraView.DefaultTorchOn, cameraView.VirbationOnDetected);
+                    cameraPreview = new CameraPreview(Context, cameraView.DefaultTorchOn, cameraView.VibationOnDetected);
                     cameraPreview.OnDetected += (list) =>
                     {
                         cameraView?.TriggerOnDetected(list);

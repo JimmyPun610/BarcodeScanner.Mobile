@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using AVFoundation;
 using Firebase.MLKit.Vision;
 using Foundation;
 using UIKit;
@@ -12,6 +13,6 @@ namespace GoogleVisionBarCodeScanner.iOS
     {
         internal static bool IsScanning = true;
         public static VisionBarcodeDetectorOptions BarcodeDetectorSupportFormat = new VisionBarcodeDetectorOptions(VisionBarcodeFormat.All);
-        
+
     }
 }

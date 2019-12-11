@@ -10,6 +10,12 @@ namespace GoogleVisionBarCodeScanner
 {
     public class Methods
     {
+
+        public static void Reset()
+        {
+            DependencyService.Get<Interface.IBarcodeScanning>().Reset();
+        }
+
         public static bool IsTorchOn()
         {
             return DependencyService.Get<Interface.IBarcodeScanning>().IsTorchOn();

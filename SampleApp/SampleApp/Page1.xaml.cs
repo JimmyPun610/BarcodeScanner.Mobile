@@ -21,13 +21,6 @@ namespace SampleApp
             On<Xamarin.Forms.PlatformConfiguration.iOS>().SetUseSafeArea(true);
         }
 
-        protected override void OnDisappearing()
-        {
-            base.OnDisappearing();
-            //Off the torch when exit page
-            if (GoogleVisionBarCodeScanner.Methods.IsTorchOn())
-                GoogleVisionBarCodeScanner.Methods.ToggleFlashlight();
-        }
 
         private async void CancelButton_Clicked(object sender, EventArgs e)
         {
@@ -51,7 +44,8 @@ namespace SampleApp
             Device.BeginInvokeOnMainThread(async() =>
             {
                 await DisplayAlert("Result", result, "OK");
-                await Navigation.PopModalAsync();
+                GoogleVisionBarCodeScanner.Methods.Reset();
+                //await Navigation.PopModalAsync();
             });
             
         }

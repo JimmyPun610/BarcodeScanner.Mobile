@@ -8,7 +8,8 @@
 
     <StackLayout>
         <!-- Place new controls here -->
-        <Button Text="Scan" Clicked="Button_Clicked"/>
+        <Button Text="Scan Continously" Clicked="Button1_Clicked"/>
+        <Button Text="Scan One time" Clicked="Button2_Clicked"/>
     </StackLayout>
 
 </ContentPage>

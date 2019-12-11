@@ -53,5 +53,10 @@ namespace GoogleVisionBarCodeScanner.iOS
 
             }
         }
+
+        public void Reset()
+        {
+            Configuration.IsScanning = true;
+        }
     }
 }

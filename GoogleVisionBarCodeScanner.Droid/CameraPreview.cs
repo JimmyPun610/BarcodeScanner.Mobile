@@ -22,6 +22,16 @@ namespace GoogleVisionBarCodeScanner.Droid
         SurfaceView surfaceView;
         IWindowManager windowManager;
         public event Action<List<BarcodeResult>> OnDetected;
+
+        protected override void OnDetachedFromWindow()
+        {
+            base.OnDetachedFromWindow();
+            //Off the torch when exit page
+            if (GoogleVisionBarCodeScanner.Methods.IsTorchOn())
+                GoogleVisionBarCodeScanner.Methods.ToggleFlashlight();
+        }
+
+
         public CameraPreview(Context context, bool defaultTorchOn, bool virbationOnDetected)
             : base(context)
         {
@@ -132,7 +142,6 @@ namespace GoogleVisionBarCodeScanner.Droid
 
         class DetectorProcessor : Java.Lang.Object, Detector.IProcessor
         {
-            bool isScanning = true;
             public event Action<List<BarcodeResult>> OnDetected;
             Context _context;
             bool _vibrationOnDetected = true;
@@ -146,9 +155,9 @@ namespace GoogleVisionBarCodeScanner.Droid
                 SparseArray qrcodes = detections.DetectedItems;
                 if (qrcodes.Size() != 0)
                 {
-                    if (isScanning)
+                    if (Configuration.IsScanning)
                     {
-                        isScanning = false;
+                        Configuration.IsScanning = false;
                         if (_vibrationOnDetected)
                         {
                             Vibrator vib = (Vibrator)_context.GetSystemService(Context.VibratorService);

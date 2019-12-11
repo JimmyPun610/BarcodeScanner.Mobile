@@ -55,5 +55,10 @@ namespace GoogleVisionBarCodeScanner.Droid
             else Console.WriteLine($"Do not find camera");
            
         }
+
+        public void Reset()
+        {
+            Configuration.IsScanning = true;
+        }
     }
 }

@@ -11,5 +11,7 @@ namespace GoogleVisionBarCodeScanner.Interface
         void ToggleFlashlight();
 
         bool IsTorchOn();
+
+        void Reset();
     }
 }
