@@ -22,8 +22,7 @@ namespace GoogleVisionBarCodeScanner.Droid
         SurfaceView surfaceView;
         IWindowManager windowManager;
         public event Action<List<BarcodeResult>> OnDetected;
-       
-        public CameraPreview(Context context, bool defaultTorchOn)
+        public CameraPreview(Context context, bool defaultTorchOn, bool virbationOnDetected)
             : base(context)
         {
             windowManager = Context.GetSystemService(Context.WindowService).JavaCast<IWindowManager>();
@@ -40,7 +39,7 @@ namespace GoogleVisionBarCodeScanner.Droid
             surfaceView.Holder.AddCallback(new SurfaceHolderCallback(cameraSource, surfaceView));
             AddView(surfaceView);
 
-            var detectProcessor = new DetectorProcessor(context);
+            var detectProcessor = new DetectorProcessor(context, virbationOnDetected);
             detectProcessor.OnDetected += DetectProcessor_OnDetected;
             barcodeDetector.SetProcessor(detectProcessor);
             if (defaultTorchOn)
@@ -136,9 +135,11 @@ namespace GoogleVisionBarCodeScanner.Droid
             bool isScanning = true;
             public event Action<List<BarcodeResult>> OnDetected;
             Context _context;
-            public DetectorProcessor(Context context)
+            bool _vibrationOnDetected = true;
+            public DetectorProcessor(Context context, bool vibrationOnDetected)
             {
                 _context = context;
+                _vibrationOnDetected = vibrationOnDetected;
             }
             public void ReceiveDetections(Detector.Detections detections)
             {
@@ -148,8 +149,11 @@ namespace GoogleVisionBarCodeScanner.Droid
                     if (isScanning)
                     {
                         isScanning = false;
-                        Vibrator vib = (Vibrator)_context.GetSystemService(Context.VibratorService);
-                        vib.Vibrate(200);
+                        if (_vibrationOnDetected)
+                        {
+                            Vibrator vib = (Vibrator)_context.GetSystemService(Context.VibratorService);
+                            vib.Vibrate(200);
+                        }
                         List<BarcodeResult> barcodeResults = new List<BarcodeResult>();
                         for(int i = 0; i < qrcodes.Size(); i++)
                         {

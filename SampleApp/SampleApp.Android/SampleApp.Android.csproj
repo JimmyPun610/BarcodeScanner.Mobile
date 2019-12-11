@@ -55,9 +55,6 @@
     <Reference Include="System.Numerics.Vectors" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="BarcodeScanner.XF">
-      <Version>4.2.1.1</Version>
-    </PackageReference>
     <PackageReference Include="Plugin.CurrentActivity">
       <Version>2.1.0.4</Version>
     </PackageReference>
@@ -118,6 +115,14 @@
     <Folder Include="Resources\drawable\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\GoogleVisionBarCodeScanner.Droid\GoogleVisionBarCodeScanner.Droid.csproj">
+      <Project>{e9cd336e-1191-459b-a5ae-c69bdab8887d}</Project>
+      <Name>GoogleVisionBarCodeScanner.Droid</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\GoogleVisionBarCodeScanner\GoogleVisionBarCodeScanner.csproj">
+      <Project>{8cda11d6-38f2-485e-9acf-61133cceec7b}</Project>
+      <Name>GoogleVisionBarCodeScanner</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SampleApp\SampleApp.csproj">
       <Project>{03240C5B-45BB-488F-A7D9-BC61B47D9E9B}</Project>
       <Name>SampleApp</Name>

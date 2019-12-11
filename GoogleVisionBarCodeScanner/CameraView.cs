@@ -7,6 +7,20 @@ namespace GoogleVisionBarCodeScanner
 {
     public class CameraView : View
     {
+        public static BindableProperty VirbationOnDetectedProperty = BindableProperty.Create(nameof(VirbationOnDetected), typeof(bool), typeof(CameraView), true);
+        public bool VirbationOnDetected
+        {
+            get
+            {
+                return (bool)GetValue(VirbationOnDetectedProperty);
+            }
+            set
+            {
+                SetValue(VirbationOnDetectedProperty, value);
+            }
+        }
+
+
         public static BindableProperty DefaultTorchOnProperty = BindableProperty.Create(nameof(DefaultTorchOn), typeof(bool), typeof(CameraView), false);
         public bool DefaultTorchOn
         {
