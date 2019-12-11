@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Android.App;
 using Android.Content;
 using Android.Gms.Vision;
 using Android.Gms.Vision.Barcodes;
@@ -90,6 +91,7 @@ namespace GoogleVisionBarCodeScanner.Droid
         private void DetectProcessor_OnDetected(List<BarcodeResult> obj)
         {
             OnDetected?.Invoke(obj);
+
         }
        
         protected override void OnLayout(bool changed, int l, int t, int r, int b)

@@ -22,7 +22,10 @@ namespace GoogleVisionBarCodeScanner
         public event EventHandler<OnDetectedEventArg> OnDetected;
         public void TriggerOnDetected(List<BarcodeResult> barCodeResults)
         {
-            OnDetected?.Invoke(this, new OnDetectedEventArg { BarcodeResults = barCodeResults });
+            Device.BeginInvokeOnMainThread(() =>
+            {
+                OnDetected?.Invoke(this, new OnDetectedEventArg { BarcodeResults = barCodeResults });
+            });
         }
     }
     

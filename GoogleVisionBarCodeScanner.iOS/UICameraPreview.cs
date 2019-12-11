@@ -119,9 +119,8 @@ namespace GoogleVisionBarCodeScanner.iOS
             {
                 InvokeOnMainThread(() => {
                     CaptureSession.StopRunning();
-                    this.OnDetected?.Invoke(list); 
+                    this.OnDetected?.Invoke(list);
                 });
-                
             };
             VideoDataOutput.SetSampleBufferDelegateQueue(captureVideoDelegate, CoreFoundation.DispatchQueue.MainQueue);
 
@@ -130,10 +129,11 @@ namespace GoogleVisionBarCodeScanner.iOS
             {
                 CaptureSession.StartRunning();
                 //Torch on by default
-                if(defaultTorchOn && !GoogleVisionBarCodeScanner.Methods.IsTorchOn())
+                if (defaultTorchOn && !GoogleVisionBarCodeScanner.Methods.IsTorchOn())
                     GoogleVisionBarCodeScanner.Methods.ToggleFlashlight();
             });
-            
+
+
         }
 
         public class CaptureVideoDelegate : AVCaptureVideoDataOutputSampleBufferDelegate
