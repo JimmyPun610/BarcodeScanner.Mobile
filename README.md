@@ -102,18 +102,6 @@ GoogleVisionBarCodeScanner.Methods.SetSupportBarcodeFormat(BarcodeFormats.QRCode
      </ScrollView>
    </ContentPage.Content>
 </ContentPage>
-```
-#### In the page.cs, below code are making sure that torch is off when leaving
-```C#
-  protected override void OnDisappearing()
-        {
-            base.OnDisappearing();
-            //Off the torch when exit page
-            if (GoogleVisionBarCodeScanner.Methods.IsTorchOn())
-                GoogleVisionBarCodeScanner.Methods.ToggleFlashlight();
-        }
-```
-
 3. Once barcode detected, "OnDetected" event will be triggered, do the stuff you want with the barcode, it will contains type and display value
 ```
    private async void CameraView_OnDetected(object sender, GoogleVisionBarCodeScanner.OnDetectedEventArg e)
@@ -147,4 +135,10 @@ bool allowed = await GoogleVisionBarCodeScanner.Methods.AskForRequiredPermission
 6. To check the condition of torch
 ```
    GoogleVisionBarCodeScanner.Methods.IsTorchOn();
+```
+
+7. Continuous scanning
+```
+   1. Do not dispose the page after onDetected.
+   2. Call GoogleVisionBarCodeScanner.Methods.Reset() to scan next.
 ```
