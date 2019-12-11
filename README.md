@@ -104,6 +104,7 @@ GoogleVisionBarCodeScanner.Methods.SetSupportBarcodeFormat(BarcodeFormats.QRCode
      </ScrollView>
    </ContentPage.Content>
 </ContentPage>
+```
 3. Once barcode detected, "OnDetected" event will be triggered, do the stuff you want with the barcode, it will contains type and display value
 ```
    private async void CameraView_OnDetected(object sender, GoogleVisionBarCodeScanner.OnDetectedEventArg e)
@@ -125,17 +126,17 @@ GoogleVisionBarCodeScanner.Methods.SetSupportBarcodeFormat(BarcodeFormats.QRCode
 ```
 
 4. To use torch, please call 
-```
+```C#
    GoogleVisionBarCodeScanner.Methods.ToggleFlashlight();
 ```
 
 5. To ask for permission
-```
+```C#
 bool allowed = await GoogleVisionBarCodeScanner.Methods.AskForRequiredPermission();
 ```
 
 6. To check the condition of torch
-```
+```C#
    GoogleVisionBarCodeScanner.Methods.IsTorchOn();
 ```
 
