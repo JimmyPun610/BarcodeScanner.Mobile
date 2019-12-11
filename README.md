@@ -80,6 +80,9 @@ GoogleVisionBarCodeScanner.Methods.SetSupportBarcodeFormat(BarcodeFormats.QRCode
 ```
 
 2. It is all about the camera view, use it on the page.xaml. For now, it will spend your whole width of the screen and the height will be equal to width.
+
+#### VirbationOnDetected: Indicate the device will vibrate or not when detected barcode, default is True
+#### DefaultTorchOn: Indicate the torch will on or not when the view appear, default is False
 ```XAML
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
@@ -92,7 +95,7 @@ GoogleVisionBarCodeScanner.Methods.SetSupportBarcodeFormat(BarcodeFormats.QRCode
      <ScrollView HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
 	 <!--If true on DefaultTorchOn, Torch will be on when the UI loaded-->
              <gv:CameraView HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" OnDetected="CameraView_OnDetected" Grid.Row="1"
-                            DefaultTorchOn="True"/>
+                            DefaultTorchOn="True" VirbationOnDetected="False"/>
      </ScrollView>
    </ContentPage.Content>
 </ContentPage>
