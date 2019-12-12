@@ -208,9 +208,9 @@ namespace GoogleVisionBarCodeScanner.Droid
 
                     _cameraSource.Start(_cameraPreview.Holder);
                 }
-                catch (InvalidOperationException)
+                catch (Exception e)
                 {
-
+                    Log.Error("BarcodeScanner.Droid", e.Message);
                 }
             }
 
