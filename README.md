@@ -79,15 +79,14 @@ https://console.firebase.google.com/
 
 # Usage
 
-1. Set support barcode format (Default is all), call it before you start to init CameraView
-```
+#### 1. Set support barcode format (Default is all), call it before you start to init CameraView
+```C#
 GoogleVisionBarCodeScanner.Methods.SetSupportBarcodeFormat(BarcodeFormats.QRCode);
 ```
 
-2. It is all about the camera view, use it on the page.xaml. For now, it will spend your whole width of the screen and the height will be equal to width.
+#### 2. It is all about the camera view, use it on the page.xaml. For now, it will spend your whole width of the screen and the height will be equal to width.
 
-#### VirbationOnDetected: Indicate the device will vibrate or not when detected barcode, default is True
-#### DefaultTorchOn: Indicate the torch will on or not when the view appear, default is False
+
 ```XAML
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
@@ -98,15 +97,16 @@ GoogleVisionBarCodeScanner.Methods.SetSupportBarcodeFormat(BarcodeFormats.QRCode
              x:Class="SampleApp.Page1">
    <ContentPage.Content>
      <ScrollView HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-	 <!--If true on DefaultTorchOn, Torch will be on when the UI loaded-->
+	 <!--VirbationOnDetected: Indicate the device will vibrate or not when detected barcode, default is True
+		 DefaultTorchOn: Indicate the torch will on or not when the view appear, default is False-->
              <gv:CameraView HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" OnDetected="CameraView_OnDetected" Grid.Row="1"
                             DefaultTorchOn="True" VirbationOnDetected="False"/>
      </ScrollView>
    </ContentPage.Content>
 </ContentPage>
 ```
-3. Once barcode detected, "OnDetected" event will be triggered, do the stuff you want with the barcode, it will contains type and display value
-```
+#### 3. Once barcode detected, "OnDetected" event will be triggered, do the stuff you want with the barcode, it will contains type and display value
+```C#
    private async void CameraView_OnDetected(object sender, GoogleVisionBarCodeScanner.OnDetectedEventArg e)
         {
             List<GoogleVisionBarCodeScanner.BarcodeResult> obj = e.BarcodeResults;
@@ -125,23 +125,24 @@ GoogleVisionBarCodeScanner.Methods.SetSupportBarcodeFormat(BarcodeFormats.QRCode
         }
 ```
 
-4. To use torch, please call 
+#### 4. To use torch, please call 
 ```C#
    GoogleVisionBarCodeScanner.Methods.ToggleFlashlight();
 ```
 
-5. To ask for permission
+#### 5. To ask for permission
 ```C#
 bool allowed = await GoogleVisionBarCodeScanner.Methods.AskForRequiredPermission();
 ```
 
-6. To check the condition of torch
+#### 6. To check the condition of torch
 ```C#
    GoogleVisionBarCodeScanner.Methods.IsTorchOn();
 ```
 
-7. Continuous scanning
-```
-   1. Do not dispose the page after onDetected.
-   2. Call GoogleVisionBarCodeScanner.Methods.Reset() to scan next.
-```
+#### 7. Continuous scanning
+<ol>
+<li>Do not dispose the page after onDetected.</li>
+<li>Call GoogleVisionBarCodeScanner.Methods.Reset() to scan next.</li>
+</ol>
+
