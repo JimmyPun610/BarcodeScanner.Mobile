@@ -119,7 +119,10 @@ GoogleVisionBarCodeScanner.Methods.SetSupportBarcodeFormat(BarcodeFormats.QRCode
             Device.BeginInvokeOnMainThread(async() =>
             {
                 await DisplayAlert("Result", result, "OK");
+		//If you want to stop scanning, you can close the scanning page
                 await Navigation.PopModalAsync();
+		//if you want to keep scanning the next barcode, do not close the scanning page and call below function
+		//GoogleVisionBarCodeScanner.Methods.Reset()
             });
             
         }
@@ -139,10 +142,3 @@ bool allowed = await GoogleVisionBarCodeScanner.Methods.AskForRequiredPermission
 ```C#
    GoogleVisionBarCodeScanner.Methods.IsTorchOn();
 ```
-
-#### 7. Continuous scanning
-<ol>
-<li>Do not dispose the page after onDetected.</li>
-<li>Call GoogleVisionBarCodeScanner.Methods.Reset() to scan next.</li>
-</ol>
-
