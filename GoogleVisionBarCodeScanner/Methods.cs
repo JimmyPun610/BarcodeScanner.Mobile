@@ -10,7 +10,11 @@ namespace GoogleVisionBarCodeScanner
 {
     public class Methods
     {
-
+        public static void SetIsScanning(bool isScanning)
+        {
+            DependencyService.Get<Interface.IBarcodeScanning>().SetIsScanning(isScanning);
+        }
+        [Obsolete("Please use SetIsScanning(true) to replace this method.")]
         public static void Reset()
         {
             DependencyService.Get<Interface.IBarcodeScanning>().Reset();

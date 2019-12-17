@@ -60,5 +60,10 @@ namespace GoogleVisionBarCodeScanner.Droid
         {
             Configuration.IsScanning = true;
         }
+
+        public void SetIsScanning(bool isScanning)
+        {
+            Configuration.IsScanning = isScanning;
+        }
     }
 }

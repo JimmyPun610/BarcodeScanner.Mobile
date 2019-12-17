@@ -7,16 +7,16 @@ namespace GoogleVisionBarCodeScanner
 {
     public class CameraView : View
     {
-        public static BindableProperty VibationOnDetectedProperty = BindableProperty.Create(nameof(VibationOnDetected), typeof(bool), typeof(CameraView), true);
-        public bool VibationOnDetected
+        public static BindableProperty VibrationOnDetectedProperty = BindableProperty.Create(nameof(VibrationOnDetected), typeof(bool), typeof(CameraView), true);
+        public bool VibrationOnDetected
         {
             get
             {
-                return (bool)GetValue(VibationOnDetectedProperty);
+                return (bool)GetValue(VibrationOnDetectedProperty);
             }
             set
             {
-                SetValue(VibationOnDetectedProperty, value);
+                SetValue(VibrationOnDetectedProperty, value);
             }
         }
 
@@ -33,6 +33,21 @@ namespace GoogleVisionBarCodeScanner
                 SetValue(DefaultTorchOnProperty, value);
             }
         }
+
+        public static BindableProperty AutoStartScanningProperty = BindableProperty.Create(nameof(AutoStartScanning), typeof(bool), typeof(CameraView), true);
+        public bool AutoStartScanning
+        {
+            get
+            {
+                return (bool)GetValue(AutoStartScanningProperty);
+            }
+            set
+            {
+                SetValue(AutoStartScanningProperty, value);
+            }
+        }
+
+
         public event EventHandler<OnDetectedEventArg> OnDetected;
         public void TriggerOnDetected(List<BarcodeResult> barCodeResults)
         {

@@ -99,9 +99,10 @@ GoogleVisionBarCodeScanner.Methods.SetSupportBarcodeFormat(BarcodeFormats.QRCode
    <ContentPage.Content>
      <ScrollView HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
 	 <!--VirbationOnDetected: Indicate the device will vibrate or not when detected barcode, default is True
-		 DefaultTorchOn: Indicate the torch will on or not when the view appear, default is False-->
+		 DefaultTorchOn: Indicate the torch will on or not when the view appear, default is False
+		 AutoStartScanning : Indicate whether the device will start scanning after it is opened, default is True-->
              <gv:CameraView HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" OnDetected="CameraView_OnDetected" Grid.Row="1"
-                            DefaultTorchOn="True" VirbationOnDetected="False"/>
+                            DefaultTorchOn="True" VibrationOnDetected="False" AutoStartScanning="True"/>
      </ScrollView>
    </ContentPage.Content>
 </ContentPage>
@@ -123,7 +124,7 @@ GoogleVisionBarCodeScanner.Methods.SetSupportBarcodeFormat(BarcodeFormats.QRCode
 		//If you want to stop scanning, you can close the scanning page
                 await Navigation.PopModalAsync();
 		//if you want to keep scanning the next barcode, do not close the scanning page and call below function
-		//GoogleVisionBarCodeScanner.Methods.Reset()
+		//GoogleVisionBarCodeScanner.Methods.SetIsScanning(true);
             });
             
         }
@@ -142,4 +143,10 @@ bool allowed = await GoogleVisionBarCodeScanner.Methods.AskForRequiredPermission
 #### 6. To check the condition of torch
 ```C#
    GoogleVisionBarCodeScanner.Methods.IsTorchOn();
+```
+#### 7. Restart scanning
+```C#
+//Old method, you can use the new one.
+//GoogleVisionBarCodeScanner.Methods.Reset();
+GoogleVisionBarCodeScanner.Methods.SetIsScanning(true);
 ```

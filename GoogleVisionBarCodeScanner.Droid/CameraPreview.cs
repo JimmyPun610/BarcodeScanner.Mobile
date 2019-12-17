@@ -32,9 +32,10 @@ namespace GoogleVisionBarCodeScanner.Droid
         }
 
 
-        public CameraPreview(Context context, bool defaultTorchOn, bool virbationOnDetected)
+        public CameraPreview(Context context, bool defaultTorchOn, bool virbationOnDetected, bool startScanningOnCreate)
             : base(context)
         {
+            Configuration.IsScanning = startScanningOnCreate;
             windowManager = Context.GetSystemService(Context.WindowService).JavaCast<IWindowManager>();
             barcodeDetector = new BarcodeDetector.Builder(context)
                .SetBarcodeFormats(Configuration.BarcodeFormats)

@@ -13,5 +13,6 @@ namespace GoogleVisionBarCodeScanner.Interface
         bool IsTorchOn();
 
         void Reset();
+        void SetIsScanning(bool isScanning);
     }
 }

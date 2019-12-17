@@ -38,12 +38,11 @@ namespace GoogleVisionBarCodeScanner.Droid.Renderer
                 if (Control == null)
                 {
                     cameraView = ((CameraView)e.NewElement);
-                    cameraPreview = new CameraPreview(Context, cameraView.DefaultTorchOn, cameraView.VibationOnDetected);
+                    cameraPreview = new CameraPreview(Context, cameraView.DefaultTorchOn, cameraView.VibrationOnDetected, cameraView.AutoStartScanning);
                     cameraPreview.OnDetected += (list) =>
                     {
                         cameraView?.TriggerOnDetected(list);
                     };
-                    
                     SetNativeControl(cameraPreview);
                
                 }

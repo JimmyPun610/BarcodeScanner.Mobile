@@ -32,10 +32,10 @@ namespace GoogleVisionBarCodeScanner.iOS
         //    Initialize();
         //}
 
-        public UICameraPreview(bool defaultTorchOn, bool vibrationOnDetected)
+        public UICameraPreview(bool defaultTorchOn, bool vibrationOnDetected, bool startScanningOnCreate)
         {
             //cameraOptions = options;
-            Initialize(defaultTorchOn, vibrationOnDetected);
+            Initialize(defaultTorchOn, vibrationOnDetected, startScanningOnCreate);
         }
         public override void RemoveFromSuperview()
         {
@@ -95,9 +95,9 @@ namespace GoogleVisionBarCodeScanner.iOS
                 }
             }
         }
-        void Initialize(bool defaultTorchOn, bool vibrationOnDetected)
+        void Initialize(bool defaultTorchOn, bool vibrationOnDetected, bool startScanningOnCreate)
         {
-            Configuration.IsScanning = true;
+            Configuration.IsScanning = startScanningOnCreate;
             CaptureSession = new AVCaptureSession();
             CaptureSession.BeginConfiguration();
             this.AutoresizingMask = UIViewAutoresizing.FlexibleDimensions;
