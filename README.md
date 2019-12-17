@@ -10,7 +10,7 @@ Please feel free to improve my source code.
 # Pending to fix
 1. CameraView is not shown in Android 10 device
 
-# Update on 4.2.1.4
+# Update on 4.2.1.5
 1. Added ask permission methods
 2. Added IsTorchOn methods
 3. Added DefaultTorchOn property
@@ -21,6 +21,8 @@ Please feel free to improve my source code.
 8. Allow continuous scanning
 9. Auto switch off flashlight when page dispose
 10. Catch exception on Android that some devices cannot start cameraSource even permission granted.
+11. Added AutoStartScanning property
+12. Fixed typo on VibrationOnDetected
 
 # Installation
 1. Install Nuget package to Forms, Android and iOS project
