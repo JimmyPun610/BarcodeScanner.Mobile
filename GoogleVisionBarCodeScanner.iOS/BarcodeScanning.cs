@@ -63,5 +63,28 @@ namespace GoogleVisionBarCodeScanner.iOS
         {
             Configuration.IsScanning = isScanning;
         }
+
+        public async Task<List<BarcodeResult>> ScanFromImage(byte[] imageArray)
+        {
+            UIImage image = new UIImage(NSData.FromArray(imageArray));
+            var visionImage = new VisionImage(image);
+            VisionImageMetadata metadata = new VisionImageMetadata();
+            VisionApi vision = VisionApi.Create();
+            VisionBarcodeDetector barcodeDetector = vision.GetBarcodeDetector(Configuration.BarcodeDetectorSupportFormat);
+            VisionBarcode[] barcodes = await barcodeDetector.DetectAsync(visionImage);
+            if (barcodes == null || barcodes.Length == 0)
+                return new List<BarcodeResult>();
+ 
+            List<BarcodeResult> resultList = new List<BarcodeResult>();
+            foreach (var barcode in barcodes)
+            {
+                resultList.Add(new BarcodeResult
+                {
+                    BarcodeType = Methods.ConvertBarcodeResultTypes(barcode.ValueType),
+                    DisplayValue = barcode.DisplayValue
+                });
+            }
+            return resultList;
+        }
     }
 }

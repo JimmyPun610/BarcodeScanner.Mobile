@@ -11,6 +11,7 @@
         <Button Text="Scan Continously" Clicked="Button1_Clicked"/>
         <Button Text="Scan One time" Clicked="Button2_Clicked"/>
         <Button Text="Start scanning on click" Clicked="Button3_Clicked"/>
+        <Button Text="Scan from Image" Clicked="Button4_Clicked"/>
     </StackLayout>
 
 </ContentPage>

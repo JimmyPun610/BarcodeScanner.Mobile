@@ -7,9 +7,12 @@ using Android;
 using Android.App;
 using Android.Content;
 using Android.Gms.Vision;
+using Android.Gms.Vision.Barcodes;
+using Android.Graphics;
 using Android.OS;
 using Android.Runtime;
 using Android.Support.V4.Content;
+using Android.Util;
 using Android.Views;
 using Android.Widget;
 using GoogleVisionBarCodeScanner.Droid;
@@ -64,6 +67,29 @@ namespace GoogleVisionBarCodeScanner.Droid
         public void SetIsScanning(bool isScanning)
         {
             Configuration.IsScanning = isScanning;
+        }
+
+        public async Task<List<BarcodeResult>> ScanFromImage(byte[] imageArray)
+        {
+            BarcodeDetector detector = new BarcodeDetector.Builder(Android.App.Application.Context)
+                                        .SetBarcodeFormats(Configuration.BarcodeFormats)
+                                        .Build();
+            Bitmap bitmap = BitmapFactory.DecodeByteArray(imageArray, 0, imageArray.Length);
+            Android.Gms.Vision.Frame frame = new Android.Gms.Vision.Frame.Builder().SetBitmap(bitmap).Build();
+            SparseArray qrcodes = detector.Detect(frame);
+            List<BarcodeResult> barcodeResults = new List<BarcodeResult>();
+            for (int i = 0; i < qrcodes.Size(); i++)
+            {
+                Barcode barcode = qrcodes.ValueAt(i) as Barcode;
+                var type = Methods.ConvertBarcodeResultTypes(barcode.ValueFormat);
+                var value = barcode.DisplayValue;
+                barcodeResults.Add(new BarcodeResult
+                {
+                    BarcodeType = type,
+                    DisplayValue = value
+                });
+            }
+            return barcodeResults;
         }
     }
 }
