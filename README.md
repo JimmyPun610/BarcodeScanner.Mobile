@@ -10,6 +10,9 @@ Please feel free to improve my source code.
 # Pending to fix
 1. CameraView is not shown in Android 10 device
 
+# Update on 4.2.2
+1. Added Scan from image feature
+
 # Update on 4.2.1.5
 1. Added ask permission methods
 2. Added IsTorchOn methods
@@ -79,8 +82,8 @@ https://console.firebase.google.com/
             return base.FinishedLaunching(app, options);
 ```
 
-
-# Usage
+# Scan from Camera
+## Usage
 
 #### 1. Set support barcode format (Default is all), call it before you start to init CameraView
 ```C#
