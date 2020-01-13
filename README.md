@@ -1,5 +1,5 @@
 # BarcodeScanner.XF
-BarcodeScanner using GoogleVision API for Xamarin Form
+BarcodeScanner using GoogleVision API for Xamarin Forms
 Works on Android and iOS 10+
 
 For Android, it use Xamarin.GooglePlayServices.Vision
