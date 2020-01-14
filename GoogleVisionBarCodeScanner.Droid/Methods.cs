@@ -1,16 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Android.App;
-using Android.Content;
 using Android.Gms.Vision;
 using Android.Gms.Vision.Barcodes;
-using Android.OS;
 using Android.Runtime;
-using Android.Views;
-using Android.Widget;
 
 namespace GoogleVisionBarCodeScanner.Droid
 {
@@ -33,6 +24,7 @@ namespace GoogleVisionBarCodeScanner.Droid
 
             return null;
         }
+
         internal static BarcodeTypes ConvertBarcodeResultTypes(BarcodeValueFormat barcodeValueType)
         {
             switch (barcodeValueType)
