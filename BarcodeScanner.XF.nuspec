@@ -2,7 +2,7 @@
 <package>
   <metadata>
     <id>BarcodeScanner.XF</id>
-    <version>4.2.1.5</version>
+    <version>4.2.2.0</version>
     <title>BarcodeScanner.XF</title>
     <authors>Jimmy Pun</authors>
     <owners>Jimmy Pun</owners>
@@ -12,7 +12,7 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>This is a library to implement barcode scanning feature by Google Mobile Vision in Xamarin Forms(iOS and Android only)</description>
     <releaseNotes>
-		4.2.1.5 : Added ask permission methods, DefaultTorchOn property, run onDetected code in UI Thread, Bug fix on multiscan in iOS, VirbationOnDetected Property, Continous scanning, error handling, AutoStartScanning property
+		4.2.2.0 : Added Feature ScanFromImage, allow user pass in image byte array and the scanner will auto detect the result.
 	</releaseNotes>
     <copyright>Copyright 2019</copyright>
     <tags>Xamarin.Forms Barcode Scanning Tools</tags>

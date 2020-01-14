@@ -14,5 +14,7 @@ namespace GoogleVisionBarCodeScanner.Interface
 
         void Reset();
         void SetIsScanning(bool isScanning);
+
+        Task<List<BarcodeResult>> ScanFromImage(byte[] imageArray);
     }
 }

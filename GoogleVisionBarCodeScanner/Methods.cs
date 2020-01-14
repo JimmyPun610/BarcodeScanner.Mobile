@@ -53,5 +53,10 @@ namespace GoogleVisionBarCodeScanner
             }
             return false;
         }
+
+        public static async Task<List<BarcodeResult>> ScanFromImage(byte[] imageArray)
+        {
+            return await DependencyService.Get<Interface.IBarcodeScanning>().ScanFromImage(imageArray);
+        }
     }
 }

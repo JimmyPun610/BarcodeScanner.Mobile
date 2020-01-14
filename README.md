@@ -10,6 +10,9 @@ Please feel free to improve my source code.
 # Pending to fix
 1. CameraView is not shown in Android 10 device
 
+# Update on 4.2.2
+1. Added Scan from image feature
+
 # Update on 4.2.1.5
 1. Added ask permission methods
 2. Added IsTorchOn methods
@@ -79,8 +82,7 @@ https://console.firebase.google.com/
             return base.FinishedLaunching(app, options);
 ```
 
-
-# Usage
+## Scan from Camera
 
 #### 1. Set support barcode format (Default is all), call it before you start to init CameraView
 ```C#
@@ -151,4 +153,21 @@ bool allowed = await GoogleVisionBarCodeScanner.Methods.AskForRequiredPermission
 //Old method, you can use the new one.
 //GoogleVisionBarCodeScanner.Methods.Reset();
 GoogleVisionBarCodeScanner.Methods.SetIsScanning(true);
+```
+
+
+## Scan from Image
+#### 1. Get the image byte array by your method.
+``` C#
+//Used MediaPlugin in sample for example
+ var file = await CrossMedia.Current.PickPhotoAsync();
+Stream stream = file.GetStream();
+byte[] bytes = new byte[stream.Length];
+stream.Read(bytes, 0, bytes.Length);
+stream.Seek(0, SeekOrigin.Begin);
+```
+
+#### 2. Analysis the image and wait for result
+``` C#
+List<GoogleVisionBarCodeScanner.BarcodeResult> obj = await GoogleVisionBarCodeScanner.Methods.ScanFromImage(bytes);
 ```

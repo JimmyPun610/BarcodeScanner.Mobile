@@ -1,6 +1,10 @@
-﻿using System;
+﻿using Plugin.Media;
+using Plugin.Permissions;
+using Plugin.Permissions.Abstractions;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -51,6 +55,54 @@ namespace SampleApp
             if (allowed)
                 Navigation.PushModalAsync(new NavigationPage(new Page3()));
             else DisplayAlert("Alert", "You have to provide Camera permission", "Ok");
+        }
+
+        private async void Button4_Clicked(object sender, EventArgs e)
+        {
+            var storageStatus = await CrossPermissions.Current.CheckPermissionStatusAsync(Plugin.Permissions.Abstractions.Permission.Storage);
+            while(storageStatus != PermissionStatus.Granted)
+            {
+                await CrossPermissions.Current.RequestPermissionsAsync(Permission.Storage);
+            }
+            if (storageStatus == PermissionStatus.Granted)
+            {
+                var file = await CrossMedia.Current.PickPhotoAsync();
+                Stream stream = file.GetStream();
+                byte[] bytes = new byte[stream.Length];
+                stream.Read(bytes, 0, bytes.Length);
+                stream.Seek(0, SeekOrigin.Begin);
+                List<GoogleVisionBarCodeScanner.BarcodeResult> obj = await GoogleVisionBarCodeScanner.Methods.ScanFromImage(bytes);
+                if(obj.Count > 0)
+                {
+                    string result = string.Empty;
+                    for (int i = 0; i < obj.Count; i++)
+                    {
+                        result += $"Type : {obj[i].BarcodeType}, Value : {obj[i].DisplayValue}{Environment.NewLine}";
+                    }
+                    Device.BeginInvokeOnMainThread(async () =>
+                    {
+                        await DisplayAlert("Result", result, "OK");
+                    });
+                }
+                else
+                {
+                    Device.BeginInvokeOnMainThread(async () =>
+                    {
+                        await DisplayAlert("Result", "No barcode found!", "OK");
+                    });
+                }
+                
+            }
+            else
+            {
+                Device.BeginInvokeOnMainThread(async () =>
+                {
+                    await DisplayAlert("Permissions Denied", "Unable to take photos.", "OK");
+                });
+                //On iOS you may want to send your user to the settings screen.
+                //CrossPermissions.Current.OpenAppSettings();
+            }
+            
         }
     }
 }

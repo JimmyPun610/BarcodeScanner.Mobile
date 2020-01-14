@@ -75,5 +75,7 @@ namespace GoogleVisionBarCodeScanner.iOS
                     return VisionBarcodeFormat.All;
             }
         }
+
+      
     }
 }
