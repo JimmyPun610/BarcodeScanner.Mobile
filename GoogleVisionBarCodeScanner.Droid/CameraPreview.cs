@@ -1,26 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Android.App;
 using Android.Content;
 using Android.Gms.Vision;
 using Android.Gms.Vision.Barcodes;
 using Android.Graphics;
-using Android.Hardware;
 using Android.OS;
 using Android.Runtime;
 using Android.Util;
 using Android.Views;
-using Android.Widget;
 
 namespace GoogleVisionBarCodeScanner.Droid
 {
     public sealed class CameraPreview : ViewGroup
     {
-        BarcodeDetector barcodeDetector;
-        CameraSource cameraSource;
-        SurfaceView surfaceView;
-        IWindowManager windowManager;
+        private readonly BarcodeDetector _barcodeDetector;
+        private readonly CameraSource _cameraSource;
+        private readonly SurfaceView _surfaceView;
+        private readonly IWindowManager _windowManager;
         public event Action<List<BarcodeResult>> OnDetected;
 
         protected override void OnDetachedFromWindow()
@@ -36,28 +33,28 @@ namespace GoogleVisionBarCodeScanner.Droid
             : base(context)
         {
             Configuration.IsScanning = startScanningOnCreate;
-            windowManager = Context.GetSystemService(Context.WindowService).JavaCast<IWindowManager>();
-            barcodeDetector = new BarcodeDetector.Builder(context)
+            _windowManager = Context.GetSystemService(Context.WindowService).JavaCast<IWindowManager>();
+            _barcodeDetector = new BarcodeDetector.Builder(context)
                .SetBarcodeFormats(Configuration.BarcodeFormats)
                .Build();
-            cameraSource = new CameraSource
-                .Builder(context, barcodeDetector)
+            _cameraSource = new CameraSource
+                .Builder(context, _barcodeDetector)
                 .SetRequestedPreviewSize(1280, 720)
                 .SetAutoFocusEnabled(true)
                 .Build();
-            Configuration.CameraSource = cameraSource;
-            surfaceView = new SurfaceView(context);            
-            surfaceView.Holder.AddCallback(new SurfaceHolderCallback(cameraSource, surfaceView));
-            AddView(surfaceView);
+            Configuration.CameraSource = _cameraSource;
+            _surfaceView = new SurfaceView(context);            
+            _surfaceView.Holder.AddCallback(new SurfaceHolderCallback(_cameraSource, _surfaceView));
+            AddView(_surfaceView);
 
             var detectProcessor = new DetectorProcessor(context, virbationOnDetected);
             detectProcessor.OnDetected += DetectProcessor_OnDetected;
-            barcodeDetector.SetProcessor(detectProcessor);
+            _barcodeDetector.SetProcessor(detectProcessor);
             if (defaultTorchOn)
                 AutoSwitchOnTorch();
         }
 
-        private void AutoSwitchOnTorch()
+        private static void AutoSwitchOnTorch()
         {
             var ts = new System.Threading.CancellationTokenSource();
             System.Threading.CancellationToken ct = ts.Token;
@@ -109,8 +106,8 @@ namespace GoogleVisionBarCodeScanner.Droid
             var msw = MeasureSpec.MakeMeasureSpec(r - l, MeasureSpecMode.Exactly);
             var msh = MeasureSpec.MakeMeasureSpec(b - t, MeasureSpecMode.Exactly);
 
-            surfaceView.Measure(msw, msh);
-            surfaceView.Layout(0, 0, r - l, b - t);
+            _surfaceView.Measure(msw, msh);
+            _surfaceView.Layout(0, 0, r - l, b - t);
 
             SetOrientation();
         }
@@ -119,8 +116,8 @@ namespace GoogleVisionBarCodeScanner.Droid
         public void SetOrientation()
         {
 
-            Android.Hardware.Camera camera = Methods.GetCamera(cameraSource);
-            switch (windowManager.DefaultDisplay.Rotation)
+            Android.Hardware.Camera camera = Methods.GetCamera(_cameraSource);
+            switch (_windowManager.DefaultDisplay.Rotation)
             {
                 case SurfaceOrientation.Rotation0:
                     camera?.SetDisplayOrientation(90);
@@ -138,22 +135,21 @@ namespace GoogleVisionBarCodeScanner.Droid
         }
 
 
-     
-
-
-        class DetectorProcessor : Java.Lang.Object, Detector.IProcessor
+        private class DetectorProcessor : Java.Lang.Object, Detector.IProcessor
         {
             public event Action<List<BarcodeResult>> OnDetected;
-            Context _context;
-            bool _vibrationOnDetected = true;
+            private readonly Context _context;
+            private readonly bool _vibrationOnDetected;
+
             public DetectorProcessor(Context context, bool vibrationOnDetected)
             {
                 _context = context;
                 _vibrationOnDetected = vibrationOnDetected;
             }
+
             public void ReceiveDetections(Detector.Detections detections)
             {
-                SparseArray qrcodes = detections.DetectedItems;
+                var qrcodes = detections.DetectedItems;
                 if (qrcodes.Size() != 0)
                 {
                     if (Configuration.IsScanning)
@@ -168,6 +164,7 @@ namespace GoogleVisionBarCodeScanner.Droid
                         for(int i = 0; i < qrcodes.Size(); i++)
                         {
                             Barcode barcode = qrcodes.ValueAt(i) as Barcode;
+                            if(barcode == null) continue;
                             var type = Methods.ConvertBarcodeResultTypes(barcode.ValueFormat);
                             var value = barcode.DisplayValue;
                             barcodeResults.Add(new BarcodeResult
@@ -186,10 +183,11 @@ namespace GoogleVisionBarCodeScanner.Droid
             }
         }
 
-        class SurfaceHolderCallback : Java.Lang.Object, ISurfaceHolderCallback
+        private class SurfaceHolderCallback : Java.Lang.Object, ISurfaceHolderCallback
         {
-            SurfaceView _cameraPreview;
-            CameraSource _cameraSource;
+            private readonly SurfaceView _cameraPreview;
+            private readonly CameraSource _cameraSource;
+
             public SurfaceHolderCallback(CameraSource cameraSource, SurfaceView cameraPreview)
             {
                 _cameraSource = cameraSource;
