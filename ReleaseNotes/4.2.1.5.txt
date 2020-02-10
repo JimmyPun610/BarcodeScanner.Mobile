@@ -1,3 +1,4 @@
+# Update on 4.2.1.5
 1. Added ask permission methods
 2. Added IsTorchOn methods
 3. Added DefaultTorchOn property

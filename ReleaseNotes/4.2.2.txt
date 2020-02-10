@@ -1,0 +1,2 @@
+# Update on 4.2.2
+1. Added Scan from image feature
