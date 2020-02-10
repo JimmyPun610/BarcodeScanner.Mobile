@@ -1,0 +1,12 @@
+1. Added ask permission methods
+2. Added IsTorchOn methods
+3. Added DefaultTorchOn property
+4. Moved some code on iOS to UIThread
+5. Added VibrationOnDetected property
+6. Run OnDetected event on UIThread
+7. Added 1 second interval on iOS scanning to solve double scanning problem
+8. Allow continuous scanning
+9. Auto switch off flashlight when page dispose
+10. Catch exception on Android that some devices cannot start cameraSource even permission granted.
+11. Added AutoStartScanning property
+12. Fixed typo on VibrationOnDetected
