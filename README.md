@@ -10,6 +10,9 @@ Please feel free to improve my source code.
 # Pending to fix
 1. CameraView is not shown in Android 10 device
 
+# Update on 4.2.2.1
+1. Support of Aztec format
+
 # Update on 4.2.2
 1. Added Scan from image feature
 
