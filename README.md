@@ -7,19 +7,22 @@ For iOS, it use GoogleMobileVision under MLKit library
 
 Please feel free to improve my source code.
 
-# Pending to fix
+## Current Version
+4.2.2.1
+
+## Pending to fix
 1. CameraView is not shown in Android 10 device
 
-# Release notes
+## Release notes
 https://github.com/JimmyPun610/BarcodeScanner.XF/tree/master/ReleaseNotes
 
-# Installation
+## Installation
 1. Install Nuget package to Forms, Android and iOS project
 ```
 Install-Package BarcodeScanner.XF
 ```
 
-# Android setup
+## Android setup
 1. Manifest.xml
 ```xml
 <uses-permission android:name="android.permission.VIBRATE" />
@@ -45,7 +48,7 @@ public override void OnRequestPermissionsResult(int requestCode, string[] permis
     base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
 }
 ```
-# iOS Setup
+## iOS Setup
 1. Edit Info.plist, add camera rights
 ```
 	<key>NSCameraUsageDescription</key>
