@@ -19,7 +19,7 @@ namespace GoogleVisionBarCodeScanner
         Upca = 512,
         Upce = 1024,
         Pdf417 = 2048,
-        //Aztec = 4096,
+        Aztec = 4096,
         All = 65535,
     }
 }

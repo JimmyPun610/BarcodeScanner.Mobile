@@ -69,6 +69,8 @@ namespace GoogleVisionBarCodeScanner.iOS
                     return VisionBarcodeFormat.Upca;
                 case BarcodeFormats.Upce:
                     return VisionBarcodeFormat.Upce;
+                case BarcodeFormats.Aztec:
+                    return VisionBarcodeFormat.Aztec;
                 case BarcodeFormats.All:
                     return VisionBarcodeFormat.All;
                 default:
