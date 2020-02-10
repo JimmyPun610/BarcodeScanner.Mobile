@@ -11,24 +11,7 @@ Please feel free to improve my source code.
 1. CameraView is not shown in Android 10 device
 
 # Update on 4.2.2.1
-1. Support of Aztec format
-
-# Update on 4.2.2
-1. Added Scan from image feature
-
-# Update on 4.2.1.5
-1. Added ask permission methods
-2. Added IsTorchOn methods
-3. Added DefaultTorchOn property
-4. Moved some code on iOS to UIThread
-5. Added VibrationOnDetected property
-6. Run OnDetected event on UIThread
-7. Added 1 second interval on iOS scanning to solve double scanning problem
-8. Allow continuous scanning
-9. Auto switch off flashlight when page dispose
-10. Catch exception on Android that some devices cannot start cameraSource even permission granted.
-11. Added AutoStartScanning property
-12. Fixed typo on VibrationOnDetected
+https://github.com/JimmyPun610/BarcodeScanner.XF/blob/master/ReleaseNotes/4.2.2.1.md
 
 # Installation
 1. Install Nuget package to Forms, Android and iOS project
