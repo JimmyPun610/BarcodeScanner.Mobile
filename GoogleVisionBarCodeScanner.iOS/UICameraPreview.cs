@@ -123,12 +123,15 @@ namespace GoogleVisionBarCodeScanner.iOS
             Layer.AddSublayer(previewLayer);
 
             CaptureSession.CommitConfiguration();
-      
-            
 
-            VideoDataOutput = new AVCaptureVideoDataOutput();
-            VideoDataOutput.AlwaysDiscardsLateVideoFrames = true;
-            VideoDataOutput.WeakVideoSettings = new CVPixelBufferAttributes { PixelFormatType = CVPixelFormatType.CV32BGRA }.Dictionary;
+
+
+            VideoDataOutput = new AVCaptureVideoDataOutput
+            {
+                AlwaysDiscardsLateVideoFrames = true,
+                WeakVideoSettings = new CVPixelBufferAttributes {PixelFormatType = CVPixelFormatType.CV32BGRA}
+                    .Dictionary
+            };
 
 
             captureVideoDelegate = new CaptureVideoDelegate(vibrationOnDetected);
@@ -196,43 +199,48 @@ namespace GoogleVisionBarCodeScanner.iOS
             }
 
             
-            private UIImage GetImageFromSampleBuffer(CMSampleBuffer sampleBuffer)
+            private static UIImage GetImageFromSampleBuffer(CMSampleBuffer sampleBuffer)
             {
                 // Get a pixel buffer from the sample buffer
                 using (var pixelBuffer = sampleBuffer.GetImageBuffer() as CVPixelBuffer)
                 {
                     // Lock the base address
-                    pixelBuffer.Lock(CVOptionFlags.None);
-
-                    // Prepare to decode buffer
-                    var flags = CGBitmapFlags.PremultipliedFirst | CGBitmapFlags.ByteOrder32Little;
-
-                    // Decode buffer - Create a new colorspace
-                    using (var cs = CGColorSpace.CreateDeviceRGB())
+                    if (pixelBuffer != null)
                     {
+                        pixelBuffer.Lock(CVPixelBufferLock.None);
 
-                        // Create new context from buffer
-                        using (var context = new CGBitmapContext(pixelBuffer.BaseAddress,
-                                                 pixelBuffer.Width,
-                                                 pixelBuffer.Height,
-                                                 8,
-                                                 pixelBuffer.BytesPerRow,
-                                                 cs,
-                                                 (CGImageAlphaInfo)flags))
+                        // Prepare to decode buffer
+                        var flags = CGBitmapFlags.PremultipliedFirst | CGBitmapFlags.ByteOrder32Little;
+
+                        // Decode buffer - Create a new colorspace
+                        using (var cs = CGColorSpace.CreateDeviceRGB())
                         {
-
-                            // Get the image from the context
-                            using (var cgImage = context.ToImage())
+                            // Create new context from buffer
+                            using (var context = new CGBitmapContext(pixelBuffer.BaseAddress,
+                                pixelBuffer.Width,
+                                pixelBuffer.Height,
+                                8,
+                                pixelBuffer.BytesPerRow,
+                                cs,
+                                (CGImageAlphaInfo) flags))
                             {
-
-                                // Unlock and return image
-                                pixelBuffer.Unlock(CVOptionFlags.None);
-                                return UIImage.FromImage(cgImage);
+                                // Get the image from the context
+                                using (var cgImage = context.ToImage())
+                                {
+                                    // Unlock and return image
+                                    pixelBuffer.Unlock(CVPixelBufferLock.None);
+                                    return UIImage.FromImage(cgImage);
+                                }
                             }
                         }
                     }
+                    else
+                    {
+                        return null;
+                    }
                 }
             }
+
             private void releaseSampleBuffer(CMSampleBuffer sampleBuffer)
             {
                 if (sampleBuffer != null)
@@ -249,14 +257,16 @@ namespace GoogleVisionBarCodeScanner.iOS
                     lastAnalysisTime = lastRunTime;
                     try
                     {
-                        UIImage image = GetImageFromSampleBuffer(sampleBuffer);
-                        var visionImage = new VisionImage(image);
-                        visionImage.Metadata = metadata;
+                        var image = GetImageFromSampleBuffer(sampleBuffer);
+                        if(image == null) return;
+                        var visionImage = new VisionImage(image) {Metadata = metadata};
                         releaseSampleBuffer(sampleBuffer);
                         DetectBarcodeActionAsync(visionImage);
                     }
-                    catch { }
-                    finally { }
+                    catch (Exception exception)
+                    {
+                        System.Diagnostics.Debug.WriteLine(exception.Message);
+                    }
                 }
                 releaseSampleBuffer(sampleBuffer);
             }
@@ -287,9 +297,9 @@ namespace GoogleVisionBarCodeScanner.iOS
                         }
                         OnDetected?.Invoke(resultList);
                     }
-                    catch (Exception ex)
+                    catch (Exception exception)
                     {
-                        return;
+                        System.Diagnostics.Debug.WriteLine(exception.Message);
                     }
                 }
                
