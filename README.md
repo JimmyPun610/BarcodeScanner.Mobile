@@ -8,7 +8,7 @@ For iOS, it use GoogleMobileVision under MLKit library
 Please feel free to improve my source code.
 
 ## Current Version
-4.2.2.1
+4.2.2.2
 
 ## Pending to fix
 1. CameraView is not shown in Android 10 device
