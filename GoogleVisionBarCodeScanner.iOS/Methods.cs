@@ -45,37 +45,37 @@ namespace GoogleVisionBarCodeScanner.iOS
         }
         internal static VisionBarcodeFormat ConvertBarcodeFormats(BarcodeFormats barcodeFormats)
         {
-            switch (barcodeFormats)
-            {
-                case BarcodeFormats.CodaBar:
-                    return VisionBarcodeFormat.CodaBar;
-                case BarcodeFormats.Code128:
-                    return VisionBarcodeFormat.Code128;
-                case BarcodeFormats.Code39:
-                    return VisionBarcodeFormat.Code39;
-                case BarcodeFormats.Code93:
-                    return VisionBarcodeFormat.Code93;
-                case BarcodeFormats.DataMatrix:
-                    return VisionBarcodeFormat.DataMatrix;
-                case BarcodeFormats.Ean13:
-                    return VisionBarcodeFormat.Ean8;
-                case BarcodeFormats.Itf:
-                    return VisionBarcodeFormat.Itf;
-                case BarcodeFormats.Pdf417:
-                    return VisionBarcodeFormat.Pdf417;
-                case BarcodeFormats.QRCode:
-                    return VisionBarcodeFormat.QRCode;
-                case BarcodeFormats.Upca:
-                    return VisionBarcodeFormat.Upca;
-                case BarcodeFormats.Upce:
-                    return VisionBarcodeFormat.Upce;
-                case BarcodeFormats.Aztec:
-                    return VisionBarcodeFormat.Aztec;
-                case BarcodeFormats.All:
-                    return VisionBarcodeFormat.All;
-                default:
-                    return VisionBarcodeFormat.All;
-            }
+            VisionBarcodeFormat visionBarcodeFormat = VisionBarcodeFormat.All;
+
+            if (barcodeFormats.HasFlag(BarcodeFormats.CodaBar))
+                visionBarcodeFormat |= VisionBarcodeFormat.CodaBar;
+            if (barcodeFormats.HasFlag(BarcodeFormats.Code128))
+                visionBarcodeFormat |= VisionBarcodeFormat.Code128;
+            if (barcodeFormats.HasFlag(BarcodeFormats.Code39))
+                visionBarcodeFormat |= VisionBarcodeFormat.Code39;
+            if (barcodeFormats.HasFlag(BarcodeFormats.Code93))
+                visionBarcodeFormat |= VisionBarcodeFormat.Code93;
+            if (barcodeFormats.HasFlag(BarcodeFormats.DataMatrix))
+                visionBarcodeFormat |= VisionBarcodeFormat.DataMatrix;
+            if (barcodeFormats.HasFlag(BarcodeFormats.Ean13))
+                visionBarcodeFormat |= VisionBarcodeFormat.Ean13;
+            if (barcodeFormats.HasFlag(BarcodeFormats.Ean8))
+                visionBarcodeFormat |= VisionBarcodeFormat.Ean8;
+            if (barcodeFormats.HasFlag(BarcodeFormats.Itf))
+                visionBarcodeFormat |= VisionBarcodeFormat.Itf;
+            if (barcodeFormats.HasFlag(BarcodeFormats.Pdf417))
+                visionBarcodeFormat |= VisionBarcodeFormat.Pdf417;
+            if (barcodeFormats.HasFlag(BarcodeFormats.QRCode))
+                visionBarcodeFormat |= VisionBarcodeFormat.QRCode;
+            if (barcodeFormats.HasFlag(BarcodeFormats.Upca))
+                visionBarcodeFormat |= VisionBarcodeFormat.Upca;
+            if (barcodeFormats.HasFlag(BarcodeFormats.Upce))
+                visionBarcodeFormat |= VisionBarcodeFormat.Upce;
+            if (barcodeFormats.HasFlag(BarcodeFormats.Aztec))
+                visionBarcodeFormat |= VisionBarcodeFormat.Aztec;
+            if (barcodeFormats.HasFlag(BarcodeFormats.All))
+                visionBarcodeFormat |= VisionBarcodeFormat.All;
+            return visionBarcodeFormat;
         }
 
       

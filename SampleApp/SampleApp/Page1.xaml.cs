@@ -18,6 +18,7 @@ namespace SampleApp
         public Page1()
         {
             InitializeComponent();
+            GoogleVisionBarCodeScanner.Methods.SetSupportBarcodeFormat(BarcodeFormats.Itf | BarcodeFormats.QRCode);
             On<Xamarin.Forms.PlatformConfiguration.iOS>().SetUseSafeArea(true);
         }
 

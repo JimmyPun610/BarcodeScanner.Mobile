@@ -59,45 +59,37 @@ namespace GoogleVisionBarCodeScanner.Droid
 
         public static Android.Gms.Vision.Barcodes.BarcodeFormat ConvertBarcodeFormats(BarcodeFormats barcodeFormats)
         {
-            switch (barcodeFormats)
-            {
-                case BarcodeFormats.CodaBar:
-                    return Android.Gms.Vision.Barcodes.BarcodeFormat.Codabar;
-                case BarcodeFormats.Code128:
-                    return Android.Gms.Vision.Barcodes.BarcodeFormat.Code128;
-                case BarcodeFormats.Code39:
-                    return Android.Gms.Vision.Barcodes.BarcodeFormat.Code93;
-                case BarcodeFormats.DataMatrix:
-                    return Android.Gms.Vision.Barcodes.BarcodeFormat.DataMatrix;
-                case BarcodeFormats.Ean13:
-                    return Android.Gms.Vision.Barcodes.BarcodeFormat.Ean13;
-                case BarcodeFormats.Ean8:
-                    return Android.Gms.Vision.Barcodes.BarcodeFormat.Ean8;
-                case BarcodeFormats.Itf:
-                    return Android.Gms.Vision.Barcodes.BarcodeFormat.Itf;
-                case BarcodeFormats.Pdf417:
-                    return Android.Gms.Vision.Barcodes.BarcodeFormat.Pdf417;
-                case BarcodeFormats.QRCode:
-                    return Android.Gms.Vision.Barcodes.BarcodeFormat.QrCode;
-                case BarcodeFormats.Upca:
-                    return Android.Gms.Vision.Barcodes.BarcodeFormat.UpcA;
-                case BarcodeFormats.Upce:
-                    return Android.Gms.Vision.Barcodes.BarcodeFormat.UpcE;
-                case BarcodeFormats.Aztec:
-                    return Android.Gms.Vision.Barcodes.BarcodeFormat.Aztec;
-                case BarcodeFormats.All:
-                    return Android.Gms.Vision.Barcodes.BarcodeFormat.Code128 | Android.Gms.Vision.Barcodes.BarcodeFormat.Codabar |
-             Android.Gms.Vision.Barcodes.BarcodeFormat.Code39 | Android.Gms.Vision.Barcodes.BarcodeFormat.Code93 | Android.Gms.Vision.Barcodes.BarcodeFormat.DataMatrix |
-             Android.Gms.Vision.Barcodes.BarcodeFormat.Ean13 | Android.Gms.Vision.Barcodes.BarcodeFormat.Ean8 | Android.Gms.Vision.Barcodes.BarcodeFormat.Itf |
-             Android.Gms.Vision.Barcodes.BarcodeFormat.Pdf417 | Android.Gms.Vision.Barcodes.BarcodeFormat.QrCode | Android.Gms.Vision.Barcodes.BarcodeFormat.UpcA | Android.Gms.Vision.Barcodes.BarcodeFormat.UpcE |
-             Android.Gms.Vision.Barcodes.BarcodeFormat.Aztec;
-                default:
-                    return Android.Gms.Vision.Barcodes.BarcodeFormat.Code128 | Android.Gms.Vision.Barcodes.BarcodeFormat.Codabar |
-             Android.Gms.Vision.Barcodes.BarcodeFormat.Code39 | Android.Gms.Vision.Barcodes.BarcodeFormat.Code93 | Android.Gms.Vision.Barcodes.BarcodeFormat.DataMatrix |
-             Android.Gms.Vision.Barcodes.BarcodeFormat.Ean13 | Android.Gms.Vision.Barcodes.BarcodeFormat.Ean8 | Android.Gms.Vision.Barcodes.BarcodeFormat.Itf |
-             Android.Gms.Vision.Barcodes.BarcodeFormat.Pdf417 | Android.Gms.Vision.Barcodes.BarcodeFormat.QrCode | Android.Gms.Vision.Barcodes.BarcodeFormat.UpcA | Android.Gms.Vision.Barcodes.BarcodeFormat.UpcE |
-             Android.Gms.Vision.Barcodes.BarcodeFormat.Aztec;
-            }
+            Android.Gms.Vision.Barcodes.BarcodeFormat formats = BarcodeFormat.AllFormats;
+
+            if(barcodeFormats.HasFlag(BarcodeFormats.CodaBar))
+                formats |= BarcodeFormat.Codabar;
+            if (barcodeFormats.HasFlag(BarcodeFormats.Code128))
+                formats |= BarcodeFormat.Code128;
+            if (barcodeFormats.HasFlag(BarcodeFormats.Code93))
+                formats |= BarcodeFormat.Code93;
+            if (barcodeFormats.HasFlag(BarcodeFormats.CodaBar))
+                formats |= BarcodeFormat.Codabar;
+            if (barcodeFormats.HasFlag(BarcodeFormats.DataMatrix))
+                formats |= BarcodeFormat.DataMatrix;
+            if (barcodeFormats.HasFlag(BarcodeFormats.Ean13))
+                formats |= BarcodeFormat.Ean13;
+            if (barcodeFormats.HasFlag(BarcodeFormats.Ean8))
+                formats |= BarcodeFormat.Ean8;
+            if (barcodeFormats.HasFlag(BarcodeFormats.Itf))
+                formats |= BarcodeFormat.Itf;
+            if (barcodeFormats.HasFlag(BarcodeFormats.Pdf417))
+                formats |= BarcodeFormat.Pdf417;
+            if (barcodeFormats.HasFlag(BarcodeFormats.QRCode))
+                formats |= BarcodeFormat.QrCode;
+            if (barcodeFormats.HasFlag(BarcodeFormats.Upca))
+                formats |= BarcodeFormat.UpcA;
+            if (barcodeFormats.HasFlag(BarcodeFormats.Upce))
+                formats |= BarcodeFormat.UpcE;
+            if (barcodeFormats.HasFlag(BarcodeFormats.Aztec))
+                formats |= BarcodeFormat.Aztec;
+            if (barcodeFormats.HasFlag(BarcodeFormats.All))
+                formats |= BarcodeFormat.AllFormats;
+            return formats;
         }
     }
 }
