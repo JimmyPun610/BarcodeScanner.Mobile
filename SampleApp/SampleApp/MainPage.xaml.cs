@@ -1,6 +1,4 @@
 ﻿using Plugin.Media;
-using Plugin.Permissions;
-using Plugin.Permissions.Abstractions;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -8,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace SampleApp
@@ -59,10 +58,10 @@ namespace SampleApp
 
         private async void Button4_Clicked(object sender, EventArgs e)
         {
-            var storageStatus = await CrossPermissions.Current.CheckPermissionStatusAsync(Plugin.Permissions.Abstractions.Permission.Storage);
+            var storageStatus = await Permissions.CheckStatusAsync<Permissions.StorageRead>();
             while(storageStatus != PermissionStatus.Granted)
             {
-                await CrossPermissions.Current.RequestPermissionsAsync(Permission.Storage);
+                await Permissions.RequestAsync<Permissions.StorageRead>();
             }
             if (storageStatus == PermissionStatus.Granted)
             {
@@ -99,8 +98,6 @@ namespace SampleApp
                 {
                     await DisplayAlert("Permissions Denied", "Unable to take photos.", "OK");
                 });
-                //On iOS you may want to send your user to the settings screen.
-                //CrossPermissions.Current.OpenAppSettings();
             }
             
         }

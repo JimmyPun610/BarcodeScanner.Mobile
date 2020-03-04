@@ -1,9 +1,9 @@
-﻿using Plugin.Permissions;
-using Plugin.Permissions.Abstractions;
+﻿
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace GoogleVisionBarCodeScanner
@@ -38,12 +38,12 @@ namespace GoogleVisionBarCodeScanner
         {
             try
             {
-                var status = await CrossPermissions.Current.CheckPermissionStatusAsync(Permission.Camera);
+                var status = await Permissions.CheckStatusAsync<Permissions.Camera>();
                 if (status != PermissionStatus.Granted)
                 {
-                    await CrossPermissions.Current.RequestPermissionsAsync(Permission.Camera);
+                    await Permissions.RequestAsync<Permissions.Camera>();
                 }
-                status = await CrossPermissions.Current.CheckPermissionStatusAsync(Permission.Camera);
+                status = await Permissions.CheckStatusAsync<Permissions.Camera>();
                 if (status == PermissionStatus.Granted)
                     return true;
             }

@@ -45,17 +45,24 @@ namespace GoogleVisionBarCodeScanner.Droid
 
         public void ToggleFlashlight()
         {
-            var _myCamera = Methods.GetCamera(Configuration.CameraSource);
-            if (_myCamera != null)
+            try
             {
-                var prams = _myCamera.GetParameters();
-                //prams.focus.setFocusMode(Camera.Parameters.FOCUS_MODE_CONTINUOUS_PICTURE);
-                if (!IsTorchOn())
-                    prams.FlashMode = Android.Hardware.Camera.Parameters.FlashModeTorch;
-                else prams.FlashMode = Android.Hardware.Camera.Parameters.FlashModeOff;
-                _myCamera.SetParameters(prams);
+                var _myCamera = Methods.GetCamera(Configuration.CameraSource);
+                if (_myCamera != null)
+                {
+                    var prams = _myCamera.GetParameters();
+                    //prams.focus.setFocusMode(Camera.Parameters.FOCUS_MODE_CONTINUOUS_PICTURE);
+                    if (!IsTorchOn())
+                        prams.FlashMode = Android.Hardware.Camera.Parameters.FlashModeTorch;
+                    else prams.FlashMode = Android.Hardware.Camera.Parameters.FlashModeOff;
+                    _myCamera.SetParameters(prams);
+                }
+                else Console.WriteLine($"Do not find camera");
             }
-            else Console.WriteLine($"Do not find camera");
+            catch(Exception ex)
+            {
+                Console.WriteLine($"Error on switch on/off flashlight");
+            }
            
         }
 

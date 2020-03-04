@@ -8,7 +8,7 @@ For iOS, it use GoogleMobileVision under MLKit library
 Please feel free to improve my source code.
 
 ## Current Version
-4.2.2.2
+4.2.2.3
 
 ## Pending to fix
 1. CameraView is not shown in Android 10 device
@@ -35,7 +35,6 @@ Install-Package BarcodeScanner.XF
   base.OnCreate(savedInstanceState);
 ...
   GoogleVisionBarCodeScanner.Droid.RendererInitializer.Init();
-  Plugin.CurrentActivity.CrossCurrentActivity.Current.Init(this, savedInstanceState);
 ...
   global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
   LoadApplication(new App());
@@ -44,7 +43,6 @@ Install-Package BarcodeScanner.XF
 public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
 {
     Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
-    Plugin.Permissions.PermissionsImplementation.Current.OnRequestPermissionsResult(requestCode, permissions, grantResults);
     base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
 }
 ```
