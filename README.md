@@ -16,8 +16,8 @@ Please feel free to improve my source code.
 https://github.com/JimmyPun610/BarcodeScanner.XF/tree/master/ReleaseNotes
 
 ## App Center Build
-### Android [![Build status](https://build.appcenter.ms/v0.1/apps/2db667d5-b04d-46ef-99c4-3d2e91369e9b/branches/master/badge)](https://appcenter.ms)
-### iOS [![Build status](https://build.appcenter.ms/v0.1/apps/8469c6ae-f101-4f93-89ab-4504d195885d/branches/master/badge)](https://appcenter.ms)
+##### Android [![Build status](https://build.appcenter.ms/v0.1/apps/2db667d5-b04d-46ef-99c4-3d2e91369e9b/branches/master/badge)](https://appcenter.ms)
+##### iOS [![Build status](https://build.appcenter.ms/v0.1/apps/8469c6ae-f101-4f93-89ab-4504d195885d/branches/master/badge)](https://appcenter.ms)
 
 
 ## Installation
