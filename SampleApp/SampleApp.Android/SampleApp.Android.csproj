@@ -55,6 +55,9 @@
     <Reference Include="System.Numerics.Vectors" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="BarcodeScanner.XF">
+      <Version>4.5.0.1</Version>
+    </PackageReference>
     <PackageReference Include="Xam.Plugin.Media">
       <Version>4.0.1.5</Version>
     </PackageReference>
@@ -68,9 +71,9 @@
     <PackageReference Include="Xamarin.Android.Support.v7.MediaRouter" Version="28.0.0.3" />
     <PackageReference Include="Xamarin.Android.Support.Core.Utils" Version="28.0.0.3" />
     <PackageReference Include="Xamarin.Android.Support.CustomTabs" Version="28.0.0.3" />
-    <PackageReference Include="Xamarin.Essentials" Version="1.5.0" />
+    <PackageReference Include="Xamarin.Essentials" Version="1.5.2" />
     <PackageReference Include="Xamarin.Forms">
-      <Version>4.2.0.815419</Version>
+      <Version>4.5.0.617</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.GooglePlayServices.Vision">
       <Version>71.1702.1</Version>
@@ -112,14 +115,6 @@
     <Folder Include="Resources\drawable\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\GoogleVisionBarCodeScanner.Droid\GoogleVisionBarCodeScanner.Droid.csproj">
-      <Project>{e9cd336e-1191-459b-a5ae-c69bdab8887d}</Project>
-      <Name>GoogleVisionBarCodeScanner.Droid</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\GoogleVisionBarCodeScanner\GoogleVisionBarCodeScanner.csproj">
-      <Project>{8cda11d6-38f2-485e-9acf-61133cceec7b}</Project>
-      <Name>GoogleVisionBarCodeScanner</Name>
-    </ProjectReference>
     <ProjectReference Include="..\SampleApp\SampleApp.csproj">
       <Project>{03240C5B-45BB-488F-A7D9-BC61B47D9E9B}</Project>
       <Name>SampleApp</Name>

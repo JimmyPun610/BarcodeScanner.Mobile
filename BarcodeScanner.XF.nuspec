@@ -2,7 +2,7 @@
 <package>
   <metadata>
     <id>BarcodeScanner.XF</id>
-    <version>4.2.2.3</version>
+    <version>4.5.0.1</version>
     <title>BarcodeScanner.XF</title>
     <authors>Jimmy Pun</authors>
     <owners>Jimmy Pun</owners>
@@ -12,10 +12,7 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>This is a library to implement barcode scanning feature by Google Mobile Vision in Xamarin Forms(iOS and Android only)</description>
     <releaseNotes>
-		4.2.2.3 : Update to Xamarin.Essentials 1.5.0, removed Plugin.Permissions and CurrentActivityPlugin
-		4.2.2.2 : Support of multiple barcode format
-		4.2.2.1 : Support of Aztec barcode
-		4.2.2.0 : Added Feature ScanFromImage, allow user pass in image byte array and the scanner will auto detect the result.
+		4.5.0.1: Update to Xamarin Form 4.5.0.356
 	</releaseNotes>
     <copyright>Copyright 2019</copyright>
     <tags>Xamarin.Forms Barcode Scanning Tools</tags>
@@ -23,24 +20,22 @@
 		<group targetFramework="netstandard2.0">
 			<!--MonoAndroid dependencies go here-->
 			<dependency id="Xamarin.Essentials" version="1.5.0" />
-			<dependency id="Xamarin.Forms" version="4.2.0.815419" />
-			<dependency id="Plugin.Permissions" version="3.0.0.12" />
+			<dependency id="Xamarin.Forms" version="4.5.0.356" />
 		</group>
 		<group targetFramework="Xamarin.iOS10">
 			<!--MonoAndroid dependencies go here-->
 			<dependency id="Xamarin.Essentials" version="1.5.0" />
-			<dependency id="Xamarin.Forms" version="4.2.0.815419" />
+			<dependency id="Xamarin.Forms" version="4.5.0.356" />
 			<dependency id="Xamarin.Firebase.iOS.Core" version="6.1.0" />
 			<dependency id="Xamarin.Firebase.iOS.MLKit" version="0.13.0.1" />
 			<dependency id="Xamarin.Firebase.iOS.MLKit.Common" version="0.13.0" />
 			<dependency id="System.Numerics.Vectors" version="4.5" />
 			<dependency id="Xamarin.Build.Download" version="0.4.11" />
-			<dependency id="Plugin.Permissions" version="3.0.0.12" />
 		</group>
 		<group targetFramework="MonoAndroid90">
 			<!--MonoAndroid dependencies go here-->
 			<dependency id="Xamarin.Essentials" version="1.5.0" />
-			<dependency id="Xamarin.Forms" version="4.2.0.815419" />
+			<dependency id="Xamarin.Forms" version="4.5.0.356" />
 			<dependency id="Xamarin.Android.Support.v7.MediaRouter" version="28.0.0.3" />
 			<dependency id="Xamarin.Android.Support.v7.AppCompat" version="28.0.0.3" />
 			<dependency id="Xamarin.Android.Support.v4" version="28.0.0.3" />	
