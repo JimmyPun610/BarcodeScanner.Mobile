@@ -8,7 +8,7 @@ For iOS, it use GoogleMobileVision under MLKit library
 Please feel free to improve my source code.
 
 ## Current Version
-4.2.2.3
+4.5.0.1
 
 ## Release notes
 https://github.com/JimmyPun610/BarcodeScanner.XF/tree/master/ReleaseNotes
