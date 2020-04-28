@@ -2,7 +2,7 @@
 <package>
   <metadata>
     <id>BarcodeScanner.XF</id>
-    <version>4.5.0.2</version>
+    <version>4.5.0.3</version>
     <title>BarcodeScanner.XF</title>
     <authors>Jimmy Pun</authors>
     <owners>Jimmy Pun</owners>
@@ -12,7 +12,7 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>This is a library to implement barcode scanning feature by Google Mobile Vision in Xamarin Forms(iOS and Android only)</description>
     <releaseNotes>
-		4.5.0.2: Update to Xamarin Form 4.5.0.617
+		4.5.0.3: Support Xamarin Form 4.5.0.617+
 	</releaseNotes>
     <copyright>Copyright 2019</copyright>
     <tags>Xamarin.Forms Barcode Scanning Tools</tags>
@@ -20,12 +20,12 @@
 		<group targetFramework="netstandard2.0">
 			<!--MonoAndroid dependencies go here-->
 			<dependency id="Xamarin.Essentials" version="1.5.0" />
-			<dependency id="Xamarin.Forms" version="[4.5.0.617]" />
+			<dependency id="Xamarin.Forms" version="4.5.0.617" />
 		</group>
 		<group targetFramework="Xamarin.iOS10">
 			<!--MonoAndroid dependencies go here-->
 			<dependency id="Xamarin.Essentials" version="1.5.0" />
-			<dependency id="Xamarin.Forms" version="[4.5.0.617]" />
+			<dependency id="Xamarin.Forms" version="4.5.0.617" />
 			<dependency id="Xamarin.Firebase.iOS.Core" version="6.1.0" />
 			<dependency id="Xamarin.Firebase.iOS.MLKit" version="0.13.0.1" />
 			<dependency id="Xamarin.Firebase.iOS.MLKit.Common" version="0.13.0" />
@@ -35,7 +35,7 @@
 		<group targetFramework="MonoAndroid90">
 			<!--MonoAndroid dependencies go here-->
 			<dependency id="Xamarin.Essentials" version="1.5.0" />
-			<dependency id="Xamarin.Forms" version="[4.5.0.617]" />
+			<dependency id="Xamarin.Forms" version="4.5.0.617" />
 			<dependency id="Xamarin.Android.Support.v7.MediaRouter" version="28.0.0.3" />
 			<dependency id="Xamarin.Android.Support.v7.AppCompat" version="28.0.0.3" />
 			<dependency id="Xamarin.Android.Support.v4" version="28.0.0.3" />	
