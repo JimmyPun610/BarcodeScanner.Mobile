@@ -158,7 +158,7 @@ stream.Read(bytes, 0, bytes.Length);
 stream.Seek(0, SeekOrigin.Begin);
 ```
 
-#### 2. Analysis the image and wait for result
+#### 2. Analyze the image and wait for result
 ``` C#
 List<GoogleVisionBarCodeScanner.BarcodeResult> obj = await GoogleVisionBarCodeScanner.Methods.ScanFromImage(bytes);
 ```
