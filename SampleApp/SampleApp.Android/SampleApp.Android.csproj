@@ -56,7 +56,7 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="BarcodeScanner.XF">
-      <Version>4.5.0.2</Version>
+      <Version>4.6.0.1</Version>
     </PackageReference>
     <PackageReference Include="Xam.Plugin.Media">
       <Version>4.0.1.5</Version>
@@ -73,10 +73,10 @@
     <PackageReference Include="Xamarin.Android.Support.CustomTabs" Version="28.0.0.3" />
     <PackageReference Include="Xamarin.Essentials" Version="1.5.2" />
     <PackageReference Include="Xamarin.Forms">
-      <Version>4.5.0.657</Version>
+      <Version>4.6.0.726</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.GooglePlayServices.Vision">
-      <Version>71.1702.1</Version>
+      <Version>71.1702.2</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
