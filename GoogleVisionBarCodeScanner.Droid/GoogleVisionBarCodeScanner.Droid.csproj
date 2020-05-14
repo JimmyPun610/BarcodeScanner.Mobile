@@ -98,13 +98,13 @@
       <Version>28.0.0.3</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.Essentials">
-      <Version>1.5.0</Version>
+      <Version>1.5.2</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.Forms">
-      <Version>4.5.0.617</Version>
+      <Version>4.6.0.726</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.GooglePlayServices.Vision">
-      <Version>71.1702.1</Version>
+      <Version>71.1702.2</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
