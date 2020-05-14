@@ -8,6 +8,15 @@ For iOS, it use GoogleMobileVision under MLKit library
 Please feel free to improve my source code.
 
 ## Current Version
+4.6.0.1 for Xamarin Form 4.6.0.726+
+```C#
+	// Make sure you add this code in your AppDelegate.cs in iOS project, otherwise, the project will build failed
+	// Temperation work around for bug on Firebase Library
+	// https://github.com/xamarin/GoogleApisForiOSComponents/issues/368
+	RemoteConfig.SharedInstance.ConfigSettings = new RemoteConfigSettings(true);
+	Firebase.Core.App.Configure();
+```
+
 4.5.0.3 for Xamarin Form 4.5.0.617+
 
 4.2.2.3 for Xamrain Form 4.2 to 4.4
@@ -68,7 +77,10 @@ https://console.firebase.google.com/
             LoadApplication(new App());
             ....
             GoogleVisionBarCodeScanner.iOS.Initializer.Init();
-            Firebase.Core.App.Configure();
+            // Temperation work around for bug on Firebase Library
+	    // https://github.com/xamarin/GoogleApisForiOSComponents/issues/368
+            RemoteConfig.SharedInstance.ConfigSettings = new RemoteConfigSettings(true);
+	    Firebase.Core.App.Configure();
             ....
             return base.FinishedLaunching(app, options);
 ```
