@@ -11,7 +11,7 @@ Please feel free to improve my source code.
 4.6.0.1 for Xamarin Form 4.6.0.726+
 ```C#
 	// Make sure you add this code in your AppDelegate.cs in iOS project, otherwise, the project will build failed
-	// Temperation work around for bug on Firebase Library
+	// Temporary work around for bug on Firebase Library
 	// https://github.com/xamarin/GoogleApisForiOSComponents/issues/368
 	RemoteConfig.SharedInstance.ConfigSettings = new RemoteConfigSettings(true);
 	Firebase.Core.App.Configure();
@@ -77,7 +77,7 @@ https://console.firebase.google.com/
             LoadApplication(new App());
             ....
             GoogleVisionBarCodeScanner.iOS.Initializer.Init();
-            // Temperation work around for bug on Firebase Library
+            // Temporary work around for bug on Firebase Library
 	    // https://github.com/xamarin/GoogleApisForiOSComponents/issues/368
             RemoteConfig.SharedInstance.ConfigSettings = new RemoteConfigSettings(true);
 	    Firebase.Core.App.Configure();
