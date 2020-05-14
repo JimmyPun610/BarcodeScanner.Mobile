@@ -11,7 +11,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="BarcodeScanner.XF" Version="4.5.0.2" />
+    <PackageReference Include="BarcodeScanner.XF" Version="4.5.0.3" />
     <PackageReference Include="Xam.Plugin.Media" Version="4.0.1.5" />
     <PackageReference Include="Xamarin.Essentials" Version="1.5.2" />
     <PackageReference Include="Xamarin.Forms" Version="4.5.0.657" />
