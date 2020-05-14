@@ -2,7 +2,7 @@
 <package>
   <metadata>
     <id>BarcodeScanner.XF</id>
-    <version>4.6.0.0</version>
+    <version>4.6.0.1</version>
     <title>BarcodeScanner.XF</title>
     <authors>Jimmy Pun</authors>
     <owners>Jimmy Pun</owners>
@@ -12,7 +12,7 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>This is a library to implement barcode scanning feature by Google Mobile Vision in Xamarin Forms(iOS and Android only)</description>
     <releaseNotes>
-		4.6.0.0: Support Xamarin Form 4.6+ and packages update, updated Firebase library about UIWebView -> WKWebView
+		4.6.0.1: Support Xamarin Form 4.6+ and packages update, updated Firebase library about UIWebView -> WKWebView
 	</releaseNotes>
     <copyright>Copyright 2020</copyright>
     <tags>Xamarin.Forms Barcode Scanning Tools</tags>
