@@ -85,6 +85,8 @@ https://console.firebase.google.com/
             return base.FinishedLaunching(app, options);
 ```
 
+5. Set Linker Behavior to Link SDK assemblies only
+
 ## Scan from Camera
 
 #### 1. Set support barcode format (Default is all), call it before you start to init CameraView
