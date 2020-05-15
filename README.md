@@ -8,7 +8,7 @@ For iOS, it use GoogleMobileVision under MLKit library
 Please feel free to improve my source code.
 
 ## Current Version
-4.6.0.1 for Xamarin Form 4.6.0.726+
+4.6.0.2 for Xamarin Form 4.6.0.772+
 ```C#
 	// Make sure you add this code in your AppDelegate.cs in iOS project, otherwise, the project will build failed
 	// Temporary work around for bug on Firebase Library
