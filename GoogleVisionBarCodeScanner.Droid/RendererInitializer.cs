@@ -5,6 +5,7 @@
         public static void Init()
         {
             Renderer.CameraViewRenderer.Init();
+            BarcodeScanning.Init();
         }
     }
 }

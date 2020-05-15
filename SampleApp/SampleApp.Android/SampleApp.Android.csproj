@@ -15,7 +15,6 @@
     <AndroidManifest>Properties\AndroidManifest.xml</AndroidManifest>
     <MonoAndroidResourcePrefix>Resources</MonoAndroidResourcePrefix>
     <MonoAndroidAssetsPrefix>Assets</MonoAndroidAssetsPrefix>
-    <AndroidUseLatestPlatformSdk>false</AndroidUseLatestPlatformSdk>
     <TargetFrameworkVersion>v9.0</TargetFrameworkVersion>
     <AndroidEnableSGenConcurrent>true</AndroidEnableSGenConcurrent>
     <AndroidHttpClientHandlerType>Xamarin.Android.Net.AndroidClientHandler</AndroidHttpClientHandlerType>
@@ -31,9 +30,6 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <AndroidLinkMode>None</AndroidLinkMode>
-    <AotAssemblies>false</AotAssemblies>
-    <EnableLLVM>false</EnableLLVM>
-    <BundleAssemblies>false</BundleAssemblies>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -55,9 +51,6 @@
     <Reference Include="System.Numerics.Vectors" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="BarcodeScanner.XF">
-      <Version>4.6.0.1</Version>
-    </PackageReference>
     <PackageReference Include="Xam.Plugin.Media">
       <Version>4.0.1.5</Version>
     </PackageReference>
@@ -73,10 +66,13 @@
     <PackageReference Include="Xamarin.Android.Support.CustomTabs" Version="28.0.0.3" />
     <PackageReference Include="Xamarin.Essentials" Version="1.5.2" />
     <PackageReference Include="Xamarin.Forms">
-      <Version>4.6.0.726</Version>
+      <Version>4.6.0.772</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.GooglePlayServices.Vision">
       <Version>71.1702.2</Version>
+    </PackageReference>
+    <PackageReference Include="BarcodeScanner.XF">
+      <Version>4.6.0.2</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
@@ -116,7 +112,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SampleApp\SampleApp.csproj">
-      <Project>{03240C5B-45BB-488F-A7D9-BC61B47D9E9B}</Project>
+      <Project>{D96A0F3E-5FA2-4EC5-9D9B-18C316B466D6}</Project>
       <Name>SampleApp</Name>
     </ProjectReference>
   </ItemGroup>

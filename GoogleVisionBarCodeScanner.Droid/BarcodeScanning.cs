@@ -18,12 +18,13 @@ using Android.Widget;
 using GoogleVisionBarCodeScanner.Droid;
 using Xamarin.Forms;
 
-[assembly: Dependency(typeof(BarcodeScanning))]
+[assembly: Dependency(typeof(GoogleVisionBarCodeScanner.Droid.BarcodeScanning))]
 namespace GoogleVisionBarCodeScanner.Droid
 {
     public class BarcodeScanning : Interface.IBarcodeScanning
     {
-      
+       
+        public static void Init() { }
 
         public bool IsTorchOn()
         {

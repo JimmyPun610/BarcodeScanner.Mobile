@@ -10,13 +10,12 @@ using GoogleVisionBarCodeScanner.iOS;
 using UIKit;
 using Xamarin.Forms;
 
-[assembly: Dependency(typeof(BarcodeScanning))]
+[assembly: Dependency(typeof(GoogleVisionBarCodeScanner.iOS.BarcodeScanning))]
 namespace GoogleVisionBarCodeScanner.iOS
 {
     public class BarcodeScanning : Interface.IBarcodeScanning
     {
-
-
+        public static void Init() { }
         public bool IsTorchOn()
         {
             var videoDevices = AVCaptureDevice.GetDefaultDevice(AVMediaType.Video);

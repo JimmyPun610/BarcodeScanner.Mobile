@@ -52,7 +52,7 @@
     <CodesignKey>iPhone Developer</CodesignKey>
     <MtouchDebug>true</MtouchDebug>
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
-    <MtouchLink>Full</MtouchLink>
+    <MtouchLink>SdkOnly</MtouchLink>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhone' ">
     <DebugType>none</DebugType>
@@ -130,21 +130,30 @@
     <Reference Include="System.Numerics.Vectors" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="BarcodeScanner.XF">
-      <Version>4.6.0.1</Version>
-    </PackageReference>
     <PackageReference Include="Xam.Plugin.Media">
       <Version>4.0.1.5</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.Essentials" Version="1.5.2" />
     <PackageReference Include="Xamarin.Forms">
-      <Version>4.6.0.726</Version>
+      <Version>4.6.0.772</Version>
+    </PackageReference>
+    <PackageReference Include="Xamarin.Firebase.iOS.Core">
+      <Version>6.6.6</Version>
+    </PackageReference>
+    <PackageReference Include="Xamarin.Firebase.iOS.MLKit">
+      <Version>0.19.0</Version>
+    </PackageReference>
+    <PackageReference Include="Xamarin.Firebase.iOS.MLKit.Common">
+      <Version>0.19.0</Version>
+    </PackageReference>
+    <PackageReference Include="BarcodeScanner.XF">
+      <Version>4.6.0.2</Version>
     </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>
     <ProjectReference Include="..\SampleApp\SampleApp.csproj">
-      <Project>{03240C5B-45BB-488F-A7D9-BC61B47D9E9B}</Project>
+      <Project>{D96A0F3E-5FA2-4EC5-9D9B-18C316B466D6}</Project>
       <Name>SampleApp</Name>
     </ProjectReference>
   </ItemGroup>
