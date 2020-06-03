@@ -9,7 +9,7 @@ For iOS, it use GoogleMobileVision under MLKit library
 Please feel free to improve my source code.
 
 ## Current Version
-4.6.1   for Xamarin Form 4.6.0.772+
+4.6.1   for Xamarin Form 4.6.0.772+, Please notice the assembly name is changed. (See sample xaml)
 
 4.5.0.3 for Xamarin Form 4.5.0.617+
 
