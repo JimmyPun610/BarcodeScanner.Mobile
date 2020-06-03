@@ -1,12 +1,156 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="MSBuild.Sdk.Extras/2.0.54">
 
-  <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
-  </PropertyGroup>
+	<PropertyGroup>
+		<!--Update with your target such as: Xamarin.iOS10 or MonoAndroid80 or Xamarin.Mac20-->
+		<TargetFrameworks>Xamarin.iOS10;MonoAndroid10.0;MonoAndroid90;netstandard2.0</TargetFrameworks>
 
-  <ItemGroup>
-    <PackageReference Include="Xamarin.Essentials" Version="1.5.2" />
-    <PackageReference Include="Xamarin.Forms" Version="4.6.0.772" />
-  </ItemGroup>
+		<!--Assembly and Namespace info -->
+		<AssemblyName>GoogleVisionBarCodeScanner</AssemblyName>
+		<RootNamespace>GoogleVisionBarCodeScanner</RootNamespace>
+
+		<Product></Product>
+		<AssemblyVersion>1.0.0.0</AssemblyVersion>
+		<AssemblyFileVersion>1.0.0.0</AssemblyFileVersion>
+		<Version>4.6.1.0</Version>
+		<NeutralLanguage>en</NeutralLanguage>
+
+
+		<!--Don't auto add files for me, I will tell you -->
+		<EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+
+		<!-- Helper to add defines-->
+		<DefineConstants>$(DefineConstants);</DefineConstants>
+
+		<!--Assembly and Namespace info -->
+
+		<!--Version of C# to use -->
+		<LangVersion>default</LangVersion>
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+		<Authors>Jimmy Pun</Authors>
+		<Description>Powerful Xamarin Forms barcode scanning library using GoogleVision API for Android and iOS.</Description>
+		<PackageIconUrl>https://banner2.kisspng.com/20180713/olo/kisspng-nuget-net-framework-package-manager-software-repo-nuget-5b487dc3ba81a7.452233091531477443764.jpg</PackageIconUrl>
+		<RepositoryUrl>https://github.com/JimmyPun610/BarcodeScanner.XF</RepositoryUrl>
+		<PackageProjectUrl>https://github.com/JimmyPun610/BarcodeScanner.XF</PackageProjectUrl>
+		<PackageLicenseUrl>https://github.com/JimmyPun610/BarcodeScanner.XF</PackageLicenseUrl>
+		<RepositoryType></RepositoryType>
+		<PackageTags>Xamarin.Forms Barcode Scanning Tools</PackageTags>
+		<PackageReleaseNotes>
+			1. Bug fix on Android
+			2. Restructure library project
+		</PackageReleaseNotes>
+		<Copyright>Copyright 2020</Copyright>
+
+	</PropertyGroup>
+
+	<!-- Define what happens on build and release -->
+	<PropertyGroup Condition=" '$(Configuration)'=='Debug' ">
+		<DebugType>full</DebugType>
+		<DebugSymbols>true</DebugSymbols>
+		<GenerateDocumentationFile>false</GenerateDocumentationFile>
+	</PropertyGroup>
+
+	<PropertyGroup Condition=" '$(Configuration)'=='Release' ">
+		<DebugType>pdbonly</DebugType>
+		<GenerateDocumentationFile>true</GenerateDocumentationFile>
+
+		 <!--If we want a nuget package add this-->
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+     
+	</PropertyGroup>
+
+	<ItemGroup>
+		<!-- This None is here so the conditionally included files show up in the Solution Explorer -->
+		<None Include="**\*.cs;**\*.xml;**\*.axml;**\*.png" Exclude="obj\**\*.*;bin\**\*.*;bin;obj" />
+
+		<!-- We will compile anything ending in .shared.cs  You can change this -->
+		<Compile Include="Shared\*.cs" />
+		<PackageReference Include="Xamarin.Essentials" Version="1.5.2" />
+		<PackageReference Include="Xamarin.Forms" Version="4.6.0.772" />
+	</ItemGroup>
+	<ItemGroup Condition=" $(TargetFramework.StartsWith('netstandard')) ">
+		<Compile Include="NetStandard\*.cs" />
+		<PackageReference Include="NETStandard.Library" Version="2.0.3" />
+
+	</ItemGroup>
+
+	<ItemGroup Condition=" $(TargetFramework.StartsWith('MonoAndroid')) ">
+		<Compile Include="Android\*.cs" />
+		<Compile Include="Android\**\*.cs" />
+		<PackageReference Include="Xamarin.Android.Support.Media.Compat">
+			<Version>28.0.0.3</Version>
+		</PackageReference>
+		<PackageReference Include="Xamarin.Android.Support.v4">
+			<Version>28.0.0.3</Version>
+		</PackageReference>
+		<PackageReference Include="Xamarin.Android.Support.VersionedParcelable">
+			<Version>28.0.0.3</Version>
+		</PackageReference>
+		<PackageReference Include="Xamarin.Android.Support.Interpolator">
+			<Version>28.0.0.3</Version>
+		</PackageReference>
+		<PackageReference Include="Xamarin.Android.Support.v7.RecyclerView">
+			<Version>28.0.0.3</Version>
+		</PackageReference>
+		<PackageReference Include="Xamarin.Android.Support.Fragment">
+			<Version>28.0.0.3</Version>
+		</PackageReference>
+		<PackageReference Include="Xamarin.Android.Support.Core.UI">
+			<Version>28.0.0.3</Version>
+		</PackageReference>
+		<PackageReference Include="Xamarin.Android.Support.Core.Utils">
+			<Version>28.0.0.3</Version>
+		</PackageReference>
+		<PackageReference Include="Xamarin.Android.Support.Annotations">
+			<Version>28.0.0.3</Version>
+		</PackageReference>
+		<PackageReference Include="Xamarin.Android.Support.CursorAdapter">
+			<Version>28.0.0.3</Version>
+		</PackageReference>
+		<PackageReference Include="Xamarin.Android.Support.Collections">
+			<Version>28.0.0.3</Version>
+		</PackageReference>
+		<PackageReference Include="Xamarin.Android.Support.Compat">
+			<Version>28.0.0.3</Version>
+		</PackageReference>
+		<PackageReference Include="Xamarin.Android.Support.Design">
+			<Version>28.0.0.3</Version>
+		</PackageReference>
+		<PackageReference Include="Xamarin.AndroidX.MediaRouter">
+			<Version>1.1.0</Version>
+		</PackageReference>
+		<PackageReference Include="Xamarin.AndroidX.Lifecycle.LiveData">
+			<Version>2.1.0</Version>
+		</PackageReference>
+		<PackageReference Include="Xamarin.AndroidX.Browser">
+			<Version>1.0.0</Version>
+		</PackageReference>
+		<PackageReference Include="Xamarin.Google.Android.Material">
+			<Version>1.0.0</Version>
+		</PackageReference>
+		<PackageReference Include="Xamarin.AndroidX.Legacy.Support.V4">
+			<Version>1.0.0</Version>
+		</PackageReference>
+		<PackageReference Include="Xamarin.GooglePlayServices.Vision">
+			<Version>71.1702.2</Version>
+		</PackageReference>
+	</ItemGroup>
+
+	<ItemGroup Condition=" $(TargetFramework.StartsWith('Xamarin.iOS')) ">
+		<Compile Include="iOS\*.cs" />
+		<Compile Include="iOS\**\*.cs" />
+		<PackageReference Include="System.Numerics.Vectors">
+			<Version>4.5.0</Version>
+		</PackageReference>
+		<PackageReference Include="Xamarin.Firebase.iOS.Core">
+			<Version>6.6.6</Version>
+		</PackageReference>
+		<PackageReference Include="Xamarin.Firebase.iOS.MLKit">
+			<Version>0.19.0</Version>
+		</PackageReference>
+		<PackageReference Include="Xamarin.Firebase.iOS.MLKit.Common">
+			<Version>0.19.0</Version>
+		</PackageReference>
+	</ItemGroup>
+	
 
 </Project>

@@ -23,10 +23,6 @@ namespace SampleApp
         
         private async void Button1_Clicked(object sender, EventArgs e)
         {
-            //var p = new GoogleVisionBarCodeScanner.BarcodeScanningPage();
-            //p.SetupBarcodeScanningPage("AD", "Cancel", "ScanningDesc", "Flashlight");
-            //Navigation.PushModalAsync(new NavigationPage(p));
-
             //Ask for permission first
             bool allowed = false;
             allowed = await GoogleVisionBarCodeScanner.Methods.AskForRequiredPermission();
