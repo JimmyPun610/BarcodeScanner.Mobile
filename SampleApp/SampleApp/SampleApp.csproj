@@ -14,10 +14,7 @@
     <PackageReference Include="Xam.Plugin.Media" Version="5.0.1" />
     <PackageReference Include="Xamarin.Essentials" Version="1.5.2" />
     <PackageReference Include="Xamarin.Forms" Version="4.6.0.772" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\..\GoogleVisionBarCodeScanner\GoogleVisionBarCodeScanner.csproj" />
+    <PackageReference Include="BarcodeScanner.XF" Version="4.6.1" />
   </ItemGroup>
 
   <ItemGroup>

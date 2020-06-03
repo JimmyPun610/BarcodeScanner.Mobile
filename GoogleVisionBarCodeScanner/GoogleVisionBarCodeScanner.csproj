@@ -1,11 +1,13 @@
 ﻿<Project Sdk="MSBuild.Sdk.Extras/2.0.54">
 
 	<PropertyGroup>
+
 		<!--Update with your target such as: Xamarin.iOS10 or MonoAndroid80 or Xamarin.Mac20-->
 		<TargetFrameworks>Xamarin.iOS10;MonoAndroid10.0;MonoAndroid90;netstandard2.0</TargetFrameworks>
 
 		<!--Assembly and Namespace info -->
-		<AssemblyName>GoogleVisionBarCodeScanner</AssemblyName>
+		<id>BarcodeScanner.XF</id>
+		<AssemblyName>BarcodeScanner.XF</AssemblyName>
 		<RootNamespace>GoogleVisionBarCodeScanner</RootNamespace>
 
 		<Product></Product>
