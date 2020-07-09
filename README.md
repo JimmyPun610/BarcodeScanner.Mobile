@@ -9,7 +9,7 @@ For iOS, it use GoogleMobileVision under MLKit library
 Please feel free to improve my source code.
 
 ## Current Version
-4.7.0   for Xamarin Form 4.7.0.968+
+4.7.0.1   for Xamarin Form 4.7.0.968+
 
 4.6.1   for Xamarin Form 4.6.0.772+, Please notice the assembly name is changed. (See sample xaml)
 
@@ -105,9 +105,11 @@ GoogleVisionBarCodeScanner.Methods.SetSupportBarcodeFormat(BarcodeFormats.QRCode
      <ScrollView HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
 	 <!--VirbationOnDetected: Indicate the device will vibrate or not when detected barcode, default is True
 		 DefaultTorchOn: Indicate the torch will on or not when the view appear, default is False
-		 AutoStartScanning : Indicate whether the device will start scanning after it is opened, default is True-->
+		 AutoStartScanning : Indicate whether the device will start scanning after it is opened, default is True
+		 RequestedFPS: Affect Android only, leave it if you want a default value (https://developers.google.com/android/reference/com/google/android/gms/vision/CameraSource.Builder.html#public-camerasource.builder-setrequestedfps-float-fps)
+		 -->
              <gv:CameraView HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" OnDetected="CameraView_OnDetected" Grid.Row="1"
-                            DefaultTorchOn="True" VibrationOnDetected="False" AutoStartScanning="True"/>
+                            DefaultTorchOn="True" VibrationOnDetected="False" AutoStartScanning="True" RequestedFPS="30"/>
      </ScrollView>
    </ContentPage.Content>
 </ContentPage>

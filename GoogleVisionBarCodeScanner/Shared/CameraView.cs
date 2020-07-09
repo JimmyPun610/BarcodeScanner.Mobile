@@ -47,6 +47,22 @@ namespace GoogleVisionBarCodeScanner
             }
         }
 
+        public static BindableProperty RequestedFPSProperty = BindableProperty.Create(nameof(RequestedFPS), typeof(float?), typeof(CameraView), null);
+        /// <summary>
+        /// Only Android will be reflected this setting
+        /// </summary>
+        public float? RequestedFPS
+        {
+            get
+            {
+                return (float?)GetValue(RequestedFPSProperty);
+            }
+            set
+            {
+                SetValue(RequestedFPSProperty, value);
+            }
+        }
+
 
         public event EventHandler<OnDetectedEventArg> OnDetected;
         public void TriggerOnDetected(List<BarcodeResult> barCodeResults)

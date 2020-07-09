@@ -72,7 +72,7 @@
       <Version>71.1702.2</Version>
     </PackageReference>
     <PackageReference Include="BarcodeScanner.XF">
-      <Version>4.7.0</Version>
+      <Version>4.7.0.1</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>

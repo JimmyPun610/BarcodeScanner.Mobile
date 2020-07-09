@@ -37,7 +37,7 @@ namespace GoogleVisionBarCodeScanner.Renderer
                 if (Control == null)
                 {
                     cameraView = ((CameraView)e.NewElement);
-                    cameraPreview = new CameraPreview(Context, cameraView.DefaultTorchOn, cameraView.VibrationOnDetected, cameraView.AutoStartScanning);
+                    cameraPreview = new CameraPreview(Context, cameraView.DefaultTorchOn, cameraView.VibrationOnDetected, cameraView.AutoStartScanning, cameraView.RequestedFPS);
                     cameraPreview.OnDetected += (list) =>
                     {
                         cameraView?.TriggerOnDetected(list);

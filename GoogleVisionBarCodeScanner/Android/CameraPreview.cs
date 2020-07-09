@@ -29,7 +29,7 @@ namespace GoogleVisionBarCodeScanner
         }
 
 
-        public CameraPreview(Context context, bool defaultTorchOn, bool virbationOnDetected, bool startScanningOnCreate)
+        public CameraPreview(Context context, bool defaultTorchOn, bool virbationOnDetected, bool startScanningOnCreate, float? requestedFPS)
             : base(context)
         {
             Configuration.IsScanning = startScanningOnCreate;
@@ -37,11 +37,24 @@ namespace GoogleVisionBarCodeScanner
             _barcodeDetector = new BarcodeDetector.Builder(context)
                .SetBarcodeFormats(Configuration.BarcodeFormats)
                .Build();
-            _cameraSource = new CameraSource
+            if(requestedFPS == null)
+            {
+                _cameraSource = new CameraSource
                 .Builder(context, _barcodeDetector)
                 .SetRequestedPreviewSize(1280, 720)
                 .SetAutoFocusEnabled(true)
                 .Build();
+            }
+            else
+            {
+                _cameraSource = new CameraSource
+                .Builder(context, _barcodeDetector)
+                .SetRequestedPreviewSize(1280, 720)
+                .SetAutoFocusEnabled(true)
+                .SetRequestedFps(requestedFPS.Value)
+                .Build();
+            }
+            
             Configuration.CameraSource = _cameraSource;
             _surfaceView = new SurfaceView(context);
             _surfaceView.Holder.AddCallback(new SurfaceHolderCallback(_cameraSource, _surfaceView));
