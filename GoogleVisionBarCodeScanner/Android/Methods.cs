@@ -72,6 +72,8 @@ namespace GoogleVisionBarCodeScanner
                 formats |= BarcodeFormat.Code128;
             if (barcodeFormats.HasFlag(BarcodeFormats.Code93))
                 formats |= BarcodeFormat.Code93;
+            if (barcodeFormats.HasFlag(BarcodeFormats.Code39))
+                formats |= BarcodeFormat.Code39;
             if (barcodeFormats.HasFlag(BarcodeFormats.CodaBar))
                 formats |= BarcodeFormat.Codabar;
             if (barcodeFormats.HasFlag(BarcodeFormats.DataMatrix))

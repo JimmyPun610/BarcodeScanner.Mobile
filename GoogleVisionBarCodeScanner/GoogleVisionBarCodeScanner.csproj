@@ -13,7 +13,7 @@
 		<Product></Product>
 		<AssemblyVersion>1.0.0.0</AssemblyVersion>
 		<AssemblyFileVersion>1.0.0.0</AssemblyFileVersion>
-		<Version>4.7.0.1</Version>
+		<Version>4.7.0.2</Version>
 		<NeutralLanguage>en</NeutralLanguage>
 
 
@@ -36,7 +36,7 @@
 		<PackageLicenseUrl>https://github.com/JimmyPun610/BarcodeScanner.XF</PackageLicenseUrl>
 		<RepositoryType></RepositoryType>
 		<PackageTags>Xamarin.Forms Barcode Scanning Tools</PackageTags>
-		<PackageReleaseNotes>1. Added RequestedFPS properties in CameraView which is only work for Android	</PackageReleaseNotes>
+		<PackageReleaseNotes>1. Code 39 support on Android bug fix	</PackageReleaseNotes>
 		<Copyright>Copyright 2020</Copyright>
 
 	</PropertyGroup>
