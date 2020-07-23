@@ -57,7 +57,7 @@ namespace SampleApp
             var storageStatus = await Permissions.CheckStatusAsync<Permissions.StorageRead>();
             while(storageStatus != PermissionStatus.Granted)
             {
-                await Permissions.RequestAsync<Permissions.StorageRead>();
+                storageStatus = await Permissions.RequestAsync<Permissions.StorageRead>();
             }
             if (storageStatus == PermissionStatus.Granted)
             {
