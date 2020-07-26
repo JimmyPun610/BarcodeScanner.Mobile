@@ -62,6 +62,8 @@ namespace SampleApp
             if (storageStatus == PermissionStatus.Granted)
             {
                 var file = await CrossMedia.Current.PickPhotoAsync();
+                if (file == null)
+                    return;
                 Stream stream = file.GetStream();
                 byte[] bytes = new byte[stream.Length];
                 stream.Read(bytes, 0, bytes.Length);
