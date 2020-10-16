@@ -1,7 +1,7 @@
 # BarcodeScanner.XF
 Powerful barcode scanning library for Xamarin Forms using GoogleVision API. 
 
-Works on iOS 10+ and Android (MonoAndroid10.0)
+Works on iOS 10+ and Android (MonoAndroid10.0 and MonoAndroid11.0)
 
 For Android, it use Xamarin.GooglePlayServices.Vision
 For iOS, it use GoogleMobileVision under MLKit library
@@ -9,7 +9,7 @@ For iOS, it use GoogleMobileVision under MLKit library
 Please feel free to improve my source code.
 
 ## Current Version
-4.8.0	for Xamarin Forms 4.8.0.1541+, Removed MonoAndroid 9 support, please make sure the target framework is Android 10
+4.8.1.1	for Xamarin Forms 4.8.0.1541+, Removed MonoAndroid 9 support, please make sure the target framework is Android 10 or 11
 
 4.7.0.2   for Xamarin Form 4.7.0.968+
 
