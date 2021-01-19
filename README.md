@@ -9,6 +9,8 @@ For iOS, it use GoogleMobileVision under MLKit library
 Please feel free to improve my source code.
 
 ## Current Version
+4.8.1.2 for Xamarin Forms 4.8.0.1687+
+
 4.8.1.1	for Xamarin Forms 4.8.0.1541+, Removed MonoAndroid 9 support, please make sure the target framework is Android 10 or 11
 
 4.7.0.2   for Xamarin Form 4.7.0.968+
@@ -78,7 +80,7 @@ https://console.firebase.google.com/
             // Temporary work around for bug on Firebase Library
 	    // https://github.com/xamarin/GoogleApisForiOSComponents/issues/368
 	    Firebase.Core.App.Configure();
-	    RemoteConfig.SharedInstance.ConfigSettings = new RemoteConfigSettings();
+	    _ = Firebase.RemoteConfig.RemoteConfig.SharedInstance;
             ....
             return base.FinishedLaunching(app, options);
 ```

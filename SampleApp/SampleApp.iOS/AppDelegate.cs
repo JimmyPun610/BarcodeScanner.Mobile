@@ -29,7 +29,7 @@ namespace SampleApp.iOS
             // Temperation work around for bug on Firebase Library
             // https://github.com/xamarin/GoogleApisForiOSComponents/issues/368
             Firebase.Core.App.Configure();
-            RemoteConfig.SharedInstance.ConfigSettings = new RemoteConfigSettings();
+            _ = Firebase.RemoteConfig.RemoteConfig.SharedInstance;
             return base.FinishedLaunching(app, options);
         }
     }
