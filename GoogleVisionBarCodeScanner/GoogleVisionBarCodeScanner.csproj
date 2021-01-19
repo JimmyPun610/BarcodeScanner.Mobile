@@ -13,7 +13,7 @@
 		<Product></Product>
 		<AssemblyVersion>1.0.0.0</AssemblyVersion>
 		<AssemblyFileVersion>1.0.0.0</AssemblyFileVersion>
-		<Version>4.8.1.2</Version>
+		<Version>4.8.2</Version>
 		<NeutralLanguage>en</NeutralLanguage>
 
 
@@ -132,6 +132,9 @@
 		<PackageReference Include="Xamarin.GooglePlayServices.Vision">
 			<Version>120.1.3</Version>
 		</PackageReference>
+        <PackageReference Include="Xamarin.AndroidX.Palette">
+            <Version>1.0.0.5</Version>
+        </PackageReference>
 	</ItemGroup>
 
 	<ItemGroup Condition=" $(TargetFramework.StartsWith('Xamarin.iOS')) ">

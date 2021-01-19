@@ -9,7 +9,7 @@ For iOS, it use GoogleMobileVision under MLKit library
 Please feel free to improve my source code.
 
 ## Current Version
-4.8.1.2 for Xamarin Forms 4.8.0.1687+
+4.8.2 for Xamarin Forms 4.8.0.1687+
 
 4.8.1.1	for Xamarin Forms 4.8.0.1541+, Removed MonoAndroid 9 support, please make sure the target framework is Android 10 or 11
 
