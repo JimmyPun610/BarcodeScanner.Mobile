@@ -135,7 +135,7 @@
     </PackageReference>
     <PackageReference Include="Xamarin.Essentials" Version="1.6.0" />
     <PackageReference Include="Xamarin.Forms">
-      <Version>4.8.0.1687</Version>
+      <Version>5.0.0.1905</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.Firebase.iOS.Core">
       <Version>6.10.4</Version>
