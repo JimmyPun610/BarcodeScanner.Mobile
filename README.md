@@ -9,6 +9,8 @@ For iOS, it use GoogleMobileVision under MLKit library
 Please feel free to improve my source code.
 
 ## Current Version
+5.0.0.0 for Xamarin Forms 5.0.0.1905
+
 4.8.2 for Xamarin Forms 4.8.0.1687+
 
 4.8.1.1	for Xamarin Forms 4.8.0.1541+, Removed MonoAndroid 9 support, please make sure the target framework is Android 10 or 11
@@ -16,10 +18,6 @@ Please feel free to improve my source code.
 4.7.0.2   for Xamarin Form 4.7.0.968+
 
 4.6.1   for Xamarin Form 4.6.0.772+, Please notice the assembly name is changed. (See sample xaml)
-
-4.5.0.3 for Xamarin Form 4.5.0.617+
-
-4.2.2.3 for Xamrain Form 4.2 to 4.4
 
 ## Release notes
 https://github.com/JimmyPun610/BarcodeScanner.XF/tree/master/ReleaseNotes
