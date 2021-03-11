@@ -72,23 +72,24 @@ namespace GoogleVisionBarCodeScanner
             var connection = previewLayer.Connection;
             if (connection != null)
             {
-                var curentDevice = UIDevice.CurrentDevice;
-                var orientation = curentDevice.Orientation;
+                var currentDevice = UIDevice.CurrentDevice;
+                UIInterfaceOrientation orientation = UIApplication.SharedApplication.Windows.FirstOrDefault()?.WindowScene?.InterfaceOrientation ?? UIInterfaceOrientation.Portrait;
+                
                 var previewLayerConnection = connection;
                 if (previewLayerConnection.SupportsVideoOrientation)
                 {
                     switch (orientation)
                     {
-                        case UIDeviceOrientation.Portrait:
+                        case UIInterfaceOrientation.Portrait:
                             updatePreviewLayer(previewLayerConnection, AVCaptureVideoOrientation.Portrait);
                             break;
-                        case UIDeviceOrientation.LandscapeRight:
+                        case UIInterfaceOrientation.LandscapeRight:
                             updatePreviewLayer(previewLayerConnection, AVCaptureVideoOrientation.LandscapeLeft);
                             break;
-                        case UIDeviceOrientation.LandscapeLeft:
+                        case UIInterfaceOrientation.LandscapeLeft:
                             updatePreviewLayer(previewLayerConnection, AVCaptureVideoOrientation.LandscapeRight);
                             break;
-                        case UIDeviceOrientation.PortraitUpsideDown:
+                        case UIInterfaceOrientation.PortraitUpsideDown:
                             updatePreviewLayer(previewLayerConnection, AVCaptureVideoOrientation.PortraitUpsideDown);
                             break;
                         default:
