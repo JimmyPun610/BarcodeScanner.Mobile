@@ -76,6 +76,10 @@ namespace GoogleVisionBarCodeScanner
     
     public class OnDetectedEventArg : EventArgs
     {
-        public List<BarcodeResult> BarcodeResults = new List<BarcodeResult>();
+        public List<BarcodeResult> BarcodeResults { get; set; }
+        public OnDetectedEventArg()
+        {
+            BarcodeResults = new List<BarcodeResult>();
+        }
     }
 }

@@ -109,7 +109,7 @@
       <Name>SampleApp</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\GoogleVisionBarCodeScanner\GoogleVisionBarCodeScanner.csproj">
-      <Project>{5C90F9EA-7557-41AF-809E-7E781CBB0EAB}</Project>
+      <Project>{8CDA11D6-38F2-485E-9ACF-61133CCEEC7B}</Project>
       <Name>GoogleVisionBarCodeScanner</Name>
     </ProjectReference>
   </ItemGroup>
