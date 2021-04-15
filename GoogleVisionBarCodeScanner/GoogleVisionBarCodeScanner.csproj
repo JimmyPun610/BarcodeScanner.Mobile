@@ -13,7 +13,7 @@
 		<Product></Product>
 		<AssemblyVersion>1.0.0.0</AssemblyVersion>
 		<AssemblyFileVersion>1.0.0.0</AssemblyFileVersion>
-		<Version>5.0.2</Version>
+		<Version>5.0.3</Version>
 		<NeutralLanguage>en</NeutralLanguage>
 
 
@@ -36,7 +36,7 @@
 		<PackageLicenseUrl>https://github.com/JimmyPun610/BarcodeScanner.XF</PackageLicenseUrl>
 		<RepositoryType></RepositoryType>
 		<PackageTags>Xamarin.Forms Barcode Scanning Tools</PackageTags>
-		<PackageReleaseNotes>1. Fixing Git issue 54, PRSIM support</PackageReleaseNotes>
+		<PackageReleaseNotes>1. Tackle Git issue 55, 57. Change scan interval to 500 as default and configurable now (iOS)</PackageReleaseNotes>
 		<Copyright>Copyright 2021</Copyright>
 
 	</PropertyGroup>

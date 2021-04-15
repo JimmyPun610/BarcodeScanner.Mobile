@@ -64,6 +64,23 @@ namespace GoogleVisionBarCodeScanner
         }
 
 
+        public static BindableProperty ScanIntervalProperty = BindableProperty.Create(nameof(ScanInterval), typeof(int), typeof(CameraView), 500);
+        /// <summary>
+        /// Only iOS will be reflected this setting, Default is 500ms, minimum value is 100ms
+        /// </summary>
+        public int ScanInterval
+        {
+            get
+            {
+                return (int)GetValue(ScanIntervalProperty);
+            }
+            set
+            {
+                SetValue(ScanIntervalProperty, value);
+            }
+        }
+
+
         public event EventHandler<OnDetectedEventArg> OnDetected;
         public void TriggerOnDetected(List<BarcodeResult> barCodeResults)
         {

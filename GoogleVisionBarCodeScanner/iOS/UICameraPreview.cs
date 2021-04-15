@@ -25,7 +25,6 @@ namespace GoogleVisionBarCodeScanner
         //CameraOptions cameraOptions;
         public AVCaptureSession CaptureSession { get; private set; }
         AVCaptureVideoDataOutput VideoDataOutput { get; set; }
-
         //public UICameraPreview(CameraOptions options)
         //{
         //    cameraOptions = options;
@@ -33,10 +32,10 @@ namespace GoogleVisionBarCodeScanner
         //    Initialize();
         //}
 
-        public UICameraPreview(bool defaultTorchOn, bool vibrationOnDetected, bool startScanningOnCreate)
+        public UICameraPreview(bool defaultTorchOn, bool vibrationOnDetected, bool startScanningOnCreate, int scanInterval)
         {
             //cameraOptions = options;
-            Initialize(defaultTorchOn, vibrationOnDetected, startScanningOnCreate);
+            Initialize(defaultTorchOn, vibrationOnDetected, startScanningOnCreate, scanInterval);
         }
         public override void RemoveFromSuperview()
         {
@@ -73,33 +72,65 @@ namespace GoogleVisionBarCodeScanner
             if (connection != null)
             {
                 var currentDevice = UIDevice.CurrentDevice;
-                UIInterfaceOrientation orientation = UIApplication.SharedApplication.Windows.FirstOrDefault()?.WindowScene?.InterfaceOrientation ?? UIInterfaceOrientation.Portrait;
-                
-                var previewLayerConnection = connection;
-                if (previewLayerConnection.SupportsVideoOrientation)
+                if(currentDevice.CheckSystemVersion(13, 0))
                 {
-                    switch (orientation)
+                    UIInterfaceOrientation orientation = UIApplication.SharedApplication.Windows.FirstOrDefault()?.WindowScene?.InterfaceOrientation ?? UIInterfaceOrientation.Portrait;
+
+                    var previewLayerConnection = connection;
+                    if (previewLayerConnection.SupportsVideoOrientation)
                     {
-                        case UIInterfaceOrientation.Portrait:
-                            updatePreviewLayer(previewLayerConnection, AVCaptureVideoOrientation.Portrait);
-                            break;
-                        case UIInterfaceOrientation.LandscapeRight:
-                            updatePreviewLayer(previewLayerConnection, AVCaptureVideoOrientation.LandscapeLeft);
-                            break;
-                        case UIInterfaceOrientation.LandscapeLeft:
-                            updatePreviewLayer(previewLayerConnection, AVCaptureVideoOrientation.LandscapeRight);
-                            break;
-                        case UIInterfaceOrientation.PortraitUpsideDown:
-                            updatePreviewLayer(previewLayerConnection, AVCaptureVideoOrientation.PortraitUpsideDown);
-                            break;
-                        default:
-                            updatePreviewLayer(previewLayerConnection, AVCaptureVideoOrientation.Portrait);
-                            break;
+                        switch (orientation)
+                        {
+                            case UIInterfaceOrientation.Portrait:
+                                updatePreviewLayer(previewLayerConnection, AVCaptureVideoOrientation.Portrait);
+                                break;
+                            case UIInterfaceOrientation.LandscapeRight:
+                                updatePreviewLayer(previewLayerConnection, AVCaptureVideoOrientation.LandscapeLeft);
+                                break;
+                            case UIInterfaceOrientation.LandscapeLeft:
+                                updatePreviewLayer(previewLayerConnection, AVCaptureVideoOrientation.LandscapeRight);
+                                break;
+                            case UIInterfaceOrientation.PortraitUpsideDown:
+                                updatePreviewLayer(previewLayerConnection, AVCaptureVideoOrientation.PortraitUpsideDown);
+                                break;
+                            default:
+                                updatePreviewLayer(previewLayerConnection, AVCaptureVideoOrientation.Portrait);
+                                break;
+                        }
                     }
                 }
+                else
+                {
+                    // Apporach on iOS 12 or below, but this will have wrong value, please read issue #55 for more information
+                    // https://github.com/JimmyPun610/BarcodeScanner.XF/issues/55
+                    var orientation = currentDevice.Orientation;
+                    var previewLayerConnection = connection;
+                    if (previewLayerConnection.SupportsVideoOrientation)
+                    {
+                        switch (orientation)
+                        {
+                            case UIDeviceOrientation.Portrait:
+                                updatePreviewLayer(previewLayerConnection, AVCaptureVideoOrientation.Portrait);
+                                break;
+                            case UIDeviceOrientation.LandscapeRight:
+                                updatePreviewLayer(previewLayerConnection, AVCaptureVideoOrientation.LandscapeLeft);
+                                break;
+                            case UIDeviceOrientation.LandscapeLeft:
+                                updatePreviewLayer(previewLayerConnection, AVCaptureVideoOrientation.LandscapeRight);
+                                break;
+                            case UIDeviceOrientation.PortraitUpsideDown:
+                                updatePreviewLayer(previewLayerConnection, AVCaptureVideoOrientation.PortraitUpsideDown);
+                                break;
+                            default:
+                                updatePreviewLayer(previewLayerConnection, AVCaptureVideoOrientation.Portrait);
+                                break;
+                        }
+                    }
+                }
+                
             }
         }
-        void Initialize(bool defaultTorchOn, bool vibrationOnDetected, bool startScanningOnCreate)
+        void Initialize(bool defaultTorchOn, bool vibrationOnDetected, bool startScanningOnCreate, int scanInterval)
         {
             Configuration.IsScanning = startScanningOnCreate;
             CaptureSession = new AVCaptureSession();
@@ -138,7 +169,7 @@ namespace GoogleVisionBarCodeScanner
             };
 
 
-            captureVideoDelegate = new CaptureVideoDelegate(vibrationOnDetected);
+            captureVideoDelegate = new CaptureVideoDelegate(vibrationOnDetected, scanInterval);
             captureVideoDelegate.OnDetected += (list) =>
             {
                 InvokeOnMainThread(() => {
@@ -168,14 +199,17 @@ namespace GoogleVisionBarCodeScanner
             VisionImageMetadata metadata;
             VisionApi vision;
             bool _vibrationOnDetected = true;
-            int scanIntervalInMs = 1000;
+            int scanIntervalInMs = 500;
             long lastAnalysisTime = DateTimeOffset.MinValue.ToUnixTimeMilliseconds();
             long lastRunTime = DateTimeOffset.MinValue.ToUnixTimeMilliseconds();
-            public CaptureVideoDelegate(bool vibrationOnDetected)
+            public CaptureVideoDelegate(bool vibrationOnDetected, int scanInterval)
             {
                 _vibrationOnDetected = vibrationOnDetected;
                 metadata = new VisionImageMetadata();
                 vision = VisionApi.Create();
+                if (scanInterval < 100)
+                    scanIntervalInMs = 500;
+                else scanIntervalInMs = scanInterval;
                 barcodeDetector = vision.GetBarcodeDetector(Configuration.BarcodeDetectorSupportFormat);
                 // Using back-facing camera
                 var devicePosition = AVCaptureDevicePosition.Back;
