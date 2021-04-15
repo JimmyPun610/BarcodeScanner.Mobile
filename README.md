@@ -112,9 +112,10 @@ GoogleVisionBarCodeScanner.Methods.SetSupportBarcodeFormat(BarcodeFormats.QRCode
 		 DefaultTorchOn: Indicate the torch will on or not when the view appear, default is False
 		 AutoStartScanning : Indicate whether the device will start scanning after it is opened, default is True
 		 RequestedFPS: Affect Android only, leave it if you want a default value (https://developers.google.com/android/reference/com/google/android/gms/vision/CameraSource.Builder.html#public-camerasource.builder-setrequestedfps-float-fps)
+		 ScanInterval: Scan interval for iOS, default is 500ms and the minimum is 100ms, please be reminded that double scanning may be occurred if it is too small
 		 -->
              <gv:CameraView HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" OnDetected="CameraView_OnDetected" Grid.Row="1"
-                            DefaultTorchOn="True" VibrationOnDetected="False" AutoStartScanning="True" RequestedFPS="30"/>
+                            DefaultTorchOn="True" VibrationOnDetected="False" AutoStartScanning="True" RequestedFPS="30" ScanInterval="500"/>
      </ScrollView>
    </ContentPage.Content>
 </ContentPage>
