@@ -47,8 +47,8 @@ namespace GoogleVisionBarCodeScanner
         }
         internal static VisionBarcodeFormat ConvertBarcodeFormats(BarcodeFormats barcodeFormats)
         {
-            VisionBarcodeFormat visionBarcodeFormat = VisionBarcodeFormat.All;
-
+            VisionBarcodeFormat visionBarcodeFormat = VisionBarcodeFormat.UnKnown;
+            
             if (barcodeFormats.HasFlag(BarcodeFormats.CodaBar))
                 visionBarcodeFormat |= VisionBarcodeFormat.CodaBar;
             if (barcodeFormats.HasFlag(BarcodeFormats.Code128))
@@ -77,6 +77,10 @@ namespace GoogleVisionBarCodeScanner
                 visionBarcodeFormat |= VisionBarcodeFormat.Aztec;
             if (barcodeFormats.HasFlag(BarcodeFormats.All))
                 visionBarcodeFormat |= VisionBarcodeFormat.All;
+
+            if (visionBarcodeFormat == VisionBarcodeFormat.UnKnown)
+                visionBarcodeFormat = VisionBarcodeFormat.All;
+
             return visionBarcodeFormat;
         }
 
