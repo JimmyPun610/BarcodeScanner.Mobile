@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Firebase.RemoteConfig;
+//using Firebase.RemoteConfig;
 using Foundation;
 using UIKit;
 using Xamarin.Forms;
@@ -26,10 +26,7 @@ namespace SampleApp.iOS
             global::Xamarin.Forms.Forms.Init();
             LoadApplication(new App());
             GoogleVisionBarCodeScanner.iOS.Initializer.Init();
-            // Temperation work around for bug on Firebase Library
-            // https://github.com/xamarin/GoogleApisForiOSComponents/issues/368
             Firebase.Core.App.Configure();
-            _ = Firebase.RemoteConfig.RemoteConfig.SharedInstance;
             return base.FinishedLaunching(app, options);
         }
     }

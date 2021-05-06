@@ -14,6 +14,7 @@
     <PackageReference Include="Xam.Plugin.Media" Version="5.0.1" />
     <PackageReference Include="Xamarin.Essentials" Version="1.6.0" />
     <PackageReference Include="Xamarin.Forms" Version="5.0.0.1905" />
+    <PackageReference Include="BarcodeScanner.XF" Version="5.0.5" />
   </ItemGroup>
 
   <ItemGroup>
@@ -26,8 +27,5 @@
     <None Update="Page1.xaml">
       <Generator>MSBuild:Compile</Generator>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\GoogleVisionBarCodeScanner\GoogleVisionBarCodeScanner.csproj" />
   </ItemGroup>
 </Project>

@@ -13,7 +13,7 @@
 		<Product></Product>
 		<AssemblyVersion>1.0.0.0</AssemblyVersion>
 		<AssemblyFileVersion>1.0.0.0</AssemblyFileVersion>
-		<Version>5.0.4</Version>
+		<Version>5.0.5</Version>
 		<NeutralLanguage>en</NeutralLanguage>
 
 
@@ -122,10 +122,10 @@
 		</PackageReference>
 		<PackageReference Include="Xamarin.Firebase.iOS.Core" Version="6.10.4">
 		</PackageReference>
-		<PackageReference Include="Xamarin.Firebase.iOS.MLKit" Version="0.21.0">
+		<PackageReference Include="Xamarin.Firebase.iOS.MLKit.Vision" Version="0.21.0">
 		</PackageReference>
-		<PackageReference Include="Xamarin.Firebase.iOS.MLKit.Common" Version="0.21.0">
-		</PackageReference>
+	<!--	<PackageReference Include="Xamarin.Firebase.iOS.MLKit.Common" Version="0.21.0">
+		</PackageReference>-->
 	</ItemGroup>
 	
    
