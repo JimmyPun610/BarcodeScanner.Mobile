@@ -180,10 +180,12 @@ namespace GoogleVisionBarCodeScanner
                             if (barcode == null) continue;
                             var type = Methods.ConvertBarcodeResultTypes(barcode.ValueFormat);
                             var value = barcode.DisplayValue;
+                            var rawValue = barcode.RawValue;
                             barcodeResults.Add(new BarcodeResult
                             {
                                 BarcodeType = type,
-                                DisplayValue = value
+                                DisplayValue = value,
+                                RawValue = rawValue
                             });
                         }
                         OnDetected?.Invoke(barcodeResults);
