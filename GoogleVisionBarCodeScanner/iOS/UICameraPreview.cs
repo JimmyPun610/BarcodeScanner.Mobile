@@ -84,10 +84,10 @@ namespace GoogleVisionBarCodeScanner
                             case UIInterfaceOrientation.Portrait:
                                 updatePreviewLayer(previewLayerConnection, AVCaptureVideoOrientation.Portrait);
                                 break;
-                            case UIInterfaceOrientation.LandscapeRight:
+                            case UIInterfaceOrientation.LandscapeLeft:
                                 updatePreviewLayer(previewLayerConnection, AVCaptureVideoOrientation.LandscapeLeft);
                                 break;
-                            case UIInterfaceOrientation.LandscapeLeft:
+                            case UIInterfaceOrientation.LandscapeRight:
                                 updatePreviewLayer(previewLayerConnection, AVCaptureVideoOrientation.LandscapeRight);
                                 break;
                             case UIInterfaceOrientation.PortraitUpsideDown:
@@ -112,10 +112,10 @@ namespace GoogleVisionBarCodeScanner
                             case UIDeviceOrientation.Portrait:
                                 updatePreviewLayer(previewLayerConnection, AVCaptureVideoOrientation.Portrait);
                                 break;
-                            case UIDeviceOrientation.LandscapeRight:
+                            case UIDeviceOrientation.LandscapeLeft:
                                 updatePreviewLayer(previewLayerConnection, AVCaptureVideoOrientation.LandscapeLeft);
                                 break;
-                            case UIDeviceOrientation.LandscapeLeft:
+                            case UIDeviceOrientation.LandscapeRight:
                                 updatePreviewLayer(previewLayerConnection, AVCaptureVideoOrientation.LandscapeRight);
                                 break;
                             case UIDeviceOrientation.PortraitUpsideDown:

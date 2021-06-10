@@ -13,7 +13,7 @@
 		<Product></Product>
 		<AssemblyVersion>1.0.0.0</AssemblyVersion>
 		<AssemblyFileVersion>1.0.0.0</AssemblyFileVersion>
-		<Version>5.0.5</Version>
+		<Version>5.0.6</Version>
 		<NeutralLanguage>en</NeutralLanguage>
 
 
@@ -36,7 +36,7 @@
 		<PackageLicenseUrl>https://github.com/JimmyPun610/BarcodeScanner.XF</PackageLicenseUrl>
 		<RepositoryType></RepositoryType>
 		<PackageTags>Xamarin.Forms Barcode Scanning Tools</PackageTags>
-		<PackageReleaseNotes>1. Tackle Git issue 59</PackageReleaseNotes>
+		<PackageReleaseNotes>1. Tackle Git issue 66 2. merge pull request - Add RawValue property</PackageReleaseNotes>
 		<Copyright>Copyright 2021</Copyright>
 
 	</PropertyGroup>
