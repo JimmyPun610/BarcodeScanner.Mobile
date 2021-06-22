@@ -12,9 +12,9 @@
 
   <ItemGroup>
     <PackageReference Include="Xam.Plugin.Media" Version="5.0.1" />
-    <PackageReference Include="Xamarin.Essentials" Version="1.6.0" />
-    <PackageReference Include="Xamarin.Forms" Version="5.0.0.1905" />
-    <PackageReference Include="BarcodeScanner.XF" Version="5.0.5" />
+    <PackageReference Include="Xamarin.Essentials" Version="1.6.1" />
+    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2012" />
+    <PackageReference Include="BarcodeScanner.XF" Version="5.0.8" />
   </ItemGroup>
 
   <ItemGroup>
