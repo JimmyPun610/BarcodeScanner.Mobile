@@ -12,7 +12,9 @@ https://docs.microsoft.com/en-us/xamarin/xamarin-forms/deploy-test/hot-restart</
 Please feel free to improve my source code.
 
 ## Current Version
-5.0.0.0 for Xamarin Forms 5.0.0.1905
+5.0.0.8 for Xamarin Forms 5.0.0.2012
+
+5.0.0.6 for Xamarin Forms 5.0.0.1905
 
 4.8.2 for Xamarin Forms 4.8.0.1687+
 
