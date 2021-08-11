@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using Android.Content;
 using Android.Gms.Extensions;
+using Android.Hardware.Camera2;
+using AndroidX.Camera.Camera2.InterOp;
 using AndroidX.Camera.Core;
 using AndroidX.Camera.Lifecycle;
 using AndroidX.Camera.View;
@@ -74,7 +76,14 @@ namespace GoogleVisionBarCodeScanner.Renderer
             preview.SetSurfaceProvider(Control.SurfaceProvider);
 
             // Frame by frame analyze
-            var imageAnalyzer = new ImageAnalysis.Builder().Build();
+            var imageAnalyzerBuilder = new ImageAnalysis.Builder();
+            if (Element.RequestedFPS.HasValue)
+            {
+                Camera2Interop.Extender ext = new Camera2Interop.Extender(imageAnalyzerBuilder);
+                ext.SetCaptureRequestOption(CaptureRequest.ControlAeMode, 0);
+                ext.SetCaptureRequestOption(CaptureRequest.ControlAeTargetFpsRange, new Android.Util.Range((int)Element.RequestedFPS.Value, (int)Element.RequestedFPS.Value));
+            }
+            var imageAnalyzer = imageAnalyzerBuilder.Build();
             imageAnalyzer.SetAnalyzer(_cameraExecutor, new BarcodeAnalyzer(Detected));
 
             // Select back camera as a default, or front camera otherwise
