@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace GoogleVisionBarCodeScanner
@@ -10,41 +10,23 @@ namespace GoogleVisionBarCodeScanner
         public static BindableProperty VibrationOnDetectedProperty = BindableProperty.Create(nameof(VibrationOnDetected), typeof(bool), typeof(CameraView), true);
         public bool VibrationOnDetected
         {
-            get
-            {
-                return (bool)GetValue(VibrationOnDetectedProperty);
-            }
-            set
-            {
-                SetValue(VibrationOnDetectedProperty, value);
-            }
+            get => (bool)GetValue(VibrationOnDetectedProperty);
+            set => SetValue(VibrationOnDetectedProperty, value);
         }
 
 
         public static BindableProperty DefaultTorchOnProperty = BindableProperty.Create(nameof(DefaultTorchOn), typeof(bool), typeof(CameraView), false);
         public bool DefaultTorchOn
         {
-            get
-            {
-                return (bool)GetValue(DefaultTorchOnProperty);
-            }
-            set
-            {
-                SetValue(DefaultTorchOnProperty, value);
-            }
+            get => (bool)GetValue(DefaultTorchOnProperty);
+            set => SetValue(DefaultTorchOnProperty, value);
         }
 
         public static BindableProperty AutoStartScanningProperty = BindableProperty.Create(nameof(AutoStartScanning), typeof(bool), typeof(CameraView), true);
         public bool AutoStartScanning
         {
-            get
-            {
-                return (bool)GetValue(AutoStartScanningProperty);
-            }
-            set
-            {
-                SetValue(AutoStartScanningProperty, value);
-            }
+            get => (bool)GetValue(AutoStartScanningProperty);
+            set => SetValue(AutoStartScanningProperty, value);
         }
 
         public static BindableProperty RequestedFPSProperty = BindableProperty.Create(nameof(RequestedFPS), typeof(float?), typeof(CameraView), null);
@@ -53,14 +35,8 @@ namespace GoogleVisionBarCodeScanner
         /// </summary>
         public float? RequestedFPS
         {
-            get
-            {
-                return (float?)GetValue(RequestedFPSProperty);
-            }
-            set
-            {
-                SetValue(RequestedFPSProperty, value);
-            }
+            get => (float?)GetValue(RequestedFPSProperty);
+            set => SetValue(RequestedFPSProperty, value);
         }
 
 
@@ -70,21 +46,15 @@ namespace GoogleVisionBarCodeScanner
         /// </summary>
         public int ScanInterval
         {
-            get
-            {
-                return (int)GetValue(ScanIntervalProperty);
-            }
-            set
-            {
-                SetValue(ScanIntervalProperty, value);
-            }
+            get => (int)GetValue(ScanIntervalProperty);
+            set => SetValue(ScanIntervalProperty, value);
         }
 
 
         public event EventHandler<OnDetectedEventArg> OnDetected;
         public void TriggerOnDetected(List<BarcodeResult> barCodeResults)
         {
-            Device.BeginInvokeOnMainThread(() =>
+            MainThread.BeginInvokeOnMainThread(() =>
             {
                 OnDetected?.Invoke(this, new OnDetectedEventArg { BarcodeResults = barCodeResults });
             });

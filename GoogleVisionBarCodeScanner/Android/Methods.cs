@@ -1,101 +1,86 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Android.Gms.Vision;
-using Android.Gms.Vision.Barcodes;
+using Android.Gms.Extensions;
 using Android.Graphics;
 using Android.Runtime;
-using Android.Util;
+using AndroidX.Camera.Core;
+using Java.Util;
 using Xamarin.Essentials;
+using Xamarin.Google.MLKit.Vision.BarCode;
+using Xamarin.Google.MLKit.Vision.Common;
 
 namespace GoogleVisionBarCodeScanner
 {
     public class Methods
     {
-        internal static Android.Hardware.Camera GetCamera(CameraSource cameraSource)
-        {
-            var javaHero = cameraSource.JavaCast<Java.Lang.Object>();
-            var fields = javaHero.Class.GetDeclaredFields();
-            foreach (var field in fields)
-            {
-                if (field.Type.CanonicalName.Equals("android.hardware.camera", StringComparison.OrdinalIgnoreCase))
-                {
-                    field.Accessible = true;
-                    var camera = field.Get(javaHero);
-                    var cCamera = (Android.Hardware.Camera)camera;
-                    return cCamera;
-                }
-            }
 
-            return null;
-        }
-
-        internal static BarcodeTypes ConvertBarcodeResultTypes(BarcodeValueFormat barcodeValueType)
+        internal static BarcodeTypes ConvertBarcodeResultTypes(int barcodeValueType)
         {
             switch (barcodeValueType)
             {
-                case BarcodeValueFormat.CalendarEvent:
+                case Barcode.TypeCalendarEvent:
                     return BarcodeTypes.CalendarEvent;
-                case BarcodeValueFormat.ContactInfo:
+                case Barcode.TypeContactInfo:
                     return BarcodeTypes.ContactInfo;
-                case BarcodeValueFormat.DriverLicense:
+                case Barcode.TypeDriverLicense:
                     return BarcodeTypes.DriversLicense;
-                case BarcodeValueFormat.Email:
+                case Barcode.TypeEmail:
                     return BarcodeTypes.Email;
-                case BarcodeValueFormat.Geo:
+                case Barcode.TypeGeo:
                     return BarcodeTypes.GeographicCoordinates;
-                case BarcodeValueFormat.Isbn:
+                case Barcode.TypeIsbn:
                     return BarcodeTypes.Isbn;
-                case BarcodeValueFormat.Phone:
+                case Barcode.TypePhone:
                     return BarcodeTypes.Phone;
-                case BarcodeValueFormat.Product:
+                case Barcode.TypeProduct:
                     return BarcodeTypes.Product;
-                case BarcodeValueFormat.Sms:
+                case Barcode.TypeSms:
                     return BarcodeTypes.Sms;
-                case BarcodeValueFormat.Text:
+                case Barcode.TypeText:
                     return BarcodeTypes.Text;
-                case BarcodeValueFormat.Url:
+                case Barcode.TypeUrl:
                     return BarcodeTypes.Url;
-                case BarcodeValueFormat.Wifi:
+                case Barcode.TypeWifi:
                     return BarcodeTypes.WiFi;
                 default: return BarcodeTypes.Unknown;
             }
         }
 
-        internal static Android.Gms.Vision.Barcodes.BarcodeFormat ConvertBarcodeFormats(BarcodeFormats barcodeFormats)
+        internal static int ConvertBarcodeFormats(BarcodeFormats barcodeFormats)
         {
-            Android.Gms.Vision.Barcodes.BarcodeFormat formats = BarcodeFormat.AllFormats;
+            var formats = Barcode.FormatAllFormats;
 
             if (barcodeFormats.HasFlag(BarcodeFormats.CodaBar))
-                formats |= BarcodeFormat.Codabar;
+                formats |= Barcode.FormatCodabar;
             if (barcodeFormats.HasFlag(BarcodeFormats.Code128))
-                formats |= BarcodeFormat.Code128;
+                formats |= Barcode.FormatCode128;
             if (barcodeFormats.HasFlag(BarcodeFormats.Code93))
-                formats |= BarcodeFormat.Code93;
+                formats |= Barcode.FormatCode93;
             if (barcodeFormats.HasFlag(BarcodeFormats.Code39))
-                formats |= BarcodeFormat.Code39;
+                formats |= Barcode.FormatCode39;
             if (barcodeFormats.HasFlag(BarcodeFormats.CodaBar))
-                formats |= BarcodeFormat.Codabar;
+                formats |= Barcode.FormatCodabar;
             if (barcodeFormats.HasFlag(BarcodeFormats.DataMatrix))
-                formats |= BarcodeFormat.DataMatrix;
+                formats |= Barcode.FormatDataMatrix;
             if (barcodeFormats.HasFlag(BarcodeFormats.Ean13))
-                formats |= BarcodeFormat.Ean13;
+                formats |= Barcode.FormatEan13;
             if (barcodeFormats.HasFlag(BarcodeFormats.Ean8))
-                formats |= BarcodeFormat.Ean8;
+                formats |= Barcode.FormatEan8;
             if (barcodeFormats.HasFlag(BarcodeFormats.Itf))
-                formats |= BarcodeFormat.Itf;
+                formats |= Barcode.FormatItf;
             if (barcodeFormats.HasFlag(BarcodeFormats.Pdf417))
-                formats |= BarcodeFormat.Pdf417;
+                formats |= Barcode.FormatPdf417;
             if (barcodeFormats.HasFlag(BarcodeFormats.QRCode))
-                formats |= BarcodeFormat.QrCode;
+                formats |= Barcode.FormatQrCode;
             if (barcodeFormats.HasFlag(BarcodeFormats.Upca))
-                formats |= BarcodeFormat.UpcA;
+                formats |= Barcode.FormatUpcA;
             if (barcodeFormats.HasFlag(BarcodeFormats.Upce))
-                formats |= BarcodeFormat.UpcE;
+                formats |= Barcode.FormatUpcE;
             if (barcodeFormats.HasFlag(BarcodeFormats.Aztec))
-                formats |= BarcodeFormat.Aztec;
+                formats |= Barcode.FormatAztec;
             if (barcodeFormats.HasFlag(BarcodeFormats.All))
-                formats |= BarcodeFormat.AllFormats;
+                formats |= Barcode.FormatAllFormats;
             return formats;
         }
         #region Public Methods
@@ -109,44 +94,26 @@ namespace GoogleVisionBarCodeScanner
             Configuration.IsScanning = true;
         }
 
-
         public static bool IsTorchOn()
         {
-            var _myCamera = Methods.GetCamera(Configuration.CameraSource);
-            bool torchOn = false;
-            if (_myCamera != null)
-            {
-                string flashModeStatus = _myCamera.GetParameters().FlashMode;
-                torchOn = flashModeStatus == Android.Hardware.Camera.Parameters.FlashModeTorch;
-            }
-            return torchOn;
+            var camera = Configuration.Camera;
+            if (camera == null || !camera.CameraInfo.HasFlashUnit)
+                return false;
+            return (int)camera.CameraInfo.TorchState?.Value == TorchState.On;
         }
         public static void ToggleFlashlight()
         {
-            try
-            {
-                var _myCamera = Methods.GetCamera(Configuration.CameraSource);
-                if (_myCamera != null)
-                {
-                    var prams = _myCamera.GetParameters();
-                    //prams.focus.setFocusMode(Camera.Parameters.FOCUS_MODE_CONTINUOUS_PICTURE);
-                    if (!IsTorchOn())
-                        prams.FlashMode = Android.Hardware.Camera.Parameters.FlashModeTorch;
-                    else prams.FlashMode = Android.Hardware.Camera.Parameters.FlashModeOff;
-                    _myCamera.SetParameters(prams);
-                }
-                else Console.WriteLine($"Do not find camera");
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Error on switch on/off flashlight");
-            }
+            var camera = Configuration.Camera;
+            if (camera == null || !camera.CameraInfo.HasFlashUnit)
+                return;
 
+            camera.CameraControl.EnableTorch(!IsTorchOn());
         }
+
 
         public static void SetSupportBarcodeFormat(BarcodeFormats barcodeFormats)
         {
-            Android.Gms.Vision.Barcodes.BarcodeFormat supportFormats = Methods.ConvertBarcodeFormats(barcodeFormats);
+            int supportFormats = Methods.ConvertBarcodeFormats(barcodeFormats);
             Configuration.BarcodeFormats = supportFormats;
         }
 
@@ -172,29 +139,35 @@ namespace GoogleVisionBarCodeScanner
 
         public static async Task<List<BarcodeResult>> ScanFromImage(byte[] imageArray)
         {
-            BarcodeDetector detector = new BarcodeDetector.Builder(Android.App.Application.Context)
-                                        .SetBarcodeFormats(Configuration.BarcodeFormats)
-                                        .Build();
-            Bitmap bitmap = BitmapFactory.DecodeByteArray(imageArray, 0, imageArray.Length);
-            Android.Gms.Vision.Frame frame = new Android.Gms.Vision.Frame.Builder().SetBitmap(bitmap).Build();
-            SparseArray qrcodes = detector.Detect(frame);
-            List<BarcodeResult> barcodeResults = new List<BarcodeResult>();
-            for (int i = 0; i < qrcodes.Size(); i++)
-            {
-                Barcode barcode = qrcodes.ValueAt(i) as Barcode;
-                var type = Methods.ConvertBarcodeResultTypes(barcode.ValueFormat);
-                var value = barcode.DisplayValue;
-                var rawValue = barcode.RawValue;
-                barcodeResults.Add(new BarcodeResult
-                {
-                    BarcodeType = type,
-                    DisplayValue = value,
-                    RawValue = rawValue
-                });
-            }
-            return barcodeResults;
+            Bitmap bitmap = await BitmapFactory.DecodeByteArrayAsync(imageArray, 0, imageArray.Length);
+            var image = InputImage.FromBitmap(bitmap, 0);
+            var scanner = BarcodeScanning.GetClient(new BarcodeScannerOptions.Builder().SetBarcodeFormats(
+                    Barcode.FormatQrCode)
+                .Build());
+            return Process(await scanner.Process(image));
         }
 
+        internal static List<BarcodeResult> Process(Java.Lang.Object result)
+        {
+            if (result == null)
+                return null;
+            var javaList = result.JavaCast<ArrayList>();
+            if (javaList.IsEmpty)
+                return null;
+            List<BarcodeResult> resultList = new List<BarcodeResult>();
+            foreach (var barcode in javaList.ToArray())
+            {
+                var mapped = barcode.JavaCast<Barcode>();
+                resultList.Add(new BarcodeResult()
+                {
+                    BarcodeType = ConvertBarcodeResultTypes(mapped.ValueType),
+                    DisplayValue = mapped.DisplayValue,
+                    RawValue = mapped.RawValue
+                });
+            }
+
+            return resultList;
+        }
         #endregion
     }
 }
