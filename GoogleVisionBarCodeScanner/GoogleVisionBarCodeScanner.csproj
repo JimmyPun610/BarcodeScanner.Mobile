@@ -43,7 +43,7 @@
 
 	<!-- Define what happens on build and release -->
 	<PropertyGroup Condition=" '$(Configuration)'=='Debug' ">
-		<DebugType>pdbonly</DebugType>
+		<DebugType>portable</DebugType>
 		<DebugSymbols>true</DebugSymbols>
 		<GenerateDocumentationFile>false</GenerateDocumentationFile>
 	</PropertyGroup>
