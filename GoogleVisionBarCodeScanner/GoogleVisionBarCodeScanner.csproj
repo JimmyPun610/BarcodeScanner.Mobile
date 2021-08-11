@@ -11,9 +11,9 @@
 		<RootNamespace>GoogleVisionBarCodeScanner</RootNamespace>
 
 		<Product></Product>
-		<AssemblyVersion>1.0.0.0</AssemblyVersion>
-		<AssemblyFileVersion>1.0.0.0</AssemblyFileVersion>
-		<Version>5.0.8</Version>
+		<AssemblyVersion>6.0.0.0</AssemblyVersion>
+		<AssemblyFileVersion>6.0.0.0</AssemblyFileVersion>
+		<Version>6.0.0-pre</Version>
 		<NeutralLanguage>en</NeutralLanguage>
 
 
@@ -28,7 +28,7 @@
 		<!--Version of C# to use -->
 		<LangVersion>default</LangVersion>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-		<Authors>Jimmy Pun</Authors>
+		<Authors>Jimmy Pun, Anton Yaroshenko</Authors>
 		<Description>Powerful Xamarin Forms barcode scanning library using GoogleVision API for Android and iOS.</Description>
 		<PackageIconUrl>https://banner2.kisspng.com/20180713/olo/kisspng-nuget-net-framework-package-manager-software-repo-nuget-5b487dc3ba81a7.452233091531477443764.jpg</PackageIconUrl>
 		<RepositoryUrl>https://github.com/JimmyPun610/BarcodeScanner.XF</RepositoryUrl>
@@ -36,7 +36,7 @@
 		<PackageLicenseUrl>https://github.com/JimmyPun610/BarcodeScanner.XF</PackageLicenseUrl>
 		<RepositoryType></RepositoryType>
 		<PackageTags>Xamarin.Forms Barcode Scanning Tools</PackageTags>
-		<PackageReleaseNotes>1. Update to Xamarin Form 5.0.0.2012</PackageReleaseNotes>
+		<PackageReleaseNotes>Migrate to ML Vision and CameraX on Android</PackageReleaseNotes>
 		<Copyright>Copyright 2021</Copyright>
 
 	</PropertyGroup>
@@ -49,7 +49,7 @@
 	</PropertyGroup>
 
 	<PropertyGroup Condition=" '$(Configuration)'=='Release' ">
-		<DebugType>pdbonly</DebugType>
+		<DebugType>portable</DebugType>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 
 		 <!--If we want a nuget package add this-->
@@ -68,9 +68,7 @@
 	</ItemGroup>
 	<ItemGroup Condition=" $(TargetFramework.StartsWith('netstandard')) ">
 		<Compile Include="NetStandard\*.cs" />
-		<PackageReference Include="NETStandard.Library" Version="2.0.3" />
-
-	</ItemGroup>
+    </ItemGroup>
 
 	<ItemGroup Condition=" $(TargetFramework.StartsWith('MonoAndroid')) ">
 		<Compile Include="Android\*.cs" />
