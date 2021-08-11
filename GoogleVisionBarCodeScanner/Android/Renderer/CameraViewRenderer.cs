@@ -167,7 +167,7 @@ namespace GoogleVisionBarCodeScanner.Renderer
 
                 try
                 {
-                    if (Configuration.IsScanning)
+                    if (!Configuration.IsScanning)
                         return;
                     Configuration.IsScanning = false;
                     var image = InputImage.FromMediaImage(mediaImage, proxy.ImageInfo.RotationDegrees);
