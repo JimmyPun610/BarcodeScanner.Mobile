@@ -15,7 +15,8 @@ namespace GoogleVisionBarCodeScanner
         }
 
 
-        public static BindableProperty DefaultTorchOnProperty = BindableProperty.Create(nameof(DefaultTorchOn), typeof(bool), typeof(CameraView), false);
+        public static BindableProperty DefaultTorchOnProperty = BindableProperty.Create(nameof(DefaultTorchOn), typeof(bool), typeof(CameraView), false, propertyChanged: (bindable, value, newValue) => ((CameraView)bindable).TorchOn = (bool)newValue);
+        [Obsolete("Use TorchOn")]
         public bool DefaultTorchOn
         {
             get => (bool)GetValue(DefaultTorchOnProperty);
@@ -23,6 +24,7 @@ namespace GoogleVisionBarCodeScanner
         }
 
         public static BindableProperty AutoStartScanningProperty = BindableProperty.Create(nameof(AutoStartScanning), typeof(bool), typeof(CameraView), true);
+        [Obsolete("Use IsScanning")]
         public bool AutoStartScanning
         {
             get => (bool)GetValue(AutoStartScanningProperty);
@@ -50,6 +52,25 @@ namespace GoogleVisionBarCodeScanner
             set => SetValue(ScanIntervalProperty, value);
         }
 
+        public static BindableProperty IsScanningProperty = BindableProperty.Create(nameof(IsScanning), typeof(bool), typeof(CameraView), true, BindingMode.TwoWay);
+        /// <summary>
+        /// Disables or enables scanning
+        /// </summary>
+        public bool IsScanning
+        {
+            get => (bool)GetValue(IsScanningProperty);
+            set => SetValue(IsScanningProperty, value);
+        }
+
+        public static BindableProperty TorchOnProperty = BindableProperty.Create(nameof(TorchOn), typeof(bool), typeof(CameraView), false, BindingMode.TwoWay);
+        /// <summary>
+        /// Disables or enables torch
+        /// </summary>
+        public bool TorchOn
+        {
+            get => (bool)GetValue(TorchOnProperty);
+            set => SetValue(TorchOnProperty, value);
+        }
 
         public event EventHandler<OnDetectedEventArg> OnDetected;
         public void TriggerOnDetected(List<BarcodeResult> barCodeResults)
@@ -60,7 +81,7 @@ namespace GoogleVisionBarCodeScanner
             });
         }
     }
-    
+
     public class OnDetectedEventArg : EventArgs
     {
         public List<BarcodeResult> BarcodeResults { get; set; }

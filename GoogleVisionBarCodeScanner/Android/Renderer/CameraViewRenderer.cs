@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using Android.Content;
 using Android.Gms.Extensions;
 using Android.Hardware.Camera2;
+using Android.Util;
 using AndroidX.Camera.Camera2.InterOp;
 using AndroidX.Camera.Core;
 using AndroidX.Camera.Lifecycle;
@@ -30,6 +29,8 @@ namespace GoogleVisionBarCodeScanner.Renderer
         private IListenableFuture _cameraFuture;
         private IExecutorService _cameraExecutor;
 
+        private ICamera _camera;
+
         public static void Init() { }
 
         public CameraViewRenderer(Context context) : base(context)
@@ -51,13 +52,14 @@ namespace GoogleVisionBarCodeScanner.Renderer
             }
             // Configure the control and subscribe to event handlers
             _cameraFuture.AddListener(new Runnable(CameraCallback), ContextCompat.GetMainExecutor(Context));
-            Methods.SetIsScanning(Element.AutoStartScanning);
+
         }
 
         protected override void OnElementPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             base.OnElementPropertyChanged(sender, e);
-            if (e.PropertyName == CameraView.DefaultTorchOnProperty.PropertyName)
+            if (e.PropertyName == CameraView.DefaultTorchOnProperty.PropertyName
+                || e.PropertyName == CameraView.TorchOnProperty.PropertyName)
                 HandleTorch();
         }
 
@@ -84,7 +86,7 @@ namespace GoogleVisionBarCodeScanner.Renderer
                 ext.SetCaptureRequestOption(CaptureRequest.ControlAeTargetFpsRange, new Android.Util.Range((int)Element.RequestedFPS.Value, (int)Element.RequestedFPS.Value));
             }
             var imageAnalyzer = imageAnalyzerBuilder.Build();
-            imageAnalyzer.SetAnalyzer(_cameraExecutor, new BarcodeAnalyzer(Detected));
+            imageAnalyzer.SetAnalyzer(_cameraExecutor, new BarcodeAnalyzer(this));
 
             // Select back camera as a default, or front camera otherwise
             CameraSelector cameraSelector = null;
@@ -100,29 +102,38 @@ namespace GoogleVisionBarCodeScanner.Renderer
                 // Unbind use cases before rebinding
                 cameraProvider.UnbindAll();
                 // Bind use cases to camera
-                Configuration.Camera = cameraProvider.BindToLifecycle((ILifecycleOwner)Context, cameraSelector, preview, imageAnalyzer);
-
+                _camera = cameraProvider.BindToLifecycle((ILifecycleOwner)Context, cameraSelector, preview, imageAnalyzer);
                 HandleTorch();
             }
             catch (Exception exc)
             {
-                // Log.Debug(TAG, "Use case binding failed", exc);
+                Log.Debug(nameof(CameraCallback), "Use case binding failed", exc);
             }
 
         }
 
         private void HandleTorch()
         {
-            if (Configuration.Camera == null || Element == null || !Configuration.Camera.CameraInfo.HasFlashUnit) return;
-            Configuration.Camera.CameraControl.EnableTorch(Element.DefaultTorchOn);
+            if (_camera == null || Element == null || !_camera.CameraInfo.HasFlashUnit) return;
+            if (Element.TorchOn && IsTorchOn() || !Element.TorchOn && !IsTorchOn())
+                return;
+            _camera.CameraControl.EnableTorch(Element.TorchOn);
         }
 
-        private void Detected(List<BarcodeResult> result)
+        private bool IsTorchOn()
         {
-            Element.TriggerOnDetected(result);
-            if (Element.VibrationOnDetected)
-                Xamarin.Essentials.Vibration.Vibrate(200);
+            if (_camera == null || !_camera.CameraInfo.HasFlashUnit)
+                return false;
+            return (int)_camera.CameraInfo.TorchState?.Value == TorchState.On;
         }
+
+        private void DisableTorchIfNeeded()
+        {
+            if (_camera == null || !_camera.CameraInfo.HasFlashUnit || (int)_camera.CameraInfo.TorchState?.Value != TorchState.On)
+                return;
+            _camera.CameraControl.EnableTorch(false);
+        }
+
 
         protected override void Dispose(bool disposing)
         {
@@ -133,26 +144,42 @@ namespace GoogleVisionBarCodeScanner.Renderer
 
             if (disposing)
             {
-                _cameraExecutor.Shutdown();
-                _cameraExecutor.Dispose();
+                DisableTorchIfNeeded();
+
+                _cameraExecutor?.Shutdown();
+                _cameraExecutor?.Dispose();
                 _cameraExecutor = null;
 
-                _cameraFuture.Cancel(true);
-                _cameraFuture.Dispose();
+                _cameraFuture?.Cancel(true);
+                _cameraFuture?.Dispose();
                 _cameraFuture = null;
             }
 
             _isDisposed = true;
         }
 
+        private class TorchStateObserver : Java.Lang.Object, IObserver
+        {
+            private readonly CameraViewRenderer _renderer;
+
+            public TorchStateObserver(CameraViewRenderer renderer)
+            {
+                _renderer = renderer;
+            }
+
+            public void OnChanged(Java.Lang.Object state) =>
+                _renderer.Element.TorchOn = (int)state == TorchState.On;
+
+        }
+
         public class BarcodeAnalyzer : Java.Lang.Object, ImageAnalysis.IAnalyzer
         {
             private readonly IBarcodeScanner _barcodeScanner;
-            private readonly Action<List<BarcodeResult>> _callbackAction;
+            private readonly CameraViewRenderer _renderer;
 
-            public BarcodeAnalyzer(Action<List<BarcodeResult>> callback)
+            public BarcodeAnalyzer(CameraViewRenderer renderer)
             {
-                _callbackAction = callback;
+                _renderer = renderer;
                 _barcodeScanner = BarcodeScanning.GetClient(new BarcodeScannerOptions.Builder().SetBarcodeFormats(
                     Barcode.FormatQrCode)
                 .Build());
@@ -167,15 +194,19 @@ namespace GoogleVisionBarCodeScanner.Renderer
 
                 try
                 {
-                    if (!Configuration.IsScanning)
-                        return;
-                    Configuration.IsScanning = false;
                     var image = InputImage.FromMediaImage(mediaImage, proxy.ImageInfo.RotationDegrees);
                     // Pass image to the scanner and have it do its thing
                     var result = await _barcodeScanner.Process(image);
                     var final = Methods.Process(result);
-                    if (final != null)
-                        _callbackAction?.Invoke(final);
+                    if (final != null && _renderer?.Element != null)
+                    {
+                        if (!_renderer.Element.IsScanning)
+                            return;
+                        _renderer.Element.IsScanning = false;
+                        _renderer.Element.TriggerOnDetected(final);
+                        if (_renderer.Element.VibrationOnDetected)
+                            Xamarin.Essentials.Vibration.Vibrate(200);
+                    }
                 }
                 catch (Exception ex)
                 {

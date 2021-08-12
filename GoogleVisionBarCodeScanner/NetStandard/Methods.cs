@@ -6,24 +6,6 @@ namespace GoogleVisionBarCodeScanner
 {
     public class Methods 
     {
-        public static void SetIsScanning(bool isScanning)
-        {
-            throw new NotImplementedException();
-        }
-        [Obsolete("Please use SetIsScanning(true) to replace this method.")]
-        public static void Reset()
-        {
-            throw new NotImplementedException();
-        }
-
-        public static bool IsTorchOn()
-        {
-            throw new NotImplementedException();
-        }
-        public static void ToggleFlashlight()
-        {
-            throw new NotImplementedException();
-        }
 
         public static void SetSupportBarcodeFormat(BarcodeFormats barcodeFormats)
         {

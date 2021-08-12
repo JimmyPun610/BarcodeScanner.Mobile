@@ -4,7 +4,6 @@ using System.Threading.Tasks;
 using Android.Gms.Extensions;
 using Android.Graphics;
 using Android.Runtime;
-using AndroidX.Camera.Core;
 using Java.Util;
 using Xamarin.Essentials;
 using Xamarin.Google.MLKit.Vision.BarCode;
@@ -84,32 +83,6 @@ namespace GoogleVisionBarCodeScanner
             return formats;
         }
         #region Public Methods
-        public static void SetIsScanning(bool isScanning)
-        {
-            Configuration.IsScanning = isScanning;
-        }
-
-        public static void Reset()
-        {
-            Configuration.IsScanning = true;
-        }
-
-        public static bool IsTorchOn()
-        {
-            var camera = Configuration.Camera;
-            if (camera == null || !camera.CameraInfo.HasFlashUnit)
-                return false;
-            return (int)camera.CameraInfo.TorchState?.Value == TorchState.On;
-        }
-        public static void ToggleFlashlight()
-        {
-            var camera = Configuration.Camera;
-            if (camera == null || !camera.CameraInfo.HasFlashUnit)
-                return;
-
-            camera.CameraControl.EnableTorch(!IsTorchOn());
-        }
-
 
         public static void SetSupportBarcodeFormat(BarcodeFormats barcodeFormats)
         {
