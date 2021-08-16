@@ -208,9 +208,17 @@ namespace GoogleVisionBarCodeScanner
 
         public bool IsTorchOn()
         {
-            var videoDevices = AVCaptureDevice.GetDefaultDevice(AVMediaType.Video);
-            if (videoDevices != null && videoDevices.HasTorch)
-                return videoDevices.TorchMode == AVCaptureTorchMode.On;
+            try
+            {
+                var videoDevices = AVCaptureDevice.GetDefaultDevice(AVMediaType.Video);
+                if (videoDevices != null && videoDevices.HasTorch)
+                    return videoDevices.TorchMode == AVCaptureTorchMode.On;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"iOS IsTorchOn error : {ex.Message}, StackTrace : {ex.StackTrace}");
+            }
+            
 
             return false;
         }

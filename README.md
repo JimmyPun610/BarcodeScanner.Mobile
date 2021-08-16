@@ -9,7 +9,7 @@ https://docs.microsoft.com/en-us/xamarin/xamarin-forms/deploy-test/hot-restart</
 Please feel free to improve my source code.
 
 ## Current Version
-6.0.0-pre for Xamarin Forms 5.0.0.2083, use MLKit and CameraX in Android. Thanks to [@stepkillah](https://github.com/stepkillah)
+6.0.0.1-pre for Xamarin Forms 5.0.0.2083, use MLKit and CameraX in Android. Thanks to [@stepkillah](https://github.com/stepkillah)
 
 5.0.0.8 for Xamarin Forms 5.0.0.2012
 
@@ -157,13 +157,13 @@ bool allowed = await GoogleVisionBarCodeScanner.Methods.AskForRequiredPermission
 
 #### 6. To check the condition of torch
 ```C#
-   GoogleVisionBarCodeScanner.Methods.IsTorchOn();
+   // CameraView is from the Name of gv:CameraView defined in XAML
+   CameraView.TorchOn = true / false;
 ```
 #### 7. Restart scanning
 ```C#
-//Old method, you can use the new one.
-//GoogleVisionBarCodeScanner.Methods.Reset();
-GoogleVisionBarCodeScanner.Methods.SetIsScanning(true);
+// CameraView is from the Name of gv:CameraView defined in XAML
+CameraView.IsScanning = true / false;
 ```
 
 
