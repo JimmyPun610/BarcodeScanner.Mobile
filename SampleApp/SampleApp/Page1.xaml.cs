@@ -30,7 +30,7 @@ namespace SampleApp
 
         private void FlashlightButton_Clicked(object sender, EventArgs e)
         {
-            GoogleVisionBarCodeScanner.Methods.ToggleFlashlight();
+            Camera.TorchOn = !Camera.TorchOn;
         }
 
         private async void CameraView_OnDetected(object sender, GoogleVisionBarCodeScanner.OnDetectedEventArg e)
@@ -45,7 +45,7 @@ namespace SampleApp
             Device.BeginInvokeOnMainThread(async() =>
             {
                 await DisplayAlert("Result", result, "OK");
-                GoogleVisionBarCodeScanner.Methods.SetIsScanning(true);
+                Camera.IsScanning = true;
                 //await Navigation.PopModalAsync();
             });
             

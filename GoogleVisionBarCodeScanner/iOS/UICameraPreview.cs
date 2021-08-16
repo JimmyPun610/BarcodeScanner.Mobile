@@ -19,11 +19,23 @@ namespace GoogleVisionBarCodeScanner
 {
     internal sealed class UICameraPreview : UIView
     {
-        public event Action<List<BarcodeResult>> OnDetected;
+        public event EventHandler<List<BarcodeResult>> OnDetected;
+        public event EventHandler IsScanningChanged;
         AVCaptureVideoPreviewLayer previewLayer;
         CaptureVideoDelegate captureVideoDelegate;
         //CameraOptions cameraOptions;
         public AVCaptureSession CaptureSession { get; private set; }
+
+        public bool IsScanning { get; private set; } = true;
+
+        public void SetIsScanning(bool isScanning)
+        {
+            bool shouldChange = isScanning != IsScanning;
+            IsScanning = isScanning;
+            if (shouldChange)
+                IsScanningChanged?.Invoke(this, EventArgs.Empty);
+        }
+
         AVCaptureVideoDataOutput VideoDataOutput { get; set; }
         //public UICameraPreview(CameraOptions options)
         //{
@@ -41,8 +53,8 @@ namespace GoogleVisionBarCodeScanner
         {
             base.RemoveFromSuperview();
             //Off the torch when exit page
-            if (GoogleVisionBarCodeScanner.Methods.IsTorchOn())
-                GoogleVisionBarCodeScanner.Methods.ToggleFlashlight();
+            if (IsTorchOn())
+                ToggleFlashlight();
             //Stop the capture session if not null
             try
             {
@@ -72,7 +84,7 @@ namespace GoogleVisionBarCodeScanner
             if (connection != null)
             {
                 var currentDevice = UIDevice.CurrentDevice;
-                if(currentDevice.CheckSystemVersion(13, 0))
+                if (currentDevice.CheckSystemVersion(13, 0))
                 {
                     UIInterfaceOrientation orientation = UIApplication.SharedApplication.Windows.FirstOrDefault()?.WindowScene?.InterfaceOrientation ?? UIInterfaceOrientation.Portrait;
 
@@ -127,12 +139,12 @@ namespace GoogleVisionBarCodeScanner
                         }
                     }
                 }
-                
+
             }
         }
         void Initialize(bool defaultTorchOn, bool vibrationOnDetected, bool startScanningOnCreate, int scanInterval)
         {
-            Configuration.IsScanning = startScanningOnCreate;
+            IsScanning = startScanningOnCreate;
             CaptureSession = new AVCaptureSession();
             CaptureSession.BeginConfiguration();
             this.AutoresizingMask = UIViewAutoresizing.FlexibleDimensions;
@@ -169,12 +181,13 @@ namespace GoogleVisionBarCodeScanner
             };
 
 
-            captureVideoDelegate = new CaptureVideoDelegate(vibrationOnDetected, scanInterval);
+            captureVideoDelegate = new CaptureVideoDelegate(vibrationOnDetected, scanInterval, this);
             captureVideoDelegate.OnDetected += (list) =>
             {
-                InvokeOnMainThread(() => {
+                InvokeOnMainThread(() =>
+                {
                     //CaptureSession.StopRunning();
-                    this.OnDetected?.Invoke(list);
+                    this.OnDetected?.Invoke(this, list);
                 });
 
             };
@@ -185,10 +198,39 @@ namespace GoogleVisionBarCodeScanner
             {
                 CaptureSession.StartRunning();
                 //Torch on by default
-                if (defaultTorchOn && !GoogleVisionBarCodeScanner.Methods.IsTorchOn())
-                    GoogleVisionBarCodeScanner.Methods.ToggleFlashlight();
+                if (defaultTorchOn && !IsTorchOn())
+                    ToggleFlashlight();
             });
 
+
+        }
+
+
+        public bool IsTorchOn()
+        {
+            var videoDevices = AVCaptureDevice.GetDefaultDevice(AVMediaType.Video);
+            if (videoDevices != null && videoDevices.HasTorch)
+                return videoDevices.TorchMode == AVCaptureTorchMode.On;
+
+            return false;
+        }
+        public void ToggleFlashlight()
+        {
+            var videoDevices = AVCaptureDevice.GetDefaultDevice(AVMediaType.Video);
+            if (videoDevices == null || !videoDevices.HasTorch) return;
+
+            NSError error;
+            videoDevices.LockForConfiguration(out error);
+            if (error == null)
+            {
+                if (videoDevices.TorchMode == AVCaptureTorchMode.On)
+                    videoDevices.TorchMode = AVCaptureTorchMode.Off;
+                else
+                {
+                    videoDevices.SetTorchModeLevel(1.0f, out error);
+                }
+            }
+            videoDevices.UnlockForConfiguration();
 
         }
 
@@ -202,9 +244,12 @@ namespace GoogleVisionBarCodeScanner
             int scanIntervalInMs = 500;
             long lastAnalysisTime = DateTimeOffset.MinValue.ToUnixTimeMilliseconds();
             long lastRunTime = DateTimeOffset.MinValue.ToUnixTimeMilliseconds();
-            public CaptureVideoDelegate(bool vibrationOnDetected, int scanInterval)
+            private UICameraPreview _cameraPreview;
+
+            public CaptureVideoDelegate(bool vibrationOnDetected, int scanInterval, UICameraPreview cameraPreview)
             {
                 _vibrationOnDetected = vibrationOnDetected;
+                _cameraPreview = cameraPreview;
                 metadata = new VisionImageMetadata();
                 vision = VisionApi.Create();
                 if (scanInterval < 100)
@@ -290,7 +335,7 @@ namespace GoogleVisionBarCodeScanner
             public override void DidOutputSampleBuffer(AVCaptureOutput captureOutput, CMSampleBuffer sampleBuffer, AVCaptureConnection connection)
             {
                 lastRunTime = DateTimeOffset.Now.ToUnixTimeMilliseconds();
-                if (lastRunTime - lastAnalysisTime > scanIntervalInMs && Configuration.IsScanning)
+                if (lastRunTime - lastAnalysisTime > scanIntervalInMs && _cameraPreview.IsScanning)
                 {
                     lastAnalysisTime = lastRunTime;
                     try
@@ -310,36 +355,34 @@ namespace GoogleVisionBarCodeScanner
             }
             private async void DetectBarcodeActionAsync(VisionImage image)
             {
+                if (!_cameraPreview.IsScanning) return;
 
-                if (Configuration.IsScanning)
+                try
                 {
-                    try
+                    VisionBarcode[] barcodes = await barcodeDetector.DetectAsync(image);
+                    if (barcodes == null || barcodes.Length == 0)
                     {
-                        VisionBarcode[] barcodes = await barcodeDetector.DetectAsync(image);
-                        if (barcodes == null || barcodes.Length == 0)
-                        {
-                            return;
-                        }
-                        Console.WriteLine($"Successfully read barcode");
-                        Configuration.IsScanning = false;
-                        if (_vibrationOnDetected)
-                            SystemSound.Vibrate.PlayAlertSound();
-                        List<BarcodeResult> resultList = new List<BarcodeResult>();
-                        foreach (var barcode in barcodes)
-                        {
-                            resultList.Add(new BarcodeResult
-                            {
-                                BarcodeType = Methods.ConvertBarcodeResultTypes(barcode.ValueType),
-                                DisplayValue = barcode.DisplayValue,
-                                RawValue= barcode.RawValue
-                            });
-                        }
-                        OnDetected?.Invoke(resultList);
+                        return;
                     }
-                    catch (Exception exception)
+                    Console.WriteLine($"Successfully read barcode");
+                    _cameraPreview.SetIsScanning(false);
+                    if (_vibrationOnDetected)
+                        SystemSound.Vibrate.PlayAlertSound();
+                    List<BarcodeResult> resultList = new List<BarcodeResult>();
+                    foreach (var barcode in barcodes)
                     {
-                        System.Diagnostics.Debug.WriteLine(exception.Message);
+                        resultList.Add(new BarcodeResult
+                        {
+                            BarcodeType = Methods.ConvertBarcodeResultTypes(barcode.ValueType),
+                            DisplayValue = barcode.DisplayValue,
+                            RawValue = barcode.RawValue
+                        });
                     }
+                    OnDetected?.Invoke(resultList);
+                }
+                catch (Exception exception)
+                {
+                    System.Diagnostics.Debug.WriteLine(exception.Message);
                 }
 
 

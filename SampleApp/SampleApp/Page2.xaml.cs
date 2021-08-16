@@ -27,7 +27,7 @@ namespace SampleApp
 
         private void FlashlightButton_Clicked(object sender, EventArgs e)
         {
-            GoogleVisionBarCodeScanner.Methods.ToggleFlashlight();
+            Camera.TorchOn = !Camera.TorchOn;
         }
 
         private async void CameraView_OnDetected(object sender, GoogleVisionBarCodeScanner.OnDetectedEventArg e)

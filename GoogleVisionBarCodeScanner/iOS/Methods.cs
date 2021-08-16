@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
-using AVFoundation;
 using Firebase.MLKit.Vision;
 using Foundation;
 using UIKit;
@@ -85,47 +83,6 @@ namespace GoogleVisionBarCodeScanner
         }
 
         #region Public Methods
-        public static void SetIsScanning(bool isScanning)
-        {
-            Configuration.IsScanning = isScanning;
-        }
-
-        public static void Reset()
-        {
-            Configuration.IsScanning = true;
-        }
-
-
-        public static bool IsTorchOn()
-        {
-            var videoDevices = AVCaptureDevice.GetDefaultDevice(AVMediaType.Video);
-            if (videoDevices.HasTorch)
-            {
-                return videoDevices.TorchMode == AVCaptureTorchMode.On;
-            }
-            return false;
-        }
-        public static void ToggleFlashlight()
-        {
-            var videoDevices = AVCaptureDevice.GetDefaultDevice(AVMediaType.Video);
-            if (videoDevices.HasTorch)
-            {
-                NSError error;
-                videoDevices.LockForConfiguration(out error);
-                if (error == null)
-                {
-                    if (videoDevices.TorchMode == AVCaptureTorchMode.On)
-                        videoDevices.TorchMode = AVCaptureTorchMode.Off;
-                    else
-                    {
-                        videoDevices.SetTorchModeLevel(1.0f, out error);
-                    }
-                }
-                videoDevices.UnlockForConfiguration();
-
-            }
-
-        }
 
         public static void SetSupportBarcodeFormat(BarcodeFormats barcodeFormats)
         {

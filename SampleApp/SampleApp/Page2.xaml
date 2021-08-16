@@ -22,7 +22,7 @@
             </StackLayout>
             <!--Fill the screen with CameraView-->
             <gv:CameraView HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" OnDetected="CameraView_OnDetected" Grid.Row="1"
-                           DefaultTorchOn="True" VibrationOnDetected="True"/>
+                           TorchOn="True" VibrationOnDetected="True" x:Name="Camera"/>
             <!--Customized Size-->
             <!--<gv:CameraView HorizontalOptions="Center" WidthRequest="200" HeightRequest="200" OnDetected="CameraView_OnDetected" Grid.Row="1"/>-->
             <Label Text="Scan QRCode" FontSize="Medium" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Center" Grid.Row="2"

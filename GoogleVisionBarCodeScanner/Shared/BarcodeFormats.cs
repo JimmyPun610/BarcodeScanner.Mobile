@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace GoogleVisionBarCodeScanner
 {
+    [Flags]
     public enum BarcodeFormats
     {
         //UnKnown = 0,
