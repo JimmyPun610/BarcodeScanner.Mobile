@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using Android.Content;
 using Android.Gms.Extensions;
 using Android.Hardware.Camera2;
@@ -67,10 +68,11 @@ namespace GoogleVisionBarCodeScanner.Renderer
 
         private void CameraCallback()
         {
-            // Used to bind the lifecycle of cameras to the lifecycle owner
-            var cameraProvider = (ProcessCameraProvider)_cameraFuture.Get();
+            if(_isDisposed)
+                return;
 
-            if (cameraProvider == null)
+            // Used to bind the lifecycle of cameras to the lifecycle owner
+            if (!(_cameraFuture.Get() is ProcessCameraProvider cameraProvider))
                 return;
 
             // Preview
@@ -101,6 +103,8 @@ namespace GoogleVisionBarCodeScanner.Renderer
             {
                 // Unbind use cases before rebinding
                 cameraProvider.UnbindAll();
+                if(Context==null)
+                    return;
                 // Bind use cases to camera
                 _camera = cameraProvider.BindToLifecycle((ILifecycleOwner)Context, cameraSelector, preview, imageAnalyzer);
                 HandleTorch();
@@ -150,13 +154,35 @@ namespace GoogleVisionBarCodeScanner.Renderer
                 _cameraExecutor?.Dispose();
                 _cameraExecutor = null;
 
+                ClearCameraProvider();
+
                 _cameraFuture?.Cancel(true);
                 _cameraFuture?.Dispose();
                 _cameraFuture = null;
+
             }
 
             _isDisposed = true;
         }
+
+
+        private void ClearCameraProvider()
+        {
+            try
+            {
+                // Used to bind the lifecycle of cameras to the lifecycle owner
+                if (!(_cameraFuture.Get() is ProcessCameraProvider cameraProvider))
+                    return;
+
+                cameraProvider.UnbindAll();
+                cameraProvider.Dispose();
+            }
+            catch (Exception ex)
+            {
+                Log.Debug($"{nameof(CameraViewRenderer)}-{nameof(ClearCameraProvider)}", ex.ToString());
+            }
+        }
+
 
         private class TorchStateObserver : Java.Lang.Object, IObserver
         {
@@ -198,24 +224,35 @@ namespace GoogleVisionBarCodeScanner.Renderer
                     // Pass image to the scanner and have it do its thing
                     var result = await _barcodeScanner.Process(image);
                     var final = Methods.Process(result);
-                    if (final != null && _renderer?.Element != null)
-                    {
-                        if (!_renderer.Element.IsScanning)
-                            return;
-                        _renderer.Element.IsScanning = false;
-                        _renderer.Element.TriggerOnDetected(final);
-                        if (_renderer.Element.VibrationOnDetected)
-                            Xamarin.Essentials.Vibration.Vibrate(200);
-                    }
+                    if (final == null || _renderer?.Element == null) return;
+                    if (!_renderer.Element.IsScanning)
+                        return;
+                    _renderer.Element.IsScanning = false;
+                    _renderer.Element.TriggerOnDetected(final);
+                    if (_renderer.Element.VibrationOnDetected)
+                        Xamarin.Essentials.Vibration.Vibrate(200);
                 }
                 catch (Exception ex)
                 {
-                    //Log somewhere
+                    Log.Debug(nameof(CameraViewRenderer), ex.ToString());
                 }
                 finally
                 {
-                    proxy.Close();
+                    SafeCloseImageProxy(proxy);
                 }
+            }
+            private void SafeCloseImageProxy(IImageProxy proxy)
+            {
+                try
+                {
+                    proxy?.Close();
+                }
+                catch (ObjectDisposedException) { }
+                catch (ArgumentException)
+                {
+                    //Ignore argument exception, it will be thrown if BarcodeAnalyzer get disposed during processing
+                }
+
             }
         }
     }
