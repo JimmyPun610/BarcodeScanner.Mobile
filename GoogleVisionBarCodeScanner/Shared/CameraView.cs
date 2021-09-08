@@ -31,6 +31,26 @@ namespace GoogleVisionBarCodeScanner
             set => SetValue(AutoStartScanningProperty, value);
         }
 
+        public static BindableProperty PreviewHeightProperty = BindableProperty.Create(nameof(PreviewHeight), typeof(int?), typeof(CameraView), null);
+        /// <summary>
+        /// Only Android will be reflected this setting
+        /// </summary>
+        public int? PreviewHeight
+        {
+            get => (int?)GetValue(PreviewHeightProperty);
+            set => SetValue(PreviewHeightProperty, value);
+        }
+
+        public static BindableProperty PreviewWidthProperty = BindableProperty.Create(nameof(PreviewWidth), typeof(int?), typeof(CameraView), null);
+        /// <summary>
+        /// Only Android will be reflected this setting
+        /// </summary>
+        public int? PreviewWidth
+        {
+            get => (int?)GetValue(PreviewWidthProperty);
+            set => SetValue(PreviewWidthProperty, value);
+        }
+
         public static BindableProperty RequestedFPSProperty = BindableProperty.Create(nameof(RequestedFPS), typeof(float?), typeof(CameraView), null);
         /// <summary>
         /// Only Android will be reflected this setting
