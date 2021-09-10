@@ -104,20 +104,23 @@ namespace GoogleVisionBarCodeScanner.Renderer
                 // Bind use cases to camera
                 _camera = cameraProvider.BindToLifecycle((ILifecycleOwner)Context, cameraSelector, preview, imageAnalyzer);
 
-                var width = (int?)Element.PreviewWidth.Value;
-                var height = (int?)Element.PreviewHeight.Value;
-
-                if (width != null && height != null)
-                {
-                    preview.UpdateSuggestedResolution(new Android.Util.Size((int)width, (int)height));
-                }
+                HandleCustomPreviewSize(preview);
                 HandleTorch();
             }
             catch (Exception exc)
             {
                 Log.Debug(nameof(CameraCallback), "Use case binding failed", exc);
             }
+        }
 
+        private void HandleCustomPreviewSize(Preview preview)
+        {
+            if (Element.PreviewWidth.HasValue && Element.PreviewHeight.HasValue)
+            {
+                var width = Element.PreviewWidth.Value;
+                var height = Element.PreviewHeight.Value;
+                preview.UpdateSuggestedResolution(new Android.Util.Size(width, height));
+            }
         }
 
         private void HandleTorch()
