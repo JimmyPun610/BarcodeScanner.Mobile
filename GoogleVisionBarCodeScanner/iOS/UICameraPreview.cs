@@ -382,6 +382,7 @@ namespace GoogleVisionBarCodeScanner
                         resultList.Add(new BarcodeResult
                         {
                             BarcodeType = Methods.ConvertBarcodeResultTypes(barcode.ValueType),
+                            BarcodeFormat = (BarcodeFormats)barcode.Format,
                             DisplayValue = barcode.DisplayValue,
                             RawValue = barcode.RawValue
                         });
