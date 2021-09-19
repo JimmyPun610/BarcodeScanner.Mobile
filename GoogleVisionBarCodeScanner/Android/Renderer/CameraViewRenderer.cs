@@ -181,7 +181,7 @@ namespace GoogleVisionBarCodeScanner.Renderer
             {
                 _renderer = renderer;
                 _barcodeScanner = BarcodeScanning.GetClient(new BarcodeScannerOptions.Builder().SetBarcodeFormats(
-                    Barcode.FormatQrCode)
+                    Configuration.BarcodeFormats)
                 .Build());
 
             }
