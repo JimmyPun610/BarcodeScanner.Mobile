@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using Android.Content;
 using Android.Gms.Extensions;
 using Android.Hardware.Camera2;
@@ -31,6 +32,7 @@ namespace GoogleVisionBarCodeScanner.Renderer
 
         private ICamera _camera;
 
+
         public static void Init() { }
 
         public CameraViewRenderer(Context context) : base(context)
@@ -58,8 +60,7 @@ namespace GoogleVisionBarCodeScanner.Renderer
         protected override void OnElementPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             base.OnElementPropertyChanged(sender, e);
-            if (e.PropertyName == CameraView.DefaultTorchOnProperty.PropertyName
-                || e.PropertyName == CameraView.TorchOnProperty.PropertyName)
+            if (e.PropertyName == CameraView.TorchOnProperty.PropertyName)
                 HandleTorch();
         }
 
@@ -76,7 +77,7 @@ namespace GoogleVisionBarCodeScanner.Renderer
             // Preview
             var preview = new Preview.Builder().Build();
             preview.SetSurfaceProvider(Control.SurfaceProvider);
-
+            
             // Frame by frame analyze
             var imageAnalyzerBuilder = new ImageAnalysis.Builder();
             if (Element.RequestedFPS.HasValue)
@@ -111,6 +112,7 @@ namespace GoogleVisionBarCodeScanner.Renderer
             {
                 Log.Debug(nameof(CameraCallback), "Use case binding failed", exc);
             }
+
         }
 
         private void HandleCustomPreviewSize(Preview preview)
@@ -187,12 +189,21 @@ namespace GoogleVisionBarCodeScanner.Renderer
         {
             private readonly IBarcodeScanner _barcodeScanner;
             private readonly CameraViewRenderer _renderer;
+            long lastRunTime = DateTimeOffset.Now.ToUnixTimeMilliseconds();
+            long lastAnalysisTime = DateTimeOffset.MinValue.ToUnixTimeMilliseconds();
+        
 
             public BarcodeAnalyzer(CameraViewRenderer renderer)
             {
                 _renderer = renderer;
+                if(_renderer.Element != null)
+                {
+                    if (_renderer.Element.ScanInterval < 100)
+                        _renderer.Element.ScanInterval = 500;
+                }
+                
                 _barcodeScanner = BarcodeScanning.GetClient(new BarcodeScannerOptions.Builder().SetBarcodeFormats(
-                    Barcode.FormatQrCode)
+                    Configuration.BarcodeFormats)
                 .Build());
 
             }
@@ -202,22 +213,26 @@ namespace GoogleVisionBarCodeScanner.Renderer
 
                 var mediaImage = proxy.Image;
                 if (mediaImage == null) return;
-
+                lastRunTime = DateTimeOffset.Now.ToUnixTimeMilliseconds();
                 try
                 {
-                    var image = InputImage.FromMediaImage(mediaImage, proxy.ImageInfo.RotationDegrees);
-                    // Pass image to the scanner and have it do its thing
-                    var result = await _barcodeScanner.Process(image);
-                    var final = Methods.Process(result);
-                    if (final != null && _renderer?.Element != null)
+                    Console.WriteLine($"IsScanning : {_renderer.Element.IsScanning}");
+                    if (lastRunTime - lastAnalysisTime > _renderer.Element.ScanInterval && _renderer.Element.IsScanning)
                     {
-                        if (!_renderer.Element.IsScanning)
-                            return;
-                        _renderer.Element.IsScanning = false;
-                        _renderer.Element.TriggerOnDetected(final);
-                        if (_renderer.Element.VibrationOnDetected)
-                            Xamarin.Essentials.Vibration.Vibrate(200);
+                        lastAnalysisTime = lastRunTime;
+                        var image = InputImage.FromMediaImage(mediaImage, proxy.ImageInfo.RotationDegrees);
+                        // Pass image to the scanner and have it do its thing
+                        var result = await _barcodeScanner.Process(image);
+                        var final = Methods.Process(result);
+                        if (final != null && _renderer?.Element != null)
+                        {
+                            _renderer.Element.IsScanning = false;
+                            _renderer.Element.TriggerOnDetected(final);
+                            if (_renderer.Element.VibrationOnDetected)
+                                Xamarin.Essentials.Vibration.Vibrate(200);
+                        }
                     }
+                  
                 }
                 catch (Exception ex)
                 {

@@ -21,7 +21,6 @@ namespace GoogleVisionBarCodeScanner.Renderer
                 if (liveCameraStream != null)
                 {
                     liveCameraStream.OnDetected -= OnDetected;
-                    liveCameraStream.IsScanningChanged -= InternalScanningChanged;
                 }
 
                 return;
@@ -30,21 +29,17 @@ namespace GoogleVisionBarCodeScanner.Renderer
             if (e.NewElement != null && Control == null)
             {
                 var cameraView = e.NewElement;
-                liveCameraStream = new UICameraPreview(cameraView.TorchOn, cameraView.VibrationOnDetected, cameraView.IsScanning, cameraView.ScanInterval);
+                liveCameraStream = new UICameraPreview(this);
                 SetNativeControl(liveCameraStream);
                 liveCameraStream.OnDetected += OnDetected;
-                liveCameraStream.IsScanningChanged += InternalScanningChanged;
             }
         }
 
         protected override void OnElementPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             base.OnElementPropertyChanged(sender, e);
-            if (e.PropertyName == CameraView.DefaultTorchOnProperty.PropertyName
-            || e.PropertyName == CameraView.TorchOnProperty.PropertyName)
+            if ( e.PropertyName == CameraView.TorchOnProperty.PropertyName)
                 HandleTorch();
-            if (e.PropertyName == CameraView.IsScanningProperty.PropertyName && Element != null)
-                liveCameraStream?.SetIsScanning(Element.IsScanning);
         }
 
         private void HandleTorch()
@@ -60,11 +55,5 @@ namespace GoogleVisionBarCodeScanner.Renderer
             Element?.TriggerOnDetected(arg);
 
 
-        private void InternalScanningChanged(object sender, EventArgs arg)
-        {
-            if (Element == null || liveCameraStream == null || Element.IsScanning == liveCameraStream.IsScanning)
-                return;
-            Element.IsScanning = liveCameraStream.IsScanning;
-        }
     }
 }

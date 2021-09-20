@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Windows.Input;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 
@@ -7,28 +8,29 @@ namespace GoogleVisionBarCodeScanner
 {
     public class CameraView : View
     {
-        public static BindableProperty VibrationOnDetectedProperty = BindableProperty.Create(nameof(VibrationOnDetected), typeof(bool), typeof(CameraView), true);
+        public static BindableProperty OnDetectedCommandProperty = BindableProperty.Create(nameof(OnDetectedCommand)
+            , typeof(ICommand
+            ), typeof(CameraView)
+            , null
+            , defaultBindingMode: BindingMode.TwoWay
+            , propertyChanged: (bindable, value, newValue) => ((CameraView)bindable).OnDetectedCommand = (ICommand)newValue);
+        public ICommand OnDetectedCommand
+        {
+            get => (ICommand)GetValue(OnDetectedCommandProperty);
+            set => SetValue(OnDetectedCommandProperty, value);
+        }
+
+
+        public static BindableProperty VibrationOnDetectedProperty = BindableProperty.Create(nameof(VibrationOnDetected)
+            , typeof(bool)
+            , typeof(CameraView)
+            , true
+            , defaultBindingMode: BindingMode.TwoWay
+            , propertyChanged: (bindable, value, newValue) => ((CameraView)bindable).VibrationOnDetected= (bool)newValue);
         public bool VibrationOnDetected
         {
             get => (bool)GetValue(VibrationOnDetectedProperty);
             set => SetValue(VibrationOnDetectedProperty, value);
-        }
-
-
-        public static BindableProperty DefaultTorchOnProperty = BindableProperty.Create(nameof(DefaultTorchOn), typeof(bool), typeof(CameraView), false, propertyChanged: (bindable, value, newValue) => ((CameraView)bindable).TorchOn = (bool)newValue);
-        [Obsolete("Use TorchOn")]
-        public bool DefaultTorchOn
-        {
-            get => (bool)GetValue(DefaultTorchOnProperty);
-            set => SetValue(DefaultTorchOnProperty, value);
-        }
-
-        public static BindableProperty AutoStartScanningProperty = BindableProperty.Create(nameof(AutoStartScanning), typeof(bool), typeof(CameraView), true);
-        [Obsolete("Use IsScanning")]
-        public bool AutoStartScanning
-        {
-            get => (bool)GetValue(AutoStartScanningProperty);
-            set => SetValue(AutoStartScanningProperty, value);
         }
 
         public static BindableProperty PreviewHeightProperty = BindableProperty.Create(nameof(PreviewHeight), typeof(int?), typeof(CameraView), null);
@@ -51,7 +53,12 @@ namespace GoogleVisionBarCodeScanner
             set => SetValue(PreviewWidthProperty, value);
         }
 
-        public static BindableProperty RequestedFPSProperty = BindableProperty.Create(nameof(RequestedFPS), typeof(float?), typeof(CameraView), null);
+        public static BindableProperty RequestedFPSProperty = BindableProperty.Create(nameof(RequestedFPS)
+            , typeof(float?)
+            , typeof(CameraView)
+            , null
+            , defaultBindingMode: BindingMode.TwoWay
+            , propertyChanged: (bindable, value, newValue) => ((CameraView)bindable).RequestedFPS = (float?)newValue);
         /// <summary>
         /// Only Android will be reflected this setting
         /// </summary>
@@ -62,7 +69,12 @@ namespace GoogleVisionBarCodeScanner
         }
 
 
-        public static BindableProperty ScanIntervalProperty = BindableProperty.Create(nameof(ScanInterval), typeof(int), typeof(CameraView), 500);
+        public static BindableProperty ScanIntervalProperty = BindableProperty.Create(nameof(ScanInterval)
+            , typeof(int)
+            , typeof(CameraView)
+            , 500
+            , defaultBindingMode: BindingMode.TwoWay
+            , propertyChanged: (bindable, value, newValue) => ((CameraView)bindable).ScanInterval = (int)newValue);
         /// <summary>
         /// Only iOS will be reflected this setting, Default is 500ms, minimum value is 100ms
         /// </summary>
@@ -72,7 +84,12 @@ namespace GoogleVisionBarCodeScanner
             set => SetValue(ScanIntervalProperty, value);
         }
 
-        public static BindableProperty IsScanningProperty = BindableProperty.Create(nameof(IsScanning), typeof(bool), typeof(CameraView), true, BindingMode.TwoWay);
+        public static BindableProperty IsScanningProperty = BindableProperty.Create(nameof(IsScanning)
+            , typeof(bool)
+            , typeof(CameraView)
+            , true
+            , defaultBindingMode: BindingMode.TwoWay
+            , propertyChanged: (bindable, value, newValue) => ((CameraView)bindable).IsScanning = (bool)newValue);
         /// <summary>
         /// Disables or enables scanning
         /// </summary>
@@ -82,7 +99,12 @@ namespace GoogleVisionBarCodeScanner
             set => SetValue(IsScanningProperty, value);
         }
 
-        public static BindableProperty TorchOnProperty = BindableProperty.Create(nameof(TorchOn), typeof(bool), typeof(CameraView), false, BindingMode.TwoWay);
+        public static BindableProperty TorchOnProperty = BindableProperty.Create(nameof(TorchOn)
+            , typeof(bool)
+            , typeof(CameraView)
+            , false
+            , defaultBindingMode: BindingMode.TwoWay
+            , propertyChanged: (bindable, value, newValue) => ((CameraView)bindable).TorchOn = (bool)newValue);
         /// <summary>
         /// Disables or enables torch
         /// </summary>
@@ -98,6 +120,7 @@ namespace GoogleVisionBarCodeScanner
             MainThread.BeginInvokeOnMainThread(() =>
             {
                 OnDetected?.Invoke(this, new OnDetectedEventArg { BarcodeResults = barCodeResults });
+                OnDetectedCommand?.Execute( new OnDetectedEventArg { BarcodeResults = barCodeResults });
             });
         }
     }
