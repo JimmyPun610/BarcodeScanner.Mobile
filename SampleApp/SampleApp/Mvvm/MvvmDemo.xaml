@@ -8,14 +8,18 @@
         <mvvm:MvvmDemoViewModel/>
     </ContentPage.BindingContext>
     <ContentPage.Content>
-        <ScrollView>
-            <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+        <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
-                <RowDefinition Height="700"/>
-                <RowDefinition Height="200"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="30"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="30"/>
+            </Grid.ColumnDefinitions>
+            <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" Grid.Row="0" Grid.ColumnSpan="3">
                 <Button x:Name="CancelButton" Text="Cancel" BackgroundColor="#FF0000" TextColor="White" Clicked="CancelButton_Clicked" HorizontalOptions="FillAndExpand"
                         CornerRadius="0"/>
                 <Button x:Name="FlashlightButton" BackgroundColor="#0075FF" TextColor="White" HorizontalOptions="FillAndExpand"
@@ -55,19 +59,16 @@
                 <Entry Keyboard="Numeric" Placeholder="Scan interval (ms)" Text="{Binding ScanInterval}"/>
             </StackLayout>
             <!--Fill the screen with CameraView-->
-            <gv:CameraView HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" OnDetectedCommand="{Binding OnDetectCommand}" Grid.Row="1"
+            <gv:CameraView OnDetectedCommand="{Binding OnDetectCommand}" Grid.Row="1" Grid.Column="1"
                            IsScanning="{Binding IsScanning}" 
+                           HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"
                            TorchOn="{Binding TorchOn}" VibrationOnDetected="{Binding VibrationOnDetected}" ScanInterval="{Binding ScanInterval}" x:Name="Camera"/>
             <!--Customized Size-->
             <!--<gv:CameraView HorizontalOptions="Center" WidthRequest="200" HeightRequest="200" OnDetected="CameraView_OnDetected" Grid.Row="1"/>-->
-            <ScrollView HorizontalOptions="FillAndExpand" Grid.Row="2" HeightRequest="200">
-                <StackLayout>
-                    <Label Text="Result" TextColor="Red"></Label>
-                    <Label Text="{Binding Result}" TextColor="Black"></Label>
-                </StackLayout>
-            </ScrollView>
+            <StackLayout Grid.Row="2" HeightRequest="120" Grid.ColumnSpan="3">
+                <Label Text="Result" TextColor="Red"></Label>
+                <Label Text="{Binding Result}" TextColor="Black"></Label>
+            </StackLayout>
         </Grid>
-        </ScrollView>
-        
     </ContentPage.Content>
 </ContentPage>

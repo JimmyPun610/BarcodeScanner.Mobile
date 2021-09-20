@@ -77,7 +77,7 @@ namespace GoogleVisionBarCodeScanner.Renderer
             // Preview
             var preview = new Preview.Builder().Build();
             preview.SetSurfaceProvider(Control.SurfaceProvider);
-
+            
             // Frame by frame analyze
             var imageAnalyzerBuilder = new ImageAnalysis.Builder();
             if (Element.RequestedFPS.HasValue)
@@ -110,12 +110,6 @@ namespace GoogleVisionBarCodeScanner.Renderer
             {
                 Log.Debug(nameof(CameraCallback), "Use case binding failed", exc);
             }
-
-        }
-
-        private void HandleIsScanning()
-        {
-
         }
 
         private void HandleTorch()
