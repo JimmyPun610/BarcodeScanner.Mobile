@@ -8,6 +8,7 @@
         <mvvm:MvvmDemoViewModel/>
     </ContentPage.BindingContext>
     <ContentPage.Content>
+  
         <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
@@ -59,10 +60,11 @@
                 <Entry Keyboard="Numeric" Placeholder="Scan interval (ms)" Text="{Binding ScanInterval}"/>
             </StackLayout>
             <!--Fill the screen with CameraView-->
-            <gv:CameraView OnDetectedCommand="{Binding OnDetectCommand}" Grid.Row="1" Grid.Column="1"
+            <gv:CameraView Grid.Row="1" Grid.Column="1"
+                           OnDetectedCommand="{Binding OnDetectCommand}" 
                            IsScanning="{Binding IsScanning}" 
-                           HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"
-                           TorchOn="{Binding TorchOn}" VibrationOnDetected="{Binding VibrationOnDetected}" ScanInterval="{Binding ScanInterval}" x:Name="Camera"/>
+                           TorchOn="{Binding TorchOn}" VibrationOnDetected="{Binding VibrationOnDetected}" ScanInterval="{Binding ScanInterval}"
+                           x:Name="Camera" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
             <!--Customized Size-->
             <!--<gv:CameraView HorizontalOptions="Center" WidthRequest="200" HeightRequest="200" OnDetected="CameraView_OnDetected" Grid.Row="1"/>-->
             <StackLayout Grid.Row="2" HeightRequest="120" Grid.ColumnSpan="3">

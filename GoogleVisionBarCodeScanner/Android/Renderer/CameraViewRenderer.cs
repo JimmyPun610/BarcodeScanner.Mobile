@@ -75,7 +75,8 @@ namespace GoogleVisionBarCodeScanner.Renderer
                 return;
 
             // Preview
-            var preview = new Preview.Builder().Build();
+            var previewBuilder = new Preview.Builder();
+            var preview = previewBuilder.Build();    
             preview.SetSurfaceProvider(Control.SurfaceProvider);
             
             // Frame by frame analyze
