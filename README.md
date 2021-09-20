@@ -168,6 +168,22 @@ bool allowed = await GoogleVisionBarCodeScanner.Methods.AskForRequiredPermission
 CameraView.IsScanning = true / false;
 ```
 
+## MVVM
+Properties support MVVM:
+1. OnDetectedCommand
+2. IsScanning
+3. TorchOn
+4. VibrationOnDetected
+5. ScanInterval
+
+Check out the MVVM from sample app for demo
+```XAML
+            <gv:CameraView Grid.Row="1" Grid.Column="1"
+                           OnDetectedCommand="{Binding OnDetectCommand}" 
+                           IsScanning="{Binding IsScanning}" 
+                           TorchOn="{Binding TorchOn}" VibrationOnDetected="{Binding VibrationOnDetected}" ScanInterval="{Binding ScanInterval}"
+                           x:Name="Camera" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
+```
 
 ## Scan from Image
 #### 1. Get the image byte array by your method.
