@@ -33,22 +33,25 @@ namespace GoogleVisionBarCodeScanner
             set => SetValue(VibrationOnDetectedProperty, value);
         }
 
+        public static BindableProperty PreviewHeightProperty = BindableProperty.Create(nameof(PreviewHeight), typeof(int?), typeof(CameraView), null);
+        /// <summary>
+        /// Only Android will be reflected this setting
+        /// </summary>
+        public int? PreviewHeight
+        {
+            get => (int?)GetValue(PreviewHeightProperty);
+            set => SetValue(PreviewHeightProperty, value);
+        }
 
-        //public static BindableProperty DefaultTorchOnProperty = BindableProperty.Create(nameof(DefaultTorchOn), typeof(bool), typeof(CameraView), false, propertyChanged: (bindable, value, newValue) => ((CameraView)bindable).TorchOn = (bool)newValue);
-        //[Obsolete("Use TorchOn")]
-        //public bool DefaultTorchOn
-        //{
-        //    get => (bool)GetValue(DefaultTorchOnProperty);
-        //    set => SetValue(DefaultTorchOnProperty, value);
-        //}
-
-        //public static BindableProperty AutoStartScanningProperty = BindableProperty.Create(nameof(AutoStartScanning), typeof(bool), typeof(CameraView), true);
-        //[Obsolete("Use IsScanning")]
-        //public bool AutoStartScanning
-        //{
-        //    get => (bool)GetValue(AutoStartScanningProperty);
-        //    set => SetValue(AutoStartScanningProperty, value);
-        //}
+        public static BindableProperty PreviewWidthProperty = BindableProperty.Create(nameof(PreviewWidth), typeof(int?), typeof(CameraView), null);
+        /// <summary>
+        /// Only Android will be reflected this setting
+        /// </summary>
+        public int? PreviewWidth
+        {
+            get => (int?)GetValue(PreviewWidthProperty);
+            set => SetValue(PreviewWidthProperty, value);
+        }
 
         public static BindableProperty RequestedFPSProperty = BindableProperty.Create(nameof(RequestedFPS)
             , typeof(float?)
