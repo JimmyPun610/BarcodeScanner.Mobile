@@ -1,10 +1,7 @@
 # BarcodeScanner.XF
-Powerful barcode scanning library for Xamarin Forms using GoogleVision API. 
+Powerful barcode scanning library for Xamarin Forms using Google MLKit API. 
 
 Works on iOS 11+ and Android (MonoAndroid10.0 and MonoAndroid11.0)
-
-For Android, it use Xamarin.GooglePlayServices.Vision
-For iOS, it use GoogleMobileVision under MLKit library
 
 <b>For user who are using Visual Studio for Windows, please make sure Hot-Restart is disabled to run the debug mode.
 https://docs.microsoft.com/en-us/xamarin/xamarin-forms/deploy-test/hot-restart</b>
@@ -12,6 +9,10 @@ https://docs.microsoft.com/en-us/xamarin/xamarin-forms/deploy-test/hot-restart</
 Please feel free to improve my source code.
 
 ## Current Version
+6.1.0.0-pre, Supporting MVVM now. Thanks to [@stepkillah](https://github.com/stepkillah)
+
+6.0.0.1-pre for Xamarin Forms 5.0.0.2083, use MLKit and CameraX in Android. Thanks to [@stepkillah](https://github.com/stepkillah)
+
 5.0.0.8 for Xamarin Forms 5.0.0.2012
 
 5.0.0.6 for Xamarin Forms 5.0.0.1905
@@ -158,15 +159,31 @@ bool allowed = await GoogleVisionBarCodeScanner.Methods.AskForRequiredPermission
 
 #### 6. To check the condition of torch
 ```C#
-   GoogleVisionBarCodeScanner.Methods.IsTorchOn();
+   // CameraView is from the Name of gv:CameraView defined in XAML
+   CameraView.TorchOn = true / false;
 ```
 #### 7. Restart scanning
 ```C#
-//Old method, you can use the new one.
-//GoogleVisionBarCodeScanner.Methods.Reset();
-GoogleVisionBarCodeScanner.Methods.SetIsScanning(true);
+// CameraView is from the Name of gv:CameraView defined in XAML
+CameraView.IsScanning = true / false;
 ```
 
+## MVVM
+Properties support MVVM:
+1. OnDetectedCommand
+2. IsScanning
+3. TorchOn
+4. VibrationOnDetected
+5. ScanInterval
+
+Check out the MVVM from sample app for demo
+```XAML
+            <gv:CameraView Grid.Row="1" Grid.Column="1"
+                           OnDetectedCommand="{Binding OnDetectCommand}" 
+                           IsScanning="{Binding IsScanning}" 
+                           TorchOn="{Binding TorchOn}" VibrationOnDetected="{Binding VibrationOnDetected}" ScanInterval="{Binding ScanInterval}"
+                           x:Name="Camera" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
+```
 
 ## Scan from Image
 #### 1. Get the image byte array by your method.

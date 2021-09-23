@@ -13,7 +13,7 @@ using AudioToolbox;
 using UIKit;
 using System.Drawing;
 using System.Threading;
-
+using GoogleVisionBarCodeScanner.Renderer;
 
 namespace GoogleVisionBarCodeScanner
 {
@@ -25,17 +25,6 @@ namespace GoogleVisionBarCodeScanner
         CaptureVideoDelegate captureVideoDelegate;
         //CameraOptions cameraOptions;
         public AVCaptureSession CaptureSession { get; private set; }
-
-        public bool IsScanning { get; private set; } = true;
-
-        public void SetIsScanning(bool isScanning)
-        {
-            bool shouldChange = isScanning != IsScanning;
-            IsScanning = isScanning;
-            if (shouldChange)
-                IsScanningChanged?.Invoke(this, EventArgs.Empty);
-        }
-
         AVCaptureVideoDataOutput VideoDataOutput { get; set; }
         //public UICameraPreview(CameraOptions options)
         //{
@@ -44,10 +33,10 @@ namespace GoogleVisionBarCodeScanner
         //    Initialize();
         //}
 
-        public UICameraPreview(bool defaultTorchOn, bool vibrationOnDetected, bool startScanningOnCreate, int scanInterval)
+        public UICameraPreview(CameraViewRenderer renderer)
         {
             //cameraOptions = options;
-            Initialize(defaultTorchOn, vibrationOnDetected, startScanningOnCreate, scanInterval);
+            Initialize(renderer);
         }
         public override void RemoveFromSuperview()
         {
@@ -142,9 +131,8 @@ namespace GoogleVisionBarCodeScanner
 
             }
         }
-        void Initialize(bool defaultTorchOn, bool vibrationOnDetected, bool startScanningOnCreate, int scanInterval)
+        void Initialize(CameraViewRenderer renderer)
         {
-            IsScanning = startScanningOnCreate;
             CaptureSession = new AVCaptureSession();
             CaptureSession.BeginConfiguration();
             this.AutoresizingMask = UIViewAutoresizing.FlexibleDimensions;
@@ -181,7 +169,7 @@ namespace GoogleVisionBarCodeScanner
             };
 
 
-            captureVideoDelegate = new CaptureVideoDelegate(vibrationOnDetected, scanInterval, this);
+            captureVideoDelegate = new CaptureVideoDelegate(renderer);
             captureVideoDelegate.OnDetected += (list) =>
             {
                 InvokeOnMainThread(() =>
@@ -197,9 +185,11 @@ namespace GoogleVisionBarCodeScanner
             InvokeOnMainThread(() =>
             {
                 CaptureSession.StartRunning();
-                //Torch on by default
-                if (defaultTorchOn && !IsTorchOn())
-                    ToggleFlashlight();
+                if(renderer.Element != null)
+                {
+                    if (renderer.Element.TorchOn && !IsTorchOn())
+                        ToggleFlashlight();
+                }
             });
 
 
@@ -208,9 +198,17 @@ namespace GoogleVisionBarCodeScanner
 
         public bool IsTorchOn()
         {
-            var videoDevices = AVCaptureDevice.GetDefaultDevice(AVMediaType.Video);
-            if (videoDevices != null && videoDevices.HasTorch)
-                return videoDevices.TorchMode == AVCaptureTorchMode.On;
+            try
+            {
+                var videoDevices = AVCaptureDevice.GetDefaultDevice(AVMediaType.Video);
+                if (videoDevices != null && videoDevices.HasTorch)
+                    return videoDevices.TorchMode == AVCaptureTorchMode.On;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"iOS IsTorchOn error : {ex.Message}, StackTrace : {ex.StackTrace}");
+            }
+            
 
             return false;
         }
@@ -240,21 +238,20 @@ namespace GoogleVisionBarCodeScanner
             VisionBarcodeDetector barcodeDetector;
             VisionImageMetadata metadata;
             VisionApi vision;
-            bool _vibrationOnDetected = true;
-            int scanIntervalInMs = 500;
             long lastAnalysisTime = DateTimeOffset.MinValue.ToUnixTimeMilliseconds();
             long lastRunTime = DateTimeOffset.MinValue.ToUnixTimeMilliseconds();
-            private UICameraPreview _cameraPreview;
-
-            public CaptureVideoDelegate(bool vibrationOnDetected, int scanInterval, UICameraPreview cameraPreview)
+            CameraViewRenderer _renderer;
+            public CaptureVideoDelegate(CameraViewRenderer renderer)
             {
-                _vibrationOnDetected = vibrationOnDetected;
-                _cameraPreview = cameraPreview;
+                _renderer = renderer;
                 metadata = new VisionImageMetadata();
                 vision = VisionApi.Create();
-                if (scanInterval < 100)
-                    scanIntervalInMs = 500;
-                else scanIntervalInMs = scanInterval;
+                if (_renderer.Element != null)
+                {
+                    if (_renderer.Element.ScanInterval < 100)
+                        _renderer.Element.ScanInterval = 500;
+                }
+
                 barcodeDetector = vision.GetBarcodeDetector(Configuration.BarcodeDetectorSupportFormat);
                 // Using back-facing camera
                 var devicePosition = AVCaptureDevicePosition.Back;
@@ -335,7 +332,7 @@ namespace GoogleVisionBarCodeScanner
             public override void DidOutputSampleBuffer(AVCaptureOutput captureOutput, CMSampleBuffer sampleBuffer, AVCaptureConnection connection)
             {
                 lastRunTime = DateTimeOffset.Now.ToUnixTimeMilliseconds();
-                if (lastRunTime - lastAnalysisTime > scanIntervalInMs && _cameraPreview.IsScanning)
+                if (lastRunTime - lastAnalysisTime > _renderer.Element.ScanInterval && _renderer.Element.IsScanning)
                 {
                     lastAnalysisTime = lastRunTime;
                     try
@@ -355,7 +352,7 @@ namespace GoogleVisionBarCodeScanner
             }
             private async void DetectBarcodeActionAsync(VisionImage image)
             {
-                if (!_cameraPreview.IsScanning) return;
+                if (!_renderer.Element.IsScanning) return;
 
                 try
                 {
@@ -364,9 +361,8 @@ namespace GoogleVisionBarCodeScanner
                     {
                         return;
                     }
-                    Console.WriteLine($"Successfully read barcode");
-                    _cameraPreview.SetIsScanning(false);
-                    if (_vibrationOnDetected)
+                    _renderer.Element.IsScanning = false;
+                    if (_renderer.Element.VibrationOnDetected)
                         SystemSound.Vibrate.PlayAlertSound();
                     List<BarcodeResult> resultList = new List<BarcodeResult>();
                     foreach (var barcode in barcodes)
@@ -374,6 +370,7 @@ namespace GoogleVisionBarCodeScanner
                         resultList.Add(new BarcodeResult
                         {
                             BarcodeType = Methods.ConvertBarcodeResultTypes(barcode.ValueType),
+                            BarcodeFormat = (BarcodeFormats)barcode.Format,
                             DisplayValue = barcode.DisplayValue,
                             RawValue = barcode.RawValue
                         });

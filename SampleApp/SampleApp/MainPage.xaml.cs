@@ -106,6 +106,17 @@ namespace SampleApp
             bool allowed = false;
             allowed = await GoogleVisionBarCodeScanner.Methods.AskForRequiredPermission();
             if (allowed)
+                Navigation.PushModalAsync(new NavigationPage(new Mvvm.MvvmDemo()));
+            else DisplayAlert("Alert", "You have to provide Camera permission", "Ok");
+        }
+
+
+        private async void Button6_Clicked(object sender, EventArgs e)
+        {
+            //Ask for permission first
+            bool allowed = false;
+            allowed = await GoogleVisionBarCodeScanner.Methods.AskForRequiredPermission();
+            if (allowed)
                 Navigation.PushModalAsync(new NavigationPage(new Page4()));
             else DisplayAlert("Alert", "You have to provide Camera permission", "Ok");
         }

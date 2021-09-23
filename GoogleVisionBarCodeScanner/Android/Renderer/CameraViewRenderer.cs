@@ -1,7 +1,8 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Threading.Tasks;
 using Android.Content;
-using Android.Gms.Extensions;
+using Android.Gms.Tasks;
 using Android.Hardware.Camera2;
 using Android.Util;
 using AndroidX.Camera.Camera2.InterOp;
@@ -59,8 +60,7 @@ namespace GoogleVisionBarCodeScanner.Renderer
         protected override void OnElementPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             base.OnElementPropertyChanged(sender, e);
-            if (e.PropertyName == CameraView.DefaultTorchOnProperty.PropertyName
-                || e.PropertyName == CameraView.TorchOnProperty.PropertyName)
+            if (e.PropertyName == CameraView.TorchOnProperty.PropertyName)
                 HandleTorch();
         }
 
@@ -68,7 +68,7 @@ namespace GoogleVisionBarCodeScanner.Renderer
 
         private void CameraCallback()
         {
-            if(_isDisposed)
+            if (_isDisposed)
                 return;
 
             // Used to bind the lifecycle of cameras to the lifecycle owner
@@ -76,7 +76,8 @@ namespace GoogleVisionBarCodeScanner.Renderer
                 return;
 
             // Preview
-            var preview = new Preview.Builder().Build();
+            var previewBuilder = new Preview.Builder();
+            var preview = previewBuilder.Build();
             preview.SetSurfaceProvider(Control.SurfaceProvider);
 
             // Frame by frame analyze
@@ -103,10 +104,12 @@ namespace GoogleVisionBarCodeScanner.Renderer
             {
                 // Unbind use cases before rebinding
                 cameraProvider.UnbindAll();
-                if(Context==null)
+                if (Context == null)
                     return;
                 // Bind use cases to camera
                 _camera = cameraProvider.BindToLifecycle((ILifecycleOwner)Context, cameraSelector, preview, imageAnalyzer);
+
+                HandleCustomPreviewSize(preview);
                 HandleTorch();
             }
             catch (Exception exc)
@@ -114,6 +117,16 @@ namespace GoogleVisionBarCodeScanner.Renderer
                 Log.Debug(nameof(CameraCallback), "Use case binding failed", exc);
             }
 
+        }
+
+        private void HandleCustomPreviewSize(Preview preview)
+        {
+            if (Element.PreviewWidth.HasValue && Element.PreviewHeight.HasValue)
+            {
+                var width = Element.PreviewWidth.Value;
+                var height = Element.PreviewHeight.Value;
+                preview.UpdateSuggestedResolution(new Android.Util.Size(width, height));
+            }
         }
 
         private void HandleTorch()
@@ -159,7 +172,6 @@ namespace GoogleVisionBarCodeScanner.Renderer
                 _cameraFuture?.Cancel(true);
                 _cameraFuture?.Dispose();
                 _cameraFuture = null;
-
             }
 
             _isDisposed = true;
@@ -202,12 +214,18 @@ namespace GoogleVisionBarCodeScanner.Renderer
         {
             private readonly IBarcodeScanner _barcodeScanner;
             private readonly CameraViewRenderer _renderer;
+            private long _lastRunTime = DateTimeOffset.Now.ToUnixTimeMilliseconds();
+            private long _lastAnalysisTime = DateTimeOffset.MinValue.ToUnixTimeMilliseconds();
+
 
             public BarcodeAnalyzer(CameraViewRenderer renderer)
             {
                 _renderer = renderer;
+                if (_renderer.Element != null && _renderer.Element.ScanInterval < 100)
+                    _renderer.Element.ScanInterval = 500;
+
                 _barcodeScanner = BarcodeScanning.GetClient(new BarcodeScannerOptions.Builder().SetBarcodeFormats(
-                    Barcode.FormatQrCode)
+                    Configuration.BarcodeFormats)
                 .Build());
 
             }
@@ -217,20 +235,26 @@ namespace GoogleVisionBarCodeScanner.Renderer
 
                 var mediaImage = proxy.Image;
                 if (mediaImage == null) return;
-
+                _lastRunTime = DateTimeOffset.Now.ToUnixTimeMilliseconds();
                 try
                 {
-                    var image = InputImage.FromMediaImage(mediaImage, proxy.ImageInfo.RotationDegrees);
-                    // Pass image to the scanner and have it do its thing
-                    var result = await _barcodeScanner.Process(image);
-                    var final = Methods.Process(result);
-                    if (final == null || _renderer?.Element == null) return;
-                    if (!_renderer.Element.IsScanning)
-                        return;
-                    _renderer.Element.IsScanning = false;
-                    _renderer.Element.TriggerOnDetected(final);
-                    if (_renderer.Element.VibrationOnDetected)
-                        Xamarin.Essentials.Vibration.Vibrate(200);
+                    Console.WriteLine($"IsScanning : {_renderer.Element.IsScanning}");
+                    if (_lastRunTime - _lastAnalysisTime > _renderer.Element.ScanInterval && _renderer.Element.IsScanning)
+                    {
+                        _lastAnalysisTime = _lastRunTime;
+                        var image = InputImage.FromMediaImage(mediaImage, proxy.ImageInfo.RotationDegrees);
+                        // Pass image to the scanner and have it do its thing
+                        var result = await ToAwaitableTask(_barcodeScanner.Process(image));
+                        var final = Methods.Process(result);
+                        if (final == null || _renderer?.Element == null) return;
+                        if (!_renderer.Element.IsScanning)
+                            return;
+
+                        _renderer.Element.IsScanning = false;
+                        _renderer.Element.TriggerOnDetected(final);
+                        if (_renderer.Element.VibrationOnDetected)
+                            Xamarin.Essentials.Vibration.Vibrate(200);
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -241,6 +265,7 @@ namespace GoogleVisionBarCodeScanner.Renderer
                     SafeCloseImageProxy(proxy);
                 }
             }
+
             private void SafeCloseImageProxy(IImageProxy proxy)
             {
                 try
@@ -252,7 +277,41 @@ namespace GoogleVisionBarCodeScanner.Renderer
                 {
                     //Ignore argument exception, it will be thrown if BarcodeAnalyzer get disposed during processing
                 }
+            }
+        }
 
+        private static Task<Java.Lang.Object> ToAwaitableTask(Android.Gms.Tasks.Task task)
+        {
+            var taskCompletionSource = new TaskCompletionSource<Java.Lang.Object>();
+            var taskCompleteListener = new TaskCompleteListener(taskCompletionSource);
+            task.AddOnCompleteListener(taskCompleteListener);
+
+            return taskCompletionSource.Task;
+        }
+    }
+
+    class TaskCompleteListener : Java.Lang.Object, IOnCompleteListener
+    {
+        private readonly TaskCompletionSource<Java.Lang.Object> _taskCompletionSource;
+
+        public TaskCompleteListener(TaskCompletionSource<Java.Lang.Object> tcs)
+        {
+            _taskCompletionSource = tcs;
+        }
+
+        public void OnComplete(Android.Gms.Tasks.Task task)
+        {
+            if (task.IsCanceled)
+            {
+                _taskCompletionSource.SetCanceled();
+            }
+            else if (task.IsSuccessful)
+            {
+                _taskCompletionSource.SetResult(task.Result);
+            }
+            else
+            {
+                _taskCompletionSource.SetException(task.Exception);
             }
         }
     }
