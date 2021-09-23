@@ -1,7 +1,9 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Threading.Tasks;
 using Android.Content;
 using Android.Gms.Extensions;
+using Android.Gms.Tasks;
 using Android.Hardware.Camera2;
 using Android.Util;
 using AndroidX.Camera.Camera2.InterOp;
@@ -223,7 +225,7 @@ namespace GoogleVisionBarCodeScanner.Renderer
                         lastAnalysisTime = lastRunTime;
                         var image = InputImage.FromMediaImage(mediaImage, proxy.ImageInfo.RotationDegrees);
                         // Pass image to the scanner and have it do its thing
-                        var result = await _barcodeScanner.Process(image);
+                        var result = await ToAwaitableTask(_barcodeScanner.Process(image));
                         var final = Methods.Process(result);
                         if (final != null && _renderer?.Element != null)
                         {
@@ -243,6 +245,40 @@ namespace GoogleVisionBarCodeScanner.Renderer
                 {
                     proxy.Close();
                 }
+            }
+        }
+        public static Task<Java.Lang.Object> ToAwaitableTask(Android.Gms.Tasks.Task task)
+        {
+            var taskCompletionSource = new TaskCompletionSource<Java.Lang.Object>();
+            var taskCompleteListener = new TaskCompleteListener(taskCompletionSource);
+            task.AddOnCompleteListener(taskCompleteListener);
+
+            return taskCompletionSource.Task;
+        }
+    }
+
+    class TaskCompleteListener : Java.Lang.Object, IOnCompleteListener
+    {
+        private readonly TaskCompletionSource<Java.Lang.Object> taskCompletionSource;
+
+        public TaskCompleteListener(TaskCompletionSource<Java.Lang.Object> tcs)
+        {
+            this.taskCompletionSource = tcs;
+        }
+
+        public void OnComplete(Android.Gms.Tasks.Task task)
+        {
+            if (task.IsCanceled)
+            {
+                this.taskCompletionSource.SetCanceled();
+            }
+            else if (task.IsSuccessful)
+            {
+                this.taskCompletionSource.SetResult(task.Result);
+            }
+            else
+            {
+                this.taskCompletionSource.SetException(task.Exception);
             }
         }
     }
