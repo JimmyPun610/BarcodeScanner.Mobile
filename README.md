@@ -63,6 +63,15 @@ public override void OnRequestPermissionsResult(int requestCode, string[] permis
     base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
 }
 ```
+##### ProGuard configuration
+```
+-keep class com.google.mlkit.common.internal.MlKitInitProvider {*;}
+-keep class androidx.camera.camera2.internal.Camera2CameraInfoImpl {*;}
+-keep class android.media.Image {*;}
+-keep class androidx.camera.core.** {*;}
+-keep class com.google.mlkit.vision.barcode.internal.BarcodeScannerImpl {*;}
+```
+
 ## iOS Setup
 1. Edit Info.plist, add camera rights
 ```

@@ -2,7 +2,6 @@
 using System.ComponentModel;
 using System.Threading.Tasks;
 using Android.Content;
-using Android.Gms.Extensions;
 using Android.Gms.Tasks;
 using Android.Hardware.Camera2;
 using Android.Util;
@@ -33,7 +32,6 @@ namespace GoogleVisionBarCodeScanner.Renderer
         private IExecutorService _cameraExecutor;
 
         private ICamera _camera;
-
 
         public static void Init() { }
 
@@ -70,17 +68,18 @@ namespace GoogleVisionBarCodeScanner.Renderer
 
         private void CameraCallback()
         {
-            // Used to bind the lifecycle of cameras to the lifecycle owner
-            var cameraProvider = (ProcessCameraProvider)_cameraFuture.Get();
+            if (_isDisposed)
+                return;
 
-            if (cameraProvider == null)
+            // Used to bind the lifecycle of cameras to the lifecycle owner
+            if (!(_cameraFuture.Get() is ProcessCameraProvider cameraProvider))
                 return;
 
             // Preview
             var previewBuilder = new Preview.Builder();
-            var preview = previewBuilder.Build();    
+            var preview = previewBuilder.Build();
             preview.SetSurfaceProvider(Control.SurfaceProvider);
-            
+
             // Frame by frame analyze
             var imageAnalyzerBuilder = new ImageAnalysis.Builder();
             if (Element.RequestedFPS.HasValue)
@@ -105,6 +104,8 @@ namespace GoogleVisionBarCodeScanner.Renderer
             {
                 // Unbind use cases before rebinding
                 cameraProvider.UnbindAll();
+                if (Context == null)
+                    return;
                 // Bind use cases to camera
                 _camera = cameraProvider.BindToLifecycle((ILifecycleOwner)Context, cameraSelector, preview, imageAnalyzer);
 
@@ -166,6 +167,8 @@ namespace GoogleVisionBarCodeScanner.Renderer
                 _cameraExecutor?.Dispose();
                 _cameraExecutor = null;
 
+                ClearCameraProvider();
+
                 _cameraFuture?.Cancel(true);
                 _cameraFuture?.Dispose();
                 _cameraFuture = null;
@@ -173,6 +176,25 @@ namespace GoogleVisionBarCodeScanner.Renderer
 
             _isDisposed = true;
         }
+
+
+        private void ClearCameraProvider()
+        {
+            try
+            {
+                // Used to bind the lifecycle of cameras to the lifecycle owner
+                if (!(_cameraFuture.Get() is ProcessCameraProvider cameraProvider))
+                    return;
+
+                cameraProvider.UnbindAll();
+                cameraProvider.Dispose();
+            }
+            catch (Exception ex)
+            {
+                Log.Debug($"{nameof(CameraViewRenderer)}-{nameof(ClearCameraProvider)}", ex.ToString());
+            }
+        }
+
 
         private class TorchStateObserver : Java.Lang.Object, IObserver
         {
@@ -192,19 +214,16 @@ namespace GoogleVisionBarCodeScanner.Renderer
         {
             private readonly IBarcodeScanner _barcodeScanner;
             private readonly CameraViewRenderer _renderer;
-            long lastRunTime = DateTimeOffset.Now.ToUnixTimeMilliseconds();
-            long lastAnalysisTime = DateTimeOffset.MinValue.ToUnixTimeMilliseconds();
-        
+            private long _lastRunTime = DateTimeOffset.Now.ToUnixTimeMilliseconds();
+            private long _lastAnalysisTime = DateTimeOffset.MinValue.ToUnixTimeMilliseconds();
+
 
             public BarcodeAnalyzer(CameraViewRenderer renderer)
             {
                 _renderer = renderer;
-                if(_renderer.Element != null)
-                {
-                    if (_renderer.Element.ScanInterval < 100)
-                        _renderer.Element.ScanInterval = 500;
-                }
-                
+                if (_renderer.Element != null && _renderer.Element.ScanInterval < 100)
+                    _renderer.Element.ScanInterval = 500;
+
                 _barcodeScanner = BarcodeScanning.GetClient(new BarcodeScannerOptions.Builder().SetBarcodeFormats(
                     Configuration.BarcodeFormats)
                 .Build());
@@ -216,38 +235,52 @@ namespace GoogleVisionBarCodeScanner.Renderer
 
                 var mediaImage = proxy.Image;
                 if (mediaImage == null) return;
-                lastRunTime = DateTimeOffset.Now.ToUnixTimeMilliseconds();
+                _lastRunTime = DateTimeOffset.Now.ToUnixTimeMilliseconds();
                 try
                 {
                     Console.WriteLine($"IsScanning : {_renderer.Element.IsScanning}");
-                    if (lastRunTime - lastAnalysisTime > _renderer.Element.ScanInterval && _renderer.Element.IsScanning)
+                    if (_lastRunTime - _lastAnalysisTime > _renderer.Element.ScanInterval && _renderer.Element.IsScanning)
                     {
-                        lastAnalysisTime = lastRunTime;
+                        _lastAnalysisTime = _lastRunTime;
                         var image = InputImage.FromMediaImage(mediaImage, proxy.ImageInfo.RotationDegrees);
                         // Pass image to the scanner and have it do its thing
                         var result = await ToAwaitableTask(_barcodeScanner.Process(image));
                         var final = Methods.Process(result);
-                        if (final != null && _renderer?.Element != null)
-                        {
-                            _renderer.Element.IsScanning = false;
-                            _renderer.Element.TriggerOnDetected(final);
-                            if (_renderer.Element.VibrationOnDetected)
-                                Xamarin.Essentials.Vibration.Vibrate(200);
-                        }
+                        if (final == null || _renderer?.Element == null) return;
+                        if (!_renderer.Element.IsScanning)
+                            return;
+
+                        _renderer.Element.IsScanning = false;
+                        _renderer.Element.TriggerOnDetected(final);
+                        if (_renderer.Element.VibrationOnDetected)
+                            Xamarin.Essentials.Vibration.Vibrate(200);
                     }
-                  
                 }
                 catch (Exception ex)
                 {
-                    //Log somewhere
+                    Log.Debug(nameof(CameraViewRenderer), ex.ToString());
                 }
                 finally
                 {
-                    proxy.Close();
+                    SafeCloseImageProxy(proxy);
+                }
+            }
+
+            private void SafeCloseImageProxy(IImageProxy proxy)
+            {
+                try
+                {
+                    proxy?.Close();
+                }
+                catch (ObjectDisposedException) { }
+                catch (ArgumentException)
+                {
+                    //Ignore argument exception, it will be thrown if BarcodeAnalyzer get disposed during processing
                 }
             }
         }
-        public static Task<Java.Lang.Object> ToAwaitableTask(Android.Gms.Tasks.Task task)
+
+        private static Task<Java.Lang.Object> ToAwaitableTask(Android.Gms.Tasks.Task task)
         {
             var taskCompletionSource = new TaskCompletionSource<Java.Lang.Object>();
             var taskCompleteListener = new TaskCompleteListener(taskCompletionSource);
@@ -259,26 +292,26 @@ namespace GoogleVisionBarCodeScanner.Renderer
 
     class TaskCompleteListener : Java.Lang.Object, IOnCompleteListener
     {
-        private readonly TaskCompletionSource<Java.Lang.Object> taskCompletionSource;
+        private readonly TaskCompletionSource<Java.Lang.Object> _taskCompletionSource;
 
         public TaskCompleteListener(TaskCompletionSource<Java.Lang.Object> tcs)
         {
-            this.taskCompletionSource = tcs;
+            _taskCompletionSource = tcs;
         }
 
         public void OnComplete(Android.Gms.Tasks.Task task)
         {
             if (task.IsCanceled)
             {
-                this.taskCompletionSource.SetCanceled();
+                _taskCompletionSource.SetCanceled();
             }
             else if (task.IsSuccessful)
             {
-                this.taskCompletionSource.SetResult(task.Result);
+                _taskCompletionSource.SetResult(task.Result);
             }
             else
             {
-                this.taskCompletionSource.SetException(task.Exception);
+                _taskCompletionSource.SetException(task.Exception);
             }
         }
     }

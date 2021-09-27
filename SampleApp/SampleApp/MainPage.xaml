@@ -13,6 +13,7 @@
         <Button Text="Start scanning on click" Clicked="Button3_Clicked"/>
         <Button Text="Scan from Image" Clicked="Button4_Clicked"/>
         <Button Text="MVVM Demo" Clicked="Button5_Clicked"/>
+        <Button Text="Scan from Image With One Time Scan" Clicked="Button6_Clicked"/>
     </StackLayout>
 
 </ContentPage>

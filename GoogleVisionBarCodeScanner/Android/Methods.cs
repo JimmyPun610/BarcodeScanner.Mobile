@@ -112,10 +112,11 @@ namespace GoogleVisionBarCodeScanner
 
         public static async Task<List<BarcodeResult>> ScanFromImage(byte[] imageArray)
         {
-            Bitmap bitmap = await BitmapFactory.DecodeByteArrayAsync(imageArray, 0, imageArray.Length);
-            var image = InputImage.FromBitmap(bitmap, 0);
-            var scanner = BarcodeScanning.GetClient(new BarcodeScannerOptions.Builder().SetBarcodeFormats(
-                    Configuration.BarcodeFormats)
+            using Bitmap bitmap = await BitmapFactory.DecodeByteArrayAsync(imageArray, 0, imageArray.Length);
+            if (bitmap == null)
+                return null;
+            using var image = InputImage.FromBitmap(bitmap, 0);
+            var scanner = BarcodeScanning.GetClient(new BarcodeScannerOptions.Builder().SetBarcodeFormats(Configuration.BarcodeFormats)
                 .Build());
             return Process(await scanner.Process(image));
         }
