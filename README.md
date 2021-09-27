@@ -9,7 +9,7 @@ https://docs.microsoft.com/en-us/xamarin/xamarin-forms/deploy-test/hot-restart</
 Please feel free to improve my source code.
 
 ## Current Version
-6.1.0.0-pre, Supporting MVVM now. Thanks to [@stepkillah](https://github.com/stepkillah)
+6.1.0.2-pre, Supporting MVVM and Fix Android camera crashing the app. Thanks to [@stepkillah](https://github.com/stepkillah). 
 
 6.0.0.1-pre for Xamarin Forms 5.0.0.2083, use MLKit and CameraX in Android. Thanks to [@stepkillah](https://github.com/stepkillah)
 
