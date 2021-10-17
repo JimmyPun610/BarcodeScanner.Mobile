@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using GoogleVisionBarCodeScanner;
 using Xamarin.Forms;
 using Xamarin.Forms.PlatformConfiguration.iOSSpecific;
 using Xamarin.Forms.Xaml;
@@ -28,6 +28,13 @@ namespace SampleApp
         private void FlashlightButton_Clicked(object sender, EventArgs e)
         {
             Camera.TorchOn = !Camera.TorchOn;
+        }
+
+        private void SwitchCameraButton_Clicked(object sender, EventArgs e)
+        {
+            Camera.CameraFacing = Camera.CameraFacing == CameraFacing.Back
+                                      ? CameraFacing.Front
+                                      : CameraFacing.Back;
         }
 
         private async void CameraView_OnDetected(object sender, GoogleVisionBarCodeScanner.OnDetectedEventArg e)

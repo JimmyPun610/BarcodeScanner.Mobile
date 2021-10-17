@@ -26,16 +26,27 @@
                     HorizontalOptions="StartAndExpand"
                     Text="Cancel"
                     TextColor="White"
-                    WidthRequest="150" />
+                    />
                 <Button
                     x:Name="FlashlightButton"
                     BackgroundColor="#0075FF"
                     Clicked="FlashlightButton_Clicked"
                     CornerRadius="0"
-                    HorizontalOptions="EndAndExpand"
+                    HorizontalOptions="CenterAndExpand"
                     Text="Flashlight"
                     TextColor="White"
-                    WidthRequest="150" />
+                    />
+
+                <Button
+                    x:Name="SwitchCameraButton"
+                    BackgroundColor="Brown"
+                    Clicked="SwitchCameraButton_Clicked"
+                    CornerRadius="0"
+                    HorizontalOptions="EndAndExpand"
+                    Text="Switch Camera"
+                    TextColor="White"
+                    />
+
             </StackLayout>
             <!--  Fill the screen with CameraView  -->
             <Grid
