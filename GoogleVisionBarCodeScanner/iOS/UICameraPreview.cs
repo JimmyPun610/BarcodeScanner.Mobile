@@ -23,19 +23,15 @@ namespace GoogleVisionBarCodeScanner
         public event EventHandler IsScanningChanged;
         AVCaptureVideoPreviewLayer previewLayer;
         CaptureVideoDelegate captureVideoDelegate;
-        //CameraOptions cameraOptions;
-        public AVCaptureSession CaptureSession { get; private set; }
+        public AVCaptureSession  CaptureSession  { get; private set; }
         AVCaptureVideoDataOutput VideoDataOutput { get; set; }
-        //public UICameraPreview(CameraOptions options)
-        //{
-        //    cameraOptions = options;
-        //    IsPreviewing = false;
-        //    Initialize();
-        //}
+        readonly CameraFacing _cameraFacing;
+        readonly CaptureQuality _captureQuality;
 
-        public UICameraPreview(CameraViewRenderer renderer)
+        public UICameraPreview(CameraViewRenderer renderer, CameraFacing cameraFacing, CaptureQuality captureQuality)
         {
-            //cameraOptions = options;
+            _cameraFacing   = cameraFacing;
+            _captureQuality = captureQuality;
             Initialize(renderer);
         }
         public override void RemoveFromSuperview()
@@ -54,7 +50,6 @@ namespace GoogleVisionBarCodeScanner
             {
 
             }
-
         }
 
         public override void LayoutSubviews()
@@ -62,6 +57,31 @@ namespace GoogleVisionBarCodeScanner
             base.LayoutSubviews();
             setPreviewOrientation();
         }
+
+        internal void ChangeCamera(CameraFacing facing)
+        {
+            var input = CaptureSession.Inputs.FirstOrDefault();
+            if (input != null)
+            {
+                CaptureSession.BeginConfiguration();
+                CaptureSession.RemoveInput(input);
+                AddInputToCameraSession(facing);
+                CaptureSession.CommitConfiguration();
+            }
+        }
+
+        internal void ChangeSessionPreset(CaptureQuality quality)
+        {
+            var input = CaptureSession.Inputs.FirstOrDefault();
+            if (input != null)
+            {
+                CaptureSession.BeginConfiguration();
+                CaptureSession.RemoveInput(input);
+                AddSessionPreset(quality);
+                CaptureSession.CommitConfiguration();
+            }
+        }
+
         private void updatePreviewLayer(AVCaptureConnection layer, AVCaptureVideoOrientation orientation)
         {
             layer.VideoOrientation = orientation;
@@ -131,6 +151,7 @@ namespace GoogleVisionBarCodeScanner
 
             }
         }
+
         void Initialize(CameraViewRenderer renderer)
         {
             CaptureSession = new AVCaptureSession();
@@ -141,24 +162,13 @@ namespace GoogleVisionBarCodeScanner
                 Frame = this.Bounds,
                 VideoGravity = AVLayerVideoGravity.ResizeAspectFill
             };
-            var videoDevices = AVCaptureDevice.DevicesWithMediaType(AVMediaType.Video);
-            var cameraPosition = AVCaptureDevicePosition.Back;
-            //var cameraPosition = (cameraOptions == CameraOptions.Front) ? AVCaptureDevicePosition.Front : AVCaptureDevicePosition.Back;
-            var device = videoDevices.FirstOrDefault(d => d.Position == cameraPosition);
 
-
-            if (device == null)
-                return;
-
-            NSError error;
-            var input = new AVCaptureDeviceInput(device, out error);
-
-            CaptureSession.AddInput(input);
-            CaptureSession.SessionPreset = AVFoundation.AVCaptureSession.Preset1280x720;
             Layer.AddSublayer(previewLayer);
 
-            CaptureSession.CommitConfiguration();
+            AddSessionPreset(_captureQuality);
+            AddInputToCameraSession(_cameraFacing);
 
+            CaptureSession.CommitConfiguration();
 
 
             VideoDataOutput = new AVCaptureVideoDataOutput
@@ -191,8 +201,39 @@ namespace GoogleVisionBarCodeScanner
                         ToggleFlashlight();
                 }
             });
+        }
 
+        void AddInputToCameraSession(CameraFacing facing)
+        {
+            var videoDevices   = AVCaptureDevice.DevicesWithMediaType(AVMediaType.Video);
+            var cameraPosition = (facing == CameraFacing.Front) ? AVCaptureDevicePosition.Front : AVCaptureDevicePosition.Back;
+            var device         = videoDevices.FirstOrDefault(d => d.Position == cameraPosition);
 
+            if (device == null)
+                throw new NotSupportedException("The selected camera is not supported on this device");
+
+            NSError error;
+            var     input = new AVCaptureDeviceInput(device, out error);
+
+            CaptureSession.AddInput(input);
+        }
+
+        void AddSessionPreset(CaptureQuality captureQuality)
+        {
+            CaptureSession.SessionPreset = GetSessionPreset(captureQuality);
+        }
+
+        NSString GetSessionPreset(CaptureQuality captureQuality)
+        {
+            return captureQuality switch
+            {
+                CaptureQuality.Lowest => AVCaptureSession.Preset352x288,
+                CaptureQuality.Low => AVCaptureSession.Preset640x480,
+                CaptureQuality.Medium => AVCaptureSession.Preset1280x720,
+                CaptureQuality.High => AVCaptureSession.Preset1920x1080,
+                CaptureQuality.Highest => AVCaptureSession.Preset3840x2160,
+                _ => throw new ArgumentOutOfRangeException(nameof(_captureQuality))
+            };
         }
 
 
