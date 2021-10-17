@@ -175,6 +175,20 @@ bool allowed = await GoogleVisionBarCodeScanner.Methods.AskForRequiredPermission
 CameraView.IsScanning = true / false;
 ```
 
+#### 8. Use front/back camera
+```C#
+// CameraView is from the Name of gv:CameraView defined in XAML
+// Default is CameraFacing.Back
+CameraView.CameraFacing = CameraFacing.Back / CameraFacing.Front;
+```
+
+#### 9. Modify caputre quality (to balance speed/precision)
+```C#
+// CameraView is from the Name of gv:CameraView defined in XAML
+// Default is CaptureQuality.Medium
+CameraView.CaptureQuality = CaptureQuality.Lowest / CaptureQuality.Low / CaptureQuality.Medium / CaptureQuality.High / CaptureQuality.Highest;
+```
+
 ## MVVM
 Properties support MVVM:
 1. OnDetectedCommand
@@ -182,6 +196,8 @@ Properties support MVVM:
 3. TorchOn
 4. VibrationOnDetected
 5. ScanInterval
+6. CameraFacing
+7. CaptureQuality
 
 Check out the MVVM from sample app for demo
 ```XAML
