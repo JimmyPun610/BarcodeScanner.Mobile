@@ -35,6 +35,13 @@ namespace SampleApp
             Camera.IsScanning = true;
         }
 
+        private void SwitchCameraButton_Clicked(object sender, EventArgs e)
+        {
+            Camera.CameraFacing = Camera.CameraFacing == CameraFacing.Back
+                                      ? CameraFacing.Front
+                                      : CameraFacing.Back;
+        }
+
         private async void CameraView_OnDetected(object sender, GoogleVisionBarCodeScanner.OnDetectedEventArg e)
         {
             List<GoogleVisionBarCodeScanner.BarcodeResult> obj = e.BarcodeResults;

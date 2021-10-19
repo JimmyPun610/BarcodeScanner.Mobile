@@ -38,7 +38,7 @@ namespace GoogleVisionBarCodeScanner.Renderer
         public CameraViewRenderer(Context context) : base(context)
         {
             _cameraExecutor = Executors.NewSingleThreadExecutor();
-            _cameraFuture = ProcessCameraProvider.GetInstance(context);
+            _cameraFuture   = ProcessCameraProvider.GetInstance(context);
         }
 
         protected override void OnElementChanged(ElementChangedEventArgs<CameraView> e)
@@ -54,14 +54,23 @@ namespace GoogleVisionBarCodeScanner.Renderer
             }
             // Configure the control and subscribe to event handlers
             _cameraFuture.AddListener(new Runnable(CameraCallback), ContextCompat.GetMainExecutor(Context));
-
         }
 
         protected override void OnElementPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             base.OnElementPropertyChanged(sender, e);
             if (e.PropertyName == CameraView.TorchOnProperty.PropertyName)
+            {
                 HandleTorch();
+            }
+            else if (e.PropertyName == CameraView.CameraFacingProperty.PropertyName)
+            {
+                CameraCallback();
+            }
+            else if (e.PropertyName == CameraView.CaptureQualityProperty.PropertyName)
+            {
+                CameraCallback();
+            }
         }
 
         protected override PreviewView CreateNativeControl() => new PreviewView(Context);
@@ -88,17 +97,16 @@ namespace GoogleVisionBarCodeScanner.Renderer
                 ext.SetCaptureRequestOption(CaptureRequest.ControlAeMode, 0);
                 ext.SetCaptureRequestOption(CaptureRequest.ControlAeTargetFpsRange, new Android.Util.Range((int)Element.RequestedFPS.Value, (int)Element.RequestedFPS.Value));
             }
-            var imageAnalyzer = imageAnalyzerBuilder.Build();
+
+            //https://developers.google.com/ml-kit/vision/barcode-scanning/android#input-image-guidelines
+            var imageAnalyzer = imageAnalyzerBuilder
+                                .SetBackpressureStrategy(ImageAnalysis.StrategyKeepOnlyLatest) //<!-- only one image will be delivered for analysis at a time
+                                .SetTargetResolution(TargetResolution())
+                                .Build();
+
             imageAnalyzer.SetAnalyzer(_cameraExecutor, new BarcodeAnalyzer(this));
 
-            // Select back camera as a default, or front camera otherwise
-            CameraSelector cameraSelector = null;
-            if (cameraProvider.HasCamera(CameraSelector.DefaultBackCamera))
-                cameraSelector = CameraSelector.DefaultBackCamera;
-            else if (cameraProvider.HasCamera(CameraSelector.DefaultFrontCamera))
-                cameraSelector = CameraSelector.DefaultFrontCamera;
-            else
-                throw new System.Exception("Camera not found");
+            var cameraSelector = SelectCamera(cameraProvider);
 
             try
             {
@@ -116,7 +124,35 @@ namespace GoogleVisionBarCodeScanner.Renderer
             {
                 Log.Debug(nameof(CameraCallback), "Use case binding failed", exc);
             }
+        }
 
+        private CameraSelector SelectCamera(ProcessCameraProvider cameraProvider)
+        {
+	        if (Element.CameraFacing == CameraFacing.Front)
+	        {
+		        if (cameraProvider.HasCamera(CameraSelector.DefaultFrontCamera))
+			        return CameraSelector.DefaultFrontCamera;
+
+                throw new NotSupportedException("Front camera is not supported in this device");
+            }
+
+	        if (cameraProvider.HasCamera(CameraSelector.DefaultBackCamera))
+		        return CameraSelector.DefaultBackCamera;
+
+            throw new NotSupportedException("Back camera is not supported in this device");
+        }
+
+        private Android.Util.Size TargetResolution()
+        {
+            return Element.CaptureQuality switch
+            {
+                CaptureQuality.Lowest => new Android.Util.Size(352, 288),
+                CaptureQuality.Low => new Android.Util.Size(640, 480),
+                CaptureQuality.Medium => new Android.Util.Size(1280, 720),
+                CaptureQuality.High => new Android.Util.Size(1920, 1080),
+                CaptureQuality.Highest => new Android.Util.Size(3840, 2160),
+                _ => throw new ArgumentOutOfRangeException(nameof(CaptureQuality))
+            };
         }
 
         private void HandleCustomPreviewSize(Preview preview)
@@ -150,6 +186,7 @@ namespace GoogleVisionBarCodeScanner.Renderer
                 return;
             _camera.CameraControl.EnableTorch(false);
         }
+
 
 
         protected override void Dispose(bool disposing)

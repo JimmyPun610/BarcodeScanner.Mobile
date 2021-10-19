@@ -114,6 +114,40 @@ namespace GoogleVisionBarCodeScanner
             set => SetValue(TorchOnProperty, value);
         }
 
+        public static BindableProperty CameraFacingProperty = BindableProperty.Create(nameof(CameraFacing)
+            , typeof(CameraFacing)
+            , typeof(CameraView)
+            , CameraFacing.Back
+            , defaultBindingMode: BindingMode.TwoWay
+            , propertyChanged: (bindable, value, newValue) => ((CameraView)bindable).CameraFacing = (CameraFacing)newValue);
+        /// <summary>
+        /// Select Back or Front camera.
+        /// Default value is Back Camera
+        /// </summary>
+        public CameraFacing CameraFacing
+        {
+            get => (CameraFacing)GetValue(CameraFacingProperty);
+            set => SetValue(CameraFacingProperty, value);
+        }
+
+        public static BindableProperty CaptureQualityProperty = BindableProperty.Create(nameof(CaptureQuality)
+            , typeof(CaptureQuality)
+            , typeof(CameraView)
+            , CaptureQuality.Medium
+            , defaultBindingMode: BindingMode.TwoWay
+            , propertyChanged: (bindable, value, newValue) => ((CameraView)bindable).CaptureQuality = (CaptureQuality)newValue);
+
+        /// <summary>
+        /// Set the capture quality for the image analysys.
+        /// Reccomended and default value is Medium.
+        /// Use highest values for more precision or lower for fast scanning.
+        /// </summary>
+        public CaptureQuality CaptureQuality
+        {
+            get => (CaptureQuality)GetValue(CaptureQualityProperty);
+            set => SetValue(CaptureQualityProperty, value);
+        }
+
         public event EventHandler<OnDetectedEventArg> OnDetected;
         public void TriggerOnDetected(List<BarcodeResult> barCodeResults)
         {

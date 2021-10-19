@@ -29,7 +29,7 @@ namespace GoogleVisionBarCodeScanner.Renderer
             if (e.NewElement != null && Control == null)
             {
                 var cameraView = e.NewElement;
-                liveCameraStream = new UICameraPreview(this);
+                liveCameraStream = new UICameraPreview(this, cameraView.CameraFacing, cameraView.CaptureQuality);
                 SetNativeControl(liveCameraStream);
                 liveCameraStream.OnDetected += OnDetected;
             }
@@ -38,8 +38,18 @@ namespace GoogleVisionBarCodeScanner.Renderer
         protected override void OnElementPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             base.OnElementPropertyChanged(sender, e);
-            if ( e.PropertyName == CameraView.TorchOnProperty.PropertyName)
+            if (e.PropertyName == CameraView.TorchOnProperty.PropertyName)
+            {
                 HandleTorch();
+            }
+            else if (e.PropertyName == CameraView.CameraFacingProperty.PropertyName)
+            {
+                liveCameraStream.ChangeCamera(Element.CameraFacing);
+            }
+            else if (e.PropertyName == CameraView.CaptureQualityProperty.PropertyName)
+            {
+                liveCameraStream.ChangeSessionPreset(Element.CaptureQuality);
+            }
         }
 
         private void HandleTorch()
