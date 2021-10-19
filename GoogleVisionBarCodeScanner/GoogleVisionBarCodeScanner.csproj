@@ -11,9 +11,9 @@
 		<RootNamespace>GoogleVisionBarCodeScanner</RootNamespace>
 
 		<Product></Product>
-		<AssemblyVersion>6.1.0.2</AssemblyVersion>
-		<AssemblyFileVersion>6.1.0.2</AssemblyFileVersion>
-		<Version>6.1.0.2-pre</Version>
+		<AssemblyVersion>6.1.1.0</AssemblyVersion>
+		<AssemblyFileVersion>6.1.1.0</AssemblyFileVersion>
+		<Version>6.1.1.0-pre</Version>
 		<NeutralLanguage>en</NeutralLanguage>
 
 
@@ -36,7 +36,7 @@
 		<PackageLicenseUrl>https://github.com/JimmyPun610/BarcodeScanner.XF</PackageLicenseUrl>
 		<RepositoryType></RepositoryType>
 		<PackageTags>Xamarin.Forms Barcode Scanning Tools</PackageTags>
-		<PackageReleaseNotes>1. Add mvvm support 2. Return barcode format 3. Fix Android crashing the app sometimes</PackageReleaseNotes>
+		<PackageReleaseNotes>1. Add CameraFacing and Default Quality</PackageReleaseNotes>
 		<Copyright>Copyright 2021</Copyright>
 
 	</PropertyGroup>

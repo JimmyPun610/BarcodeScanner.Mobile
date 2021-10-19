@@ -9,19 +9,9 @@ https://docs.microsoft.com/en-us/xamarin/xamarin-forms/deploy-test/hot-restart</
 Please feel free to improve my source code.
 
 ## Current Version
-6.1.0.2-pre, Supporting MVVM and Fix Android camera crashing the app. Thanks to [@stepkillah](https://github.com/stepkillah). 
+6.1.1-pre, Add CameraFacing and default quality
 
 5.0.0.9 for Xamarin Forms 5.0.0.2012
-
-5.0.0.6 for Xamarin Forms 5.0.0.1905
-
-4.8.2 for Xamarin Forms 4.8.0.1687+
-
-4.8.1.1	for Xamarin Forms 4.8.0.1541+, Removed MonoAndroid 9 support, please make sure the target framework is Android 10 or 11
-
-4.7.0.2   for Xamarin Form 4.7.0.968+
-
-4.6.1   for Xamarin Form 4.6.0.772+, Please notice the assembly name is changed. (See sample xaml)
 
 ## Release notes
 https://github.com/JimmyPun610/BarcodeScanner.XF/tree/master/ReleaseNotes
@@ -120,13 +110,13 @@ GoogleVisionBarCodeScanner.Methods.SetSupportBarcodeFormat(BarcodeFormats.QRCode
    <ContentPage.Content>
      <ScrollView HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
 	 <!--VirbationOnDetected: Indicate the device will vibrate or not when detected barcode, default is True
-		 DefaultTorchOn: Indicate the torch will on or not when the view appear, default is False
-		 AutoStartScanning : Indicate whether the device will start scanning after it is opened, default is True
+		 TorchOn: Indicate the torch will on or not when the view appear, default is False
+		 IsScanning : Indicate whether the device will start scanning after it is opened, default is True
 		 RequestedFPS: Affect Android only, leave it if you want a default value (https://developers.google.com/android/reference/com/google/android/gms/vision/CameraSource.Builder.html#public-camerasource.builder-setrequestedfps-float-fps)
 		 ScanInterval: Scan interval for iOS, default is 500ms and the minimum is 100ms, please be reminded that double scanning may be occurred if it is too small
 		 -->
              <gv:CameraView HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" OnDetected="CameraView_OnDetected" Grid.Row="1"
-                            DefaultTorchOn="True" VibrationOnDetected="False" AutoStartScanning="True" RequestedFPS="30" ScanInterval="500"/>
+                            TorchOn="True" VibrationOnDetected="False" IsScanning="True" RequestedFPS="30" ScanInterval="500"/>
      </ScrollView>
    </ContentPage.Content>
 </ContentPage>
