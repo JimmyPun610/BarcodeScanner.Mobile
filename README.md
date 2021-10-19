@@ -9,19 +9,9 @@ https://docs.microsoft.com/en-us/xamarin/xamarin-forms/deploy-test/hot-restart</
 Please feel free to improve my source code.
 
 ## Current Version
-6.1.0.2-pre, Supporting MVVM and Fix Android camera crashing the app. Thanks to [@stepkillah](https://github.com/stepkillah). 
+6.1.1-pre, Add CameraFacing and default quality
 
 5.0.0.9 for Xamarin Forms 5.0.0.2012
-
-5.0.0.6 for Xamarin Forms 5.0.0.1905
-
-4.8.2 for Xamarin Forms 4.8.0.1687+
-
-4.8.1.1	for Xamarin Forms 4.8.0.1541+, Removed MonoAndroid 9 support, please make sure the target framework is Android 10 or 11
-
-4.7.0.2   for Xamarin Form 4.7.0.968+
-
-4.6.1   for Xamarin Form 4.6.0.772+, Please notice the assembly name is changed. (See sample xaml)
 
 ## Release notes
 https://github.com/JimmyPun610/BarcodeScanner.XF/tree/master/ReleaseNotes
