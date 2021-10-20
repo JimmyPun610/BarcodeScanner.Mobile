@@ -275,7 +275,6 @@ namespace GoogleVisionBarCodeScanner.Renderer
                 _lastRunTime = DateTimeOffset.Now.ToUnixTimeMilliseconds();
                 try
                 {
-                    Console.WriteLine($"IsScanning : {_renderer.Element.IsScanning}");
                     if (_lastRunTime - _lastAnalysisTime > _renderer.Element.ScanInterval && _renderer.Element.IsScanning)
                     {
                         _lastAnalysisTime = _lastRunTime;
