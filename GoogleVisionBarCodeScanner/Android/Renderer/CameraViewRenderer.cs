@@ -269,12 +269,12 @@ namespace GoogleVisionBarCodeScanner.Renderer
 
             public async void Analyze(IImageProxy proxy)
             {
-
-                var mediaImage = proxy.Image;
-                if (mediaImage == null) return;
-                _lastRunTime = DateTimeOffset.Now.ToUnixTimeMilliseconds();
                 try
                 {
+                    var mediaImage = proxy.Image;
+                    if (mediaImage == null) return;
+                    _lastRunTime = DateTimeOffset.Now.ToUnixTimeMilliseconds();
+                    
                     if (_lastRunTime - _lastAnalysisTime > _renderer.Element.ScanInterval && _renderer.Element.IsScanning)
                     {
                         _lastAnalysisTime = _lastRunTime;
