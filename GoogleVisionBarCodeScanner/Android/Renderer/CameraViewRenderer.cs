@@ -110,12 +110,16 @@ namespace GoogleVisionBarCodeScanner.Renderer
 
             try
             {
+                var lifecycleOwner = Context as ILifecycleOwner ?? (Context as ContextWrapper)?.BaseContext as ILifecycleOwner;
+
+                if (lifecycleOwner == null)
+                    throw new Exception("Unable to find lifecycle owner");
+
                 // Unbind use cases before rebinding
                 cameraProvider.UnbindAll();
-                if (Context == null)
-                    return;
+                
                 // Bind use cases to camera
-                _camera = cameraProvider.BindToLifecycle((ILifecycleOwner)Context, cameraSelector, preview, imageAnalyzer);
+                _camera = cameraProvider.BindToLifecycle(lifecycleOwner, cameraSelector, preview, imageAnalyzer);
 
                 HandleCustomPreviewSize(preview);
                 HandleTorch();
