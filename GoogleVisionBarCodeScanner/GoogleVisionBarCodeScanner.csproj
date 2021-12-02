@@ -11,9 +11,9 @@
 		<RootNamespace>GoogleVisionBarCodeScanner</RootNamespace>
 
 		<Product></Product>
-		<AssemblyVersion>6.1.1.1</AssemblyVersion>
-		<AssemblyFileVersion>6.1.1.1</AssemblyFileVersion>
-		<Version>6.1.1.1-pre</Version>
+		<AssemblyVersion>6.1.1.2</AssemblyVersion>
+		<AssemblyFileVersion>6.1.1.2</AssemblyFileVersion>
+		<Version>6.1.1.2-pre</Version>
 		<NeutralLanguage>en</NeutralLanguage>
 
 
@@ -36,7 +36,7 @@
 		<PackageLicenseUrl>https://github.com/JimmyPun610/BarcodeScanner.XF</PackageLicenseUrl>
 		<RepositoryType></RepositoryType>
 		<PackageTags>Xamarin.Forms Barcode Scanning Tools</PackageTags>
-		<PackageReleaseNotes>1. Merged pull request #96</PackageReleaseNotes>
+		<PackageReleaseNotes>1. Merged pull request #97</PackageReleaseNotes>
 		<Copyright>Copyright 2021</Copyright>
 
 	</PropertyGroup>
