@@ -9,7 +9,7 @@ https://docs.microsoft.com/en-us/xamarin/xamarin-forms/deploy-test/hot-restart</
 Please feel free to improve my source code.
 
 ## Current Version
-6.1.1-pre, Add CameraFacing and default quality
+6.1.1.2-pre, Add CameraFacing and default quality, bug fixing on Android crashing issue
 
 5.0.0.9 for Xamarin Forms 5.0.0.2012
 
