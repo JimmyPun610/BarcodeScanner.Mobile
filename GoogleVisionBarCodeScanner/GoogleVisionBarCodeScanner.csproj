@@ -11,9 +11,9 @@
 		<RootNamespace>GoogleVisionBarCodeScanner</RootNamespace>
 
 		<Product></Product>
-		<AssemblyVersion>6.1.1.2</AssemblyVersion>
-		<AssemblyFileVersion>6.1.1.2</AssemblyFileVersion>
-		<Version>6.1.1.2-pre</Version>
+		<AssemblyVersion>6.2.0.0</AssemblyVersion>
+		<AssemblyFileVersion>6.2.0.0</AssemblyFileVersion>
+		<Version>6.2.0.0-pre</Version>
 		<NeutralLanguage>en</NeutralLanguage>
 
 
@@ -36,8 +36,8 @@
 		<PackageLicenseUrl>https://github.com/JimmyPun610/BarcodeScanner.XF</PackageLicenseUrl>
 		<RepositoryType></RepositoryType>
 		<PackageTags>Xamarin.Forms Barcode Scanning Tools</PackageTags>
-		<PackageReleaseNotes>1. Merged pull request #97</PackageReleaseNotes>
-		<Copyright>Copyright 2021</Copyright>
+		<PackageReleaseNotes>1. Update library iOS Firebase.Core (8.10.0) and MLKit.Core (5.0.0) and MLKit.BarcodeScanning (1.6.0) library</PackageReleaseNotes>
+		<Copyright>Copyright 2022</Copyright>
 
 	</PropertyGroup>
 
@@ -65,6 +65,7 @@
 		<Compile Include="Shared\*.cs" />
         <PackageReference Include="Xamarin.Essentials" Version="1.7.0" />
 		<PackageReference Include="Xamarin.Forms" Version="5.0.0.2125" />
+		
 	</ItemGroup>
 	<ItemGroup Condition=" $(TargetFramework.StartsWith('netstandard')) ">
 		<Compile Include="NetStandard\*.cs" />
@@ -89,17 +90,13 @@
         </PackageReference>
         <PackageReference Include="Xamarin.AndroidX.Camera.Camera2" Version="1.0.2">
         </PackageReference>
-        <PackageReference Include="Xamarin.AndroidX.Camera.Lifecycle">
-            <Version>1.0.2</Version>
+        <PackageReference Include="Xamarin.AndroidX.Camera.Lifecycle" Version="1.0.2">
         </PackageReference>
-        <PackageReference Include="Xamarin.AndroidX.Camera.View">
-            <Version>1.0.0.5-alpha20</Version>
+        <PackageReference Include="Xamarin.AndroidX.Camera.View" Version="1.0.0.5-alpha20">
         </PackageReference>
-        <PackageReference Include="Xamarin.Google.Dagger">
-            <Version>2.37.0</Version>
+        <PackageReference Include="Xamarin.Google.Dagger" Version="2.37.0">
         </PackageReference>
-        <PackageReference Include="Xamarin.Google.MLKit.BarcodeScanning">
-            <Version>116.1.2.1</Version>
+        <PackageReference Include="Xamarin.Google.MLKit.BarcodeScanning" Version="116.1.2.1">
         </PackageReference>
     </ItemGroup>
 
@@ -108,12 +105,13 @@
 		<Compile Include="iOS\**\*.cs" />
 		<PackageReference Include="System.Numerics.Vectors" Version="4.5.0">
 		</PackageReference>
-		<PackageReference Include="Xamarin.Firebase.iOS.Core" Version="6.10.4">
+		<PackageReference Include="Xamarin.Firebase.iOS.Core" Version="8.10.0">
 		</PackageReference>
-		<PackageReference Include="Xamarin.Firebase.iOS.MLKit.Vision" Version="0.21.0">
+		<PackageReference Include="Xamarin.MLKit.iOS.BarcodeScanning" Version="1.6.0">
+		</PackageReference>
+		<PackageReference Include="Xamarin.MLKit.iOS.Core" Version="5.0.0">
 		</PackageReference>
 	</ItemGroup>
 	
-   
 
 </Project>

@@ -7,13 +7,14 @@ using CoreGraphics;
 using CoreImage;
 using CoreMedia;
 using CoreVideo;
-using Firebase.MLKit.Vision;
+using MLKit.BarcodeScanning;
 using Foundation;
 using AudioToolbox;
 using UIKit;
 using System.Drawing;
 using System.Threading;
 using GoogleVisionBarCodeScanner.Renderer;
+using MLKit.Core;
 
 namespace GoogleVisionBarCodeScanner
 {
@@ -276,45 +277,44 @@ namespace GoogleVisionBarCodeScanner
         public class CaptureVideoDelegate : AVCaptureVideoDataOutputSampleBufferDelegate
         {
             public event Action<List<BarcodeResult>> OnDetected;
-            VisionBarcodeDetector barcodeDetector;
-            VisionImageMetadata metadata;
-            VisionApi vision;
+            BarcodeScanner barcodeDetector;
+            UIImageOrientation orientation = UIImageOrientation.Up;
             long lastAnalysisTime = DateTimeOffset.MinValue.ToUnixTimeMilliseconds();
             long lastRunTime = DateTimeOffset.MinValue.ToUnixTimeMilliseconds();
             CameraViewRenderer _renderer;
             public CaptureVideoDelegate(CameraViewRenderer renderer)
             {
                 _renderer = renderer;
-                metadata = new VisionImageMetadata();
-                vision = VisionApi.Create();
+           
                 if (_renderer.Element != null)
                 {
                     if (_renderer.Element.ScanInterval < 100)
                         _renderer.Element.ScanInterval = 500;
                 }
-
-                barcodeDetector = vision.GetBarcodeDetector(Configuration.BarcodeDetectorSupportFormat);
+                var options = new BarcodeScannerOptions(Configuration.BarcodeDetectorSupportFormat);
+                barcodeDetector = BarcodeScanner.BarcodeScannerWithOptions(options);
                 // Using back-facing camera
                 var devicePosition = AVCaptureDevicePosition.Back;
                 var deviceOrientation = UIDevice.CurrentDevice.Orientation;
                 switch (deviceOrientation)
                 {
                     case UIDeviceOrientation.Portrait:
-                        metadata.Orientation = devicePosition == AVCaptureDevicePosition.Front ? VisionDetectorImageOrientation.LeftTop : VisionDetectorImageOrientation.RightTop;
+                        
+                        orientation = devicePosition == AVCaptureDevicePosition.Front ? UIImageOrientation.LeftMirrored : UIImageOrientation.Right;
                         break;
                     case UIDeviceOrientation.LandscapeLeft:
-                        metadata.Orientation = devicePosition == AVCaptureDevicePosition.Front ? VisionDetectorImageOrientation.BottomLeft : VisionDetectorImageOrientation.TopLeft;
+                        orientation = devicePosition == AVCaptureDevicePosition.Front ? UIImageOrientation.DownMirrored : UIImageOrientation.Up;
                         break;
                     case UIDeviceOrientation.PortraitUpsideDown:
-                        metadata.Orientation = devicePosition == AVCaptureDevicePosition.Front ? VisionDetectorImageOrientation.RightBottom : VisionDetectorImageOrientation.LeftBottom;
+                        orientation = devicePosition == AVCaptureDevicePosition.Front ? UIImageOrientation.RightMirrored : UIImageOrientation.Left;
                         break;
                     case UIDeviceOrientation.LandscapeRight:
-                        metadata.Orientation = devicePosition == AVCaptureDevicePosition.Front ? VisionDetectorImageOrientation.TopRight : VisionDetectorImageOrientation.BottomRight;
+                        orientation = devicePosition == AVCaptureDevicePosition.Front ? UIImageOrientation.UpMirrored : UIImageOrientation.Down;
                         break;
                     case UIDeviceOrientation.FaceUp:
                     case UIDeviceOrientation.FaceDown:
                     case UIDeviceOrientation.Unknown:
-                        metadata.Orientation = VisionDetectorImageOrientation.LeftTop;
+                        orientation = UIImageOrientation.Up;
                         break;
                 }
             }
@@ -380,9 +380,42 @@ namespace GoogleVisionBarCodeScanner
                     {
                         var image = GetImageFromSampleBuffer(sampleBuffer);
                         if (image == null) return;
-                        var visionImage = new VisionImage(image) { Metadata = metadata };
+                        var visionImage = new MLImage(image) { Orientation = orientation };
                         releaseSampleBuffer(sampleBuffer);
-                        DetectBarcodeActionAsync(visionImage);
+                        barcodeDetector.ProcessImage(visionImage, (barcodes, error) =>
+                        {
+                            if (_renderer.Element == null) return;
+                            if (!_renderer.Element.IsScanning) return;
+
+                            if(error != null)
+                            {
+                                System.Diagnostics.Debug.WriteLine(error);
+                                return;
+                            }
+
+                            if (barcodes == null || barcodes.Length == 0)
+                            {
+                                return;
+                            }
+
+                            _renderer.Element.IsScanning = false;
+
+                            if (_renderer.Element.VibrationOnDetected)
+                                SystemSound.Vibrate.PlayAlertSound();
+
+                            List<BarcodeResult> resultList = new List<BarcodeResult>();
+                            foreach (var barcode in barcodes)
+                            {
+                                resultList.Add(new BarcodeResult
+                                {
+                                    BarcodeType = Methods.ConvertBarcodeResultTypes(barcode.ValueType),
+                                    BarcodeFormat = (BarcodeFormats)barcode.Format,
+                                    DisplayValue = barcode.DisplayValue,
+                                    RawValue = barcode.RawValue
+                                });
+                            }
+                            OnDetected?.Invoke(resultList);
+                        });
                     }
                     catch (Exception exception)
                     {
@@ -390,40 +423,6 @@ namespace GoogleVisionBarCodeScanner
                     }
                 }
                 releaseSampleBuffer(sampleBuffer);
-            }
-            private async void DetectBarcodeActionAsync(VisionImage image)
-            {
-                if (!_renderer.Element.IsScanning) return;
-
-                try
-                {
-                    VisionBarcode[] barcodes = await barcodeDetector.DetectAsync(image);
-                    if (barcodes == null || barcodes.Length == 0)
-                    {
-                        return;
-                    }
-                    _renderer.Element.IsScanning = false;
-                    if (_renderer.Element.VibrationOnDetected)
-                        SystemSound.Vibrate.PlayAlertSound();
-                    List<BarcodeResult> resultList = new List<BarcodeResult>();
-                    foreach (var barcode in barcodes)
-                    {
-                        resultList.Add(new BarcodeResult
-                        {
-                            BarcodeType = Methods.ConvertBarcodeResultTypes(barcode.ValueType),
-                            BarcodeFormat = (BarcodeFormats)barcode.Format,
-                            DisplayValue = barcode.DisplayValue,
-                            RawValue = barcode.RawValue
-                        });
-                    }
-                    OnDetected?.Invoke(resultList);
-                }
-                catch (Exception exception)
-                {
-                    System.Diagnostics.Debug.WriteLine(exception.Message);
-                }
-
-
             }
         }
 
