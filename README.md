@@ -9,6 +9,8 @@ https://docs.microsoft.com/en-us/xamarin/xamarin-forms/deploy-test/hot-restart</
 Please feel free to improve my source code.
 
 ## Current Version
+6.2.0.0-pre, Update iOS Firebase library, will need to create nuget source in localhost
+
 6.1.1.2-pre, Add CameraFacing and default quality, bug fixing on Android crashing issue
 
 5.0.0.9 for Xamarin Forms 5.0.0.2012
@@ -88,6 +90,8 @@ https://console.firebase.google.com/
 ```
 
 5. Set Linker Behavior to Link SDK assemblies only
+
+6. Download the Nuget file Xamarin.Firebase.iOS.Core.8.10.0, Xamarin.MLKit.iOS.Core.5.0.0 and Xamarin.MLKit.iOS.BarcodeScanning.1.6.0 to your localhost, set the 3rd party source to the directory in the visual studio.
 
 ## Scan from Camera
 
