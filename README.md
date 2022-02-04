@@ -9,7 +9,7 @@ https://docs.microsoft.com/en-us/xamarin/xamarin-forms/deploy-test/hot-restart</
 Please feel free to improve my source code.
 
 ## Current Version
-6.2.0.0-pre, Update iOS Firebase library, will need to create nuget source in localhost
+6.2.0.0-pre, Update iOS Firebase library, will need to create nuget source in localhost, please read iOS part for more details
 
 6.1.1.2-pre, Add CameraFacing and default quality, bug fixing on Android crashing issue
 
