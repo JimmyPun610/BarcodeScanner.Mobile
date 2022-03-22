@@ -13,13 +13,14 @@
 
   <ItemGroup>
     <PackageReference Include="Xam.Plugin.Media" Version="5.0.1" />
-    <PackageReference Include="Xamarin.Essentials" Version="1.7.0" />
-    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2125" />
+    <PackageReference Include="Xamarin.Essentials" Version="1.7.1" />
+    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2337" />
+    <!-- Package Reference -->
+    <!--<PackageReference Include="BarcodeScanner.XF" Version="6.2.1.4-pre" />--> 
+
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\..\GoogleVisionBarCodeScanner\GoogleVisionBarCodeScanner.csproj" />
-  </ItemGroup>
+
 
   <ItemGroup>
     <EmbeddedResource Update="Page4.xaml">
@@ -27,6 +28,7 @@
     </EmbeddedResource>
   </ItemGroup>
 
+ 
   <ItemGroup>
     <None Update="App.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -43,5 +45,9 @@
     <EmbeddedResource Update="Mvvm\MvvmDemo.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+  </ItemGroup>
+  <!-- Project Reference config -->
+ <ItemGroup>
+    <ProjectReference Include="..\..\GoogleVisionBarCodeScanner\GoogleVisionBarCodeScanner.csproj" />
   </ItemGroup>
 </Project>

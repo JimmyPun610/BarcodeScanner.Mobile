@@ -4,8 +4,8 @@ using System.Threading.Tasks;
 using Foundation;
 using UIKit;
 using Xamarin.Essentials;
-using MLKit.BarcodeScanning;
 using MLKit.Core;
+using MLKit.BarcodeScanning;
 
 namespace GoogleVisionBarCodeScanner
 {
