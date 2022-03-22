@@ -9,6 +9,12 @@ https://docs.microsoft.com/en-us/xamarin/xamarin-forms/deploy-test/hot-restart</
 Please feel free to improve my source code.
 
 ## Current Version
+6.2.1.5-pre, 
+
+1. Add support of MonoAndroid12.0
+2. Use custom build iOS MLKit library (no need to download the package manually now.)
+3. Update Xamarin Forms verison
+
 6.2.0.0-pre, Update iOS Firebase library, will need to create nuget source in localhost, please read iOS part for more details
 
 6.1.1.2-pre, Add CameraFacing and default quality, bug fixing on Android crashing issue
@@ -81,17 +87,14 @@ https://console.firebase.google.com/
             ....
             GoogleVisionBarCodeScanner.iOS.Initializer.Init();
             // Temporary work around for bug on Firebase Library
-	    // https://github.com/xamarin/GoogleApisForiOSComponents/issues/368
-	    Firebase.Core.App.Configure();
-            // This line is not needed in version 5.0.5
-	    // _ = Firebase.RemoteConfig.RemoteConfig.SharedInstance;
+	        // https://github.com/xamarin/GoogleApisForiOSComponents/issues/368
+			Firebase.Core.App.Configure();
+
             ....
             return base.FinishedLaunching(app, options);
 ```
 
 5. Set Linker Behavior to Link SDK assemblies only
-
-6. Download the Nuget file Xamarin.Firebase.iOS.Core.8.10.0, Xamarin.MLKit.iOS.Core.5.0.0 and Xamarin.MLKit.iOS.BarcodeScanning.1.6.0 to your localhost, set the 3rd party source to the directory in the visual studio.
 
 ## Scan from Camera
 
