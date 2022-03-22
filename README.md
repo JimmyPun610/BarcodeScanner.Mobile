@@ -1,7 +1,7 @@
 # BarcodeScanner.XF
 Powerful barcode scanning library for Xamarin Forms using Google MLKit API. 
 
-Works on iOS 11+ and Android (MonoAndroid10.0 and MonoAndroid11.0)
+Works on iOS 11+ and Android (MonoAndroid10.0 to MonoAndroid12.0)
 
 <b>For user who are using Visual Studio for Windows, please make sure Hot-Restart is disabled to run the debug mode.
 https://docs.microsoft.com/en-us/xamarin/xamarin-forms/deploy-test/hot-restart</b>
@@ -87,8 +87,8 @@ https://console.firebase.google.com/
             ....
             GoogleVisionBarCodeScanner.iOS.Initializer.Init();
             // Temporary work around for bug on Firebase Library
-	        // https://github.com/xamarin/GoogleApisForiOSComponents/issues/368
-			Firebase.Core.App.Configure();
+	    // https://github.com/xamarin/GoogleApisForiOSComponents/issues/368
+	    Firebase.Core.App.Configure();
 
             ....
             return base.FinishedLaunching(app, options);
