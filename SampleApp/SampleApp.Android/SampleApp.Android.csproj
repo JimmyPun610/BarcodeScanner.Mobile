@@ -72,7 +72,7 @@
       <Version>5.0.0.2337</Version>
     </PackageReference>
     <!-- Package Reference -->
-    <!--<PackageReference Include="BarcodeScanner.XF" Version="6.2.1.4-pre" />-->
+    <PackageReference Include="BarcodeScanner.XF" Version="6.2.1.5-pre" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MainActivity.cs" />
@@ -115,10 +115,10 @@
       <Name>SampleApp</Name>
     </ProjectReference>
     <!-- Project Reference config -->
-    <ProjectReference Include="..\..\GoogleVisionBarCodeScanner\GoogleVisionBarCodeScanner.csproj">
+    <!--<ProjectReference Include="..\..\GoogleVisionBarCodeScanner\GoogleVisionBarCodeScanner.csproj">
       <Project>{8CDA11D6-38F2-485E-9ACF-61133CCEEC7B}</Project>
       <Name>GoogleVisionBarCodeScanner</Name>
-    </ProjectReference>
+    </ProjectReference>-->
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\xml\file_paths.xml" />

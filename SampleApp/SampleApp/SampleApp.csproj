@@ -16,7 +16,7 @@
     <PackageReference Include="Xamarin.Essentials" Version="1.7.1" />
     <PackageReference Include="Xamarin.Forms" Version="5.0.0.2337" />
     <!-- Package Reference -->
-    <!--<PackageReference Include="BarcodeScanner.XF" Version="6.2.1.4-pre" />--> 
+    <PackageReference Include="BarcodeScanner.XF" Version="6.2.1.5-pre" /> 
 
   </ItemGroup>
 
@@ -47,7 +47,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <!-- Project Reference config -->
- <ItemGroup>
+ <!--<ItemGroup>
     <ProjectReference Include="..\..\GoogleVisionBarCodeScanner\GoogleVisionBarCodeScanner.csproj" />
-  </ItemGroup>
+  </ItemGroup>-->
 </Project>
