@@ -302,6 +302,10 @@ namespace GoogleVisionBarCodeScanner.Renderer
                 {
                     Log.Debug(nameof(CameraViewRenderer), ex.ToString());
                 }
+                catch (System.Exception ex)
+                {
+                    Log.Debug(nameof(CameraViewRenderer), ex.ToString());
+                }
                 finally
                 {
                     SafeCloseImageProxy(proxy);
