@@ -14,7 +14,7 @@ namespace SampleApp.Droid
 {
 	
 	
-	[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Android.Build.Tasks", "1.0.0.0")]
+	[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Android.Build.Tasks", "12.1.0.11")]
 	public partial class Resource
 	{
 		
@@ -331,6 +331,7 @@ namespace SampleApp.Droid
 			global::GoogleVisionBarCodeScanner.Resource.Attribute.colorSurface = global::SampleApp.Droid.Resource.Attribute.colorSurface;
 			global::GoogleVisionBarCodeScanner.Resource.Attribute.colorSwitchThumbNormal = global::SampleApp.Droid.Resource.Attribute.colorSwitchThumbNormal;
 			global::GoogleVisionBarCodeScanner.Resource.Attribute.commitIcon = global::SampleApp.Droid.Resource.Attribute.commitIcon;
+			global::GoogleVisionBarCodeScanner.Resource.Attribute.constraintRotate = global::SampleApp.Droid.Resource.Attribute.constraintRotate;
 			global::GoogleVisionBarCodeScanner.Resource.Attribute.constraints = global::SampleApp.Droid.Resource.Attribute.constraints;
 			global::GoogleVisionBarCodeScanner.Resource.Attribute.constraintSet = global::SampleApp.Droid.Resource.Attribute.constraintSet;
 			global::GoogleVisionBarCodeScanner.Resource.Attribute.constraintSetEnd = global::SampleApp.Droid.Resource.Attribute.constraintSetEnd;
@@ -4696,6 +4697,7 @@ namespace SampleApp.Droid
 			global::GoogleVisionBarCodeScanner.Resource.Styleable.ConstraintSet_barrierDirection = global::SampleApp.Droid.Resource.Styleable.ConstraintSet_barrierDirection;
 			global::GoogleVisionBarCodeScanner.Resource.Styleable.ConstraintSet_barrierMargin = global::SampleApp.Droid.Resource.Styleable.ConstraintSet_barrierMargin;
 			global::GoogleVisionBarCodeScanner.Resource.Styleable.ConstraintSet_chainUseRtl = global::SampleApp.Droid.Resource.Styleable.ConstraintSet_chainUseRtl;
+			global::GoogleVisionBarCodeScanner.Resource.Styleable.ConstraintSet_constraintRotate = global::SampleApp.Droid.Resource.Styleable.ConstraintSet_constraintRotate;
 			global::GoogleVisionBarCodeScanner.Resource.Styleable.ConstraintSet_constraint_referenced_ids = global::SampleApp.Droid.Resource.Styleable.ConstraintSet_constraint_referenced_ids;
 			global::GoogleVisionBarCodeScanner.Resource.Styleable.ConstraintSet_constraint_referenced_tags = global::SampleApp.Droid.Resource.Styleable.ConstraintSet_constraint_referenced_tags;
 			global::GoogleVisionBarCodeScanner.Resource.Styleable.ConstraintSet_deriveConstraintsFrom = global::SampleApp.Droid.Resource.Styleable.ConstraintSet_deriveConstraintsFrom;

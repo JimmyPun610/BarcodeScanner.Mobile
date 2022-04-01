@@ -1,83 +1,84 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Firebase.MLKit.Vision;
 using Foundation;
 using UIKit;
 using Xamarin.Essentials;
+using MLKit.Core;
+using MLKit.BarcodeScanning;
 
 namespace GoogleVisionBarCodeScanner
 {
     public class Methods
     {
-        internal static BarcodeTypes ConvertBarcodeResultTypes(VisionBarcodeValueType visionBarcodeValueType)
+        internal static BarcodeTypes ConvertBarcodeResultTypes(BarcodeValueType visionBarcodeValueType)
         {
             switch (visionBarcodeValueType)
             {
-                case VisionBarcodeValueType.CalendarEvent:
+                case BarcodeValueType.CalendarEvent:
                     return BarcodeTypes.CalendarEvent;
-                case VisionBarcodeValueType.ContactInfo:
+                case BarcodeValueType.ContactInfo:
                     return BarcodeTypes.ContactInfo;
-                case VisionBarcodeValueType.DriversLicense:
+                case BarcodeValueType.DriversLicense:
                     return BarcodeTypes.DriversLicense;
-                case VisionBarcodeValueType.Email:
+                case BarcodeValueType.Email:
                     return BarcodeTypes.Email;
-                case VisionBarcodeValueType.GeographicCoordinates:
+                case BarcodeValueType.GeographicCoordinates:
                     return BarcodeTypes.GeographicCoordinates;
-                case VisionBarcodeValueType.Isbn:
+                case BarcodeValueType.Isbn:
                     return BarcodeTypes.Isbn;
-                case VisionBarcodeValueType.Phone:
+                case BarcodeValueType.Phone:
                     return BarcodeTypes.Phone;
-                case VisionBarcodeValueType.Product:
+                case BarcodeValueType.Product:
                     return BarcodeTypes.Product;
-                case VisionBarcodeValueType.Sms:
+                case BarcodeValueType.Sms:
                     return BarcodeTypes.Sms;
-                case VisionBarcodeValueType.Text:
+                case BarcodeValueType.Text:
                     return BarcodeTypes.Text;
-                case VisionBarcodeValueType.Unknown:
+                case BarcodeValueType.Unknown:
                     return BarcodeTypes.Unknown;
-                case VisionBarcodeValueType.Url:
+                case BarcodeValueType.Url:
                     return BarcodeTypes.Url;
-                case VisionBarcodeValueType.WiFi:
+                case BarcodeValueType.WiFi:
                     return BarcodeTypes.WiFi;
                 default: return BarcodeTypes.Unknown;
             }
         }
-        internal static VisionBarcodeFormat ConvertBarcodeFormats(BarcodeFormats barcodeFormats)
+        internal static BarcodeFormat ConvertBarcodeFormats(BarcodeFormats barcodeFormats)
         {
-            VisionBarcodeFormat visionBarcodeFormat = VisionBarcodeFormat.UnKnown;
+            BarcodeFormat visionBarcodeFormat = BarcodeFormat.Unknown;
             
             if (barcodeFormats.HasFlag(BarcodeFormats.CodaBar))
-                visionBarcodeFormat |= VisionBarcodeFormat.CodaBar;
+                visionBarcodeFormat |= BarcodeFormat.CodaBar;
             if (barcodeFormats.HasFlag(BarcodeFormats.Code128))
-                visionBarcodeFormat |= VisionBarcodeFormat.Code128;
+                visionBarcodeFormat |= BarcodeFormat.Code128;
             if (barcodeFormats.HasFlag(BarcodeFormats.Code39))
-                visionBarcodeFormat |= VisionBarcodeFormat.Code39;
+                visionBarcodeFormat |= BarcodeFormat.Code39;
             if (barcodeFormats.HasFlag(BarcodeFormats.Code93))
-                visionBarcodeFormat |= VisionBarcodeFormat.Code93;
+                visionBarcodeFormat |= BarcodeFormat.Code93;
             if (barcodeFormats.HasFlag(BarcodeFormats.DataMatrix))
-                visionBarcodeFormat |= VisionBarcodeFormat.DataMatrix;
+                visionBarcodeFormat |= BarcodeFormat.DataMatrix;
             if (barcodeFormats.HasFlag(BarcodeFormats.Ean13))
-                visionBarcodeFormat |= VisionBarcodeFormat.Ean13;
+                visionBarcodeFormat |= BarcodeFormat.Ean13;
             if (barcodeFormats.HasFlag(BarcodeFormats.Ean8))
-                visionBarcodeFormat |= VisionBarcodeFormat.Ean8;
+                visionBarcodeFormat |= BarcodeFormat.Ean8;
             if (barcodeFormats.HasFlag(BarcodeFormats.Itf))
-                visionBarcodeFormat |= VisionBarcodeFormat.Itf;
+                visionBarcodeFormat |= BarcodeFormat.Itf;
             if (barcodeFormats.HasFlag(BarcodeFormats.Pdf417))
-                visionBarcodeFormat |= VisionBarcodeFormat.Pdf417;
+                visionBarcodeFormat |= BarcodeFormat.Pdf417;
             if (barcodeFormats.HasFlag(BarcodeFormats.QRCode))
-                visionBarcodeFormat |= VisionBarcodeFormat.QRCode;
+                visionBarcodeFormat |= BarcodeFormat.QrCode;
             if (barcodeFormats.HasFlag(BarcodeFormats.Upca))
-                visionBarcodeFormat |= VisionBarcodeFormat.Upca;
+                visionBarcodeFormat |= BarcodeFormat.Upca;
             if (barcodeFormats.HasFlag(BarcodeFormats.Upce))
-                visionBarcodeFormat |= VisionBarcodeFormat.Upce;
+                visionBarcodeFormat |= BarcodeFormat.Upce;
             if (barcodeFormats.HasFlag(BarcodeFormats.Aztec))
-                visionBarcodeFormat |= VisionBarcodeFormat.Aztec;
+                visionBarcodeFormat |= BarcodeFormat.Aztec;
             if (barcodeFormats.HasFlag(BarcodeFormats.All))
-                visionBarcodeFormat |= VisionBarcodeFormat.All;
+                visionBarcodeFormat |= BarcodeFormat.All;
 
-            if (visionBarcodeFormat == VisionBarcodeFormat.UnKnown)
-                visionBarcodeFormat = VisionBarcodeFormat.All;
+            if (visionBarcodeFormat == BarcodeFormat.Unknown)
+                visionBarcodeFormat = BarcodeFormat.All;
 
             return visionBarcodeFormat;
         }
@@ -86,8 +87,8 @@ namespace GoogleVisionBarCodeScanner
 
         public static void SetSupportBarcodeFormat(BarcodeFormats barcodeFormats)
         {
-            VisionBarcodeFormat supportFormats = Methods.ConvertBarcodeFormats(barcodeFormats);
-            Configuration.BarcodeDetectorSupportFormat = new Firebase.MLKit.Vision.VisionBarcodeDetectorOptions(supportFormats);
+            BarcodeFormat supportFormats = Methods.ConvertBarcodeFormats(barcodeFormats);
+            Configuration.BarcodeDetectorSupportFormat = supportFormats;
         }
 
         public static async Task<bool> AskForRequiredPermission()
@@ -113,26 +114,43 @@ namespace GoogleVisionBarCodeScanner
         public static async Task<List<BarcodeResult>> ScanFromImage(byte[] imageArray)
         {
             UIImage image = new UIImage(NSData.FromArray(imageArray));
-            var visionImage = new VisionImage(image);
-            VisionImageMetadata metadata = new VisionImageMetadata();
-            VisionApi vision = VisionApi.Create();
-            VisionBarcodeDetector barcodeDetector = vision.GetBarcodeDetector(Configuration.BarcodeDetectorSupportFormat);
-            VisionBarcode[] barcodes = await barcodeDetector.DetectAsync(visionImage);
-            if (barcodes == null || barcodes.Length == 0)
-                return new List<BarcodeResult>();
+            var visionImage = new MLImage(image);
+            //VisionImageMetadata metadata = new VisionImageMetadata();
+            //VisionApi vision = VisionApi.Create();
+            //VisionBarcodeDetector barcodeDetector = vision.GetBarcodeDetector(Configuration.BarcodeDetectorSupportFormat);
+            //VisionBarcode[] barcodes = await barcodeDetector.DetectAsync(visionImage);
+            var options = new BarcodeScannerOptions(Configuration.BarcodeDetectorSupportFormat);
+            var barcodeScanner = BarcodeScanner.BarcodeScannerWithOptions(options);
 
-            List<BarcodeResult> resultList = new List<BarcodeResult>();
-            foreach (var barcode in barcodes)
+            var tcs = new TaskCompletionSource<List<BarcodeResult>>();
+
+            barcodeScanner.ProcessImage(visionImage, (barcodes, error) =>
             {
-                resultList.Add(new BarcodeResult
+                if (error != null){
+                    Console.WriteLine($"Error occurred : {error}");
+                    tcs.TrySetResult(null);
+                    return;
+                }
+                if (barcodes == null || barcodes.Length == 0)
                 {
-                    BarcodeType = Methods.ConvertBarcodeResultTypes(barcode.ValueType),
-                    BarcodeFormat = (BarcodeFormats)barcode.Format,
-                    DisplayValue = barcode.DisplayValue,
-                    RawValue = barcode.RawValue
-                });
-            }
-            return resultList;
+                    tcs.TrySetResult(new List<BarcodeResult>());
+                    return;
+                }
+                List<BarcodeResult> resultList = new List<BarcodeResult>();
+                foreach (var barcode in barcodes)
+                {
+                    resultList.Add(new BarcodeResult
+                    {
+                        BarcodeType = Methods.ConvertBarcodeResultTypes(barcode.ValueType),
+                        BarcodeFormat = (BarcodeFormats)barcode.Format,
+                        DisplayValue = barcode.DisplayValue,
+                        RawValue = barcode.RawValue
+                    });
+                }
+                tcs.TrySetResult(resultList);
+                return;
+            });
+            return await tcs.Task;
         }
 
         #endregion

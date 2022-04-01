@@ -1,9 +1,9 @@
-﻿using Firebase.MLKit.Vision;
+﻿using MLKit.BarcodeScanning;
 
 namespace GoogleVisionBarCodeScanner
 {
     internal class Configuration
     {
-        public static VisionBarcodeDetectorOptions BarcodeDetectorSupportFormat = new VisionBarcodeDetectorOptions(VisionBarcodeFormat.All);
+        public static BarcodeFormat BarcodeDetectorSupportFormat = BarcodeFormat.All;
     }
 }

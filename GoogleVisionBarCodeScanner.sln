@@ -7,9 +7,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleApp.Android", "Sample
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleApp.iOS", "SampleApp\SampleApp.iOS\SampleApp.iOS.csproj", "{E0E45276-1ED6-48A0-838B-B4A9573CF48D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SampleApp", "SampleApp\SampleApp\SampleApp.csproj", "{D96A0F3E-5FA2-4EC5-9D9B-18C316B466D6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleApp", "SampleApp\SampleApp\SampleApp.csproj", "{D96A0F3E-5FA2-4EC5-9D9B-18C316B466D6}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GoogleVisionBarCodeScanner", "GoogleVisionBarCodeScanner\GoogleVisionBarCodeScanner.csproj", "{8CDA11D6-38F2-485E-9ACF-61133CCEEC7B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoogleVisionBarCodeScanner", "GoogleVisionBarCodeScanner\GoogleVisionBarCodeScanner.csproj", "{8CDA11D6-38F2-485E-9ACF-61133CCEEC7B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -81,5 +81,7 @@ Global
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9951DB8F-72CC-41B0-9C3E-48DA9135C9E5}
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
 	EndGlobalSection
 EndGlobal

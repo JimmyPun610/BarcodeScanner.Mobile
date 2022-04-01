@@ -1,7 +1,7 @@
 # BarcodeScanner.XF
 Powerful barcode scanning library for Xamarin Forms using Google MLKit API. 
 
-Works on iOS 11+ and Android (MonoAndroid10.0 and MonoAndroid11.0)
+Works on iOS 11+ and Android (MonoAndroid10.0 to MonoAndroid12.0)
 
 <b>For user who are using Visual Studio for Windows, please make sure Hot-Restart is disabled to run the debug mode.
 https://docs.microsoft.com/en-us/xamarin/xamarin-forms/deploy-test/hot-restart</b>
@@ -9,7 +9,15 @@ https://docs.microsoft.com/en-us/xamarin/xamarin-forms/deploy-test/hot-restart</
 Please feel free to improve my source code.
 
 ## Current Version
-6.1.1-pre, Add CameraFacing and default quality
+6.2.1.5-pre, 
+
+1. Add support of MonoAndroid12.0
+2. Use custom build iOS MLKit library (no need to download the package manually now.)
+3. Update Xamarin Forms verison
+
+6.2.0.0-pre, Update iOS Firebase library, will need to create nuget source in localhost, please read iOS part for more details
+
+6.1.1.2-pre, Add CameraFacing and default quality, bug fixing on Android crashing issue
 
 5.0.0.9 for Xamarin Forms 5.0.0.2012
 
@@ -81,8 +89,7 @@ https://console.firebase.google.com/
             // Temporary work around for bug on Firebase Library
 	    // https://github.com/xamarin/GoogleApisForiOSComponents/issues/368
 	    Firebase.Core.App.Configure();
-            // This line is not needed in version 5.0.5
-	    // _ = Firebase.RemoteConfig.RemoteConfig.SharedInstance;
+
             ....
             return base.FinishedLaunching(app, options);
 ```
