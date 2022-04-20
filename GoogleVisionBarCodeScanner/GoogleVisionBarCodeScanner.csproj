@@ -11,9 +11,9 @@
 		<RootNamespace>GoogleVisionBarCodeScanner</RootNamespace>
 
 		<Product></Product>
-		<AssemblyVersion>6.2.1.5</AssemblyVersion>
-		<AssemblyFileVersion>6.2.1.5</AssemblyFileVersion>
-		<Version>6.2.1.5-pre</Version>
+		<AssemblyVersion>6.2.1.6</AssemblyVersion>
+		<AssemblyFileVersion>6.2.1.6</AssemblyFileVersion>
+		<Version>6.2.1.6-pre</Version>
 		<NeutralLanguage>en</NeutralLanguage>
 
 
@@ -36,7 +36,7 @@
 		<PackageLicenseUrl>https://github.com/JimmyPun610/BarcodeScanner.XF</PackageLicenseUrl>
 		<RepositoryType></RepositoryType>
 		<PackageTags>Xamarin.Forms Barcode Scanning Tools</PackageTags>
-		<PackageReleaseNotes>1. Use custom MLKit.BarcodeScanning and MLKit.Core nuget package, the logic is the same as the official one. Add MonoAndroid12.0 support and update packages version</PackageReleaseNotes>
+		<PackageReleaseNotes>1. merge pull request to catch more exception</PackageReleaseNotes>
 		<Copyright>Copyright 2022</Copyright>
 		<PackOnBuild>true</PackOnBuild>
 	</PropertyGroup>
