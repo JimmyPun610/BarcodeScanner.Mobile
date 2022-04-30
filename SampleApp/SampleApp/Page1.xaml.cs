@@ -1,12 +1,9 @@
-﻿using GoogleVisionBarCodeScanner;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Xamarin.Forms.PlatformConfiguration.iOSSpecific;
+using GoogleVisionBarCodeScanner;
 using Xamarin.Forms;
+using Xamarin.Forms.PlatformConfiguration.iOSSpecific;
 using Xamarin.Forms.Xaml;
 
 namespace SampleApp
@@ -40,9 +37,9 @@ namespace SampleApp
                                       : CameraFacing.Back;
         }
 
-        private async void CameraView_OnDetected(object sender, GoogleVisionBarCodeScanner.OnDetectedEventArg e)
+        private void CameraView_OnDetected(object sender, OnDetectedEventArg e)
         {
-            List<GoogleVisionBarCodeScanner.BarcodeResult> obj = e.BarcodeResults;
+            List<BarcodeResult> obj = e.BarcodeResults;
 
             string result = string.Empty;
             for(int i = 0; i < obj.Count; i++)

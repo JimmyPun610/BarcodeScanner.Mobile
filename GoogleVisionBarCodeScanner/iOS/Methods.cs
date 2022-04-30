@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using System.Linq;
 using Foundation;
 using UIKit;
 using Xamarin.Essentials;
 using MLKit.Core;
 using MLKit.BarcodeScanning;
+using CoreGraphics;
 
 namespace GoogleVisionBarCodeScanner
 {
@@ -138,19 +140,25 @@ namespace GoogleVisionBarCodeScanner
                 }
                 List<BarcodeResult> resultList = new List<BarcodeResult>();
                 foreach (var barcode in barcodes)
-                {
-                    resultList.Add(new BarcodeResult
-                    {
-                        BarcodeType = Methods.ConvertBarcodeResultTypes(barcode.ValueType),
-                        BarcodeFormat = (BarcodeFormats)barcode.Format,
-                        DisplayValue = barcode.DisplayValue,
-                        RawValue = barcode.RawValue
-                    });
-                }
+                    resultList.Add(MapBarcodeResult(barcode));
+
                 tcs.TrySetResult(resultList);
                 return;
             });
             return await tcs.Task;
+        }
+
+        public static BarcodeResult MapBarcodeResult(Barcode barcode)
+        {
+            var points = barcode.CornerPoints.Select(v => new BarcodePoint(v.CGPointValue.X, v.CGPointValue.Y)).ToArray();
+            return new BarcodeResult
+            {
+                BarcodeType = Methods.ConvertBarcodeResultTypes(barcode.ValueType),
+                BarcodeFormat = (BarcodeFormats)barcode.Format,
+                DisplayValue = barcode.DisplayValue,
+                RawValue = barcode.RawValue,
+                CornerPoints = points
+            };
         }
 
         #endregion

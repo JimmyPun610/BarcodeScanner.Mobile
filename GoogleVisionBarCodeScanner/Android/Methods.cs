@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Android.Gms.Extensions;
 using Android.Graphics;
@@ -132,12 +133,14 @@ namespace GoogleVisionBarCodeScanner
             foreach (var barcode in javaList.ToArray())
             {
                 var mapped = barcode.JavaCast<Barcode>();
+                var corners = mapped.GetCornerPoints().Select(p => new BarcodePoint(p.X, p.Y)).ToArray();
                 resultList.Add(new BarcodeResult()
                 {
                     BarcodeType = ConvertBarcodeResultTypes(mapped.ValueType),
                     BarcodeFormat = (BarcodeFormats)mapped.Format,
                     DisplayValue = mapped.DisplayValue,
-                    RawValue = mapped.RawValue
+                    RawValue = mapped.RawValue,
+                    CornerPoints = corners,
                 });
             }
 
