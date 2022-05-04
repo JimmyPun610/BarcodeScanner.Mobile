@@ -287,7 +287,11 @@ namespace GoogleVisionBarCodeScanner.Renderer
                         var image = InputImage.FromMediaImage(mediaImage, proxy.ImageInfo.RotationDegrees);
                         // Pass image to the scanner and have it do its thing
                         var result = await ToAwaitableTask(_barcodeScanner.Process(image));
-                        var final = Methods.Process(result);
+
+                        var formsWidth = (float)(_renderer?.Element?.Width ?? image.Width);
+                        var formsHeight = (float)(_renderer?.Element?.Height ?? image.Height);
+                        var final = Methods.Process(result, image, formsWidth, formsHeight);
+
                         if (final == null || _renderer?.Element == null) return;
                         if (!_renderer.Element.IsScanning)
                             return;

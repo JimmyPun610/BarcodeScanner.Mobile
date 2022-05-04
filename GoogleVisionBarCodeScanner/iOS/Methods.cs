@@ -138,9 +138,11 @@ namespace GoogleVisionBarCodeScanner
                     tcs.TrySetResult(new List<BarcodeResult>());
                     return;
                 }
+
+                var s = image.Size;
                 List<BarcodeResult> resultList = new List<BarcodeResult>();
                 foreach (var barcode in barcodes)
-                    resultList.Add(MapBarcodeResult(barcode));
+                    resultList.Add(MapBarcodeResult(barcode, image, s.Width, s.Height));
 
                 tcs.TrySetResult(resultList);
                 return;
@@ -148,17 +150,48 @@ namespace GoogleVisionBarCodeScanner
             return await tcs.Task;
         }
 
-        public static BarcodeResult MapBarcodeResult(Barcode barcode)
+        public static BarcodeResult MapBarcodeResult(Barcode barcode, UIImage image, nfloat formsWitdh, nfloat formsHeight)
         {
-            var points = barcode.CornerPoints.Select(v => new BarcodePoint(v.CGPointValue.X, v.CGPointValue.Y)).ToArray();
+            var points = barcode.CornerPoints.Select(v => MapCGPoint(v.CGPointValue, image, formsWitdh, formsHeight)).ToArray();
             return new BarcodeResult
             {
-                BarcodeType = Methods.ConvertBarcodeResultTypes(barcode.ValueType),
+                BarcodeType = ConvertBarcodeResultTypes(barcode.ValueType),
                 BarcodeFormat = (BarcodeFormats)barcode.Format,
                 DisplayValue = barcode.DisplayValue,
                 RawValue = barcode.RawValue,
                 CornerPoints = points
             };
+        }
+
+        private static BarcodePoint MapCGPoint(CGPoint originalPoint, UIImage image, nfloat formsWitdh, nfloat formsHeight)
+        {
+            var size = image.Size;
+
+            // Calculate points with the origin in the center of the image
+            // range: [-1 ... 1]
+            var x = ((originalPoint.X / size.Width) - 0.5) * 2;
+            var y = ((originalPoint.Y / size.Height) - 0.5) * 2;
+
+            var fcx = formsWitdh * 0.5;
+            var fcy = formsHeight * 0.5;
+
+            switch(UIDevice.CurrentDevice.Orientation)
+            {
+                case UIDeviceOrientation.Portrait:
+                    return new BarcodePoint(fcx - (fcx * y), fcy + (fcy * x));
+
+                case UIDeviceOrientation.PortraitUpsideDown:
+                    return new BarcodePoint(fcx + (fcx * y), fcy - (fcy * x));
+
+                case UIDeviceOrientation.LandscapeRight:
+                    return new BarcodePoint(fcx - (fcx * x), fcy - (fcy * y));
+
+                case UIDeviceOrientation.LandscapeLeft:
+                    return new BarcodePoint(fcx + (fcx * x), fcy + (fcy * y));
+
+                default:
+                    return new BarcodePoint(fcx + (fcx * x), fcy + (fcy * y));
+            }
         }
 
         #endregion
