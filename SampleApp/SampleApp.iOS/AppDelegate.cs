@@ -22,6 +22,9 @@ namespace SampleApp.iOS
         //
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
+            // Keep app alive for debugging
+            UIApplication.SharedApplication.IdleTimerDisabled = true;
+
             global::Xamarin.Forms.Forms.Init();
             LoadApplication(new App());
             GoogleVisionBarCodeScanner.iOS.Initializer.Init();

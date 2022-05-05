@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
+using Android.Content.PM;
 using Android.Gms.Extensions;
 using Android.Graphics;
 using Android.Runtime;
+using Android.Views;
 using Java.Util;
 using Xamarin.Essentials;
 using Xamarin.Google.MLKit.Vision.BarCode;
@@ -110,7 +113,7 @@ namespace GoogleVisionBarCodeScanner
             return false;
         }
 
-        public static async Task<List<BarcodeResult>> ScanFromImage(byte[] imageArray)
+        public static async Task<List<BarcodeResult>> ScanFromImage(byte[] imageArray, float formsWitdh, float formsHeight)
         {
             using Bitmap bitmap = await BitmapFactory.DecodeByteArrayAsync(imageArray, 0, imageArray.Length);
             if (bitmap == null)
@@ -118,10 +121,10 @@ namespace GoogleVisionBarCodeScanner
             using var image = InputImage.FromBitmap(bitmap, 0);
             var scanner = BarcodeScanning.GetClient(new BarcodeScannerOptions.Builder().SetBarcodeFormats(Configuration.BarcodeFormats)
                 .Build());
-            return Process(await scanner.Process(image));
+            return Process(await scanner.Process(image), image, formsWitdh, formsHeight);
         }
 
-        internal static List<BarcodeResult> Process(Java.Lang.Object result)
+        internal static List<BarcodeResult> Process(Java.Lang.Object result, InputImage image, float formsWitdh, float formsHeight)
         {
             if (result == null)
                 return null;
@@ -132,16 +135,46 @@ namespace GoogleVisionBarCodeScanner
             foreach (var barcode in javaList.ToArray())
             {
                 var mapped = barcode.JavaCast<Barcode>();
+                var corners = mapped.GetCornerPoints().Select(p => MapPoint(p, image, formsWitdh, formsHeight)).ToArray();
                 resultList.Add(new BarcodeResult()
                 {
                     BarcodeType = ConvertBarcodeResultTypes(mapped.ValueType),
                     BarcodeFormat = (BarcodeFormats)mapped.Format,
                     DisplayValue = mapped.DisplayValue,
-                    RawValue = mapped.RawValue
+                    RawValue = mapped.RawValue,
+                    CornerPoints = corners,
                 });
             }
 
             return resultList;
+        }
+
+        private static BarcodePoint MapPoint(Point originalPoint, InputImage image, float formsWitdh, float formsHeight)
+        {
+            var width = (double)image.Width;
+            var height = (double)image.Height;
+
+            // Calculate points with the origin in the center of the image
+            // range: [-1 ... 1]
+            var x = ((originalPoint.X / width) - 0.5) * 2;
+            var y = ((originalPoint.Y / height) - 0.5) * 2;
+
+            var fcx = formsWitdh * 0.5;
+            var fcy = formsHeight * 0.5;
+
+            var orientation = Platform.CurrentActivity.WindowManager.DefaultDisplay.Rotation;
+            switch (orientation)
+            {
+                case SurfaceOrientation.Rotation180:
+                    return new BarcodePoint(fcx + (fcx * y), fcy - (fcy * x));
+
+                case SurfaceOrientation.Rotation90: // button on the right
+                case SurfaceOrientation.Rotation270: // button on the left
+                    return new BarcodePoint(fcx + (fcx * x), fcy + (fcy * y));
+
+                default: //SurfaceOrientation.Rotation0
+                    return new BarcodePoint(fcx + (fcx * x), fcy + (fcy * y));
+            }
         }
         #endregion
     }
