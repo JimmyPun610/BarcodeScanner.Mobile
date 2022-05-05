@@ -15,7 +15,6 @@ using System.Drawing;
 using System.Threading;
 using GoogleVisionBarCodeScanner.Renderer;
 using MLKit.Core;
-using Xamarin.Essentials;
 
 namespace GoogleVisionBarCodeScanner
 {
@@ -300,6 +299,7 @@ namespace GoogleVisionBarCodeScanner
                 switch (deviceOrientation)
                 {
                     case UIDeviceOrientation.Portrait:
+                        
                         orientation = devicePosition == AVCaptureDevicePosition.Front ? UIImageOrientation.LeftMirrored : UIImageOrientation.Right;
                         break;
                     case UIDeviceOrientation.LandscapeLeft:
@@ -403,13 +403,17 @@ namespace GoogleVisionBarCodeScanner
                             if (_renderer.Element.VibrationOnDetected)
                                 SystemSound.Vibrate.PlayAlertSound();
 
-                            var w = (nfloat)_renderer.Element.Width;
-                            var h = (nfloat)_renderer.Element.Height;
-
                             List<BarcodeResult> resultList = new List<BarcodeResult>();
                             foreach (var barcode in barcodes)
-                                resultList.Add(Methods.MapBarcodeResult(barcode, image, w, h));
-
+                            {
+                                resultList.Add(new BarcodeResult
+                                {
+                                    BarcodeType = Methods.ConvertBarcodeResultTypes(barcode.ValueType),
+                                    BarcodeFormat = (BarcodeFormats)barcode.Format,
+                                    DisplayValue = barcode.DisplayValue,
+                                    RawValue = barcode.RawValue
+                                });
+                            }
                             OnDetected?.Invoke(resultList);
                         });
                     }

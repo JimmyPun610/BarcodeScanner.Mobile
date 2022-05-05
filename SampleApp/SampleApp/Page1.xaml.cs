@@ -1,12 +1,12 @@
-﻿using System;
+﻿using GoogleVisionBarCodeScanner;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using GoogleVisionBarCodeScanner;
-using SkiaSharp;
-using SkiaSharp.Views.Forms;
-using Xamarin.Forms;
+using System.Text;
+using System.Threading.Tasks;
 using Xamarin.Forms.PlatformConfiguration.iOSSpecific;
+using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace SampleApp
@@ -14,14 +14,6 @@ namespace SampleApp
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class Page1 : ContentPage, INotifyPropertyChanged
     {
-        readonly SKPaint paint = new SKPaint
-        {
-            Style = SKPaintStyle.Stroke,
-            Color = Color.BlueViolet.ToSKColor(),
-            StrokeWidth = 4
-        };
-
-        List<BarcodeResult> Barcodes { get; set; }
 
         public Page1()
         {
@@ -48,33 +40,22 @@ namespace SampleApp
                                       : CameraFacing.Back;
         }
 
-        private void CameraView_OnDetected(object sender, OnDetectedEventArg e)
+        private async void CameraView_OnDetected(object sender, GoogleVisionBarCodeScanner.OnDetectedEventArg e)
         {
-            Barcodes = e.BarcodeResults;
-            Canvas.InvalidateSurface();
-            Camera.IsScanning = true;
-        }
+            List<GoogleVisionBarCodeScanner.BarcodeResult> obj = e.BarcodeResults;
 
-        void SKCanvasView_PaintSurface(object sender, SKPaintSurfaceEventArgs args)
-        {
-            SKImageInfo info = args.Info;
-            SKSurface surface = args.Surface;
-            SKCanvas canvas = surface.Canvas;
-
-            canvas.Clear();
-
-            if (Barcodes != null)
+            string result = string.Empty;
+            for(int i = 0; i < obj.Count; i++)
             {
-                foreach (var b in Barcodes)
-                {
-                    if (b.CornerPoints?.Length > 1)
-                    {
-                        var points = b.CornerPoints.Select(p => new SKPoint((float)p.X, (float)p.Y)).ToList();
-                        points.Add(points[0]);
-                        canvas.DrawPoints(SKPointMode.Polygon, points.ToArray(), paint);
-                    }
-                }
+                result += $"Type : {obj[i].BarcodeType}, Value : {obj[i].DisplayValue}{Environment.NewLine}";
             }
+            Device.BeginInvokeOnMainThread(async() =>
+            {
+                await DisplayAlert("Result", result, "OK");
+                Camera.IsScanning = true;
+                //await Navigation.PopModalAsync();
+            });
+            
         }
     }
 }

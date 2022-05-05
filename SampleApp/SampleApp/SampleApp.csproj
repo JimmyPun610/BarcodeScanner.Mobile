@@ -16,7 +16,8 @@
     <PackageReference Include="Xamarin.Essentials" Version="1.7.1" />
     <PackageReference Include="Xamarin.Forms" Version="5.0.0.2337" />
     <!-- Package Reference -->
-    <PackageReference Include="SkiaSharp.Views.Forms" Version="2.80.3" />
+    <PackageReference Include="BarcodeScanner.XF" Version="6.2.1.5-pre" /> 
+
   </ItemGroup>
 
 
@@ -28,9 +29,6 @@
   </ItemGroup>
 
  
-  <ItemGroup>
-    <None Remove="SkiaSharp.Views.Forms" />
-  </ItemGroup>
   <ItemGroup>
     <None Update="App.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -52,7 +50,4 @@
  <!--<ItemGroup>
     <ProjectReference Include="..\..\GoogleVisionBarCodeScanner\GoogleVisionBarCodeScanner.csproj" />
   </ItemGroup>-->
-  <ItemGroup>
-    <ProjectReference Include="..\..\GoogleVisionBarCodeScanner\GoogleVisionBarCodeScanner.csproj" />
-  </ItemGroup>
 </Project>
