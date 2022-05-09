@@ -21,7 +21,7 @@ namespace GoogleVisionBarCodeScanner
 {
     internal sealed class UICameraPreview : UIView
     {
-        public event EventHandler<List<BarcodeResult>> OnDetected;
+        public event EventHandler<OnDetectedEventArg> OnDetected;
         public event EventHandler IsScanningChanged;
         AVCaptureVideoPreviewLayer previewLayer;
         CaptureVideoDelegate captureVideoDelegate;
@@ -182,12 +182,12 @@ namespace GoogleVisionBarCodeScanner
 
 
             captureVideoDelegate = new CaptureVideoDelegate(renderer);
-            captureVideoDelegate.OnDetected += (list) =>
+            captureVideoDelegate.OnDetected += (eventArg) =>
             {
                 InvokeOnMainThread(() =>
                 {
                     //CaptureSession.StopRunning();
-                    this.OnDetected?.Invoke(this, list);
+                    this.OnDetected?.Invoke(this, eventArg);
                 });
 
             };
@@ -277,7 +277,7 @@ namespace GoogleVisionBarCodeScanner
 
         public class CaptureVideoDelegate : AVCaptureVideoDataOutputSampleBufferDelegate
         {
-            public event Action<List<BarcodeResult>> OnDetected;
+            public event Action<OnDetectedEventArg> OnDetected;
             BarcodeScanner barcodeDetector;
             UIImageOrientation orientation = UIImageOrientation.Up;
             long lastAnalysisTime = DateTimeOffset.MinValue.ToUnixTimeMilliseconds();
@@ -380,6 +380,15 @@ namespace GoogleVisionBarCodeScanner
                     {
                         var image = GetImageFromSampleBuffer(sampleBuffer);
                         if (image == null) return;
+
+                        byte[] imageDataByteArray = null;
+                        using (NSData imageData = image.AsJPEG())
+                        {
+                            imageDataByteArray = new byte[imageData.Length];
+                            System.Runtime.InteropServices.Marshal.Copy(imageData.Bytes, imageDataByteArray, 0, Convert.ToInt32(imageData.Length));
+                            //todo: send bytes to result.
+                        }
+
                         var visionImage = new MLImage(image) { Orientation = orientation };
                         releaseSampleBuffer(sampleBuffer);
                         barcodeDetector.ProcessImage(visionImage, (barcodes, error) =>
@@ -410,7 +419,7 @@ namespace GoogleVisionBarCodeScanner
                             foreach (var barcode in barcodes)
                                 resultList.Add(Methods.MapBarcodeResult(barcode, image, w, h));
 
-                            OnDetected?.Invoke(resultList);
+                            OnDetected?.Invoke(new OnDetectedEventArg { BarcodeResults = resultList, ImageData = imageDataByteArray });
                         });
                     }
                     catch (Exception exception)

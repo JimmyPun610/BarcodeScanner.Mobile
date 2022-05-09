@@ -1,8 +1,10 @@
 ﻿using System;
 using System.ComponentModel;
+using System.IO;
 using System.Threading.Tasks;
 using Android.Content;
 using Android.Gms.Tasks;
+using Android.Graphics;
 using Android.Hardware.Camera2;
 using Android.Util;
 using AndroidX.Camera.Camera2.InterOp;
@@ -13,6 +15,7 @@ using AndroidX.Core.Content;
 using AndroidX.Lifecycle;
 using Google.Common.Util.Concurrent;
 using Java.Lang;
+using Java.Nio;
 using Java.Util.Concurrent;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
@@ -279,6 +282,9 @@ namespace GoogleVisionBarCodeScanner.Renderer
                 {
                     var mediaImage = proxy.Image;
                     if (mediaImage == null) return;
+
+                    var imageData = NV21toJPEG(YUV_420_888toNV21(mediaImage), mediaImage.Width, mediaImage.Height);
+
                     _lastRunTime = DateTimeOffset.Now.ToUnixTimeMilliseconds();
                     
                     if (_lastRunTime - _lastAnalysisTime > _renderer.Element.ScanInterval && _renderer.Element.IsScanning)
@@ -297,7 +303,7 @@ namespace GoogleVisionBarCodeScanner.Renderer
                             return;
 
                         _renderer.Element.IsScanning = false;
-                        _renderer.Element.TriggerOnDetected(final);
+                        _renderer.Element.TriggerOnDetected(final, imageData);
                         if (_renderer.Element.VibrationOnDetected)
                             Xamarin.Essentials.Vibration.Vibrate(200);
                     }
@@ -314,6 +320,41 @@ namespace GoogleVisionBarCodeScanner.Renderer
                 {
                     SafeCloseImageProxy(proxy);
                 }
+            }
+
+            /// <summary>
+            /// https://stackoverflow.com/a/45926852
+            /// </summary>
+            private static byte[] YUV_420_888toNV21(Android.Media.Image image)
+            {
+                byte[] nv21;
+                ByteBuffer yBuffer = image.GetPlanes()[0].Buffer;
+                ByteBuffer uBuffer = image.GetPlanes()[1].Buffer;
+                ByteBuffer vBuffer = image.GetPlanes()[2].Buffer;
+
+                int ySize = yBuffer.Remaining();
+                int uSize = uBuffer.Remaining();
+                int vSize = vBuffer.Remaining();
+
+                nv21 = new byte[ySize + uSize + vSize];
+
+                //U and V are swapped
+                yBuffer.Get(nv21, 0, ySize);
+                vBuffer.Get(nv21, ySize, vSize);
+                uBuffer.Get(nv21, ySize + vSize, uSize);
+
+                return nv21;
+            }
+
+            /// <summary>
+            /// https://stackoverflow.com/a/45926852
+            /// </summary>
+            private static byte[] NV21toJPEG(byte[] nv21, int width, int height)
+            {
+                MemoryStream outstran = new MemoryStream();
+                YuvImage yuv = new YuvImage(nv21, ImageFormatType.Nv21, width, height, null);
+                yuv.CompressToJpeg(new Android.Graphics.Rect(0, 0, width, height), 100, outstran);
+                return outstran.ToArray();
             }
 
             private void SafeCloseImageProxy(IImageProxy proxy)

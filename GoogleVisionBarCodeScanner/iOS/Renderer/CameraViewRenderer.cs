@@ -61,8 +61,8 @@ namespace GoogleVisionBarCodeScanner.Renderer
         }
 
 
-        private void OnDetected(object sender, List<BarcodeResult> arg) =>
-            Element?.TriggerOnDetected(arg);
+        private void OnDetected(object sender, OnDetectedEventArg arg) =>
+            Element?.TriggerOnDetected(arg.BarcodeResults, arg.ImageData);
 
 
     }

@@ -149,12 +149,12 @@ namespace GoogleVisionBarCodeScanner
         }
 
         public event EventHandler<OnDetectedEventArg> OnDetected;
-        public void TriggerOnDetected(List<BarcodeResult> barCodeResults)
+        public void TriggerOnDetected(List<BarcodeResult> barCodeResults, byte[] imageData)
         {
             MainThread.BeginInvokeOnMainThread(() =>
             {
-                OnDetected?.Invoke(this, new OnDetectedEventArg { BarcodeResults = barCodeResults });
-                OnDetectedCommand?.Execute( new OnDetectedEventArg { BarcodeResults = barCodeResults });
+                OnDetected?.Invoke(this, new OnDetectedEventArg { BarcodeResults = barCodeResults, ImageData = imageData });
+                OnDetectedCommand?.Execute( new OnDetectedEventArg { BarcodeResults = barCodeResults, ImageData = imageData });
             });
         }
     }
@@ -162,8 +162,10 @@ namespace GoogleVisionBarCodeScanner
     public class OnDetectedEventArg : EventArgs
     {
         public List<BarcodeResult> BarcodeResults { get; set; }
+        public byte[] ImageData { get; set; }
         public OnDetectedEventArg()
         {
+            ImageData = new byte[0];
             BarcodeResults = new List<BarcodeResult>();
         }
     }
