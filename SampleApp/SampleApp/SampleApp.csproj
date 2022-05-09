@@ -30,6 +30,7 @@
  
   <ItemGroup>
     <None Remove="SkiaSharp.Views.Forms" />
+    <None Remove="ImageCapture\" />
   </ItemGroup>
   <ItemGroup>
     <None Update="App.xaml">
@@ -54,5 +55,8 @@
   </ItemGroup>-->
   <ItemGroup>
     <ProjectReference Include="..\..\GoogleVisionBarCodeScanner\GoogleVisionBarCodeScanner.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="ImageCapture\" />
   </ItemGroup>
 </Project>
