@@ -294,6 +294,12 @@ namespace GoogleVisionBarCodeScanner
                 }
                 var options = new BarcodeScannerOptions(Configuration.BarcodeDetectorSupportFormat);
                 barcodeDetector = BarcodeScanner.BarcodeScannerWithOptions(options);
+                orientation = GetUIImageOrientation();
+            }
+
+            private UIImageOrientation GetUIImageOrientation()
+            {
+                var orientation = UIImageOrientation.Up;
                 // Using back-facing camera
                 var devicePosition = AVCaptureDevicePosition.Back;
                 var deviceOrientation = UIDevice.CurrentDevice.Orientation;
@@ -314,13 +320,15 @@ namespace GoogleVisionBarCodeScanner
                     case UIDeviceOrientation.FaceUp:
                     case UIDeviceOrientation.FaceDown:
                     case UIDeviceOrientation.Unknown:
-                        orientation = UIImageOrientation.Up;
+                        orientation = UIImageOrientation.Right;
                         break;
                 }
+
+                return orientation;
             }
 
 
-            private static UIImage GetImageFromSampleBuffer(CMSampleBuffer sampleBuffer)
+            private static UIImage GetImageFromSampleBuffer(CMSampleBuffer sampleBuffer, UIImageOrientation orientation)
             {
                 // Get a pixel buffer from the sample buffer
                 using (var pixelBuffer = sampleBuffer.GetImageBuffer() as CVPixelBuffer)
@@ -350,7 +358,7 @@ namespace GoogleVisionBarCodeScanner
                                 {
                                     // Unlock and return image
                                     pixelBuffer.Unlock(CVPixelBufferLock.None);
-                                    return UIImage.FromImage(cgImage);
+                                    return UIImage.FromImage(cgImage, 1, orientation);
                                 }
                             }
                         }
@@ -378,7 +386,7 @@ namespace GoogleVisionBarCodeScanner
                     lastAnalysisTime = lastRunTime;
                     try
                     {
-                        var image = GetImageFromSampleBuffer(sampleBuffer);
+                        var image = GetImageFromSampleBuffer(sampleBuffer, GetUIImageOrientation());
                         if (image == null) return;
 
                         byte[] imageDataByteArray = null;
@@ -386,7 +394,6 @@ namespace GoogleVisionBarCodeScanner
                         {
                             imageDataByteArray = new byte[imageData.Length];
                             System.Runtime.InteropServices.Marshal.Copy(imageData.Bytes, imageDataByteArray, 0, Convert.ToInt32(imageData.Length));
-                            //todo: send bytes to result.
                         }
 
                         var visionImage = new MLImage(image) { Orientation = orientation };
