@@ -283,14 +283,12 @@ namespace GoogleVisionBarCodeScanner.Renderer
                     var mediaImage = proxy.Image;
                     if (mediaImage == null) return;
 
-                    var imageData = NV21toJPEG(YUV_420_888toNV21(mediaImage), mediaImage.Width, mediaImage.Height);
-
                     _lastRunTime = DateTimeOffset.Now.ToUnixTimeMilliseconds();
                     
                     if (_lastRunTime - _lastAnalysisTime > _renderer.Element.ScanInterval && _renderer.Element.IsScanning)
                     {
                         _lastAnalysisTime = _lastRunTime;
-                        var image = InputImage.FromMediaImage(mediaImage, proxy.ImageInfo.RotationDegrees);
+                        var image = InputImage.FromMediaImage(mediaImage, 0); //proxy.ImageInfo.RotationDegrees);
                         // Pass image to the scanner and have it do its thing
                         var result = await ToAwaitableTask(_barcodeScanner.Process(image));
 
@@ -301,6 +299,9 @@ namespace GoogleVisionBarCodeScanner.Renderer
                         if (final == null || _renderer?.Element == null) return;
                         if (!_renderer.Element.IsScanning)
                             return;
+
+                        var imageData = NV21toJPEG(YUV_420_888toNV21(mediaImage), mediaImage.Width, mediaImage.Height);
+                        imageData = RotateJpeg(imageData, GetImageRotationCorrectionDegrees());
 
                         _renderer.Element.IsScanning = false;
                         _renderer.Element.TriggerOnDetected(final, imageData);
@@ -355,6 +356,26 @@ namespace GoogleVisionBarCodeScanner.Renderer
                 YuvImage yuv = new YuvImage(nv21, ImageFormatType.Nv21, width, height, null);
                 yuv.CompressToJpeg(new Android.Graphics.Rect(0, 0, width, height), 100, outstran);
                 return outstran.ToArray();
+            }
+
+            /// <summary>
+            /// https://stackoverflow.com/a/44323834
+            /// </summary>
+            private static byte[] RotateJpeg(byte[] jpegData, int rotationDegrees)
+            {
+                var bmp = BitmapFactory.DecodeByteArray(jpegData, 0, jpegData.Length);
+                var matrix = new Matrix();
+                matrix.PostRotate(rotationDegrees);
+                bmp = Bitmap.CreateBitmap(bmp, 0, 0, bmp.Width, bmp.Height, matrix, true);
+
+                var ms = new MemoryStream();
+                bmp.Compress(Bitmap.CompressFormat.Jpeg, 100, ms);
+                return ms.ToArray();
+            }
+
+            private static int GetImageRotationCorrectionDegrees()
+            {
+                return 90;
             }
 
             private void SafeCloseImageProxy(IImageProxy proxy)
