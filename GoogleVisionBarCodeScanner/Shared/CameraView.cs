@@ -99,6 +99,21 @@ namespace GoogleVisionBarCodeScanner
             set => SetValue(IsScanningProperty, value);
         }
 
+        public static BindableProperty ReturnBarcodeImageProperty = BindableProperty.Create(nameof(ReturnBarcodeImage)
+            , typeof(bool)
+            , typeof(CameraView)
+            , false
+            , defaultBindingMode: BindingMode.TwoWay
+            , propertyChanged: (bindable, value, newValue) => ((CameraView)bindable).ReturnBarcodeImage = (bool)newValue);
+        /// <summary>
+        /// Disables or enables returning the image which the barcode was read from.
+        /// </summary>
+        public bool ReturnBarcodeImage
+        {
+            get => (bool)GetValue(ReturnBarcodeImageProperty);
+            set => SetValue(ReturnBarcodeImageProperty, value);
+        }
+
         public static BindableProperty TorchOnProperty = BindableProperty.Create(nameof(TorchOn)
             , typeof(bool)
             , typeof(CameraView)

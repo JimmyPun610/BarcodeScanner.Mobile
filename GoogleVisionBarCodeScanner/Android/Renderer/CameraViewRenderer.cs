@@ -302,8 +302,12 @@ namespace GoogleVisionBarCodeScanner.Renderer
                         if (!_renderer.Element.IsScanning)
                             return;
 
-                        var imageData = NV21toJPEG(YUV_420_888toNV21(mediaImage), mediaImage.Width, mediaImage.Height);
-                        imageData = RotateJpeg(imageData, GetImageRotationCorrectionDegrees());
+                        var imageData = new byte[0];
+                        if (_renderer.Element.ReturnBarcodeImage)
+                        {
+                            imageData = NV21toJPEG(YUV_420_888toNV21(mediaImage), mediaImage.Width, mediaImage.Height);
+                            imageData = RotateJpeg(imageData, GetImageRotationCorrectionDegrees());
+                        }
 
                         _renderer.Element.IsScanning = false;
                         _renderer.Element.TriggerOnDetected(final, imageData);
