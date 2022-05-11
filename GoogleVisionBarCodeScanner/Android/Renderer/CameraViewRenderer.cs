@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.IO;
 using System.Threading.Tasks;
+using Android.App;
 using Android.Content;
 using Android.Gms.Tasks;
 using Android.Graphics;
@@ -19,6 +20,7 @@ using Java.Nio;
 using Java.Util.Concurrent;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
+using Xamarin.Forms.PlatformConfiguration;
 using Xamarin.Google.MLKit.Vision.BarCode;
 using Xamarin.Google.MLKit.Vision.Common;
 using Exception = Java.Lang.Exception;
@@ -375,7 +377,27 @@ namespace GoogleVisionBarCodeScanner.Renderer
 
             private static int GetImageRotationCorrectionDegrees()
             {
-                return 90;
+                bool isAutoRotateEnabled = Android.Provider.Settings.System.GetInt(Android.App.Application.Context.ContentResolver,
+                    Android.Provider.Settings.System.AccelerometerRotation, 0) == 1;
+
+                if (!isAutoRotateEnabled)
+                    return 90;
+
+                Android.Views.IWindowManager windowManager = (Android.Views.IWindowManager)Xamarin.Essentials.Platform.CurrentActivity.GetSystemService(Service.WindowService);
+
+                switch(windowManager.DefaultDisplay.Rotation)
+                {
+                    case Android.Views.SurfaceOrientation.Rotation0:
+                        return 90;
+                    case Android.Views.SurfaceOrientation.Rotation90:
+                        return 0;
+                    case Android.Views.SurfaceOrientation.Rotation180:
+                        return -90;
+                    case Android.Views.SurfaceOrientation.Rotation270:
+                        return 180;
+                    default:
+                        return 0;
+                }
             }
 
             private void SafeCloseImageProxy(IImageProxy proxy)
