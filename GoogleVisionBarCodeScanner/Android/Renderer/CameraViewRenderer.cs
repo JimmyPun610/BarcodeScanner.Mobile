@@ -290,7 +290,7 @@ namespace GoogleVisionBarCodeScanner.Renderer
                     if (_lastRunTime - _lastAnalysisTime > _renderer.Element.ScanInterval && _renderer.Element.IsScanning)
                     {
                         _lastAnalysisTime = _lastRunTime;
-                        var image = InputImage.FromMediaImage(mediaImage, 0); //proxy.ImageInfo.RotationDegrees);
+                        var image = InputImage.FromMediaImage(mediaImage, proxy.ImageInfo.RotationDegrees);
                         // Pass image to the scanner and have it do its thing
                         var result = await ToAwaitableTask(_barcodeScanner.Process(image));
 
