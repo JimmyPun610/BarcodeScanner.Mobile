@@ -31,3 +31,5 @@
 /._BarcodeScanner.XF.nuspec
 /MigrationBackup/ae31901d/GoogleVisionBarCodeScanner.iOS
 /GoogleVisionBarCodeScanner/bin/Release
+SampleApp/SampleApp.Android/bin
+SampleApp/SampleApp.iOS/bin
