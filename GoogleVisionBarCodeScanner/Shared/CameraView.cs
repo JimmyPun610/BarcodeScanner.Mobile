@@ -99,6 +99,21 @@ namespace GoogleVisionBarCodeScanner
             set => SetValue(IsScanningProperty, value);
         }
 
+        public static BindableProperty ReturnBarcodeImageProperty = BindableProperty.Create(nameof(ReturnBarcodeImage)
+            , typeof(bool)
+            , typeof(CameraView)
+            , false
+            , defaultBindingMode: BindingMode.TwoWay
+            , propertyChanged: (bindable, value, newValue) => ((CameraView)bindable).ReturnBarcodeImage = (bool)newValue);
+        /// <summary>
+        /// Disables or enables returning the image which the barcode was read from.
+        /// </summary>
+        public bool ReturnBarcodeImage
+        {
+            get => (bool)GetValue(ReturnBarcodeImageProperty);
+            set => SetValue(ReturnBarcodeImageProperty, value);
+        }
+
         public static BindableProperty TorchOnProperty = BindableProperty.Create(nameof(TorchOn)
             , typeof(bool)
             , typeof(CameraView)
@@ -149,12 +164,12 @@ namespace GoogleVisionBarCodeScanner
         }
 
         public event EventHandler<OnDetectedEventArg> OnDetected;
-        public void TriggerOnDetected(List<BarcodeResult> barCodeResults)
+        public void TriggerOnDetected(List<BarcodeResult> barCodeResults, byte[] imageData)
         {
             MainThread.BeginInvokeOnMainThread(() =>
             {
-                OnDetected?.Invoke(this, new OnDetectedEventArg { BarcodeResults = barCodeResults });
-                OnDetectedCommand?.Execute( new OnDetectedEventArg { BarcodeResults = barCodeResults });
+                OnDetected?.Invoke(this, new OnDetectedEventArg { BarcodeResults = barCodeResults, ImageData = imageData });
+                OnDetectedCommand?.Execute( new OnDetectedEventArg { BarcodeResults = barCodeResults, ImageData = imageData });
             });
         }
     }
@@ -162,8 +177,10 @@ namespace GoogleVisionBarCodeScanner
     public class OnDetectedEventArg : EventArgs
     {
         public List<BarcodeResult> BarcodeResults { get; set; }
+        public byte[] ImageData { get; set; }
         public OnDetectedEventArg()
         {
+            ImageData = new byte[0];
             BarcodeResults = new List<BarcodeResult>();
         }
     }
