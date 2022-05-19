@@ -33,3 +33,5 @@
 /GoogleVisionBarCodeScanner/bin/Release
 SampleApp/SampleApp.Android/bin
 SampleApp/SampleApp.iOS/bin
+SampleApp/SampleApp.Android/obj
+SampleApp/SampleApp.iOS/obj
