@@ -34,4 +34,6 @@
 SampleApp/SampleApp.Android/bin
 SampleApp/SampleApp.iOS/bin
 SampleApp/SampleApp.Android/obj
+SampleApp/SampleApp/obj
+SampleApp/SampleApp/bin
 SampleApp/SampleApp.iOS/obj
