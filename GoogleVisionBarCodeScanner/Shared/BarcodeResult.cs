@@ -6,20 +6,10 @@
         public BarcodeFormats BarcodeFormat { get; set; }
         public string DisplayValue { get; set; }
         public string RawValue { get; set; }
-        public BarcodePoint[] CornerPoints { get; set; }
+        /// <summary>
+        /// This value is native coordination, please make conversion to Xamarin Forms coordination first
+        /// </summary>
+        public System.Drawing.RectangleF BoundingBox { get; set; }
     }
-
-    public struct BarcodePoint
-    {
-        public double X { get; }
-        public double Y { get; }
-
-        public BarcodePoint(double x, double y)
-        {
-            X = x;
-            Y = y;
-        }
-
-        public override string ToString() => $"X:{X:0.00} Y:{Y:0.00}";
-    }
+    
 }

@@ -28,13 +28,13 @@
                            TorchOn="False" VibrationOnDetected="False" ScanInterval="50" x:Name="Camera"/>
 
             <!--IgnorePixelScaling: Make sure it is set to true. Ensures density is properly calculated-->
-            <skia:SKCanvasView
+            <!--<skia:SKCanvasView
                 x:Name="Canvas"
                 HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"
                 Grid.Row="1" BackgroundColor="Transparent"
                 PaintSurface="SKCanvasView_PaintSurface"
                 IgnorePixelScaling="True" 
-            />
+            />-->
 
             <!--Customized Size--> 
             <!--<gv:CameraView HorizontalOptions="Center" WidthRequest="200" HeightRequest="200" OnDetected="CameraView_OnDetected" Grid.Row="1"/>-->

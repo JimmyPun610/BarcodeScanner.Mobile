@@ -419,12 +419,9 @@ namespace GoogleVisionBarCodeScanner
                             if (_renderer.Element.VibrationOnDetected)
                                 SystemSound.Vibrate.PlayAlertSound();
 
-                            var w = (nfloat)_renderer.Element.Width;
-                            var h = (nfloat)_renderer.Element.Height;
-
                             List<BarcodeResult> resultList = new List<BarcodeResult>();
                             foreach (var barcode in barcodes)
-                                resultList.Add(Methods.MapBarcodeResult(barcode, image, w, h));
+                                resultList.Add(Methods.MapBarcodeResult(barcode));
 
                             var imageDataByteArray = new byte[0];
                             if (shouldReturnBarcodeImage)
