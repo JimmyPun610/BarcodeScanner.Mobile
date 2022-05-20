@@ -18,7 +18,8 @@
       <Version>5.0.0.2401</Version>
     </PackageReference>
     <!-- Package Reference -->
-    <PackageReference Include="SkiaSharp.Views.Forms" Version="2.80.3" />
+	  <PackageReference Include="SkiaSharp.Views.Forms" Version="2.80.3" />
+	  <PackageReference Include="BarcodeScanner.XF" Version="6.2.2-pre" />
   </ItemGroup>
 
 
@@ -55,9 +56,7 @@
  <!--<ItemGroup>
     <ProjectReference Include="..\..\GoogleVisionBarCodeScanner\GoogleVisionBarCodeScanner.csproj" />
   </ItemGroup>-->
-  <ItemGroup>
-    <ProjectReference Include="..\..\GoogleVisionBarCodeScanner\GoogleVisionBarCodeScanner.csproj" />
-  </ItemGroup>
+
   <ItemGroup>
     <Folder Include="ImageCapture\" />
   </ItemGroup>

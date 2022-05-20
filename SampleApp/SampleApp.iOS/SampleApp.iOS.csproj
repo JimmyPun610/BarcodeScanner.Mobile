@@ -142,6 +142,7 @@
     <PackageReference Include="Xamarin.Build.Download">
       <Version>0.11.2</Version>
     </PackageReference>
+		  <PackageReference Include="BarcodeScanner.XF" Version="6.2.2-pre" />
     <!-- Package Reference -->
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
@@ -155,10 +156,7 @@
       <Project>{8CDA11D6-38F2-485E-9ACF-61133CCEEC7B}</Project>
       <Name>GoogleVisionBarCodeScanner</Name>
     </ProjectReference>-->
-    <ProjectReference Include="..\..\GoogleVisionBarCodeScanner\GoogleVisionBarCodeScanner.csproj">
-      <Project>{8CDA11D6-38F2-485E-9ACF-61133CCEEC7B}</Project>
-      <Name>GoogleVisionBarCodeScanner</Name>
-    </ProjectReference>
+  
   </ItemGroup>
   <!-- Project Reference config -->
   <!--<Import Project="$(MSBuildThisFileDirectory)..\..\GoogleVisionBarCodeScanner\BarcodeScanner.XF.targets" />-->

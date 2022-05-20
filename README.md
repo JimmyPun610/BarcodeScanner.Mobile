@@ -9,15 +9,10 @@ https://docs.microsoft.com/en-us/xamarin/xamarin-forms/deploy-test/hot-restart</
 Please feel free to improve my source code.
 
 ## Current Version
-6.2.1.5-pre, 
+6.2.2-pre, 
 
-1. Add support of MonoAndroid12.0
-2. Use custom build iOS MLKit library (no need to download the package manually now.)
-3. Update Xamarin Forms verison
-
-6.2.0.0-pre, Update iOS Firebase library, will need to create nuget source in localhost, please read iOS part for more details
-
-6.1.1.2-pre, Add CameraFacing and default quality, bug fixing on Android crashing issue
+1. Add new feature to return scanned image
+2. Update Xamarin Forms verison
 
 5.0.0.9 for Xamarin Forms 5.0.0.2012
 
@@ -119,7 +114,7 @@ GoogleVisionBarCodeScanner.Methods.SetSupportBarcodeFormat(BarcodeFormats.QRCode
 	 <!--VirbationOnDetected: Indicate the device will vibrate or not when detected barcode, default is True
 		 TorchOn: Indicate the torch will on or not when the view appear, default is False
 		 IsScanning : Indicate whether the device will start scanning after it is opened, default is True
-		 RequestedFPS: Affect Android only, leave it if you want a default value (https://developers.google.com/android/reference/com/google/android/gms/vision/CameraSource.Builder.html#public-camerasource.builder-setrequestedfps-float-fps)
+		 RequestedFPS: Affect Android only, remove it if you want a default value (https://developers.google.com/android/reference/com/google/android/gms/vision/CameraSource.Builder.html#public-camerasource.builder-setrequestedfps-float-fps)
 		 ScanInterval: Scan interval for iOS, default is 500ms and the minimum is 100ms, please be reminded that double scanning may be occurred if it is too small
 		 -->
              <gv:CameraView HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" OnDetected="CameraView_OnDetected" Grid.Row="1"
