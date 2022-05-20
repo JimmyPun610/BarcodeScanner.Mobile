@@ -14,8 +14,6 @@
 /GoogleVisionBarCodeScanner/obj
 /GoogleVisionBarCodeScanner.iOS
 /packages
-/SampleApp/SampleApp
-/SampleApp
 /BarcodeScanner.XF.2.0.0.nupkg
 /GoogleVisionBarCodeScanner/bin/Debug
 /nuget.exe
@@ -33,3 +31,9 @@
 /._BarcodeScanner.XF.nuspec
 /MigrationBackup/ae31901d/GoogleVisionBarCodeScanner.iOS
 /GoogleVisionBarCodeScanner/bin/Release
+SampleApp/SampleApp.Android/bin
+SampleApp/SampleApp.iOS/bin
+SampleApp/SampleApp.Android/obj
+SampleApp/SampleApp/obj
+SampleApp/SampleApp/bin
+SampleApp/SampleApp.iOS/obj
