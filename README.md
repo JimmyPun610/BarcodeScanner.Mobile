@@ -13,8 +13,5 @@ Powerful barcode scanning library using Google MLKit API. For MAUI and Xamarin F
 ## Release notes
 https://github.com/JimmyPun610/BarcodeScanner.Mobile/tree/master/ReleaseNotes
 
-## App Center Build
-Not ready yet
-
 ## Installation and usage
 Please refer to [Wiki](https://github.com/JimmyPun610/BarcodeScanner.Mobile/wiki)
