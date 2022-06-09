@@ -1,6 +1,6 @@
 # BarcodeScanner.XF
 
-## This library is migrated to [BarcodeScanner.Mobile](https://github.com/JimmyPun610/BarcodeScanner.Mobile/) and archieved.
+## This library is migrated to [BarcodeScanner.Mobile](https://github.com/JimmyPun610/BarcodeScanner.Mobile/) and archived.
 
 Powerful barcode scanning library for Xamarin Forms using Google MLKit API. 
 
