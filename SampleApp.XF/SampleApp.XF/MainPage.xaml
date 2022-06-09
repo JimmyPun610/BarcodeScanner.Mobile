@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SampleApp.XF.MainPage">
+
+    <ScrollView>
+        <StackLayout>
+            <!-- Place new controls here -->
+            <Button Text="Scan Continously" Clicked="Button1_Clicked"/>
+            <Button Text="Scan One time" Clicked="Button2_Clicked"/>
+            <Button Text="Start scanning on click" Clicked="Button3_Clicked"/>
+            <Button Text="Scan from Image" Clicked="Button4_Clicked"/>
+            <Button Text="MVVM Demo" Clicked="Button5_Clicked"/>
+            <Button Text="Scan from Image With One Time Scan" Clicked="Button6_Clicked"/>
+            <Button Text="Image Capture Demo" Clicked="Button7_Clicked"/>
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

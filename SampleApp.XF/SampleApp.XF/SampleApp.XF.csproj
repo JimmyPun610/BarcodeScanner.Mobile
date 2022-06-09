@@ -1,0 +1,37 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>netstandard2.0</TargetFramework>
+		<ProduceReferenceAssembly>true</ProduceReferenceAssembly>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+		<DebugType>portable</DebugType>
+		<DebugSymbols>true</DebugSymbols>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Xam.Plugin.Media" Version="5.0.1" />
+		<PackageReference Include="Xamarin.Forms" Version="5.0.0.2401" />
+		<PackageReference Include="Xamarin.Essentials" Version="1.7.3" />
+		<PackageReference Include="BarcodeScanner.Mobile.XamarinForms" Version="6.3.0.21" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<EmbeddedResource Update="Mvvm\MvvmDemo.xaml">
+			<Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+		</EmbeddedResource>
+		<EmbeddedResource Update="Page1.xaml">
+		  <Generator>MSBuild:Compile</Generator>
+		</EmbeddedResource>
+		<EmbeddedResource Update="Page2.xaml">
+		  <Generator>MSBuild:Compile</Generator>
+		</EmbeddedResource>
+		<EmbeddedResource Update="Page3.xaml">
+		  <Generator>MSBuild:Compile</Generator>
+		</EmbeddedResource>
+		<EmbeddedResource Update="Page4.xaml">
+		  <Generator>MSBuild:Compile</Generator>
+		</EmbeddedResource>
+	</ItemGroup>
+</Project>

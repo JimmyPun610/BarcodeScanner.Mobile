@@ -1,0 +1,72 @@
+﻿<Project Sdk="MSBuild.Sdk.Extras/3.0.44">
+
+	<PropertyGroup>
+
+		<!--Update with your target such as: Xamarin.iOS10 or MonoAndroid80 or Xamarin.Mac20-->
+		<TargetFrameworks>Xamarin.iOS10;MonoAndroid12.0;netstandard2.0</TargetFrameworks>
+
+		<!--Assembly and Namespace info -->
+		<id>BarcodeScanner.Mobile.XamarinForms</id>
+		<AssemblyName>BarcodeScanner.Mobile.XamarinForms</AssemblyName>
+		<RootNamespace>BarcodeScanner.Mobile.XamarinForms</RootNamespace>
+
+		<Product></Product>
+		<AssemblyVersion>6.3.0.21</AssemblyVersion>
+		<AssemblyFileVersion>6.3.0.21</AssemblyFileVersion>
+		<Version>6.3.0.21</Version>
+		<NeutralLanguage>en</NeutralLanguage>
+
+		<!--Don't auto add files for me, I will tell you -->
+		<EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+
+		<!-- Helper to add defines-->
+		<DefineConstants>$(DefineConstants);</DefineConstants>
+
+		<!--Assembly and Namespace info -->
+
+		<!--Version of C# to use -->
+		<LangVersion>default</LangVersion>
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+		<Authors>Jimmy Pun, Anton Yaroshenko</Authors>
+		<Description>.NET 6 upgrade for BarcodeScanner.XF, Powerful Xamarin Forms barcode scanning library using GoogleVision API for Android and iOS.</Description>
+		<PackageIconUrl>https://banner2.kisspng.com/20180713/olo/kisspng-nuget-net-framework-package-manager-software-repo-nuget-5b487dc3ba81a7.452233091531477443764.jpg</PackageIconUrl>
+		<RepositoryUrl>https://github.com/JimmyPun610/BarcodeScanner.Mobile</RepositoryUrl>
+		<PackageProjectUrl>https://github.com/JimmyPun610/BarcodeScanner.Mobile</PackageProjectUrl>
+		<PackageLicenseUrl>https://github.com/JimmyPun610/BarcodeScanner.Mobile</PackageLicenseUrl>
+		<RepositoryType></RepositoryType>
+		<PackageTags>Xamarin.Forms Barcode Scanning Tools</PackageTags>
+		<PackageReleaseNotes>1. Xamarin Forms version support</PackageReleaseNotes>
+		<Copyright>Copyright 2022</Copyright>
+		<PackOnBuild>true</PackOnBuild>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<!-- This None is here so the conditionally included files show up in the Solution Explorer -->
+		<None Include="**\*.cs;**\*.xml;**\*.axml;**\*.png" Exclude="obj\**\*.*;bin\**\*.*;bin;obj" />
+
+		<!-- We will compile anything ending in .shared.cs  You can change this -->
+		<Compile Include="Shared\*.cs" />
+		<PackageReference Include="BarcodeScanner.Mobile.Core" Version="6.3.0.21" />
+		<PackageReference Include="Xamarin.Build.Download" Version="0.11.2" />
+		<PackageReference Include="Xamarin.Forms" Version="5.0.0.2401" />
+		<PackageReference Include="Xamarin.Essentials" Version="1.7.3" />
+
+	</ItemGroup>
+	
+	<ItemGroup Condition=" $(TargetFramework.StartsWith('netstandard')) ">
+		<Compile Include="NetStandard\*.cs" />
+	</ItemGroup>
+
+	<ItemGroup Condition="( '$(TargetFramework)' == 'MonoAndroid12.0' )">
+		<Compile Include="Android\*.cs" />
+		<Compile Include="Android\**\*.cs" />
+	</ItemGroup>
+
+	<ItemGroup Condition=" $(TargetFramework.StartsWith('Xamarin.iOS')) ">
+		<Compile Include="iOS\*.cs" />
+		<Compile Include="iOS\**\*.cs" />
+	</ItemGroup>
+
+
+
+</Project>
