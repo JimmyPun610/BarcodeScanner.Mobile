@@ -24,8 +24,7 @@ using Xamarin.Google.MLKit.Vision.BarCode;
 using Xamarin.Google.MLKit.Vision.Common;
 using BarcodeScanner.Mobile.Core;
 using Exception = Java.Lang.Exception;
-
-
+using Android.Runtime;
 
 [assembly: ExportRenderer(typeof(BarcodeScanner.Mobile.XamarinForms.CameraView), typeof(BarcodeScanner.Mobile.XamarinForms.Renderer.CameraViewRenderer))]
 namespace BarcodeScanner.Mobile.XamarinForms.Renderer
@@ -387,8 +386,7 @@ namespace BarcodeScanner.Mobile.XamarinForms.Renderer
 
                 if (!isAutoRotateEnabled)
                     return 90;
-
-                Android.Views.IWindowManager windowManager = (Android.Views.IWindowManager)Xamarin.Essentials.Platform.CurrentActivity.GetSystemService(Service.WindowService);
+                Android.Views.IWindowManager windowManager = Android.App.Application.Context.GetSystemService(Context.WindowService).JavaCast<Android.Views.IWindowManager>();
 
                 switch(windowManager.DefaultDisplay.Rotation)
                 {
