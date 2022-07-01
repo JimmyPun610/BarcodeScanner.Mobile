@@ -48,7 +48,7 @@
 	</ItemGroup>
 	
 	<ItemGroup>
-		<PackageReference Include="BarcodeScanner.Mobile.Maui" Version="6.3.0.21-pre">
+		<PackageReference Include="BarcodeScanner.Mobile.Maui" Version="6.3.0.22-pre">
 		</PackageReference>
 	</ItemGroup>
 

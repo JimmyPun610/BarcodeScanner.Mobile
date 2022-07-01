@@ -15,9 +15,9 @@
 		<RootNamespace>BarcodeScanner.Mobile.Maui</RootNamespace>
 
 		<Product></Product>
-		<AssemblyVersion>6.3.0.21</AssemblyVersion>
-		<AssemblyFileVersion>6.3.0.21</AssemblyFileVersion>
-		<Version>6.3.0.21-pre</Version>
+		<AssemblyVersion>6.3.0.22</AssemblyVersion>
+		<AssemblyFileVersion>6.3.0.22</AssemblyFileVersion>
+		<Version>6.3.0.22-pre</Version>
 		<NeutralLanguage>en</NeutralLanguage>
 
 		<!--Version of C# to use -->

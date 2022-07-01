@@ -1,5 +1,6 @@
 ﻿using Android.App;
 using Android.Graphics;
+using Android.Runtime;
 using Android.Util;
 using AndroidX.Camera.Core;
 using BarcodeScanner.Mobile.Core;
@@ -137,7 +138,7 @@ namespace BarcodeScanner.Mobile.Maui.Platforms.Android
             if (!isAutoRotateEnabled)
                 return 90;
 
-            global::Android.Views.IWindowManager windowManager = (global::Android.Views.IWindowManager)Platform.CurrentActivity.GetSystemService(Service.WindowService);
+            global::Android.Views.IWindowManager windowManager = global::Android.App.Application.Context.GetSystemService(global::Android.Content.Context.WindowService).JavaCast<global::Android.Views.IWindowManager>();
 
             switch (windowManager.DefaultDisplay.Rotation)
             {

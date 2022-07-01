@@ -129,7 +129,7 @@
     <PackageReference Include="Xam.Plugin.Media" Version="5.0.1" />
     <PackageReference Include="Xamarin.Forms" Version="5.0.0.2401" />
     <PackageReference Include="Xamarin.Essentials" Version="1.7.3" />
-    <PackageReference Include="BarcodeScanner.Mobile.XamarinForms" Version="[6.3.0.21]" />
+    <PackageReference Include="BarcodeScanner.Mobile.XamarinForms" Version="[6.3.0.22]" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>
