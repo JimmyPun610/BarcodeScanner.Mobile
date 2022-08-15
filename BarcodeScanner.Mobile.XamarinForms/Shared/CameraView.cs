@@ -89,8 +89,7 @@ namespace BarcodeScanner.Mobile.XamarinForms
             , typeof(bool)
             , typeof(CameraView)
             , true
-            , defaultBindingMode: BindingMode.TwoWay
-            , propertyChanged: (bindable, value, newValue) => ((CameraView)bindable).IsScanning = (bool)newValue);
+            , defaultBindingMode: BindingMode.TwoWay);
         /// <summary>
         /// Disables or enables scanning
         /// </summary>
