@@ -15,9 +15,9 @@
 		<RootNamespace>BarcodeScanner.Mobile.Maui</RootNamespace>
 
 		<Product></Product>
-		<AssemblyVersion>6.3.0.22</AssemblyVersion>
-		<AssemblyFileVersion>6.3.0.22</AssemblyFileVersion>
-		<Version>6.3.0.22-pre</Version>
+		<AssemblyVersion>6.3.0.23</AssemblyVersion>
+		<AssemblyFileVersion>6.3.0.23</AssemblyFileVersion>
+		<Version>6.3.0.23-pre</Version>
 		<NeutralLanguage>en</NeutralLanguage>
 
 		<!--Version of C# to use -->
@@ -31,7 +31,7 @@
 		<PackageLicenseUrl>https://github.com/JimmyPun610/BarcodeScanner.Mobile</PackageLicenseUrl>
 		<RepositoryType></RepositoryType>
 		<PackageTags>MAUI Barcode Scanning Tools</PackageTags>
-		<PackageReleaseNotes>1. Adding .NET6 support (MAUI)</PackageReleaseNotes>
+		<PackageReleaseNotes>1. Update dependency package for Android</PackageReleaseNotes>
 		<Copyright>Copyright 2022</Copyright>
 		<PackOnBuild>true</PackOnBuild>
 	</PropertyGroup>
@@ -42,16 +42,10 @@
     </PropertyGroup>-->
 	
 	<ItemGroup>
-		<PackageReference Include="BarcodeScanner.Mobile.Core" Version="6.3.0.21" />
-		<PackageReference Include="Xamarin.Build.Download" Version="0.11.2" />
-		<None Include="BarcodeScanner.Mobile.Maui.android.targets" Pack="True" PackagePath="build\net6.0-android31.0\BarcodeScanner.Mobile.Maui.targets" />
+		<PackageReference Include="BarcodeScanner.Mobile.Core" Version="6.3.0.23" />
+		<PackageReference Include="Xamarin.Build.Download" Version="0.11.3" />
 	</ItemGroup>
 	
-	<!-- Bypass vaildation in Xamarin.Build.Download -->
-	<!--<Target Name="SetXamarinBuildDownloadBypassValidation" DependsOnTargets="BeforeBuild">
-		<PropertyGroup>
-			<XamarinBuildDownloadBypassValidation>true</XamarinBuildDownloadBypassValidation>
-		</PropertyGroup>
-	</Target>-->
+
 	
 </Project>

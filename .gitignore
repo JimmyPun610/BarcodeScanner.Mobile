@@ -2,3 +2,9 @@ obj
 bin
 *.DS_Store
 *.user
+/.vs/ProjectEvaluation
+/.vs/BarcodeScanner.Mobile/DesignTimeBuild
+/.vs/BarcodeScanner.Mobile/FileContentIndex
+/.vs/BarcodeScanner.Mobile/v17
+/.vs/BarcodeScanner.Mobile/project-colors.json
+/.vs/BarcodeScanner.Mobile

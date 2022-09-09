@@ -1,5 +1,9 @@
 ﻿using AndroidX.Camera.Core;
+#if MONOANDROID
 using Xamarin.Google.MLKit.Vision.BarCode;
+#else
+using Xamarin.Google.MLKit.Vision.Barcode.Common;
+#endif
 
 namespace BarcodeScanner.Mobile.Core
 {

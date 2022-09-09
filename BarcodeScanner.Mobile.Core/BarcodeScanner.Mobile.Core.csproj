@@ -14,9 +14,9 @@
 		<RootNamespace>BarcodeScanner.Mobile.Core</RootNamespace>
 
 		<Product></Product>
-		<AssemblyVersion>6.3.0.21</AssemblyVersion>
-		<AssemblyFileVersion>6.3.0.21</AssemblyFileVersion>
-		<Version>6.3.0.21</Version>
+		<AssemblyVersion>6.3.0.23</AssemblyVersion>
+		<AssemblyFileVersion>6.3.0.23</AssemblyFileVersion>
+		<Version>6.3.0.23</Version>
 		<NeutralLanguage>en</NeutralLanguage>
 
 
@@ -37,7 +37,7 @@
 		<PackageLicenseUrl>https://github.com/JimmyPun610/BarcodeScanner.Mobile</PackageLicenseUrl>
 		<RepositoryType></RepositoryType>
 		<PackageTags>Xamarin.Forms Barcode Scanning Tools</PackageTags>
-		<PackageReleaseNotes>1. Adding .NET6 support (MAUI)</PackageReleaseNotes>
+		<PackageReleaseNotes>1. Dependency libraries update for MAUI Android</PackageReleaseNotes>
 		<Copyright>Copyright 2022</Copyright>
 		<PackOnBuild>true</PackOnBuild>
 		<AllowUnsafeBlocks>True</AllowUnsafeBlocks>
@@ -77,40 +77,38 @@
 		</PackageReference>
 		<PackageReference Include="Xamarin.Google.MLKit.BarcodeScanning" Version="116.1.2.5">
 		</PackageReference>
-		<!-- Due to build issue on Maui, this library is added into the project https://github.com/xamarin/AndroidX/issues/535 -->
-		<PackageReference Include="Xamarin.Google.Guava" Version="31.1.0.2" />
 	</ItemGroup>
 
 	<!-- Going to use latest version library in MAUI -->
 	<ItemGroup Condition="( '$(TargetFramework)' == 'net6.0-android31.0' )">
 		<Compile Include="Android\*.cs" />
 		<Compile Include="Android\**\*.cs" />
-		<PackageReference Include="Xamarin.AndroidX.MediaRouter" Version="1.3.0">
+		<PackageReference Include="Xamarin.AndroidX.MediaRouter" Version="1.3.1">
 		</PackageReference>
-		<PackageReference Include="Xamarin.AndroidX.Lifecycle.LiveData" Version="2.4.1.1">
+		<PackageReference Include="Xamarin.AndroidX.Lifecycle.LiveData" Version="2.5.1">
 		</PackageReference>
-		<PackageReference Include="Xamarin.AndroidX.Browser" Version="1.4.0.1">
+		<PackageReference Include="Xamarin.AndroidX.Browser" Version="1.4.0.2">
 		</PackageReference>
-		<PackageReference Include="Xamarin.Google.Android.Material" Version="1.6.0">
+		<PackageReference Include="Xamarin.Google.Android.Material" Version="1.6.1.1">
 		</PackageReference>
-		<PackageReference Include="Xamarin.AndroidX.Palette" Version="1.0.0.13">
+		<PackageReference Include="Xamarin.AndroidX.Palette" Version="1.0.0.14">
 		</PackageReference>
-		<PackageReference Include="Xamarin.AndroidX.Core" Version="1.7.0.2">
+		<PackageReference Include="Xamarin.AndroidX.Core" Version="1.8.0.1">
 		</PackageReference>
-		<PackageReference Include="Xamarin.AndroidX.RecyclerView" Version="1.2.1.6">
+		<PackageReference Include="Xamarin.AndroidX.RecyclerView" Version="1.2.1.7">
 		</PackageReference>
-		<PackageReference Include="Xamarin.Google.Dagger" Version="2.41.0">
+		<PackageReference Include="Xamarin.Google.Dagger" Version="2.41.0.2">
 		</PackageReference>
-		<PackageReference Include="Xamarin.AndroidX.Camera.Camera2" Version="1.1.0-beta02">
+		<PackageReference Include="Xamarin.AndroidX.Camera.Camera2" Version="1.1.0">
 		</PackageReference>
-		<PackageReference Include="Xamarin.AndroidX.Camera.Lifecycle" Version="1.1.0-beta02">
+		<PackageReference Include="Xamarin.AndroidX.Camera.Lifecycle" Version="1.1.0">
 		</PackageReference>
-		<PackageReference Include="Xamarin.AndroidX.Camera.View" Version="1.1.0-beta02">
+		<PackageReference Include="Xamarin.AndroidX.Camera.View" Version="1.1.0">
 		</PackageReference>
-		<PackageReference Include="Xamarin.Google.MLKit.BarcodeScanning" Version="116.1.2.5">
+		<PackageReference Include="Xamarin.Google.MLKit.BarcodeScanning" Version="117.0.2.2">
 		</PackageReference>
-		<!-- Due to build issue on Maui, this library is added into the project https://github.com/xamarin/AndroidX/issues/535 -->
-		<PackageReference Include="Xamarin.Google.Guava" Version="31.1.0.2" />
+		 <!--Due to build issue on Maui, this library is added into the project https://github.com/xamarin/AndroidX/issues/535 
+		<PackageReference Include="Xamarin.Google.Guava" Version="31.1.0.2" />-->
 	</ItemGroup>
 
 	<ItemGroup Condition="( '$(TargetFramework)' == 'Xamarin.iOS10' OR '$(TargetFramework)' == 'net6.0-ios' )">
@@ -126,31 +124,14 @@
 		</PackageReference>
 	</ItemGroup>
 	
-	<!--<ItemGroup Condition="( '$(TargetFramework)' == 'MonoAndroid12.0' OR '$(TargetFramework)' == 'Xamarin.iOS10' OR '$(TargetFramework)' == 'netstandard2.0')">
-		<PackageReference Include="Xamarin.Build.Download" Version="0.11.2">
-		</PackageReference>
-	</ItemGroup>
-	
-	--><!-- Bypass vaildation in Xamarin.Build.Download --><!--
-	<Target Name="SetXamarinBuildDownloadBypassValidation" DependsOnTargets="BeforeBuild">
-		<PropertyGroup>
-			<XamarinBuildDownloadBypassValidation>true</XamarinBuildDownloadBypassValidation>
-		</PropertyGroup>
-	</Target>
-	
-	<ItemGroup Condition="( '$(TargetFramework)' == 'net6.0' OR '$(TargetFramework)' == 'net6.0-android31.0' OR '$(TargetFramework)' == 'net6.0-ios')">
-		<PackageReference Include="Xamarin.Build.Download" Version="0.11.3">
-		</PackageReference>
-	</ItemGroup>-->
-	
 	<ItemGroup>
 		<!-- This None is here so the conditionally included files show up in the Solution Explorer -->
 		<None Include="**\*.cs;**\*.xml;**\*.axml;**\*.png" Exclude="obj\**\*.*;bin\**\*.*;bin;obj" />
 	
 		<!-- We will compile anything ending in .shared.cs  You can change this -->
 		<Compile Include="Shared\*.cs" />
-		<PackageReference Include="Xamarin.Build.Download" Version="0.11.2" />
-		<PackageReference Include="Microsoft.Maui.Graphics" Version="6.0.300" />
+		<PackageReference Include="Xamarin.Build.Download" Version="0.11.3" />
+		<PackageReference Include="Microsoft.Maui.Graphics" Version="6.0.403" />
 
 	</ItemGroup>
 

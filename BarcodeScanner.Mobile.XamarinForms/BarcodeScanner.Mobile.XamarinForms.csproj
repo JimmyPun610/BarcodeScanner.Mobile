@@ -11,9 +11,9 @@
 		<RootNamespace>BarcodeScanner.Mobile.XamarinForms</RootNamespace>
 
 		<Product></Product>
-		<AssemblyVersion>6.3.0.22</AssemblyVersion>
-		<AssemblyFileVersion>6.3.0.22</AssemblyFileVersion>
-		<Version>6.3.0.22</Version>
+		<AssemblyVersion>6.3.0.23</AssemblyVersion>
+		<AssemblyFileVersion>6.3.0.23</AssemblyFileVersion>
+		<Version>6.3.0.23</Version>
 		<NeutralLanguage>en</NeutralLanguage>
 
 		<!--Don't auto add files for me, I will tell you -->
@@ -46,9 +46,9 @@
 
 		<!-- We will compile anything ending in .shared.cs  You can change this -->
 		<Compile Include="Shared\*.cs" />
-		<PackageReference Include="BarcodeScanner.Mobile.Core" Version="6.3.0.21" />
-		<PackageReference Include="Xamarin.Build.Download" Version="0.11.2" />
-		<PackageReference Include="Xamarin.Forms" Version="5.0.0.2401" />
+		<PackageReference Include="BarcodeScanner.Mobile.Core" Version="6.3.0.23" />
+		<PackageReference Include="Xamarin.Build.Download" Version="0.11.3" />
+		<PackageReference Include="Xamarin.Forms" Version="5.0.0.2515" />
 		<PackageReference Include="Xamarin.Essentials" Version="1.7.3" />
 
 	</ItemGroup>

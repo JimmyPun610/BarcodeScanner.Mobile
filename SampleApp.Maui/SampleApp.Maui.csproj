@@ -32,6 +32,7 @@
 		
 	</PropertyGroup>
 
+
 	<ItemGroup>
 		<!-- App Icon -->
 		<MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#512BD4" />
@@ -48,13 +49,7 @@
 	</ItemGroup>
 	
 	<ItemGroup>
-		<PackageReference Include="BarcodeScanner.Mobile.Maui" Version="6.3.0.22-pre">
-		</PackageReference>
-	</ItemGroup>
-
-	<!-- Have to include this package here otherwise build will be failed -->
-	<ItemGroup Condition="(  '$(TargetFramework)' == 'net6.0-android' )">
-		<PackageReference Include="Xamarin.Google.MLKit.BarcodeScanning" Version="116.1.2.5">
+		<PackageReference Include="BarcodeScanner.Mobile.Maui" Version="6.3.0.23-pre">
 		</PackageReference>
 	</ItemGroup>
 

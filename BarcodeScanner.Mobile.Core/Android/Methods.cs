@@ -2,7 +2,13 @@
 using Android.Graphics;
 using Android.Runtime;
 using Java.Util;
+#if MONOANDROID
 using Xamarin.Google.MLKit.Vision.BarCode;
+#else
+using Xamarin.Google.MLKit.Vision.Barcode.Common;
+using Xamarin.Google.MLKit.Vision.BarCode;
+#endif
+
 using Xamarin.Google.MLKit.Vision.Common;
 
 namespace BarcodeScanner.Mobile.Core

@@ -1,5 +1,7 @@
 ﻿using MLKit.Core;
 using MLKit.BarcodeScanning;
+using Foundation;
+using UIKit;
 
 namespace BarcodeScanner.Mobile.Core
 {
