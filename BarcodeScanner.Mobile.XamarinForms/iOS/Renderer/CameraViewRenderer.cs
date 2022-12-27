@@ -3,6 +3,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
 using BarcodeScanner.Mobile.XamarinForms;
 using BarcodeScanner.Mobile.Core;
+using ObjCRuntime;
 
 
 [assembly: ExportRenderer(typeof(CameraView), typeof(BarcodeScanner.Mobile.XamarinForms.Renderer.CameraViewRenderer))]
