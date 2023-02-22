@@ -40,6 +40,8 @@ namespace BarcodeScanner.Mobile
         
         private void Connect()
         {
+            if (DeviceInfo.Current.DeviceType == DeviceType.Virtual)
+                return;
             _cameraExecutor = Executors.NewSingleThreadExecutor();
             _cameraFuture = ProcessCameraProvider.GetInstance(Context);
             _cameraFuture.AddListener(new Runnable(CameraCallback), ContextCompat.GetMainExecutor(Context));

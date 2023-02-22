@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using Xamarin.Forms;
 using ObjCRuntime;
-
+using Xamarin.Forms.Platform.iOS;
 
 [assembly: ExportRenderer(typeof(BarcodeScanner.Mobile.CameraView), typeof(BarcodeScanner.Mobile.Renderer.CameraViewRenderer))]
 namespace BarcodeScanner.Mobile.Renderer

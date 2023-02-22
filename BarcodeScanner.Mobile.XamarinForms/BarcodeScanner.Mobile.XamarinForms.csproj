@@ -28,7 +28,7 @@
 		<LangVersion>default</LangVersion>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 		<Authors>Jimmy Pun, Anton Yaroshenko</Authors>
-		<Description>.NET 6 upgrade for BarcodeScanner.XF, Powerful Xamarin Forms barcode scanning library using GoogleVision API for Android and iOS.</Description>
+		<Description>.NET 7 upgrade for BarcodeScanner.XF, Powerful Xamarin Forms barcode scanning library using GoogleVision API for Android and iOS.</Description>
 		<PackageIconUrl>https://banner2.kisspng.com/20180713/olo/kisspng-nuget-net-framework-package-manager-software-repo-nuget-5b487dc3ba81a7.452233091531477443764.jpg</PackageIconUrl>
 		<RepositoryUrl>https://github.com/JimmyPun610/BarcodeScanner.Mobile</RepositoryUrl>
 		<PackageProjectUrl>https://github.com/JimmyPun610/BarcodeScanner.Mobile</PackageProjectUrl>

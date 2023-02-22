@@ -41,6 +41,9 @@ namespace BarcodeScanner.Mobile
 
         public void Connect()
         {
+            if (DeviceInfo.Current.DeviceType == DeviceType.Virtual)
+                return;
+
             ChangeCameraFacing();
             ChangeCameraQuality();
             
