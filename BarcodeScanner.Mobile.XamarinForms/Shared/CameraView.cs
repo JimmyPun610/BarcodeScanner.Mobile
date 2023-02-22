@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using System.Windows.Input;
 using Xamarin.Essentials;
 using Xamarin.Forms;
-using BarcodeScanner.Mobile.Core;
 
-namespace BarcodeScanner.Mobile.XamarinForms
+namespace BarcodeScanner.Mobile
 {
     public class CameraView : View
     {

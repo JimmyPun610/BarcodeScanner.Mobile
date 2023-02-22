@@ -16,7 +16,7 @@ namespace SampleApp.XF.Droid
 
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             // Init Renederer for BarcodeScanner
-            BarcodeScanner.Mobile.XamarinForms.Droid.RendererInitializer.Init();
+            BarcodeScanner.Mobile.Droid.RendererInitializer.Init();
 
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             LoadApplication(new App());

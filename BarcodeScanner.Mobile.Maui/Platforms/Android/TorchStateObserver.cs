@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BarcodeScanner.Mobile.Maui.Platforms.Android
+namespace BarcodeScanner.Mobile.Platforms.Android
 {
     internal class TorchStateObserver : Java.Lang.Object, IObserver
     {

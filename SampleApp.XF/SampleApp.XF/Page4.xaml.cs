@@ -4,8 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using BarcodeScanner.Mobile.Core;
-using BarcodeScanner.Mobile.XamarinForms;
+using BarcodeScanner.Mobile;
 using Plugin.Media;
 using Xamarin.Essentials;
 using Xamarin.Forms;
@@ -78,7 +77,7 @@ namespace SampleApp.XF
                     byte[] bytes = new byte[stream.Length];
                     await stream.ReadAsync(bytes, 0, bytes.Length);
                     stream.Seek(0, SeekOrigin.Begin);
-                    List<BarcodeResult> obj = await BarcodeScanner.Mobile.Core.Methods.ScanFromImage(bytes);
+                    List<BarcodeResult> obj = await BarcodeScanner.Mobile.Methods.ScanFromImage(bytes);
                     if (obj == null)
                     {
                         Device.BeginInvokeOnMainThread(async () =>

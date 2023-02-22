@@ -7,8 +7,7 @@ using AndroidX.Camera.Lifecycle;
 using AndroidX.Camera.View;
 using AndroidX.Core.Content;
 using AndroidX.Lifecycle;
-using BarcodeScanner.Mobile.Core;
-using BarcodeScanner.Mobile.Maui.Platforms.Android;
+using BarcodeScanner.Mobile.Platforms.Android;
 using Google.Common.Util.Concurrent;
 using Java.Lang;
 using Java.Util.Concurrent;
@@ -19,7 +18,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Exception = System.Exception;
 
-namespace BarcodeScanner.Mobile.Maui
+namespace BarcodeScanner.Mobile
 {
     public partial class CameraViewHandler
     {

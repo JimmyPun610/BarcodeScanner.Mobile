@@ -1,20 +1,17 @@
 ﻿using Microsoft.Maui.Handlers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using System.Threading.Tasks;
 
 #if IOS
-using NativeCameraView = BarcodeScanner.Mobile.Maui.Platforms.iOS.UICameraPreview;
+using NativeCameraView = BarcodeScanner.Mobile.Platforms.iOS.UICameraPreview;
 #elif ANDROID
 using NativeCameraView = AndroidX.Camera.View.PreviewView;
 using AndroidX.Camera.View;
+#elif WINDOWS
+using NativeCameraView = Microsoft.UI.Xaml.Controls.GridView;
 #endif
 
-namespace BarcodeScanner.Mobile.Maui
+namespace BarcodeScanner.Mobile
 {
+#if ANDROID || IOS || WINDOWS
     public partial class CameraViewHandler : ViewHandler<ICameraView, NativeCameraView>
     {
         public static PropertyMapper<ICameraView, CameraViewHandler> CameraViewMapper = new()
@@ -54,4 +51,7 @@ namespace BarcodeScanner.Mobile.Maui
             base.DisconnectHandler(platformView);
         }
     }
+#else
+    public partial class CameraViewHandler { }
+#endif
 }

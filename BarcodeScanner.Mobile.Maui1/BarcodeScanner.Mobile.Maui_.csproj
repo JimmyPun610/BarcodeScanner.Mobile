@@ -1,0 +1,51 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFrameworks>net6.0-android;net6.0-ios;</TargetFrameworks>
+		<UseMaui>true</UseMaui>
+		<SingleProject>true</SingleProject>
+		<ImplicitUsings>enable</ImplicitUsings>
+
+		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">15.4</SupportedOSPlatformVersion>
+		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">31.0</SupportedOSPlatformVersion>
+
+		<!--Assembly and Namespace info -->
+		<id>BarcodeScanner.Mobile.Maui</id>
+		<AssemblyName>BarcodeScanner.Mobile.Maui</AssemblyName>
+		<RootNamespace>BarcodeScanner.Mobile.Maui</RootNamespace>
+
+		<Product></Product>
+		<AssemblyVersion>6.3.0.23</AssemblyVersion>
+		<AssemblyFileVersion>6.3.0.23</AssemblyFileVersion>
+		<Version>6.3.0.23-pre</Version>
+		<NeutralLanguage>en</NeutralLanguage>
+
+		<!--Version of C# to use -->
+		<LangVersion>default</LangVersion>
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+		<Authors>Jimmy Pun, Anton Yaroshenko</Authors>
+		<Description>.NET 6 upgrade for BarcodeScanner.XF, Powerful MAUI barcode scanning library using GoogleVision API for Android and iOS.</Description>
+		<PackageIconUrl>https://banner2.kisspng.com/20180713/olo/kisspng-nuget-net-framework-package-manager-software-repo-nuget-5b487dc3ba81a7.452233091531477443764.jpg</PackageIconUrl>
+		<RepositoryUrl>https://github.com/JimmyPun610/BarcodeScanner.Mobile</RepositoryUrl>
+		<PackageProjectUrl>https://github.com/JimmyPun610/BarcodeScanner.Mobile</PackageProjectUrl>
+		<PackageLicenseUrl>https://github.com/JimmyPun610/BarcodeScanner.Mobile</PackageLicenseUrl>
+		<RepositoryType></RepositoryType>
+		<PackageTags>MAUI Barcode Scanning Tools</PackageTags>
+		<PackageReleaseNotes>1. Update dependency package for Android</PackageReleaseNotes>
+		<Copyright>Copyright 2022</Copyright>
+		<PackOnBuild>true</PackOnBuild>
+	</PropertyGroup>
+
+	<!--<PropertyGroup Condition="'$(TargetFramework)' == 'net6.0-ios'">
+		<RuntimeIdentifiers>ios-arm64;</RuntimeIdentifiers>
+		<PlatformTarget>arm64</PlatformTarget>
+    </PropertyGroup>-->
+	
+	<ItemGroup>
+		<PackageReference Include="BarcodeScanner.Mobile.Core" Version="6.3.0.23" />
+		<PackageReference Include="Xamarin.Build.Download" Version="0.11.3" />
+	</ItemGroup>
+	
+
+	
+</Project>

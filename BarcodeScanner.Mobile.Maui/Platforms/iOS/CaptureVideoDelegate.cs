@@ -7,9 +7,8 @@ using Foundation;
 using AudioToolbox;
 using UIKit;
 using MLKit.Core;
-using BarcodeScanner.Mobile.Core;
 
-namespace BarcodeScanner.Mobile.Maui.Platforms.iOS
+namespace BarcodeScanner.Mobile.Platforms.iOS
 {
     public class CaptureVideoDelegate : AVCaptureVideoDataOutputSampleBufferDelegate
     {
@@ -28,7 +27,7 @@ namespace BarcodeScanner.Mobile.Maui.Platforms.iOS
                 if (_cameraView.ScanInterval < 100)
                     _cameraView.ScanInterval = 500;
             }
-            var options = new BarcodeScannerOptions(BarcodeScanner.Mobile.Core.Configuration.BarcodeDetectorSupportFormat);
+            var options = new BarcodeScannerOptions(Configuration.BarcodeDetectorSupportFormat);
             barcodeDetector = MLKit.BarcodeScanning.BarcodeScanner.BarcodeScannerWithOptions(options);
             orientation = GetUIImageOrientation();
         }
@@ -157,7 +156,7 @@ namespace BarcodeScanner.Mobile.Maui.Platforms.iOS
 
                         List<BarcodeResult> resultList = new List<BarcodeResult>();
                         foreach (var barcode in barcodes)
-                            resultList.Add(Core.Methods.ProcessBarcodeResult(barcode));
+                            resultList.Add(Methods.ProcessBarcodeResult(barcode));
 
                         var imageDataByteArray = new byte[0];
                         if (shouldReturnBarcodeImage)

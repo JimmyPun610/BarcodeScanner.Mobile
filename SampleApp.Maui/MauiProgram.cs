@@ -1,4 +1,4 @@
-﻿using BarcodeScanner.Mobile.Maui;
+﻿using BarcodeScanner.Mobile;
 using Microsoft.Maui.Controls.Compatibility.Hosting;
 
 namespace SampleApp.Maui

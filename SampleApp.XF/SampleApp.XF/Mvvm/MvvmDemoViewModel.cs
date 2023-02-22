@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Text;
-using BarcodeScanner.Mobile.Core;
+using BarcodeScanner.Mobile;
 using System.Windows.Input;
 using Xamarin.Forms;
 
@@ -133,7 +133,7 @@ namespace SampleApp.XF.Mvvm
         }
         public void ExecuteOnDetectedCommand(OnDetectedEventArg arg)
         {
-            List<BarcodeScanner.Mobile.Core.BarcodeResult> obj = arg.BarcodeResults;
+            List<BarcodeScanner.Mobile.BarcodeResult> obj = arg.BarcodeResults;
 
             string result = string.Empty;
             for (int i = 0; i < obj.Count; i++)

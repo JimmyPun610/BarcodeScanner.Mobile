@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UIKit;
 
-namespace BarcodeScanner.Mobile.Maui.Platforms.iOS
+namespace BarcodeScanner.Mobile.Platforms.iOS
 {
     public class UICameraPreview : UIView
     {

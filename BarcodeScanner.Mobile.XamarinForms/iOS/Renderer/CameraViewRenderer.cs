@@ -1,12 +1,10 @@
 ﻿using System.ComponentModel;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
-using BarcodeScanner.Mobile.XamarinForms;
-using BarcodeScanner.Mobile.Core;
 
 
-[assembly: ExportRenderer(typeof(CameraView), typeof(BarcodeScanner.Mobile.XamarinForms.Renderer.CameraViewRenderer))]
-namespace BarcodeScanner.Mobile.XamarinForms.Renderer
+[assembly: ExportRenderer(typeof(BarcodeScanner.Mobile.CameraView), typeof(BarcodeScanner.Mobile.Renderer.CameraViewRenderer))]
+namespace BarcodeScanner.Mobile.Renderer
 {
     internal class CameraViewRenderer : ViewRenderer<CameraView, UICameraPreview>
     {

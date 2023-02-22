@@ -1,4 +1,4 @@
-﻿namespace BarcodeScanner.Mobile.XamarinForms.iOS
+﻿namespace BarcodeScanner.Mobile.iOS
 {
     public class Initializer
     {

@@ -3,12 +3,11 @@ using Android.Graphics;
 using Android.Runtime;
 using Android.Util;
 using AndroidX.Camera.Core;
-using BarcodeScanner.Mobile.Core;
 using Java.Nio;
 using Xamarin.Google.MLKit.Vision.BarCode;
 using Xamarin.Google.MLKit.Vision.Common;
 
-namespace BarcodeScanner.Mobile.Maui.Platforms.Android
+namespace BarcodeScanner.Mobile.Platforms.Android
 {
     public class BarcodeAnalyzer : Java.Lang.Object, ImageAnalysis.IAnalyzer
     {
@@ -47,7 +46,7 @@ namespace BarcodeScanner.Mobile.Maui.Platforms.Android
                     var result = await ToAwaitableTask(_barcodeScanner.Process(image));
 
 
-                    var final = Core.Methods.ProcessBarcodeResult(result);
+                    var final = Methods.ProcessBarcodeResult(result);
 
                     if (final == null || _cameraView == null) return;
                     if (!_cameraView.IsScanning)

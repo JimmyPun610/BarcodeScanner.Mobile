@@ -5,8 +5,7 @@ using System.Linq;
 using Xamarin.Forms;
 using Xamarin.Forms.PlatformConfiguration.iOSSpecific;
 using Xamarin.Forms.Xaml;
-using BarcodeScanner.Mobile.Core;
-using BarcodeScanner.Mobile.XamarinForms;
+using BarcodeScanner.Mobile;
 
 
 namespace SampleApp.XF
@@ -25,7 +24,7 @@ namespace SampleApp.XF
         public Page1()
         {
             InitializeComponent();
-            BarcodeScanner.Mobile.Core.Methods.SetSupportBarcodeFormat(BarcodeFormats.Code39 | BarcodeFormats.QRCode | BarcodeFormats.Code128);
+            BarcodeScanner.Mobile.Methods.SetSupportBarcodeFormat(BarcodeFormats.Code39 | BarcodeFormats.QRCode | BarcodeFormats.Code128);
             On<Xamarin.Forms.PlatformConfiguration.iOS>().SetUseSafeArea(true);
         }
 

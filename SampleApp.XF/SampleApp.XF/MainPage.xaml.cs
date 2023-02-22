@@ -22,7 +22,7 @@ namespace SampleApp.XF
         {
             //Ask for permission first
             bool allowed = false;
-            allowed = await BarcodeScanner.Mobile.XamarinForms.Methods.AskForRequiredPermission();
+            allowed = await BarcodeScanner.Mobile.Methods.AskForRequiredPermission();
             if (allowed)
                 Navigation.PushModalAsync(new NavigationPage(new Page1()));
             else DisplayAlert("Alert", "You have to provide Camera permission", "Ok");
@@ -33,7 +33,7 @@ namespace SampleApp.XF
         {
             //Ask for permission first
             bool allowed = false;
-            allowed = await BarcodeScanner.Mobile.XamarinForms.Methods.AskForRequiredPermission();
+            allowed = await BarcodeScanner.Mobile.Methods.AskForRequiredPermission();
             if (allowed)
                 Navigation.PushModalAsync(new NavigationPage(new Page2()));
             else DisplayAlert("Alert", "You have to provide Camera permission", "Ok");
@@ -43,7 +43,7 @@ namespace SampleApp.XF
         {
             //Ask for permission first
             bool allowed = false;
-            allowed = await BarcodeScanner.Mobile.XamarinForms.Methods.AskForRequiredPermission();
+            allowed = await BarcodeScanner.Mobile.Methods.AskForRequiredPermission();
             if (allowed)
                 Navigation.PushModalAsync(new NavigationPage(new Page3()));
             else DisplayAlert("Alert", "You have to provide Camera permission", "Ok");
@@ -65,7 +65,7 @@ namespace SampleApp.XF
                 byte[] bytes = new byte[stream.Length];
                 stream.Read(bytes, 0, bytes.Length);
                 stream.Seek(0, SeekOrigin.Begin);
-                List< BarcodeScanner.Mobile.Core.BarcodeResult > obj = await BarcodeScanner.Mobile.Core.Methods.ScanFromImage(bytes);
+                List< BarcodeScanner.Mobile.BarcodeResult > obj = await BarcodeScanner.Mobile.Methods.ScanFromImage(bytes);
                 if (obj.Count > 0)
                 {
                     string result = string.Empty;
@@ -101,7 +101,7 @@ namespace SampleApp.XF
         {
             //Ask for permission first
             bool allowed = false;
-            allowed = await BarcodeScanner.Mobile.XamarinForms.Methods.AskForRequiredPermission();
+            allowed = await BarcodeScanner.Mobile.Methods.AskForRequiredPermission();
             if (allowed)
                 Navigation.PushModalAsync(new NavigationPage(new Mvvm.MvvmDemo()));
             else DisplayAlert("Alert", "You have to provide Camera permission", "Ok");
@@ -112,7 +112,7 @@ namespace SampleApp.XF
         {
             //Ask for permission first
             bool allowed = false;
-            allowed = await BarcodeScanner.Mobile.XamarinForms.Methods.AskForRequiredPermission();
+            allowed = await BarcodeScanner.Mobile.Methods.AskForRequiredPermission();
             if (allowed)
                 Navigation.PushModalAsync(new NavigationPage(new Page4()));
             else DisplayAlert("Alert", "You have to provide Camera permission", "Ok");
@@ -122,7 +122,7 @@ namespace SampleApp.XF
         {
             //Ask for permission first
             bool allowed = false;
-            allowed = await BarcodeScanner.Mobile.XamarinForms.Methods.AskForRequiredPermission();
+            allowed = await BarcodeScanner.Mobile.Methods.AskForRequiredPermission();
             if (allowed)
                 Navigation.PushModalAsync(new NavigationPage(new ImageCapture.ImageCaptureDemo()));
             else DisplayAlert("Alert", "You have to provide Camera permission", "Ok");

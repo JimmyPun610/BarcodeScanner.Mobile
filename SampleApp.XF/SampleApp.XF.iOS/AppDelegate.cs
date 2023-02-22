@@ -25,7 +25,7 @@ namespace SampleApp.XF.iOS
             global::Xamarin.Forms.Forms.Init();
             LoadApplication(new App());
 
-            BarcodeScanner.Mobile.XamarinForms.iOS.Initializer.Init();
+            BarcodeScanner.Mobile.iOS.Initializer.Init();
             Firebase.Core.App.Configure();
 
             return base.FinishedLaunching(app, options);

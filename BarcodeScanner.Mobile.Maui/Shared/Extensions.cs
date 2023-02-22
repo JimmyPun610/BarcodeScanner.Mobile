@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BarcodeScanner.Mobile.Maui
+namespace BarcodeScanner.Mobile
 {
     public static class Extensions
     {

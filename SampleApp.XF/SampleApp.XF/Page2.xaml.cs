@@ -6,8 +6,7 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.PlatformConfiguration.iOSSpecific;
 using Xamarin.Forms.Xaml;
-using BarcodeScanner.Mobile.Core;
-using BarcodeScanner.Mobile.XamarinForms;
+using BarcodeScanner.Mobile;
 
 
 namespace SampleApp.XF

@@ -9,11 +9,10 @@ using MLKit.BarcodeScanning;
 using Foundation;
 using AudioToolbox;
 using UIKit;
-using BarcodeScanner.Mobile.XamarinForms.Renderer;
+using BarcodeScanner.Mobile.Renderer;
 using MLKit.Core;
-using BarcodeScanner.Mobile.Core;
 
-namespace BarcodeScanner.Mobile.XamarinForms
+namespace BarcodeScanner.Mobile
 {
     internal sealed class UICameraPreview : UIView
     {
@@ -238,7 +237,7 @@ namespace BarcodeScanner.Mobile.XamarinForms
                 throw new NotSupportedException("The selected camera is not supported on this device");
 
             NSError error;
-            var     input = new AVCaptureDeviceInput(device, out error);
+            var input = new AVCaptureDeviceInput(device, out error);
 
             CaptureSession.AddInput(input);
         }
@@ -315,7 +314,7 @@ namespace BarcodeScanner.Mobile.XamarinForms
                     if (_renderer.Element.ScanInterval < 100)
                         _renderer.Element.ScanInterval = 500;
                 }
-                var options = new BarcodeScannerOptions(BarcodeScanner.Mobile.Core.Configuration.BarcodeDetectorSupportFormat);
+                var options = new BarcodeScannerOptions(Configuration.BarcodeDetectorSupportFormat);
                 barcodeDetector = MLKit.BarcodeScanning.BarcodeScanner.BarcodeScannerWithOptions(options);
                 orientation = GetUIImageOrientation();
             }
@@ -444,7 +443,7 @@ namespace BarcodeScanner.Mobile.XamarinForms
 
                             List<BarcodeResult> resultList = new List<BarcodeResult>();
                             foreach (var barcode in barcodes)
-                                resultList.Add(Core.Methods.ProcessBarcodeResult(barcode));
+                                resultList.Add(Methods.ProcessBarcodeResult(barcode));
 
                             var imageDataByteArray = new byte[0];
                             if (shouldReturnBarcodeImage)

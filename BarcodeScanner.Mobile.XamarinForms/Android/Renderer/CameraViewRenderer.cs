@@ -22,14 +22,13 @@ using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 using Xamarin.Google.MLKit.Vision.BarCode;
 using Xamarin.Google.MLKit.Vision.Common;
-using BarcodeScanner.Mobile.Core;
 using Exception = Java.Lang.Exception;
 using Android.Runtime;
 
-[assembly: ExportRenderer(typeof(BarcodeScanner.Mobile.XamarinForms.CameraView), typeof(BarcodeScanner.Mobile.XamarinForms.Renderer.CameraViewRenderer))]
-namespace BarcodeScanner.Mobile.XamarinForms.Renderer
+[assembly: ExportRenderer(typeof(BarcodeScanner.Mobile.CameraView), typeof(BarcodeScanner.Mobile.Renderer.CameraViewRenderer))]
+namespace BarcodeScanner.Mobile.Renderer
 {
-    internal class CameraViewRenderer : Xamarin.Forms.Platform.Android.AppCompat.ViewRenderer<BarcodeScanner.Mobile.XamarinForms.CameraView, PreviewView>
+    internal class CameraViewRenderer : Xamarin.Forms.Platform.Android.AppCompat.ViewRenderer<BarcodeScanner.Mobile.CameraView, PreviewView>
     {
 
         private bool _isDisposed;
@@ -47,7 +46,7 @@ namespace BarcodeScanner.Mobile.XamarinForms.Renderer
             _cameraFuture   = ProcessCameraProvider.GetInstance(context);
         }
 
-        protected override void OnElementChanged(ElementChangedEventArgs<BarcodeScanner.Mobile.XamarinForms.CameraView> e)
+        protected override void OnElementChanged(ElementChangedEventArgs<BarcodeScanner.Mobile.CameraView> e)
         {
             base.OnElementChanged(e);
 
@@ -65,15 +64,15 @@ namespace BarcodeScanner.Mobile.XamarinForms.Renderer
         protected override void OnElementPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             base.OnElementPropertyChanged(sender, e);
-            if (e.PropertyName == BarcodeScanner.Mobile.XamarinForms.CameraView.TorchOnProperty.PropertyName)
+            if (e.PropertyName == BarcodeScanner.Mobile.CameraView.TorchOnProperty.PropertyName)
             {
                 HandleTorch();
             }
-            else if (e.PropertyName == BarcodeScanner.Mobile.XamarinForms.CameraView.CameraFacingProperty.PropertyName)
+            else if (e.PropertyName == BarcodeScanner.Mobile.CameraView.CameraFacingProperty.PropertyName)
             {
                 CameraCallback();
             }
-            else if (e.PropertyName == BarcodeScanner.Mobile.XamarinForms.CameraView.CaptureQualityProperty.PropertyName)
+            else if (e.PropertyName == BarcodeScanner.Mobile.CameraView.CaptureQualityProperty.PropertyName)
             {
                 CameraCallback();
             }
@@ -296,7 +295,7 @@ namespace BarcodeScanner.Mobile.XamarinForms.Renderer
                         var result = await ToAwaitableTask(_barcodeScanner.Process(image));
 
                     
-                        var final = Core.Methods.ProcessBarcodeResult(result);
+                        var final = Methods.ProcessBarcodeResult(result);
 
                         if (final == null || _renderer?.Element == null) return;
                         if (!_renderer.Element.IsScanning)

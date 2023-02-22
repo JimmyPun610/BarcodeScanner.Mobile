@@ -1,5 +1,4 @@
-using BarcodeScanner.Mobile.Core;
-using BarcodeScanner.Mobile.Maui;
+using BarcodeScanner.Mobile;
 using Microsoft.Maui.Controls.PlatformConfiguration;
 using Microsoft.Maui.Controls.PlatformConfiguration.iOSSpecific;
 

@@ -1,6 +1,5 @@
 ﻿using AVFoundation;
-using BarcodeScanner.Mobile.Core;
-using BarcodeScanner.Mobile.Maui.Platforms.iOS;
+using BarcodeScanner.Mobile.Platforms.iOS;
 using CoreVideo;
 using Foundation;
 using System;
@@ -10,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UIKit;
 
-namespace BarcodeScanner.Mobile.Maui
+namespace BarcodeScanner.Mobile
 {
     public partial class CameraViewHandler
     {

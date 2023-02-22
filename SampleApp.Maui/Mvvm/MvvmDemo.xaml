@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:gv="clr-namespace:BarcodeScanner.Mobile.Maui;assembly=BarcodeScanner.Mobile.Maui"
+             xmlns:gv="clr-namespace:BarcodeScanner.Mobile;assembly=BarcodeScanner.Mobile.Maui"
              xmlns:mvvm="clr-namespace:SampleApp.Maui.Mvvm"
              x:Class="SampleApp.Maui.Mvvm.MvvmDemo"
              Title="MvvmDemo">
@@ -35,7 +35,7 @@
                         </DataTrigger>
                     </Button.Triggers>
                 </Button>
-                <Button x:Name="VibrationButton" BackgroundColor="#93FF" TextColor="White" HorizontalOptions="FillAndExpand"
+                <Button x:Name="VibrationButton" BackgroundColor="#FF93FF" TextColor="White" HorizontalOptions="FillAndExpand"
                        CornerRadius="0" Command="{Binding HandleVirbationCommand}">
                     <Button.Triggers>
                         <DataTrigger TargetType="Button" Binding="{Binding VibrationOnDetected}" Value="True">

@@ -1,4 +1,4 @@
-﻿namespace BarcodeScanner.Mobile.XamarinForms.Droid
+﻿namespace BarcodeScanner.Mobile.Droid
 {
     public class RendererInitializer
     {
