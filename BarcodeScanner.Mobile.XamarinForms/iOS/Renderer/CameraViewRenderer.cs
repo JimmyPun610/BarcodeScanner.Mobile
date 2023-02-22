@@ -3,6 +3,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
 using BarcodeScanner.Mobile.XamarinForms;
 using BarcodeScanner.Mobile.Core;
+using ObjCRuntime;
 
 
 [assembly: ExportRenderer(typeof(CameraView), typeof(BarcodeScanner.Mobile.XamarinForms.Renderer.CameraViewRenderer))]
@@ -15,6 +16,8 @@ namespace BarcodeScanner.Mobile.XamarinForms.Renderer
 
         protected override void OnElementChanged(ElementChangedEventArgs<CameraView> e)
         {
+            if (Runtime.Arch == Arch.SIMULATOR) return;
+            
             base.OnElementChanged(e);
             if (e.OldElement != null || Element == null)
             {
@@ -37,6 +40,8 @@ namespace BarcodeScanner.Mobile.XamarinForms.Renderer
 
         protected override void OnElementPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
+            if (Runtime.Arch == Arch.SIMULATOR) return;
+            
             base.OnElementPropertyChanged(sender, e);
             if (e.PropertyName == CameraView.TorchOnProperty.PropertyName)
             {
