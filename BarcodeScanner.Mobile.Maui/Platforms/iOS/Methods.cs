@@ -155,14 +155,15 @@ namespace BarcodeScanner.Mobile
 
             foreach (var cornerPoint in barcode.CornerPoints)
                 cornerPoints.Add(new Microsoft.Maui.Graphics.Point(cornerPoint.CGPointValue.X, cornerPoint.CGPointValue.Y));
-
+            
             return new BarcodeResult
             {
                 BarcodeType = ConvertBarcodeResultTypes(barcode.ValueType),
                 BarcodeFormat = (BarcodeFormats)barcode.Format,
                 DisplayValue = barcode.DisplayValue,
                 RawValue = barcode.RawValue,
-                CornerPoints = cornerPoints.ToArray()
+                CornerPoints = cornerPoints.ToArray(),
+                RawData = barcode.RawData.ToArray()
             };
         }
         #endregion

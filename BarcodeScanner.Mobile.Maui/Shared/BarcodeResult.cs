@@ -12,6 +12,7 @@ namespace BarcodeScanner.Mobile
         /// </summary>
         public Point[] CornerPoints { get; set; }
 
+        public byte[] RawData { get; set; }
     }
     
 }

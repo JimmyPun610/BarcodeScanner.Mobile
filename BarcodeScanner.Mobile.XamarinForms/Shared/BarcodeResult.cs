@@ -12,6 +12,7 @@ namespace BarcodeScanner.Mobile
         /// This value is native coordination, please make conversion to Maui coordination first
         /// </summary>
         public Point[] CornerPoints { get; set; }
+        public byte[] RawData { get; set; }
     }
-    
+
 }
