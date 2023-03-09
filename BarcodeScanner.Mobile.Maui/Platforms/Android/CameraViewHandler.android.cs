@@ -11,11 +11,6 @@ using BarcodeScanner.Mobile.Platforms.Android;
 using Google.Common.Util.Concurrent;
 using Java.Lang;
 using Java.Util.Concurrent;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Exception = System.Exception;
 
 namespace BarcodeScanner.Mobile
@@ -29,15 +24,15 @@ namespace BarcodeScanner.Mobile
 
         private ICamera _camera;
 
-        PreviewView previewView;
+        PreviewView _previewView;
 
         protected override PreviewView CreatePlatformView()
         {
-            previewView = new PreviewView(Context);
-            return previewView;
+            _previewView = new PreviewView(Context);
+            return _previewView;
         }
 
-        
+
         private void Connect()
         {
             if (DeviceInfo.Current.DeviceType == DeviceType.Virtual)
@@ -53,13 +48,13 @@ namespace BarcodeScanner.Mobile
                 return;
 
             // Used to bind the lifecycle of cameras to the lifecycle owner
-            if (!(_cameraFuture.Get() is ProcessCameraProvider cameraProvider))
+            if (_cameraFuture?.Get() is not ProcessCameraProvider cameraProvider)
                 return;
 
             // Preview
             var previewBuilder = new Preview.Builder();
             var preview = previewBuilder.Build();
-            preview.SetSurfaceProvider(previewView.SurfaceProvider);
+            preview.SetSurfaceProvider(_previewView.SurfaceProvider);
 
             var imageAnalyzerBuilder = new ImageAnalysis.Builder();
             // Frame by frame analyze
@@ -132,12 +127,14 @@ namespace BarcodeScanner.Mobile
                 _ => throw new ArgumentOutOfRangeException(nameof(CaptureQuality))
             };
         }
+
         public void HandleTorch()
         {
             if (_camera == null || VirtualView == null || !_camera.CameraInfo.HasFlashUnit) return;
            
             _camera.CameraControl.EnableTorch(VirtualView.TorchOn);
         }
+
         private bool IsTorchOn()
         {
             if (_camera == null || !_camera.CameraInfo.HasFlashUnit)
@@ -187,7 +184,7 @@ namespace BarcodeScanner.Mobile
             try
             {
                 // Used to bind the lifecycle of cameras to the lifecycle owner
-                if (!(_cameraFuture.Get() is ProcessCameraProvider cameraProvider))
+                if (_cameraFuture?.Get() is not ProcessCameraProvider cameraProvider)
                     return;
 
                 cameraProvider.UnbindAll();
