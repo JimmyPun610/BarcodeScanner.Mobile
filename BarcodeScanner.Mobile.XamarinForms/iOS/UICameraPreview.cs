@@ -20,7 +20,7 @@ namespace BarcodeScanner.Mobile
         public event EventHandler IsScanningChanged;
         AVCaptureVideoPreviewLayer previewLayer;
         CaptureVideoDelegate captureVideoDelegate;
-        public AVCaptureSession  CaptureSession  { get; private set; }
+        public AVCaptureSession CaptureSession { get; private set; }
         AVCaptureVideoDataOutput VideoDataOutput { get; set; }
         readonly CameraFacing _cameraFacing;
         readonly CaptureQuality _captureQuality;
@@ -223,6 +223,7 @@ namespace BarcodeScanner.Mobile
                 {
                     if (renderer.Element.TorchOn && !IsTorchOn())
                         ToggleFlashlight();
+                    SetFocusMode();
                 }
             });
         }
@@ -273,7 +274,7 @@ namespace BarcodeScanner.Mobile
             {
                 Console.WriteLine($"iOS IsTorchOn error : {ex.Message}, StackTrace : {ex.StackTrace}");
             }
-            
+
 
             return false;
         }
@@ -297,6 +298,21 @@ namespace BarcodeScanner.Mobile
 
         }
 
+        public void SetFocusMode(AVCaptureFocusMode focusMode = AVCaptureFocusMode.ContinuousAutoFocus)
+        {
+            var videoDevice = AVCaptureDevice.GetDefaultDevice(AVMediaType.Video);
+            if (videoDevice == null) return;
+
+            NSError error;
+            videoDevice.LockForConfiguration(out error);
+            if (error == null)
+            {
+                videoDevice.FocusMode = focusMode;
+            }
+            videoDevice.UnlockForConfiguration();
+
+        }
+
         public class CaptureVideoDelegate : AVCaptureVideoDataOutputSampleBufferDelegate
         {
             public event Action<OnDetectedEventArg> OnDetected;
@@ -308,7 +324,7 @@ namespace BarcodeScanner.Mobile
             public CaptureVideoDelegate(CameraViewRenderer renderer)
             {
                 _renderer = renderer;
-           
+
                 if (_renderer.Element != null)
                 {
                     if (_renderer.Element.ScanInterval < 100)
@@ -425,7 +441,7 @@ namespace BarcodeScanner.Mobile
                             if (_renderer.Element == null) return;
                             if (!_renderer.Element.IsScanning) return;
 
-                            if(error != null)
+                            if (error != null)
                             {
                                 System.Diagnostics.Debug.WriteLine(error);
                                 return;
