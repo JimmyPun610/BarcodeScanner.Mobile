@@ -3,9 +3,9 @@
 	<PropertyGroup>
 		<!-- Choose either one -->
 		<!-- Android Config -->
-		<TargetFrameworks>net6.0-android;</TargetFrameworks>
+		<TargetFrameworks>net7.0-android;</TargetFrameworks>
 		<!-- iOS Config -->
-		<!--<TargetFrameworks>net6.0-ios;</TargetFrameworks>
+		<!--<TargetFrameworks>net7.0-ios;</TargetFrameworks>
 		<RuntimeIdentifier>ios-arm64</RuntimeIdentifier>
 		<PlatformTarget>arm64</PlatformTarget>-->
 		<!-- -->
@@ -49,7 +49,7 @@
 	</ItemGroup>
 	
 	<ItemGroup>
-		<PackageReference Include="BarcodeScanner.Mobile.Maui" Version="6.3.0.25-pre">
+		<PackageReference Include="BarcodeScanner.Mobile.Maui" Version="7.0.0.1-pre">
 		</PackageReference>
 	</ItemGroup>
 
