@@ -3,7 +3,7 @@
 	<PropertyGroup>
 		<!-- Choose either one -->
 		<!-- Android Config -->
-		<TargetFrameworks>net6.0-android;</TargetFrameworks>
+		<TargetFrameworks>net7.0-android;</TargetFrameworks>
 		<!-- iOS Config -->
 		<!--<TargetFrameworks>net7.0-ios;</TargetFrameworks>
 		<RuntimeIdentifier>ios-arm64</RuntimeIdentifier>
