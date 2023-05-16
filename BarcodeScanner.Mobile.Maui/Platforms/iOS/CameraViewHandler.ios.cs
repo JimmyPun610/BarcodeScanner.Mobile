@@ -76,6 +76,7 @@ namespace BarcodeScanner.Mobile
 
             CaptureSession.StartRunning();
             HandleTorch();
+            SetFocusMode();
         }
 
         public void Dispose()
@@ -125,7 +126,21 @@ namespace BarcodeScanner.Mobile
                 _ => throw new ArgumentOutOfRangeException(nameof(VirtualView.CaptureQuality))
             };
         }
+        public void SetFocusMode(AVCaptureFocusMode focusMode = AVCaptureFocusMode.ContinuousAutoFocus)
+        {
+            Microsoft.Maui.Controls.Application.Current.Dispatcher.Dispatch(() => {
+                var videoDevice = AVCaptureDevice.GetDefaultDevice(AVFoundation.AVMediaTypes.Video);
+                if (videoDevice == null) return;
 
+                NSError error;
+                videoDevice.LockForConfiguration(out error);
+                if (error == null)
+                {
+                    videoDevice.FocusMode = focusMode;
+                }
+                videoDevice.UnlockForConfiguration();
+            });
+        }
 
         public bool IsTorchOn()
         {
@@ -143,7 +158,7 @@ namespace BarcodeScanner.Mobile
         }
         public void HandleTorch()
         {
-            Application.Current.Dispatcher.Dispatch(() =>
+            Microsoft.Maui.Controls.Application.Current.Dispatcher.Dispatch(() =>
             {
                 if (isUpdatingTorch)
                     return;
