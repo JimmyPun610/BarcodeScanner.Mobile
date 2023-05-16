@@ -11,9 +11,9 @@
 		<RootNamespace>BarcodeScanner.Mobile.XamarinForms</RootNamespace>
 
 		<Product></Product>
-		<AssemblyVersion>6.3.0.27</AssemblyVersion>
-		<AssemblyFileVersion>6.3.0.27</AssemblyFileVersion>
-		<Version>6.3.0.27</Version>
+		<AssemblyVersion>6.3.0.29</AssemblyVersion>
+		<AssemblyFileVersion>6.3.0.29</AssemblyFileVersion>
+		<Version>6.3.0.29</Version>
 		<NeutralLanguage>en</NeutralLanguage>
 
 		<!--Don't auto add files for me, I will tell you -->

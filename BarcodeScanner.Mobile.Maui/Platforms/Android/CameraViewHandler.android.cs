@@ -1,5 +1,6 @@
 ﻿using Android.Content;
 using Android.Hardware.Camera2;
+using Android.OS;
 using Android.Util;
 using AndroidX.Camera.Camera2.InterOp;
 using AndroidX.Camera.Core;
@@ -90,13 +91,14 @@ namespace BarcodeScanner.Mobile
 
                 HandleCustomPreviewSize(preview);
                 HandleTorch();
+                HandleAutoFoucs();
             }
             catch (Exception exc)
             {
                 Log.Debug(nameof(CameraCallback), "Use case binding failed", exc);
             }
         }
-
+     
         private CameraSelector SelectCamera(ProcessCameraProvider cameraProvider)
         {
             if (VirtualView.CameraFacing == CameraFacing.Front)
@@ -124,6 +126,42 @@ namespace BarcodeScanner.Mobile
                 CaptureQuality.Highest => new Android.Util.Size(3840, 2160),
                 _ => throw new ArgumentOutOfRangeException(nameof(CaptureQuality))
             };
+        }
+        /// <summary>
+        /// Logic from https://stackoverflow.com/a/66659592/9032777
+        /// Focus every 3s
+        /// </summary>
+        public async void HandleAutoFoucs()
+        {
+            while (true)
+            {
+                try
+                {
+                    await Task.Delay(3000);
+
+                    if (_camera == null || _previewView == null)
+                    {
+                        continue;
+                    }
+
+                    float x = _previewView.GetX() + _previewView.Width / 2f;
+                    float y = _previewView.GetY() + _previewView.Height / 2f;
+
+                    MeteringPointFactory pointFactory = _previewView.MeteringPointFactory;
+                    float afPointWidth = 1.0f / 6.0f;  // 1/6 total area
+                    float aePointWidth = afPointWidth * 1.5f;
+                    MeteringPoint afPoint = pointFactory.CreatePoint(x, y, afPointWidth);
+                    MeteringPoint aePoint = pointFactory.CreatePoint(x, y, aePointWidth);
+
+                    _camera.CameraControl.StartFocusAndMetering(
+                new FocusMeteringAction.Builder(afPoint,
+                        FocusMeteringAction.FlagAf).AddPoint(aePoint,
+                        FocusMeteringAction.FlagAe).Build());
+                }catch(Exception ex)
+                {
+
+                }
+            }
         }
 
         public void HandleTorch()

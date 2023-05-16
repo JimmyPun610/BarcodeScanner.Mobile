@@ -131,6 +131,7 @@ namespace BarcodeScanner.Mobile.Renderer
 
                 HandleCustomPreviewSize(preview);
                 HandleTorch();
+                HandleAutoFoucs();
             }
             catch (Exception exc)
             {
@@ -176,7 +177,42 @@ namespace BarcodeScanner.Mobile.Renderer
                 preview.UpdateSuggestedResolution(new Android.Util.Size(width, height));
             }
         }
+        /// <summary>
+        /// Logic from https://stackoverflow.com/a/66659592/9032777
+        /// Focus every 3s
+        /// </summary>
+        public async void HandleAutoFoucs()
+        {
+            while (true)
+            {
+                try
+                {
+                    await System.Threading.Tasks.Task.Delay(3000);
 
+                    if (_camera == null || Element == null || Control == null)
+                    {
+                        continue;
+                    }
+
+                    float x = Control.GetX() + Control.Width / 2f;
+                    float y = Control.GetY() + Control.Height / 2f;
+
+                    MeteringPointFactory pointFactory = Control.MeteringPointFactory;
+                    float afPointWidth = 1.0f / 6.0f;  // 1/6 total area
+                    float aePointWidth = afPointWidth * 1.5f;
+                    MeteringPoint afPoint = pointFactory.CreatePoint(x, y, afPointWidth);
+                    MeteringPoint aePoint = pointFactory.CreatePoint(x, y, aePointWidth);
+
+                    _camera.CameraControl.StartFocusAndMetering(
+                new FocusMeteringAction.Builder(afPoint,
+                        FocusMeteringAction.FlagAf).AddPoint(aePoint,
+                        FocusMeteringAction.FlagAe).Build());
+                }
+                catch(Exception ex) { 
+                }
+                
+            }
+        }
         private void HandleTorch()
         {
             if (_camera == null || Element == null || !_camera.CameraInfo.HasFlashUnit) return;
