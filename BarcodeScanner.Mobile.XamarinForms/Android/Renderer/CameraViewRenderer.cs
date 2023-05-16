@@ -49,10 +49,6 @@ namespace BarcodeScanner.Mobile.Renderer
 
         protected override void OnElementChanged(ElementChangedEventArgs<BarcodeScanner.Mobile.CameraView> e)
         {
-
-            if (Build.Model.Contains("Emulator") || Build.Model.Contains("Android SDK"))
-                return;
-
             base.OnElementChanged(e);
 
             if (e.NewElement == null) return;
@@ -68,9 +64,6 @@ namespace BarcodeScanner.Mobile.Renderer
 
         protected override void OnElementPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (Build.Model.Contains("Emulator") || Build.Model.Contains("Android SDK"))
-                return;
-
             base.OnElementPropertyChanged(sender, e);
             if (e.PropertyName == BarcodeScanner.Mobile.CameraView.TorchOnProperty.PropertyName)
             {
