@@ -4,7 +4,6 @@ using Android.Graphics;
 using Android.Runtime;
 using Android.Util;
 using AndroidX.Camera.Core;
-using Java.Interop;
 using Java.Nio;
 using Xamarin.Google.MLKit.Vision.Common;
 using Xamarin.Google.MLKit.Vision.Text;

@@ -70,5 +70,7 @@ namespace BarcodeScanner.Mobile
         public event EventHandler<OnDetectedEventArg> OnDetected;
         public void TriggerOnDetected(List<BarcodeResult> barCodeResults, byte[] imageData);
 
+        public void TriggerOnDetected(OCRResult ocrResult, byte[] imageData);
+
     }
 }

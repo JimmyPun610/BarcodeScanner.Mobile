@@ -79,6 +79,21 @@ namespace BarcodeScanner.Mobile
             set => SetValue(ScanIntervalProperty, value);
         }
 
+        public static BindableProperty IsOCRProperty = BindableProperty.Create(nameof(IsOCR)
+            , typeof(bool)
+            , typeof(CameraView)
+            , true
+            , defaultBindingMode: BindingMode.TwoWay
+            , propertyChanged: (bindable, value, newValue) => ((CameraView)bindable).IsOCR = (bool)newValue);
+        /// <summary>
+        /// Disables or enables scanning
+        /// </summary>
+        public bool IsOCR
+        {
+            get => (bool)GetValue(IsOCRProperty);
+            set => SetValue(IsOCRProperty, value);
+        }
+
         public static BindableProperty IsScanningProperty = BindableProperty.Create(nameof(IsScanning)
             , typeof(bool)
             , typeof(CameraView)

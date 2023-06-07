@@ -4,7 +4,6 @@ using Android.Graphics;
 using Android.Runtime;
 using Android.Util;
 using AndroidX.Camera.Core;
-using Java.Interop;
 using Java.Nio;
 using Xamarin.Google.MLKit.Vision.Common;
 using Xamarin.Google.MLKit.Vision.Text;
@@ -63,7 +62,7 @@ namespace BarcodeScanner.Mobile.Platforms.Android
                     var result = await ToAwaitableTask(_textScanner.Process(image).AddOnSuccessListener(new OnSuccessListener()).AddOnFailureListener(new OnFailureListener()));
 
 
-                    var final = result;// Methods.ProcessBarcodeResult(result);
+                    var final = new OCRResult();
 
                     if (final == null || _cameraView == null) return;
                     if (!_cameraView.IsScanning)
@@ -77,7 +76,7 @@ namespace BarcodeScanner.Mobile.Platforms.Android
                     }
 
                     _cameraView.IsScanning = false;
-                    //_cameraView.TriggerOnDetected(final, imageData);
+                    _cameraView.TriggerOnDetected(final, imageData);
                     if (_cameraView.VibrationOnDetected)
                         Vibration.Vibrate(200);
                 }
