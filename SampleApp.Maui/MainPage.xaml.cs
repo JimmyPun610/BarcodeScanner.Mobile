@@ -115,5 +115,15 @@
                 Navigation.PushModalAsync(new NavigationPage(new ImageCapture.ImageCaptureDemo()));
             else DisplayAlert("Alert", "You have to provide Camera permission", "Ok");
         }
+
+        private async void Button8_Clicked(object sender, EventArgs e)
+        {
+            //Ask for permission first
+            bool allowed = false;
+            allowed = await BarcodeScanner.Mobile.Methods.AskForRequiredPermission();
+            if (allowed)
+                Navigation.PushModalAsync(new NavigationPage(new OCRImageCapture.OCRImageCaptureDemo()));
+            else DisplayAlert("Alert", "You have to provide Camera permission", "Ok");
+        }
     }
 }
