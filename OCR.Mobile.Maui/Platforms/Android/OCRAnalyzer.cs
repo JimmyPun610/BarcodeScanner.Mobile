@@ -1,34 +1,50 @@
 ﻿using Android.App;
+using Android.Gms.Tasks;
 using Android.Graphics;
 using Android.Runtime;
 using Android.Util;
 using AndroidX.Camera.Core;
 using Java.Interop;
 using Java.Nio;
-using Xamarin.Google.MLKit.Vision.BarCode;
 using Xamarin.Google.MLKit.Vision.Common;
+using Xamarin.Google.MLKit.Vision.Text;
 
 namespace BarcodeScanner.Mobile.Platforms.Android
 {
-    public class BarcodeAnalyzer : Java.Lang.Object, ImageAnalysis.IAnalyzer
+    public class OCRAnalyzer : Java.Lang.Object, ImageAnalysis.IAnalyzer
     {
-        private readonly IBarcodeScanner _barcodeScanner;
+        private readonly ITextRecognizer _textScanner;
         private readonly ICameraView _cameraView;
         private long _lastRunTime = DateTimeOffset.Now.ToUnixTimeMilliseconds();
         private long _lastAnalysisTime = DateTimeOffset.MinValue.ToUnixTimeMilliseconds();
 
 
-        public BarcodeAnalyzer(ICameraView cameraView)
+        public OCRAnalyzer(ICameraView cameraView)
         {
             _cameraView = cameraView;
             if (_cameraView != null && _cameraView.ScanInterval < 100)
                 _cameraView.ScanInterval = 500;
 
-            _barcodeScanner = BarcodeScanning.GetClient(new BarcodeScannerOptions.Builder().SetBarcodeFormats(
-                Configuration.BarcodeFormats)
-            .Build());
+            _textScanner = TextRecognition.GetClient(Xamarin.Google.MLKit.Vision.Text.Latin.TextRecognizerOptions.DefaultOptions);
 
         }
+
+        public class OnSuccessListener : Java.Lang.Object, IOnSuccessListener
+        {
+            public void OnSuccess(Java.Lang.Object result)
+            {
+
+            }
+        }
+
+        public class OnFailureListener : Java.Lang.Object, IOnFailureListener
+        {
+            public void OnFailure(Java.Lang.Exception e)
+            {
+
+            }
+        }
+
 
         public async void Analyze(IImageProxy proxy)
         {
@@ -42,12 +58,12 @@ namespace BarcodeScanner.Mobile.Platforms.Android
                 if (_lastRunTime - _lastAnalysisTime > _cameraView.ScanInterval && _cameraView.IsScanning)
                 {
                     _lastAnalysisTime = _lastRunTime;
-                    var image = InputImage.FromMediaImage(mediaImage, proxy.ImageInfo.RotationDegrees);
-                    // Pass image to the scanner and have it do its thing
-                    var result = await ToAwaitableTask(_barcodeScanner.Process(image));
+                    var image = InputImage.FromMediaImage(mediaImage, proxy.ImageInfo.RotationDegrees); 
+
+                    var result = await ToAwaitableTask(_textScanner.Process(image).AddOnSuccessListener(new OnSuccessListener()).AddOnFailureListener(new OnFailureListener()));
 
 
-                    var final = Methods.ProcessBarcodeResult(result);
+                    var final = result;// Methods.ProcessBarcodeResult(result);
 
                     if (final == null || _cameraView == null) return;
                     if (!_cameraView.IsScanning)
@@ -61,18 +77,18 @@ namespace BarcodeScanner.Mobile.Platforms.Android
                     }
 
                     _cameraView.IsScanning = false;
-                    _cameraView.TriggerOnDetected(final, imageData);
+                    //_cameraView.TriggerOnDetected(final, imageData);
                     if (_cameraView.VibrationOnDetected)
                         Vibration.Vibrate(200);
                 }
             }
             catch (Java.Lang.Exception ex)
             {
-                Log.Debug(nameof(BarcodeAnalyzer), ex.ToString());
+                Log.Debug(nameof(OCRAnalyzer), ex.ToString());
             }
             catch (Exception ex)
             {
-                Log.Debug(nameof(BarcodeAnalyzer), ex.ToString());
+                Log.Debug(nameof(OCRAnalyzer), ex.ToString());
             }
             finally
             {

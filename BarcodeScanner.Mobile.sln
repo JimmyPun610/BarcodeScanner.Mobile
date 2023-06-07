@@ -19,6 +19,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SampleApp.Maui", "SampleApp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BarcodeScanner.Mobile.Maui", "BarcodeScanner.Mobile.Maui\BarcodeScanner.Mobile.Maui.csproj", "{E3188076-4D16-404A-A001-13E18A77F88A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OCR.Mobile.Maui", "OCR.Mobile.Maui\OCR.Mobile.Maui.csproj", "{3FE18CB8-693D-4C15-BAA5-CA6F6340F588}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -113,6 +115,18 @@ Global
 		{E3188076-4D16-404A-A001-13E18A77F88A}.Release|iPhone.Build.0 = Release|Any CPU
 		{E3188076-4D16-404A-A001-13E18A77F88A}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
 		{E3188076-4D16-404A-A001-13E18A77F88A}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
+		{3FE18CB8-693D-4C15-BAA5-CA6F6340F588}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3FE18CB8-693D-4C15-BAA5-CA6F6340F588}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3FE18CB8-693D-4C15-BAA5-CA6F6340F588}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{3FE18CB8-693D-4C15-BAA5-CA6F6340F588}.Debug|iPhone.Build.0 = Debug|Any CPU
+		{3FE18CB8-693D-4C15-BAA5-CA6F6340F588}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{3FE18CB8-693D-4C15-BAA5-CA6F6340F588}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{3FE18CB8-693D-4C15-BAA5-CA6F6340F588}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3FE18CB8-693D-4C15-BAA5-CA6F6340F588}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3FE18CB8-693D-4C15-BAA5-CA6F6340F588}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{3FE18CB8-693D-4C15-BAA5-CA6F6340F588}.Release|iPhone.Build.0 = Release|Any CPU
+		{3FE18CB8-693D-4C15-BAA5-CA6F6340F588}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{3FE18CB8-693D-4C15-BAA5-CA6F6340F588}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -124,6 +138,7 @@ Global
 		{3C1F0740-EA98-4954-9173-240188AEC83B} = {FE719BA8-E77C-4377-8F64-9C737C44C817}
 		{02760199-04C3-4AEC-BDA3-F22901DE7051} = {FE719BA8-E77C-4377-8F64-9C737C44C817}
 		{E3188076-4D16-404A-A001-13E18A77F88A} = {33FFD854-0B4D-4920-96A6-0AAADFD1B5BF}
+		{3FE18CB8-693D-4C15-BAA5-CA6F6340F588} = {33FFD854-0B4D-4920-96A6-0AAADFD1B5BF}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9ED78E07-0D21-46F8-B6F9-4327309EB993}
