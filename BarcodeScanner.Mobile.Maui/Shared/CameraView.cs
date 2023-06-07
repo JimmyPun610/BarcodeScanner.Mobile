@@ -109,6 +109,21 @@ namespace BarcodeScanner.Mobile
             set => SetValue(ReturnBarcodeImageProperty, value);
         }
 
+        public static BindableProperty IsOCRProperty = BindableProperty.Create(nameof(IsOCR)
+            , typeof(bool)
+            , typeof(CameraView)
+            , true
+            , defaultBindingMode: BindingMode.TwoWay
+            , propertyChanged: (bindable, value, newValue) => ((CameraView)bindable).IsOCR = (bool)newValue);
+        /// <summary>
+        /// Looking to perform text (OCR) or barcode scanning.
+        /// </summary>
+        public bool IsOCR
+        {
+            get => (bool)GetValue(IsOCRProperty);
+            set => SetValue(IsOCRProperty, value);
+        }
+
         public static BindableProperty TorchOnProperty = BindableProperty.Create(nameof(TorchOn)
             , typeof(bool)
             , typeof(CameraView)
@@ -165,6 +180,15 @@ namespace BarcodeScanner.Mobile
             {
                 OnDetected?.Invoke(this, new OnDetectedEventArg { BarcodeResults = barCodeResults, ImageData = imageData });
                 OnDetectedCommand?.Execute(new OnDetectedEventArg { BarcodeResults = barCodeResults, ImageData = imageData });
+            });
+        }
+
+        public void TriggerOnDetected(OCRResult ocrResult, byte[] imageData)
+        {
+            MainThread.BeginInvokeOnMainThread(() =>
+            {
+                OnDetected?.Invoke(this, new OnDetectedEventArg { OCRResult = ocrResult, ImageData = imageData });
+                OnDetectedCommand?.Execute(new OnDetectedEventArg { OCRResult = ocrResult, ImageData = imageData });
             });
         }
 

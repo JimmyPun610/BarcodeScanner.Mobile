@@ -47,10 +47,22 @@
 		<!-- Raw Assets (also remove the "Resources\Raw" prefix) -->
 		<MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
 	</ItemGroup>
+
+
+	<ItemGroup>
+	  <ProjectReference Include="..\BarcodeScanner.Mobile.Maui\BarcodeScanner.Mobile.Maui.csproj" />
+	</ItemGroup>
 	
 	<ItemGroup>
-		<PackageReference Include="BarcodeScanner.Mobile.Maui" Version="6.3.0.29-pre">
-		</PackageReference>
+	  <Compile Update="OCRImageCapture\OCRImageCaptureDemo.xaml.cs">
+	    <DependentUpon>OCRImageCaptureDemo.xaml</DependentUpon>
+	  </Compile>
+	</ItemGroup>
+	
+	<ItemGroup>
+	  <MauiXaml Update="OCRImageCapture\OCRImageCaptureDemo.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	</ItemGroup>
 
 </Project>

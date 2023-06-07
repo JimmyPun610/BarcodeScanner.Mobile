@@ -173,7 +173,7 @@ namespace BarcodeScanner.Mobile
             set => SetValue(CaptureQualityProperty, value);
         }
 
-        public event EventHandler<OnDetectedEventArg> OnDetected;
+        /*public event EventHandler<OnDetectedEventArg> OnDetected;
         public void TriggerOnDetected(List<BarcodeResult> barCodeResults, byte[] imageData)
         {
             MainThread.BeginInvokeOnMainThread(() =>
@@ -181,7 +181,7 @@ namespace BarcodeScanner.Mobile
                 OnDetected?.Invoke(this, new OnDetectedEventArg { BarcodeResults = barCodeResults, ImageData = imageData });
                 OnDetectedCommand?.Execute(new OnDetectedEventArg { BarcodeResults = barCodeResults, ImageData = imageData });
             });
-        }
+        }*/
 
         public CameraView()
         {

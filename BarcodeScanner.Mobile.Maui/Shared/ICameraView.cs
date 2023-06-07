@@ -47,6 +47,10 @@ namespace BarcodeScanner.Mobile
         /// Disables or enables returning the image which the barcode was read from.
         /// </summary>
         bool ReturnBarcodeImage { get; set; }
+        /// <summary>
+        /// When enabled we are performing text scanning (OCR) instead of barcode scanning.
+        /// </summary>
+        bool IsOCR { get; set; }
         public static BindableProperty TorchOnProperty { get; set; }
         /// <summary>
         /// Disables or enables torch
