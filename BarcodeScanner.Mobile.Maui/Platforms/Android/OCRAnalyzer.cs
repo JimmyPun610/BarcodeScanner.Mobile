@@ -12,7 +12,6 @@ namespace BarcodeScanner.Mobile.Platforms.Android
 {
     public class OCRAnalyzer : Java.Lang.Object, ImageAnalysis.IAnalyzer
     {
-        private readonly ITextRecognizer _textScanner;
         private readonly ICameraView _cameraView;
         private long _lastRunTime = DateTimeOffset.Now.ToUnixTimeMilliseconds();
         private long _lastAnalysisTime = DateTimeOffset.MinValue.ToUnixTimeMilliseconds();
@@ -23,9 +22,6 @@ namespace BarcodeScanner.Mobile.Platforms.Android
             _cameraView = cameraView;
             if (_cameraView != null && _cameraView.ScanInterval < 100)
                 _cameraView.ScanInterval = 500;
-
-            _textScanner = TextRecognition.GetClient(Xamarin.Google.MLKit.Vision.Text.Latin.TextRecognizerOptions.DefaultOptions);
-
         }
 
         public class OnSuccessListener : Java.Lang.Object, IOnSuccessListener
@@ -44,7 +40,6 @@ namespace BarcodeScanner.Mobile.Platforms.Android
             }
         }
 
-
         public async void Analyze(IImageProxy proxy)
         {
             try
@@ -57,14 +52,23 @@ namespace BarcodeScanner.Mobile.Platforms.Android
                 if (_lastRunTime - _lastAnalysisTime > _cameraView.ScanInterval && _cameraView.IsScanning)
                 {
                     _lastAnalysisTime = _lastRunTime;
-                    var image = InputImage.FromMediaImage(mediaImage, proxy.ImageInfo.RotationDegrees); 
+                    var image = InputImage.FromMediaImage(mediaImage, proxy.ImageInfo.RotationDegrees);
 
-                    var result = await ToAwaitableTask(_textScanner.Process(image).AddOnSuccessListener(new OnSuccessListener()).AddOnFailureListener(new OnFailureListener()));
+                    var ocrResult = new OCRResult();
+                    using (var textScanner = TextRecognition.GetClient(Xamarin.Google.MLKit.Vision.Text.Latin.TextRecognizerOptions.DefaultOptions))
+                    {
+                        var result = await ToAwaitableTask(textScanner.Process(image).AddOnSuccessListener(new OnSuccessListener()).AddOnFailureListener(new OnFailureListener()));
 
+                        var textResult = (Xamarin.Google.MLKit.Vision.Text.Text)result;
 
-                    var final = new OCRResult();
+                        ocrResult.AllText = textResult.GetText();
+                        /*foreach(var block in textResult.TextBlocks)
+                        {
+                            block.Text
+                        }*/
+                    }
 
-                    if (final == null || _cameraView == null) return;
+                    if (ocrResult == null || _cameraView == null) return;
                     if (!_cameraView.IsScanning)
                         return;
 
@@ -76,7 +80,7 @@ namespace BarcodeScanner.Mobile.Platforms.Android
                     }
 
                     _cameraView.IsScanning = false;
-                    _cameraView.TriggerOnDetected(final, imageData);
+                    _cameraView.TriggerOnDetected(ocrResult, imageData);
                     if (_cameraView.VibrationOnDetected)
                         Vibration.Vibrate(200);
                 }

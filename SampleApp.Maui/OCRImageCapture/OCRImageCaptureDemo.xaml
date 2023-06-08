@@ -24,6 +24,10 @@
             <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" Grid.Row="0" Grid.ColumnSpan="3">
                 <Button x:Name="CancelButton" Text="Cancel" BackgroundColor="#FF0000" TextColor="White" Clicked="CancelButton_Clicked" HorizontalOptions="FillAndExpand"
                         CornerRadius="0"/>
+                <Button x:Name="ScanButton" Text="Scan" BackgroundColor="Black" TextColor="White" Command="{Binding ScanCommand}" HorizontalOptions="FillAndExpand"
+                        CornerRadius="0" IsVisible="{Binding AllowScanning}"/>
+                <Button x:Name="ScanAgainButton" Text="Scan Again" BackgroundColor="Blue" TextColor="White" Command="{Binding ScanAgainCommand}" HorizontalOptions="FillAndExpand"
+                        CornerRadius="0" IsVisible="{Binding ShowImage}"/>
             </StackLayout>
             <!--Fill the screen with CameraView-->
             <gv:CameraView Grid.Row="1" Grid.Column="1"
@@ -39,10 +43,12 @@
             <Image Grid.Row="1" Grid.Column="1" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"
                    IsVisible="{Binding ShowImage}"
                    Source="{Binding CapturedImageSource}" />
-            <StackLayout Grid.Row="2" HeightRequest="120" Grid.ColumnSpan="3">
+            <ScrollView Grid.Row="2" HeightRequest="120" Grid.ColumnSpan="3">
+                <StackLayout>
                 <Label Text="Result" TextColor="Red"></Label>
                 <Label Text="{Binding Result}" TextColor="Black"></Label>
-            </StackLayout>
+                </StackLayout>
+            </ScrollView>
         </Grid>
     </ContentPage.Content>
 </ContentPage>

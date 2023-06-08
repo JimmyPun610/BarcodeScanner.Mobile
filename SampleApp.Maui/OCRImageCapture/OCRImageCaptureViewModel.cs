@@ -22,6 +22,17 @@ namespace SampleApp.Maui.OCRImageCapture
             }
         }
 
+        private bool _allowScanning { get; set; }
+        public bool AllowScanning
+        {
+            get { return _allowScanning; }
+            set
+            {
+                _allowScanning = value;
+                OnPropertyChanged(nameof(AllowScanning));
+            }
+        }
+
         private ICommand _onDetectCommand { get; set; }
         public ICommand OnDetectCommand
         {
@@ -33,6 +44,17 @@ namespace SampleApp.Maui.OCRImageCapture
             }
         }
 
+        public ICommand ScanCommand
+        {
+            get
+            {
+                return new Command(
+                    execute: () => {
+                        IsScanning = true;
+                        AllowScanning = false;
+                    });
+            }
+        }
 
         private int _scanInterval { get; set; }
         public int ScanInterval
@@ -102,7 +124,8 @@ namespace SampleApp.Maui.OCRImageCapture
         public OCRImageCaptureViewModel()
         {
             this.ScanInterval = 1000;
-            this.IsScanning = true;
+            this.IsScanning = false;
+            this.AllowScanning = true;
             this.OnDetectCommand = new Command<OnDetectedEventArg>(ExecuteOnDetectedCommand);
             this.Result = string.Empty;
             this.showCamera = true;
@@ -111,14 +134,7 @@ namespace SampleApp.Maui.OCRImageCapture
 
         public void ExecuteOnDetectedCommand(OnDetectedEventArg arg)
         {
-            List<BarcodeScanner.Mobile.BarcodeResult> obj = arg.BarcodeResults;
-
-            string result = string.Empty;
-            for (int i = 0; i < obj.Count; i++)
-            {
-                result += $"Type : {obj[i].BarcodeType}, Value : {obj[i].DisplayValue}{Environment.NewLine}";
-            }
-            this.Result = result;
+            this.Result = arg.OCRResult.AllText;
 
             imageData = arg.ImageData;
             OnPropertyChanged(nameof(CapturedImageSource));
