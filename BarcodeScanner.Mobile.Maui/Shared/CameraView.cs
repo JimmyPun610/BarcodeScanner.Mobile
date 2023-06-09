@@ -176,19 +176,20 @@ namespace BarcodeScanner.Mobile
         public event EventHandler<OnDetectedEventArg> OnDetected;
         public void TriggerOnDetected(List<BarcodeResult> barCodeResults, byte[] imageData)
         {
-            MainThread.BeginInvokeOnMainThread(() =>
-            {
-                OnDetected?.Invoke(this, new OnDetectedEventArg { BarcodeResults = barCodeResults, ImageData = imageData });
-                OnDetectedCommand?.Execute(new OnDetectedEventArg { BarcodeResults = barCodeResults, ImageData = imageData });
-            });
+            TriggerOnDetected(new OCRResult(), barCodeResults, imageData);
         }
 
         public void TriggerOnDetected(OCRResult ocrResult, byte[] imageData)
         {
+            TriggerOnDetected(ocrResult, new List<BarcodeResult>(), imageData);
+        }
+
+        public void TriggerOnDetected(OCRResult ocrResult, List<BarcodeResult> barCodeResults, byte[] imageData)
+        {
             MainThread.BeginInvokeOnMainThread(() =>
             {
-                OnDetected?.Invoke(this, new OnDetectedEventArg { OCRResult = ocrResult, ImageData = imageData });
-                OnDetectedCommand?.Execute(new OnDetectedEventArg { OCRResult = ocrResult, ImageData = imageData });
+                OnDetected?.Invoke(this, new OnDetectedEventArg { OCRResult = ocrResult, BarcodeResults = barCodeResults, ImageData = imageData });
+                OnDetectedCommand?.Execute(new OnDetectedEventArg { OCRResult = ocrResult, BarcodeResults = barCodeResults, ImageData = imageData });
             });
         }
 

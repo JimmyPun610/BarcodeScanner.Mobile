@@ -22,7 +22,7 @@ namespace BarcodeScanner.Mobile
 
             foreach(var o in result.GetResults<VNRecognizedTextObservation>())
             {
-                ocrResult.AllText += o.TopCandidates(1).First();
+                ocrResult.AllText += o.TopCandidates(1).First().String;
             }
 
             ocrResult.Success = true;
@@ -33,11 +33,17 @@ namespace BarcodeScanner.Mobile
         {
             var ocrResult = new OCRResult();
             var options = new NSDictionary();
-            var ocrHandler = new VNImageRequestHandler(image.CIImage, options);
+            var ocrHandler = new VNImageRequestHandler(image.CGImage, options);
             var ocrRequest = new VNRecognizeTextRequest((request, error) =>
             {
                 ocrResult = ProcessResult(request);
             });
+            ocrRequest.RecognitionLevel = VNRequestTextRecognitionLevel.Accurate;
+            var success = ocrHandler.Perform(new VNRequest[] { ocrRequest }, out NSError error);
+
+            if (!success)
+                ocrResult.Success = false;
+
             return ocrResult;
         }
 
