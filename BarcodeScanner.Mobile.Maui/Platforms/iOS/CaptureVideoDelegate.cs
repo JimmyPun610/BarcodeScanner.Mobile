@@ -131,45 +131,30 @@ namespace BarcodeScanner.Mobile.Platforms.iOS
                     var image = GetImageFromSampleBuffer(sampleBuffer, shouldReturnBarcodeImage ? GetUIImageOrientation() : null);
                     if (image == null) return;
 
-                    var visionImage = new MLImage(image) { Orientation = orientation };
-                    releaseSampleBuffer(sampleBuffer);
-                    barcodeDetector.ProcessImage(visionImage, (barcodes, error) =>
+                    var ocrResult = new OCRResult();
+                    var resultList = new List<BarcodeResult>();
+
+                    if (_cameraView.IsOCR)
                     {
-                        if (_cameraView == null) return;
-                        if (!_cameraView.IsScanning) return;
-
-                        if (error != null)
-                        {
-                            System.Diagnostics.Debug.WriteLine(error);
-                            return;
-                        }
-
-                        if (barcodes == null || barcodes.Length == 0)
-                        {
-                            return;
-                        }
-
                         _cameraView.IsScanning = false;
+                        ocrResult = OCRMethods.ScanFromImage(image);
+                    }
+                    else
+                    {
+                        resultList = ProcessBarcode(image, sampleBuffer);
+                    }
 
-                        if (_cameraView.VibrationOnDetected)
-                            SystemSound.Vibrate.PlayAlertSound();
-
-                        List<BarcodeResult> resultList = new List<BarcodeResult>();
-                        foreach (var barcode in barcodes)
-                            resultList.Add(Methods.ProcessBarcodeResult(barcode));
-
-                        var imageDataByteArray = new byte[0];
-                        if (shouldReturnBarcodeImage)
+                    var imageDataByteArray = new byte[0];
+                    if (shouldReturnBarcodeImage)
+                    {
+                        using (NSData imageData = image.AsJPEG())
                         {
-                            using (NSData imageData = image.AsJPEG())
-                            {
-                                imageDataByteArray = new byte[imageData.Length];
-                                System.Runtime.InteropServices.Marshal.Copy(imageData.Bytes, imageDataByteArray, 0, Convert.ToInt32(imageData.Length));
-                            }
+                            imageDataByteArray = new byte[imageData.Length];
+                            System.Runtime.InteropServices.Marshal.Copy(imageData.Bytes, imageDataByteArray, 0, Convert.ToInt32(imageData.Length));
                         }
+                    }
 
-                        OnDetected?.Invoke(new OnDetectedEventArg { BarcodeResults = resultList, ImageData = imageDataByteArray });
-                    });
+                    OnDetected?.Invoke(new OnDetectedEventArg { BarcodeResults = resultList, ImageData = imageDataByteArray });
                 }
                 catch (Exception exception)
                 {
@@ -177,6 +162,42 @@ namespace BarcodeScanner.Mobile.Platforms.iOS
                 }
             }
             releaseSampleBuffer(sampleBuffer);
+        }
+
+
+        List<BarcodeResult> ProcessBarcode(UIImage image, CMSampleBuffer sampleBuffer)
+        {
+            List<BarcodeResult> resultList = new List<BarcodeResult>();
+            var visionImage = new MLImage(image) { Orientation = orientation };
+            releaseSampleBuffer(sampleBuffer);
+            barcodeDetector.ProcessImage(visionImage, (barcodes, error) =>
+            {
+                if (_cameraView == null) return;
+                if (!_cameraView.IsScanning) return;
+
+                if (error != null)
+                {
+                    System.Diagnostics.Debug.WriteLine(error);
+                    return;
+                }
+
+                if (barcodes == null || barcodes.Length == 0)
+                {
+                    return;
+                }
+
+                _cameraView.IsScanning = false;
+
+                if (_cameraView.VibrationOnDetected)
+                    SystemSound.Vibrate.PlayAlertSound();
+
+                
+                foreach (var barcode in barcodes)
+                    resultList.Add(Methods.ProcessBarcodeResult(barcode));
+
+            });
+
+            return resultList;
         }
     }
 
