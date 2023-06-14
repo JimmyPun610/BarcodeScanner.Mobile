@@ -26,8 +26,6 @@
                         CornerRadius="0"/>
                 <Button x:Name="ScanButton" Text="Scan" BackgroundColor="Black" TextColor="White" Command="{Binding ScanCommand}" HorizontalOptions="FillAndExpand"
                         CornerRadius="0" IsVisible="{Binding AllowScanning}"/>
-                <Button x:Name="ScanAgainButton" Text="Scan Again" BackgroundColor="Blue" TextColor="White" Command="{Binding ScanAgainCommand}" HorizontalOptions="FillAndExpand"
-                        CornerRadius="0" IsVisible="{Binding ShowImage}"/>
             </StackLayout>
             <!--Fill the screen with CameraView-->
             <gv:CameraView Grid.Row="1" Grid.Column="1"
