@@ -14,6 +14,7 @@
             <Button Text="Scan from Image With One Time Scan" Clicked="Button6_Clicked"/>
             <Button Text="Image Capture Demo" Clicked="Button7_Clicked"/>
             <Button Text="OCR Image Capture Demo" Clicked="Button8_Clicked"/>
+            <Button Text="OCR from image" Clicked="Button9_Clicked"/>
         </StackLayout>
     </ScrollView>
 
