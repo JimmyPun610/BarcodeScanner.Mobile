@@ -51,15 +51,26 @@ namespace BarcodeScanner.Mobile
         public static async Task<OCRResult> ScanFromImage(byte[] imageArray)
         {
             var tcs = new TaskCompletionSource<OCRResult>();
+            var ocrResult = new OCRResult();
             UIImage image = new UIImage(NSData.FromArray(imageArray));
             var options = new NSDictionary();
-            var ocrHandler = new VNImageRequestHandler(image.CIImage, options);
+            var ocrHandler = new VNImageRequestHandler(image.CGImage, options);
             var ocrRequest = new VNRecognizeTextRequest((request, error) =>
             {
-                var ocrResult = ProcessResult(request);
+                if (error != null)
+                {
+                    Console.WriteLine($"{error.ToString()}");
+                    ocrResult.Success = false;
+                    tcs.TrySetResult(ocrResult);
+                }
 
+                ocrResult = ProcessResult(request);
+                ocrResult.Success = true;
                 tcs.TrySetResult(ocrResult);
             });
+            ocrRequest.RecognitionLevel = VNRequestTextRecognitionLevel.Accurate;
+            ocrHandler.Perform(new VNRequest[] { ocrRequest }, out NSError error);
+
             return await tcs.Task;
         }
 
