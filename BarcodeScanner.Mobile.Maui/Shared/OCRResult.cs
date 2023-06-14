@@ -12,14 +12,18 @@ namespace BarcodeScanner.Mobile
 
         public string AllText { get; set; }
 
-        public IList<Line> Lines { get; set; }
+        public IList<OCRLine> Lines { get; set; } = new List<OCRLine>();
 
         public IList<string> GetAllElements()
         {
-            return null;
+            List<string> AllElements = new List<string>();
+            foreach (var line in Lines)
+                AllElements.AddRange(line.Elements);
+            
+            return AllElements;
         }
 
-        public class Line
+        public class OCRLine
         {
             public string Text { get; set; }
             public IList<string> Elements { get; set; } = new List<string>();
