@@ -145,7 +145,7 @@ namespace SampleApp.Maui
                 sourceStream.Read(bytes, 0, bytes.Length);
                 sourceStream.Seek(0, SeekOrigin.Begin);
                 OCRResult obj = await BarcodeScanner.Mobile.OCRMethods.ScanFromImage(bytes);
-                if (obj.Success == true)
+                if (obj.Success == true && obj.Elements.Count > 0)
                 {
                     string result = string.Empty;
                     foreach (var element in obj.Elements)
