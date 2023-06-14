@@ -56,6 +56,7 @@ namespace BarcodeScanner.Mobile
                 }
                 
             }
+            ocrResult.Success = true;
             return ocrResult;
         }
 
