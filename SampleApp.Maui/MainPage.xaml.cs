@@ -148,9 +148,9 @@ namespace SampleApp.Maui
                 if (obj.Success == false)
                 {
                     string result = string.Empty;
-                    foreach (var element in obj.GetAllElements())
+                    foreach (var element in obj.Elements)
                     {
-                        result += $"{element}{Environment.NewLine}";
+                        result += $"Confidence: {element.Confidence}, value: {element.Text}{Environment.NewLine}";
                     }
 
                     this.Dispatcher.Dispatch(async () =>

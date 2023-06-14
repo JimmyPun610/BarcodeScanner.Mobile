@@ -19,10 +19,11 @@ namespace BarcodeScanner.Mobile
             if (result.GetResults<VNRecognizedTextObservation>().Count() < 1)
                 return ocrResult;
 
-
             foreach(var o in result.GetResults<VNRecognizedTextObservation>())
             {
-                ocrResult.AllText += o.TopCandidates(1).First().String;
+                var topCandidate = o.TopCandidates(1).First();
+                ocrResult.AllText += topCandidate.String;
+                ocrResult.Elements.Add(new OCRResult.OCRElement { Text = topCandidate.String, Confidence = topCandidate.Confidence });
             }
 
             ocrResult.Success = true;

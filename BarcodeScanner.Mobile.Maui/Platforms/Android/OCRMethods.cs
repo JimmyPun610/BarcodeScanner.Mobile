@@ -42,16 +42,18 @@ namespace BarcodeScanner.Mobile
             ocrResult.AllText = textResult.GetText();
             foreach(var block in textResult.TextBlocks)
             {
-                var ocrLine = new OCRLine();
+                
                 foreach (var line  in block.Lines)
                 {
-                    ocrLine.Text = line.Text;
                     foreach (var element in  line.Elements)
                     {
-                        ocrLine.Elements.Add(element.Text);
-                    }
+                        var ocrElement = new OCRElement();
+                        ocrElement.Text = element.Text;
+                        ocrElement.Confidence = element.Confidence;
+                        ocrResult.Elements.Add(ocrElement);
+                    }  
                 }
-                ocrResult.Lines.Add(ocrLine);
+                
             }
             return ocrResult;
         }
