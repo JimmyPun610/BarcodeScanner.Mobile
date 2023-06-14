@@ -13,6 +13,7 @@ namespace BarcodeScanner.Mobile
         public string AllText { get; set; }
 
         public IList<OCRElement> Elements { get; set; } = new List<OCRElement>();
+        public IList<string> Lines { get; set; } = new List<string>();
 
         public class OCRElement
         {

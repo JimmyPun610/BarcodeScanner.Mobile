@@ -22,8 +22,14 @@ namespace BarcodeScanner.Mobile
             foreach(var o in result.GetResults<VNRecognizedTextObservation>())
             {
                 var topCandidate = o.TopCandidates(1).First();
-                ocrResult.AllText += topCandidate.String;
-                ocrResult.Elements.Add(new OCRResult.OCRElement { Text = topCandidate.String, Confidence = topCandidate.Confidence });
+                ocrResult.AllText += " " + topCandidate.String;
+                ocrResult.Lines.Add(topCandidate.String);
+
+                topCandidate.String.Split(" ").ToList().ForEach(e =>
+                {
+                    ocrResult.Elements.Add(new OCRResult.OCRElement { Text = e, Confidence = topCandidate.Confidence });
+                });
+
             }
 
             ocrResult.Success = true;

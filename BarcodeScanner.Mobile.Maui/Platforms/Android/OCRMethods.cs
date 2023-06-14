@@ -45,6 +45,7 @@ namespace BarcodeScanner.Mobile
                 
                 foreach (var line  in block.Lines)
                 {
+                    ocrResult.Lines.Add(line.Text);
                     foreach (var element in  line.Elements)
                     {
                         var ocrElement = new OCRElement();
