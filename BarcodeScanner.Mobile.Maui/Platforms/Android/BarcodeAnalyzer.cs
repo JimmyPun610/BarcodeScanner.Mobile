@@ -6,6 +6,8 @@ using AndroidX.Camera.Core;
 using Java.Nio;
 using Xamarin.Google.MLKit.Vision.BarCode;
 using Xamarin.Google.MLKit.Vision.Common;
+using Xamarin.Google.MLKit.Vision.Text;
+using static BarcodeScanner.Mobile.OCRMethods;
 
 namespace BarcodeScanner.Mobile.Platforms.Android
 {
@@ -42,13 +44,26 @@ namespace BarcodeScanner.Mobile.Platforms.Android
                 {
                     _lastAnalysisTime = _lastRunTime;
                     var image = InputImage.FromMediaImage(mediaImage, proxy.ImageInfo.RotationDegrees);
+
+                    List<BarcodeResult> barcodeFinalResult = null;
+                    OCRResult ocrFinalResult = null;
+
                     // Pass image to the scanner and have it do its thing
-                    var result = await ToAwaitableTask(_barcodeScanner.Process(image));
+                    if (_cameraView.IsOCR)
+                    {
+                        using (var textScanner = TextRecognition.GetClient(Xamarin.Google.MLKit.Vision.Text.Latin.TextRecognizerOptions.DefaultOptions))
+                        {
+                            var result = await ToAwaitableTask(textScanner.Process(image).AddOnSuccessListener(new OnSuccessListener()).AddOnFailureListener(new OnFailureListener()));
+                            ocrFinalResult = OCRMethods.ProcessOCRResult(result);
+                        }
+                    }
+                    else
+                    {
+                        var result = await ToAwaitableTask(_barcodeScanner.Process(image));
+                        barcodeFinalResult = Methods.ProcessBarcodeResult(result);
+                        if (barcodeFinalResult == null || _cameraView == null) return;
+                    }
 
-
-                    var final = Methods.ProcessBarcodeResult(result);
-
-                    if (final == null || _cameraView == null) return;
                     if (!_cameraView.IsScanning)
                         return;
 
@@ -60,7 +75,7 @@ namespace BarcodeScanner.Mobile.Platforms.Android
                     }
 
                     _cameraView.IsScanning = false;
-                    _cameraView.TriggerOnDetected(final, imageData);
+                    _cameraView.TriggerOnDetected(ocrFinalResult, barcodeFinalResult, imageData);
                     if (_cameraView.VibrationOnDetected)
                         Vibration.Vibrate(200);
                 }

@@ -60,39 +60,6 @@ namespace BarcodeScanner.Mobile
                 tcs.TrySetResult(ocrResult);
             });
             return await tcs.Task;
-
-            //VisionImageMetadata metadata = new VisionImageMetadata();
-            //VisionApi vision = VisionApi.Create();
-            //VisionBarcodeDetector barcodeDetector = vision.GetBarcodeDetector(Configuration.BarcodeDetectorSupportFormat);
-            //VisionBarcode[] barcodes = await barcodeDetector.DetectAsync(visionImage);
-            /*var options = new BarcodeScannerOptions(Configuration.BarcodeDetectorSupportFormat);
-            var barcodeScanner = MLKit.BarcodeScanning.BarcodeScanner.BarcodeScannerWithOptions(options);
-
-            var tcs = new TaskCompletionSource<List<BarcodeResult>>();
-
-            barcodeScanner.ProcessImage(visionImage, (barcodes, error) =>
-            {
-                if (error != null)
-                {
-                    Console.WriteLine($"Error occurred : {error}");
-                    tcs.TrySetResult(null);
-                    return;
-                }
-                if (barcodes == null || barcodes.Length == 0)
-                {
-                    tcs.TrySetResult(new List<BarcodeResult>());
-                    return;
-                }
-
-                var s = image.Size;
-                List<BarcodeResult> resultList = new List<BarcodeResult>();
-                foreach (var barcode in barcodes)
-                    resultList.Add(ProcessBarcodeResult(barcode));
-
-                tcs.TrySetResult(resultList);
-                return;
-            });
-            return await tcs.Task;*/
         }
 
     }
