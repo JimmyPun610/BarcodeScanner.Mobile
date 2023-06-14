@@ -11,4 +11,13 @@
 	<uses-permission android:name="android.permission.CAMERA" />
 	<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+	
+	<!-- .net 7 maui has some unresolved permissions issues with api 33 -->
+	<uses-sdk android:minSdkVersion="21" android:targetSdkVersion="32" />
+
+	<queries>
+		<intent>
+			<action android:name="android.media.action.IMAGE_CAPTURE" />
+		</intent>
+	</queries>
 </manifest>
