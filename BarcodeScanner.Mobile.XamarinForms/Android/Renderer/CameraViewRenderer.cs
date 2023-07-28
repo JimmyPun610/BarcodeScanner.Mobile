@@ -77,6 +77,10 @@ namespace BarcodeScanner.Mobile.Renderer
             {
                 CameraCallback();
             }
+            else if (e.PropertyName == BarcodeScanner.Mobile.CameraView.ZoomProperty.PropertyName)
+            {
+                HandleZoom();
+            }
         }
 
         protected override PreviewView CreateNativeControl() => new PreviewView(Context);
@@ -125,7 +129,7 @@ namespace BarcodeScanner.Mobile.Renderer
 
                 if (lifecycleOwner == null)
                     throw new Exception("Unable to find lifecycle owner");
-                
+
                 // Bind use cases to camera
                 _camera = cameraProvider.BindToLifecycle(lifecycleOwner, cameraSelector, preview, imageAnalyzer);
 
@@ -208,9 +212,9 @@ namespace BarcodeScanner.Mobile.Renderer
                         FocusMeteringAction.FlagAf).AddPoint(aePoint,
                         FocusMeteringAction.FlagAe).Build());
                 }
-                catch(Exception ex) { 
+                catch(Exception ex) {
                 }
-                
+
             }
         }
         private void HandleTorch()
@@ -235,7 +239,13 @@ namespace BarcodeScanner.Mobile.Renderer
             _camera.CameraControl.EnableTorch(false);
         }
 
+        private void HandleZoom()
+        {
+            if (_camera == null)
+                return;
 
+            _camera.CameraControl.SetLinearZoom(Element.Zoom);
+        }
 
         protected override void Dispose(bool disposing)
         {
@@ -323,7 +333,7 @@ namespace BarcodeScanner.Mobile.Renderer
                     if (mediaImage == null) return;
 
                     _lastRunTime = DateTimeOffset.Now.ToUnixTimeMilliseconds();
-                    
+
                     if (_lastRunTime - _lastAnalysisTime > _renderer.Element.ScanInterval && _renderer.Element.IsScanning)
                     {
                         _lastAnalysisTime = _lastRunTime;
@@ -331,7 +341,7 @@ namespace BarcodeScanner.Mobile.Renderer
                         // Pass image to the scanner and have it do its thing
                         var result = await ToAwaitableTask(_barcodeScanner.Process(image));
 
-                    
+
                         var final = Methods.ProcessBarcodeResult(result);
 
                         if (final == null || _renderer?.Element == null) return;
