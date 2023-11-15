@@ -49,8 +49,7 @@
 	</ItemGroup>
 	
 	<ItemGroup>
-		<PackageReference Include="BarcodeScanner.Mobile.Maui" Version="6.3.0.29-pre">
-		</PackageReference>
+	  <ProjectReference Include="..\BarcodeScanner.Mobile.Maui\BarcodeScanner.Mobile.Maui.csproj" />
 	</ItemGroup>
 
 </Project>

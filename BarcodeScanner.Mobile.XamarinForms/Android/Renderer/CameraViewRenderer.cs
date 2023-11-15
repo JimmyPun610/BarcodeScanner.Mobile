@@ -2,7 +2,6 @@
 using System.ComponentModel;
 using System.IO;
 using System.Threading.Tasks;
-using Android.App;
 using Android.Content;
 using Android.Gms.Tasks;
 using Android.Graphics;
@@ -24,12 +23,11 @@ using Xamarin.Google.MLKit.Vision.BarCode;
 using Xamarin.Google.MLKit.Vision.Common;
 using Exception = Java.Lang.Exception;
 using Android.Runtime;
-using Android.OS;
 
 [assembly: ExportRenderer(typeof(BarcodeScanner.Mobile.CameraView), typeof(BarcodeScanner.Mobile.Renderer.CameraViewRenderer))]
 namespace BarcodeScanner.Mobile.Renderer
 {
-    internal class CameraViewRenderer : Xamarin.Forms.Platform.Android.AppCompat.ViewRenderer<BarcodeScanner.Mobile.CameraView, PreviewView>
+    public class CameraViewRenderer : Xamarin.Forms.Platform.Android.AppCompat.ViewRenderer<CameraView, PreviewView>
     {
 
         private bool _isDisposed;
@@ -44,10 +42,10 @@ namespace BarcodeScanner.Mobile.Renderer
         public CameraViewRenderer(Context context) : base(context)
         {
             _cameraExecutor = Executors.NewSingleThreadExecutor();
-            _cameraFuture   = ProcessCameraProvider.GetInstance(context);
+            _cameraFuture = ProcessCameraProvider.GetInstance(context);
         }
 
-        protected override void OnElementChanged(ElementChangedEventArgs<BarcodeScanner.Mobile.CameraView> e)
+        protected override void OnElementChanged(ElementChangedEventArgs<CameraView> e)
         {
             base.OnElementChanged(e);
 
@@ -65,15 +63,15 @@ namespace BarcodeScanner.Mobile.Renderer
         protected override void OnElementPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             base.OnElementPropertyChanged(sender, e);
-            if (e.PropertyName == BarcodeScanner.Mobile.CameraView.TorchOnProperty.PropertyName)
+            if (e.PropertyName == CameraView.TorchOnProperty.PropertyName)
             {
                 HandleTorch();
             }
-            else if (e.PropertyName == BarcodeScanner.Mobile.CameraView.CameraFacingProperty.PropertyName)
+            else if (e.PropertyName == CameraView.CameraFacingProperty.PropertyName)
             {
                 CameraCallback();
             }
-            else if (e.PropertyName == BarcodeScanner.Mobile.CameraView.CaptureQualityProperty.PropertyName)
+            else if (e.PropertyName == CameraView.CaptureQualityProperty.PropertyName)
             {
                 CameraCallback();
             }
@@ -125,7 +123,7 @@ namespace BarcodeScanner.Mobile.Renderer
 
                 if (lifecycleOwner == null)
                     throw new Exception("Unable to find lifecycle owner");
-                
+
                 // Bind use cases to camera
                 _camera = cameraProvider.BindToLifecycle(lifecycleOwner, cameraSelector, preview, imageAnalyzer);
 
@@ -141,16 +139,16 @@ namespace BarcodeScanner.Mobile.Renderer
 
         private CameraSelector SelectCamera(ProcessCameraProvider cameraProvider)
         {
-	        if (Element.CameraFacing == CameraFacing.Front)
-	        {
-		        if (cameraProvider.HasCamera(CameraSelector.DefaultFrontCamera))
-			        return CameraSelector.DefaultFrontCamera;
+            if (Element.CameraFacing == CameraFacing.Front)
+            {
+                if (cameraProvider.HasCamera(CameraSelector.DefaultFrontCamera))
+                    return CameraSelector.DefaultFrontCamera;
 
                 throw new NotSupportedException("Front camera is not supported in this device");
             }
 
-	        if (cameraProvider.HasCamera(CameraSelector.DefaultBackCamera))
-		        return CameraSelector.DefaultBackCamera;
+            if (cameraProvider.HasCamera(CameraSelector.DefaultBackCamera))
+                return CameraSelector.DefaultBackCamera;
 
             throw new NotSupportedException("Back camera is not supported in this device");
         }
@@ -208,9 +206,10 @@ namespace BarcodeScanner.Mobile.Renderer
                         FocusMeteringAction.FlagAf).AddPoint(aePoint,
                         FocusMeteringAction.FlagAe).Build());
                 }
-                catch(Exception ex) { 
+                catch (Exception ex)
+                {
                 }
-                
+
             }
         }
         private void HandleTorch()
@@ -323,7 +322,7 @@ namespace BarcodeScanner.Mobile.Renderer
                     if (mediaImage == null) return;
 
                     _lastRunTime = DateTimeOffset.Now.ToUnixTimeMilliseconds();
-                    
+
                     if (_lastRunTime - _lastAnalysisTime > _renderer.Element.ScanInterval && _renderer.Element.IsScanning)
                     {
                         _lastAnalysisTime = _lastRunTime;
@@ -331,14 +330,14 @@ namespace BarcodeScanner.Mobile.Renderer
                         // Pass image to the scanner and have it do its thing
                         var result = await ToAwaitableTask(_barcodeScanner.Process(image));
 
-                    
+
                         var final = Methods.ProcessBarcodeResult(result);
 
                         if (final == null || _renderer?.Element == null) return;
                         if (!_renderer.Element.IsScanning)
                             return;
 
-                        var imageData = new byte[0];
+                        var imageData = Array.Empty<byte>();
                         if (_renderer.Element.ReturnBarcodeImage)
                         {
                             imageData = NV21toJPEG(YUV_420_888toNV21(mediaImage), mediaImage.Width, mediaImage.Height);
@@ -424,7 +423,7 @@ namespace BarcodeScanner.Mobile.Renderer
                     return 90;
                 Android.Views.IWindowManager windowManager = Android.App.Application.Context.GetSystemService(Context.WindowService).JavaCast<Android.Views.IWindowManager>();
 
-                switch(windowManager.DefaultDisplay.Rotation)
+                switch (windowManager?.DefaultDisplay?.Rotation)
                 {
                     case Android.Views.SurfaceOrientation.Rotation0:
                         return 90;
@@ -438,6 +437,11 @@ namespace BarcodeScanner.Mobile.Renderer
                         return 0;
                 }
             }
+
+            /// <summary>
+            /// Fix for https://github.com/xamarin/AndroidX/issues/767
+            /// </summary>
+            public Android.Util.Size DefaultTargetResolution => _renderer.TargetResolution();
 
             private void SafeCloseImageProxy(IImageProxy proxy)
             {
