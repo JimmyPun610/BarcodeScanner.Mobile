@@ -70,6 +70,7 @@ namespace BarcodeScanner.Mobile
                                 .SetTargetResolution(VirtualView.CaptureQuality.GetTargetResolution())
                                 .Build();
 
+
             imageAnalyzer.SetAnalyzer(_cameraExecutor, new BarcodeAnalyzer(VirtualView));
 
             var cameraSelector = SelectCamera(cameraProvider);

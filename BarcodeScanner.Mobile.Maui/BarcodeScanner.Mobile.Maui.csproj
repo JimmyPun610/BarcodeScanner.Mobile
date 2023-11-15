@@ -102,6 +102,12 @@
 	  </Compile>
 	</ItemGroup>
 
+	<ItemGroup Condition="'$(TargetFramework)' == 'net7.0-android'">
+	  <PackageReference Include="Xamarin.GooglePlayServices.MLKit.Text.Recognition">
+	    <Version>118.0.1</Version>
+	  </PackageReference>
+	</ItemGroup>
+
 
 
 </Project>

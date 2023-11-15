@@ -1,4 +1,6 @@
-﻿namespace SampleApp.Maui
+﻿using BarcodeScanner.Mobile;
+
+namespace SampleApp.Maui
 {
     public partial class MainPage : ContentPage
     {
@@ -113,6 +115,65 @@
             if (allowed)
                 Navigation.PushModalAsync(new NavigationPage(new ImageCapture.ImageCaptureDemo()));
             else DisplayAlert("Alert", "You have to provide Camera permission", "Ok");
+        }
+
+        private async void Button8_Clicked(object sender, EventArgs e)
+        {
+            //Ask for permission first
+            bool allowed = false;
+            allowed = await BarcodeScanner.Mobile.Methods.AskForRequiredPermission();
+            if (allowed)
+                Navigation.PushModalAsync(new NavigationPage(new OCRImageCapture.OCRImageCaptureDemo()));
+            else DisplayAlert("Alert", "You have to provide Camera permission", "Ok");
+        }
+
+        private async void Button9_Clicked(object sender, EventArgs e)
+        {
+            var storageStatus = await Permissions.CheckStatusAsync<Permissions.StorageRead>();
+            while (storageStatus != PermissionStatus.Granted)
+            {
+                storageStatus = await Permissions.RequestAsync<Permissions.StorageRead>();
+            }
+            if (storageStatus == PermissionStatus.Granted)
+            {
+                var file = await MediaPicker.PickPhotoAsync();
+                if (file == null)
+                    return;
+                using Stream sourceStream = await file.OpenReadAsync();
+                byte[] bytes = new byte[sourceStream.Length];
+                sourceStream.Read(bytes, 0, bytes.Length);
+                sourceStream.Seek(0, SeekOrigin.Begin);
+                OCRResult obj = await BarcodeScanner.Mobile.OCRMethods.ScanFromImage(bytes);
+                if (obj.Success == true && obj.Elements.Count > 0)
+                {
+                    string result = string.Empty;
+                    foreach (var element in obj.Elements)
+                    {
+                        result += $"Confidence: {element.Confidence}, value: {element.Text}{Environment.NewLine}";
+                    }
+
+                    this.Dispatcher.Dispatch(async () =>
+                    {
+                        await DisplayAlert("Result", result, "OK");
+                    });
+                }
+                else
+                {
+                    this.Dispatcher.Dispatch(async () =>
+                    {
+                        await DisplayAlert("Result", "No text found!", "OK");
+                    });
+                }
+
+            }
+            else
+            {
+                this.Dispatcher.Dispatch(async () =>
+                {
+                    await DisplayAlert("Permissions Denied", "Unable to take photos.", "OK");
+                });
+            }
+
         }
     }
 }

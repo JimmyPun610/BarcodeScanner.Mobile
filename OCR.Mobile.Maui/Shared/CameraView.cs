@@ -79,6 +79,21 @@ namespace BarcodeScanner.Mobile
             set => SetValue(ScanIntervalProperty, value);
         }
 
+        public static BindableProperty IsOCRProperty = BindableProperty.Create(nameof(IsOCR)
+            , typeof(bool)
+            , typeof(CameraView)
+            , true
+            , defaultBindingMode: BindingMode.TwoWay
+            , propertyChanged: (bindable, value, newValue) => ((CameraView)bindable).IsOCR = (bool)newValue);
+        /// <summary>
+        /// Disables or enables scanning
+        /// </summary>
+        public bool IsOCR
+        {
+            get => (bool)GetValue(IsOCRProperty);
+            set => SetValue(IsOCRProperty, value);
+        }
+
         public static BindableProperty IsScanningProperty = BindableProperty.Create(nameof(IsScanning)
             , typeof(bool)
             , typeof(CameraView)
@@ -107,21 +122,6 @@ namespace BarcodeScanner.Mobile
         {
             get => (bool)GetValue(ReturnBarcodeImageProperty);
             set => SetValue(ReturnBarcodeImageProperty, value);
-        }
-
-        public static BindableProperty IsOCRProperty = BindableProperty.Create(nameof(IsOCR)
-            , typeof(bool)
-            , typeof(CameraView)
-            , false
-            , defaultBindingMode: BindingMode.TwoWay
-            , propertyChanged: (bindable, value, newValue) => ((CameraView)bindable).IsOCR = (bool)newValue);
-        /// <summary>
-        /// Looking to perform text (OCR) or barcode scanning.
-        /// </summary>
-        public bool IsOCR
-        {
-            get => (bool)GetValue(IsOCRProperty);
-            set => SetValue(IsOCRProperty, value);
         }
 
         public static BindableProperty TorchOnProperty = BindableProperty.Create(nameof(TorchOn)
@@ -173,25 +173,15 @@ namespace BarcodeScanner.Mobile
             set => SetValue(CaptureQualityProperty, value);
         }
 
-        public event EventHandler<OnDetectedEventArg> OnDetected;
+        /*public event EventHandler<OnDetectedEventArg> OnDetected;
         public void TriggerOnDetected(List<BarcodeResult> barCodeResults, byte[] imageData)
-        {
-            TriggerOnDetected(new OCRResult(), barCodeResults, imageData);
-        }
-
-        public void TriggerOnDetected(OCRResult ocrResult, byte[] imageData)
-        {
-            TriggerOnDetected(ocrResult, new List<BarcodeResult>(), imageData);
-        }
-
-        public void TriggerOnDetected(OCRResult ocrResult, List<BarcodeResult> barCodeResults, byte[] imageData)
         {
             MainThread.BeginInvokeOnMainThread(() =>
             {
-                OnDetected?.Invoke(this, new OnDetectedEventArg { OCRResult = ocrResult, BarcodeResults = barCodeResults, ImageData = imageData });
-                OnDetectedCommand?.Execute(new OnDetectedEventArg { OCRResult = ocrResult, BarcodeResults = barCodeResults, ImageData = imageData });
+                OnDetected?.Invoke(this, new OnDetectedEventArg { BarcodeResults = barCodeResults, ImageData = imageData });
+                OnDetectedCommand?.Execute(new OnDetectedEventArg { BarcodeResults = barCodeResults, ImageData = imageData });
             });
-        }
+        }*/
 
         public CameraView()
         {

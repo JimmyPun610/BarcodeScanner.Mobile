@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:mvvm="clr-namespace:SampleApp.Maui.OCRImageCapture"
+             xmlns:gv="clr-namespace:BarcodeScanner.Mobile;assembly=BarcodeScanner.Mobile.Maui"
+             x:Class="SampleApp.Maui.OCRImageCapture.OCRImageCaptureDemo"
+             Title="OCRImageCaptureDemo">
+    <ContentPage.BindingContext>
+        <mvvm:OCRImageCaptureViewModel/>
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+
+        <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="30"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="30"/>
+            </Grid.ColumnDefinitions>
+            <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" Grid.Row="0" Grid.ColumnSpan="3">
+                <Button x:Name="CancelButton" Text="Cancel" BackgroundColor="#FF0000" TextColor="White" Clicked="CancelButton_Clicked" HorizontalOptions="FillAndExpand"
+                        CornerRadius="0"/>
+                <Button x:Name="ScanButton" Text="Scan" BackgroundColor="Black" TextColor="White" Command="{Binding ScanCommand}" HorizontalOptions="FillAndExpand"
+                        CornerRadius="0" IsVisible="{Binding AllowScanning}"/>
+            </StackLayout>
+            <!--Fill the screen with CameraView-->
+            <gv:CameraView Grid.Row="1" Grid.Column="1"
+                           IsVisible="{Binding ShowCamera}"
+                           OnDetectedCommand="{Binding OnDetectCommand}" 
+                           IsScanning="{Binding IsScanning}" 
+                           ScanInterval="{Binding ScanInterval}"
+                           ReturnBarcodeImage="True"
+                           IsOCR="True"
+                           x:Name="Camera" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
+            <!--Customized Size-->
+            <!--<gv:CameraView HorizontalOptions="Center" WidthRequest="200" HeightRequest="200" OnDetected="CameraView_OnDetected" Grid.Row="1"/>-->
+            <Image Grid.Row="1" Grid.Column="1" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"
+                   IsVisible="{Binding ShowImage}"
+                   Source="{Binding CapturedImageSource}" />
+            <ScrollView Grid.Row="2" HeightRequest="120" Grid.ColumnSpan="3" BackgroundColor="White" >
+                <StackLayout>
+                <Label Text="Result" TextColor="Red"></Label>
+                <Label Text="{Binding Result}" TextColor="Black"></Label>
+                </StackLayout>
+            </ScrollView>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

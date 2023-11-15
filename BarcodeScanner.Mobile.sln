@@ -16,6 +16,9 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SampleApp.XF", "SampleApp.XF\SampleApp.XF\SampleApp.XF.csproj", "{3C1F0740-EA98-4954-9173-240188AEC83B}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SampleApp.Maui", "SampleApp.Maui\SampleApp.Maui.csproj", "{02760199-04C3-4AEC-BDA3-F22901DE7051}"
+	ProjectSection(ProjectDependencies) = postProject
+		{E3188076-4D16-404A-A001-13E18A77F88A} = {E3188076-4D16-404A-A001-13E18A77F88A}
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BarcodeScanner.Mobile.Maui", "BarcodeScanner.Mobile.Maui\BarcodeScanner.Mobile.Maui.csproj", "{E3188076-4D16-404A-A001-13E18A77F88A}"
 EndProject

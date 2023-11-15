@@ -64,7 +64,7 @@ namespace BarcodeScanner.Mobile
                         PlatformView.InvokeOnMainThread(() =>
                         {
                             //CaptureSession.StopRunning();
-                            this.VirtualView?.TriggerOnDetected(eventArg.BarcodeResults, eventArg.ImageData);
+                            this.VirtualView?.TriggerOnDetected(eventArg.OCRResult, eventArg.BarcodeResults, eventArg.ImageData);
                         });
                     };
                 }
