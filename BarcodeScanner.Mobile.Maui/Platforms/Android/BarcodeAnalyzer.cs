@@ -1,4 +1,4 @@
-﻿using Android.App;
+using Android.App;
 using Android.Graphics;
 using Android.Runtime;
 using Android.Util;
@@ -8,6 +8,7 @@ using Xamarin.Google.MLKit.Vision.BarCode;
 using Xamarin.Google.MLKit.Vision.Common;
 using Xamarin.Google.MLKit.Vision.Text;
 using static BarcodeScanner.Mobile.OCRMethods;
+using Size = Android.Util.Size;
 
 namespace BarcodeScanner.Mobile.Platforms.Android
 {
@@ -168,6 +169,11 @@ namespace BarcodeScanner.Mobile.Platforms.Android
                     return 0;
             }
         }
+
+        /// <summary>
+        /// Fix for https://github.com/xamarin/AndroidX/issues/767
+        /// </summary>
+        public Size DefaultTargetResolution => _cameraView.CaptureQuality.GetTargetResolution();
 
         private void SafeCloseImageProxy(IImageProxy proxy)
         {

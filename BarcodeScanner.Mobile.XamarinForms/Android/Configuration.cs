@@ -1,5 +1,4 @@
-﻿using AndroidX.Camera.Core;
-using Xamarin.Google.MLKit.Vision.BarCode;
+﻿using Xamarin.Google.MLKit.Vision.Barcode.Common;
 
 
 namespace BarcodeScanner.Mobile

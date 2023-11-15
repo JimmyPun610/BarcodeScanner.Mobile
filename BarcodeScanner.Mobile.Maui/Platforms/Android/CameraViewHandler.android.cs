@@ -67,7 +67,7 @@ namespace BarcodeScanner.Mobile
             //https://developers.google.com/ml-kit/vision/barcode-scanning/android#input-image-guidelines
             var imageAnalyzer = imageAnalyzerBuilder
                                 .SetBackpressureStrategy(ImageAnalysis.StrategyKeepOnlyLatest) //<!-- only one image will be delivered for analysis at a time
-                                .SetTargetResolution(TargetResolution())
+                                .SetTargetResolution(VirtualView.CaptureQuality.GetTargetResolution())
                                 .Build();
 
 
@@ -116,18 +116,6 @@ namespace BarcodeScanner.Mobile
             throw new NotSupportedException("Back camera is not supported in this device");
         }
 
-        private Android.Util.Size TargetResolution()
-        {
-            return VirtualView.CaptureQuality switch
-            {
-                CaptureQuality.Lowest => new Android.Util.Size(352, 288),
-                CaptureQuality.Low => new Android.Util.Size(640, 480),
-                CaptureQuality.Medium => new Android.Util.Size(1280, 720),
-                CaptureQuality.High => new Android.Util.Size(1920, 1080),
-                CaptureQuality.Highest => new Android.Util.Size(3840, 2160),
-                _ => throw new ArgumentOutOfRangeException(nameof(CaptureQuality))
-            };
-        }
         /// <summary>
         /// Logic from https://stackoverflow.com/a/66659592/9032777
         /// Focus every 3s

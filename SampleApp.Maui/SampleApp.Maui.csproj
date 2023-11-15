@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
 		<!-- Choose either one -->
@@ -60,9 +60,11 @@
 	</ItemGroup>
 	
 	<ItemGroup>
+
 	  <MauiXaml Update="OCRImageCapture\OCRImageCaptureDemo.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+
 	</ItemGroup>
 
 </Project>

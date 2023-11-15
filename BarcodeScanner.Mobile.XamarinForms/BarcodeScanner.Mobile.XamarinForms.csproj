@@ -3,7 +3,7 @@
 	<PropertyGroup>
 
 		<!--Update with your target such as: Xamarin.iOS10 or MonoAndroid80 or Xamarin.Mac20-->
-		<TargetFrameworks>Xamarin.iOS10;MonoAndroid12.0;netstandard2.0</TargetFrameworks>
+		<TargetFrameworks>Xamarin.iOS10;MonoAndroid13.0;netstandard2.0</TargetFrameworks>
 
 		<!--Assembly and Namespace info -->
 		<id>BarcodeScanner.Mobile.XamarinForms</id>
@@ -47,9 +47,9 @@
 		<!-- We will compile anything ending in .shared.cs  You can change this -->
 		<Compile Include="Shared\*.cs" />
 
-		<PackageReference Include="Xamarin.Build.Download" Version="0.11.3" />
-		<PackageReference Include="Xamarin.Forms" Version="5.0.0.2515" />
-		<PackageReference Include="Xamarin.Essentials" Version="1.7.3" />
+		<PackageReference Include="Xamarin.Build.Download" Version="0.11.4" />
+		<PackageReference Include="Xamarin.Forms" Version="5.0.0.2612" />
+		<PackageReference Include="Xamarin.Essentials" Version="1.8.0" />
 
 	</ItemGroup>
 	
@@ -58,33 +58,33 @@
 	
 	</ItemGroup>
 
-	<ItemGroup Condition="( '$(TargetFramework)' == 'MonoAndroid12.0' )">
+	<ItemGroup Condition="( '$(TargetFramework)' == 'MonoAndroid13.0' )">
 		<Compile Include="Android\*.cs" />
 		<Compile Include="Android\**\*.cs" />
 	
-		<PackageReference Include="Xamarin.AndroidX.MediaRouter" Version="1.2.5">
+		<PackageReference Include="Xamarin.AndroidX.MediaRouter" Version="1.6.0">
 		</PackageReference>
-		<PackageReference Include="Xamarin.AndroidX.Lifecycle.LiveData" Version="2.3.1.3">
+		<PackageReference Include="Xamarin.AndroidX.Lifecycle.LiveData" Version="2.6.2.1">
 		</PackageReference>
-		<PackageReference Include="Xamarin.AndroidX.Browser" Version="1.3.0.6">
+		<PackageReference Include="Xamarin.AndroidX.Browser" Version="1.5.0.3">
 		</PackageReference>
 		<PackageReference Include="Xamarin.Google.Android.Material" Version="1.4.0.4">
 		</PackageReference>
-		<PackageReference Include="Xamarin.AndroidX.Palette" Version="1.0.0.10">
+		<PackageReference Include="Xamarin.AndroidX.Palette" Version="1.0.0.20">
 		</PackageReference>
-		<PackageReference Include="Xamarin.AndroidX.Core" Version="1.6.0.3">
+		<PackageReference Include="Xamarin.AndroidX.Core" Version="1.12.0.1">
 		</PackageReference>
-		<PackageReference Include="Xamarin.AndroidX.RecyclerView" Version="1.2.1.3">
+		<PackageReference Include="Xamarin.AndroidX.RecyclerView" Version="1.3.1.1">
 		</PackageReference>
-		<PackageReference Include="Xamarin.AndroidX.Camera.Camera2" Version="1.0.2">
+		<PackageReference Include="Xamarin.AndroidX.Camera.Camera2" Version="1.2.3.2">
 		</PackageReference>
-		<PackageReference Include="Xamarin.AndroidX.Camera.Lifecycle" Version="1.0.2">
+		<PackageReference Include="Xamarin.AndroidX.Camera.Lifecycle" Version="1.2.3.2">
 		</PackageReference>
-		<PackageReference Include="Xamarin.AndroidX.Camera.View" Version="1.0.0.5-alpha20">
+		<PackageReference Include="Xamarin.AndroidX.Camera.View" Version="1.2.3.2">
 		</PackageReference>
-		<PackageReference Include="Xamarin.Google.Dagger" Version="2.37.0">
+		<PackageReference Include="Xamarin.Google.Dagger" Version="2.46.1.2">
 		</PackageReference>
-		<PackageReference Include="Xamarin.Google.MLKit.BarcodeScanning" Version="116.1.2.5">
+		<PackageReference Include="Xamarin.Google.MLKit.BarcodeScanning" Version="117.1.0.2">
 		</PackageReference>
 	</ItemGroup>
 
