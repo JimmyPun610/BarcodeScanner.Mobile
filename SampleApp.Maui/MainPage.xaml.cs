@@ -40,10 +40,9 @@
         private async void Button4_Clicked(object sender, EventArgs e)
         {
             var storageStatus = await Permissions.CheckStatusAsync<Permissions.StorageRead>();
-            while (storageStatus != PermissionStatus.Granted)
-            {
+            if (storageStatus != PermissionStatus.Granted)
                 storageStatus = await Permissions.RequestAsync<Permissions.StorageRead>();
-            }
+
             if (storageStatus == PermissionStatus.Granted)
             {
                 var file = await MediaPicker.PickPhotoAsync();

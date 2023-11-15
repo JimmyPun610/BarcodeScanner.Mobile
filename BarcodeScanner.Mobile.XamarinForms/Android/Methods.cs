@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 using Xamarin.Essentials;
 using Xamarin.Google.MLKit.Vision.Common;
 using Android.Runtime;
-using Java.Util;
 using Android.Gms.Extensions;
+using Xamarin.Google.MLKit.Vision.Barcode.Common;
+using Bitmap = Android.Graphics.Bitmap;
+using ArrayList = Java.Util.ArrayList;
 
 namespace BarcodeScanner.Mobile
 {

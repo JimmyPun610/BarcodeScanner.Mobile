@@ -52,10 +52,9 @@ namespace SampleApp.XF
         private async void Button4_Clicked(object sender, EventArgs e)
         {
             var storageStatus = await Permissions.CheckStatusAsync<Permissions.StorageRead>();
-            while (storageStatus != PermissionStatus.Granted)
-            {
+            if (storageStatus != PermissionStatus.Granted)
                 storageStatus = await Permissions.RequestAsync<Permissions.StorageRead>();
-            }
+
             if (storageStatus == PermissionStatus.Granted)
             {
                 var file = await CrossMedia.Current.PickPhotoAsync();
@@ -65,7 +64,7 @@ namespace SampleApp.XF
                 byte[] bytes = new byte[stream.Length];
                 stream.Read(bytes, 0, bytes.Length);
                 stream.Seek(0, SeekOrigin.Begin);
-                List< BarcodeScanner.Mobile.BarcodeResult > obj = await BarcodeScanner.Mobile.Methods.ScanFromImage(bytes);
+                List<BarcodeScanner.Mobile.BarcodeResult> obj = await BarcodeScanner.Mobile.Methods.ScanFromImage(bytes);
                 if (obj.Count > 0)
                 {
                     string result = string.Empty;

@@ -9,23 +9,22 @@ namespace BarcodeScanner.Mobile
 {
     public static class Extensions
     {
-//        public static MauiAppBuilder ConfigureBarcodeScanner(this MauiAppBuilder builder)
-//        {
-//            return builder
-//                .UseMauiCompatibility()
-//                .ConfigureMauiHandlers(handlers =>
-//                {
-//#if ANDROID
-//                handlers.AddCompatibilityRenderer(typeof(CameraView), typeof(Platforms.Android.Renderer.CameraViewRenderer));
-//#elif IOS
-//                    handlers.AddCompatibilityRenderer(typeof(CameraView), typeof(Platforms.iOS.Renderer.CameraViewRenderer));
-//#endif
-//                });
-//        }
 
         public static void AddBarcodeScannerHandler(this IMauiHandlersCollection handlers)
         {
             handlers.AddHandler(typeof(ICameraView), typeof(CameraViewHandler));
         }
+
+#if ANDROID
+        public static Android.Util.Size GetTargetResolution(this CaptureQuality quality) => quality switch
+        {
+            CaptureQuality.Lowest => new Android.Util.Size(352, 288),
+            CaptureQuality.Low => new Android.Util.Size(640, 480),
+            CaptureQuality.Medium => new Android.Util.Size(1280, 720),
+            CaptureQuality.High => new Android.Util.Size(1920, 1080),
+            CaptureQuality.Highest => new Android.Util.Size(3840, 2160),
+            _ => throw new ArgumentOutOfRangeException(nameof(CaptureQuality))
+        };
+#endif
     }
 }
