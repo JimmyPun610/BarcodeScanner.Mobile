@@ -162,6 +162,22 @@ namespace BarcodeScanner.Mobile
             set => SetValue(CaptureQualityProperty, value);
         }
 
+        public static BindableProperty ZoomProperty = BindableProperty.Create(nameof(Zoom)
+            , typeof(float)
+            , typeof(CameraView)
+            , 0f
+            , defaultBindingMode: BindingMode.TwoWay
+            , propertyChanged: (bindable, value, newValue) => ((CameraView)bindable).Zoom = (float)newValue);
+
+        /// <summary>
+        /// Set the zoom level for the image.
+        /// </summary>
+        public float Zoom
+        {
+            get => (float)GetValue(ZoomProperty);
+            set => SetValue(ZoomProperty, value);
+        }
+
         public event EventHandler<OnDetectedEventArg> OnDetected;
         public void TriggerOnDetected(List<BarcodeResult> barCodeResults, byte[] imageData)
         {

@@ -75,6 +75,10 @@ namespace BarcodeScanner.Mobile.Renderer
             {
                 CameraCallback();
             }
+            else if (e.PropertyName == BarcodeScanner.Mobile.CameraView.ZoomProperty.PropertyName)
+            {
+                HandleZoom();
+            }
         }
 
         protected override PreviewView CreateNativeControl() => new PreviewView(Context);
@@ -206,8 +210,9 @@ namespace BarcodeScanner.Mobile.Renderer
                         FocusMeteringAction.FlagAf).AddPoint(aePoint,
                         FocusMeteringAction.FlagAe).Build());
                 }
-                catch (Exception ex)
-                {
+
+                catch(Exception ex) {
+
                 }
 
             }
@@ -234,7 +239,13 @@ namespace BarcodeScanner.Mobile.Renderer
             _camera.CameraControl.EnableTorch(false);
         }
 
+        private void HandleZoom()
+        {
+            if (_camera == null)
+                return;
 
+            _camera.CameraControl.SetLinearZoom(Element.Zoom);
+        }
 
         protected override void Dispose(bool disposing)
         {
