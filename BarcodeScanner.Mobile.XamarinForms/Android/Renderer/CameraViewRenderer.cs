@@ -404,7 +404,7 @@ namespace BarcodeScanner.Mobile.Renderer
             /// </summary>
             private static byte[] NV21toJPEG(byte[] nv21, int width, int height)
             {
-                MemoryStream outstran = new MemoryStream();
+                using MemoryStream outstran = new MemoryStream();
                 YuvImage yuv = new YuvImage(nv21, ImageFormatType.Nv21, width, height, null);
                 yuv.CompressToJpeg(new Android.Graphics.Rect(0, 0, width, height), 100, outstran);
                 return outstran.ToArray();

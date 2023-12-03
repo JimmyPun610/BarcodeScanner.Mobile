@@ -1,5 +1,4 @@
-﻿using CoreGraphics;
-using Foundation;
+﻿using Foundation;
 using MLKit.BarcodeScanning;
 using MLKit.Core;
 using UIKit;

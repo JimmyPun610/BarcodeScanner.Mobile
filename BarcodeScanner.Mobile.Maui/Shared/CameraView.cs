@@ -158,7 +158,7 @@ namespace BarcodeScanner.Mobile
         public static BindableProperty CaptureQualityProperty = BindableProperty.Create(nameof(CaptureQuality)
             , typeof(CaptureQuality)
             , typeof(CameraView)
-            , CaptureQuality.Medium
+            , CaptureQuality.Default
             , defaultBindingMode: BindingMode.TwoWay
             , propertyChanged: (bindable, value, newValue) => ((CameraView)bindable).CaptureQuality = (CaptureQuality)newValue);
 

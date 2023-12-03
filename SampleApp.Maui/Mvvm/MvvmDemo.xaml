@@ -10,7 +10,7 @@
     </ContentPage.BindingContext>
     <ContentPage.Content>
 
-        <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+        <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
@@ -62,10 +62,10 @@
             </StackLayout>
             <!--Fill the screen with CameraView-->
             <gv:CameraView Grid.Row="1" Grid.Column="1"
-                           OnDetectedCommand="{Binding OnDetectCommand}" 
-                           IsScanning="{Binding IsScanning}" 
-                           TorchOn="{Binding TorchOn}" VibrationOnDetected="{Binding VibrationOnDetected}" ScanInterval="{Binding ScanInterval}"
-                           x:Name="Camera" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
+                    OnDetectedCommand="{Binding OnDetectCommand}" 
+                    IsScanning="{Binding IsScanning}" 
+                    TorchOn="{Binding TorchOn}" VibrationOnDetected="{Binding VibrationOnDetected}" ScanInterval="{Binding ScanInterval}"
+                    x:Name="Camera" />
             <!--Customized Size-->
             <!--<gv:CameraView HorizontalOptions="Center" WidthRequest="200" HeightRequest="200" OnDetected="CameraView_OnDetected" Grid.Row="1"/>-->
             <StackLayout Grid.Row="2" HeightRequest="120" Grid.ColumnSpan="3">

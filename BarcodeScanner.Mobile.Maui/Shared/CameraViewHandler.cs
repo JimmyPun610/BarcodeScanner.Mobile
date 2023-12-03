@@ -34,7 +34,7 @@ namespace BarcodeScanner.Mobile
         {
         }
 
-   
+
         public CameraViewHandler(PropertyMapper mapper = null) : base(mapper ?? CameraViewMapper)
         {
         }

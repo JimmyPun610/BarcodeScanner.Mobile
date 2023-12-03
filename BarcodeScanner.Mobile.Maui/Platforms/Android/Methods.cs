@@ -1,7 +1,6 @@
 ﻿using Android.Gms.Extensions;
 using Android.Graphics;
 using Android.Runtime;
-using Java.Nio;
 using Java.Util;
 using Xamarin.Google.MLKit.Vision.Barcode.Common;
 using Xamarin.Google.MLKit.Vision.BarCode;
