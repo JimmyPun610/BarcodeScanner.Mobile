@@ -57,8 +57,6 @@
                     Grid.Row="1"
                     Grid.Column="1"
                     OnDetected="CameraView_OnDetected"
-                    PreviewHeight="200"
-                    PreviewWidth="300"
                     TorchOn="True"
                     VibrationOnDetected="True" />
             </Grid>

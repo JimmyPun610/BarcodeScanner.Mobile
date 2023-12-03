@@ -9,18 +9,6 @@ namespace BarcodeScanner.Mobile
         public static BindableProperty VibrationOnDetectedProperty { get; set; }
         public bool VibrationOnDetected { get; set; }
 
-        public static BindableProperty PreviewHeightProperty { get; set; }
-        /// <summary>
-        /// Only Android will be reflected this setting
-        /// </summary>
-        public int? PreviewHeight { get; set; }
-
-        public static BindableProperty PreviewWidthProperty { get; set; }
-        /// <summary>
-        /// Only Android will be reflected this setting
-        /// </summary>
-        public int? PreviewWidth { get; set; }
-
         public static BindableProperty RequestedFPSProperty { get; set; }
         /// <summary>
         /// Only Android will be reflected this setting
