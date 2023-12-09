@@ -2,11 +2,6 @@
 using BarcodeScanner.Mobile.Platforms.iOS;
 using CoreVideo;
 using Foundation;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UIKit;
 
 namespace BarcodeScanner.Mobile
@@ -209,21 +204,10 @@ namespace BarcodeScanner.Mobile
                     CaptureDevice = null;
                 }
 
-                var devices = AVCaptureDevice.DevicesWithMediaType(AVMediaTypes.Video.GetConstant());
-                foreach (var device in devices)
-                {
-                    if (VirtualView.CameraFacing == CameraFacing.Front &&
-                        device.Position == AVCaptureDevicePosition.Front)
-                    {
-                        CaptureDevice = device;
-                        break;
-                    }
-                    else if (VirtualView.CameraFacing == CameraFacing.Back && device.Position == AVCaptureDevicePosition.Back)
-                    {
-                        CaptureDevice = device;
-                        break;
-                    }
-                }
+                var position = VirtualView.CameraFacing == CameraFacing.Front ?
+                    AVCaptureDevicePosition.Front : AVCaptureDevicePosition.Back;
+                CaptureDevice = GetCamera(position);
+
 
                 if (CaptureDevice == null)
                 {
@@ -236,6 +220,7 @@ namespace BarcodeScanner.Mobile
                 CaptureSession.CommitConfiguration();
             }
         }
+
         public void ChangeCameraQuality()
         {
 
@@ -250,6 +235,20 @@ namespace BarcodeScanner.Mobile
             }
     
         }
-       
+
+        private AVCaptureDevice GetCamera(AVCaptureDevicePosition position)
+        {
+            if (AVCaptureDevice.GetDefaultDevice(AVCaptureDeviceType.BuiltInTripleCamera, AVMediaTypes.Video, position) != null)
+            {
+                return AVCaptureDevice.GetDefaultDevice(AVCaptureDeviceType.BuiltInTripleCamera, AVMediaTypes.Video, position);
+            }
+
+            if (AVCaptureDevice.GetDefaultDevice(AVCaptureDeviceType.BuiltInDualCamera, AVMediaTypes.Video, position) != null)
+            {
+                return AVCaptureDevice.GetDefaultDevice(AVCaptureDeviceType.BuiltInDualCamera, AVMediaTypes.Video, position);
+            }
+
+            return AVCaptureDevice.DevicesWithMediaType(AVMediaTypes.Video.GetConstant()).FirstOrDefault(d => d.Position == position);
+        }
     }
 }
