@@ -1,15 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Xamarin.Google.MLKit.Vision.Text;
+﻿using Xamarin.Google.MLKit.Vision.Text;
 using Android.Gms.Tasks;
 using Android.Util;
-using BarcodeScanner.Mobile.Platforms.Android;
 using Xamarin.Google.MLKit.Vision.Common;
 using Android.Graphics;
-using Xamarin.Google.MLKit.Vision.BarCode;
 using Android.Gms.Extensions;
 using static BarcodeScanner.Mobile.OCRResult;
 

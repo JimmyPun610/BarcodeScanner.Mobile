@@ -115,6 +115,7 @@ namespace BarcodeScanner.Mobile
             {
                 CaptureQuality.Lowest => AVCaptureSession.Preset352x288,
                 CaptureQuality.Low => AVCaptureSession.Preset640x480,
+                CaptureQuality.Default => AVCaptureSession.Preset1280x720,
                 CaptureQuality.Medium => AVCaptureSession.Preset1280x720,
                 CaptureQuality.High => AVCaptureSession.Preset1920x1080,
                 CaptureQuality.Highest => AVCaptureSession.Preset3840x2160,

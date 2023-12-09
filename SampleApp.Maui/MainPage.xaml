@@ -4,7 +4,8 @@
              x:Class="SampleApp.Maui.MainPage">
 
     <ScrollView>
-        <StackLayout>
+        <StackLayout Spacing="10"
+                     Margin="10,0">
             <!-- Place new controls here -->
             <Button Text="Scan Continously" Clicked="Button1_Clicked"/>
             <Button Text="Scan One time" Clicked="Button2_Clicked"/>

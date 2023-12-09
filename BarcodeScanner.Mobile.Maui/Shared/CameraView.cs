@@ -28,25 +28,6 @@ namespace BarcodeScanner.Mobile
             set => SetValue(VibrationOnDetectedProperty, value);
         }
 
-        public static BindableProperty PreviewHeightProperty = BindableProperty.Create(nameof(PreviewHeight), typeof(int?), typeof(CameraView), null);
-        /// <summary>
-        /// Only Android will be reflected this setting
-        /// </summary>
-        public int? PreviewHeight
-        {
-            get => (int?)GetValue(PreviewHeightProperty);
-            set => SetValue(PreviewHeightProperty, value);
-        }
-
-        public static BindableProperty PreviewWidthProperty = BindableProperty.Create(nameof(PreviewWidth), typeof(int?), typeof(CameraView), null);
-        /// <summary>
-        /// Only Android will be reflected this setting
-        /// </summary>
-        public int? PreviewWidth
-        {
-            get => (int?)GetValue(PreviewWidthProperty);
-            set => SetValue(PreviewWidthProperty, value);
-        }
 
         public static BindableProperty RequestedFPSProperty = BindableProperty.Create(nameof(RequestedFPS)
             , typeof(float?)
@@ -158,7 +139,7 @@ namespace BarcodeScanner.Mobile
         public static BindableProperty CaptureQualityProperty = BindableProperty.Create(nameof(CaptureQuality)
             , typeof(CaptureQuality)
             , typeof(CameraView)
-            , CaptureQuality.Medium
+            , CaptureQuality.Default
             , defaultBindingMode: BindingMode.TwoWay
             , propertyChanged: (bindable, value, newValue) => ((CameraView)bindable).CaptureQuality = (CaptureQuality)newValue);
 

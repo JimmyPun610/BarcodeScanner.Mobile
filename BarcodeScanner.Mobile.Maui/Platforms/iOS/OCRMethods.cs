@@ -1,5 +1,4 @@
-﻿using System;
-using Foundation;
+﻿using Foundation;
 using UIKit;
 using Vision;
 
@@ -16,7 +15,7 @@ namespace BarcodeScanner.Mobile
             if (result.GetType() != typeof(VNRecognizeTextRequest))
                 return ocrResult; //only interested in text
 
-            if (result.GetResults<VNRecognizedTextObservation>().Count() < 1)
+            if (!result.GetResults<VNRecognizedTextObservation>().Any())
                 return ocrResult;
 
             foreach(var o in result.GetResults<VNRecognizedTextObservation>())

@@ -4,23 +4,40 @@
              x:Class="SampleApp.Maui.Page1"
              xmlns:gv="clr-namespace:BarcodeScanner.Mobile;assembly=BarcodeScanner.Mobile.Maui"
              Title="Page1">
-    <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Grid.Row="0">
-            <Button x:Name="CancelButton" Text="Cancel" BackgroundColor="#FF0000" TextColor="White" Clicked="CancelButton_Clicked" HorizontalOptions="StartAndExpand"
-                        CornerRadius="0"/>
-            <Button x:Name="FlashlightButton" Text="Flashlight" BackgroundColor="#0075FF" TextColor="White" Clicked="FlashlightButton_Clicked" HorizontalOptions="CenterAndExpand"
-                        CornerRadius="0"/>
-            <Button x:Name="SwitchCameraButton" Text="Switch Camera" BackgroundColor="Brown" TextColor="White" Clicked="SwitchCameraButton_Clicked" HorizontalOptions="EndAndExpand"
-                        CornerRadius="0"/>
+        <StackLayout Orientation="Horizontal" 
+                     Grid.Row="0">
+            <Button Text="Cancel" 
+                    BackgroundColor="#FF0000" 
+                    TextColor="White"
+                    Clicked="CancelButton_Clicked"
+                    HorizontalOptions="StartAndExpand"
+                    CornerRadius="0"/>
+            <Button Text="Flashlight"
+                    BackgroundColor="#0075FF"
+                    TextColor="White"
+                    Clicked="FlashlightButton_Clicked"
+                    HorizontalOptions="CenterAndExpand"
+                    CornerRadius="0"/>
+
+            <Button Text="Switch Camera"
+                    BackgroundColor="Brown"
+                    TextColor="White"
+                    Clicked="SwitchCameraButton_Clicked" 
+                    HorizontalOptions="EndAndExpand"
+                    CornerRadius="0"/>
         </StackLayout>
         <!--Fill the screen with CameraView-->
-        <gv:CameraView HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" OnDetected="CameraView_OnDetected" Grid.Row="1"
-                           TorchOn="False" VibrationOnDetected="False" ScanInterval="50" x:Name="Camera"/>
+        <gv:CameraView OnDetected="CameraView_OnDetected" 
+                       Grid.Row="1"
+                       TorchOn="False" 
+                       VibrationOnDetected="False" 
+                       ScanInterval="50" x:Name="Camera"/>
 
         <!--IgnorePixelScaling: Make sure it is set to true. Ensures density is properly calculated-->
         <!--<skia:SKCanvasView
@@ -33,7 +50,10 @@
 
         <!--Customized Size-->
         <!--<gv:CameraView HorizontalOptions="Center" WidthRequest="200" HeightRequest="200" OnDetected="CameraView_OnDetected" Grid.Row="1"/>-->
-        <Label Text="Scan QRCode" FontSize="Medium" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Center" Grid.Row="2"
-                   TextColor="Red"/>
+        <Label Text="Scan QRCode"
+               FontSize="Medium" 
+               HorizontalTextAlignment="Center" 
+               Grid.Row="2"
+               TextColor="Red"/>
     </Grid>
 </ContentPage>

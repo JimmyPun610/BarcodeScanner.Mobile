@@ -1,12 +1,7 @@
 ﻿using AndroidX.Camera.Core;
 using AndroidX.Lifecycle;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace BarcodeScanner.Mobile.Platforms.Android
+namespace BarcodeScanner.Mobile
 {
     internal class TorchStateObserver : Java.Lang.Object, IObserver
     {

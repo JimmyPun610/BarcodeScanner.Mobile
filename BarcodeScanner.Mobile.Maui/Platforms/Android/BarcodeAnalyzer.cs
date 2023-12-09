@@ -1,4 +1,3 @@
-using Android.App;
 using Android.Graphics;
 using Android.Runtime;
 using Android.Util;
@@ -10,7 +9,7 @@ using Xamarin.Google.MLKit.Vision.Text;
 using static BarcodeScanner.Mobile.OCRMethods;
 using Size = Android.Util.Size;
 
-namespace BarcodeScanner.Mobile.Platforms.Android
+namespace BarcodeScanner.Mobile
 {
     public class BarcodeAnalyzer : Java.Lang.Object, ImageAnalysis.IAnalyzer
     {
@@ -68,7 +67,7 @@ namespace BarcodeScanner.Mobile.Platforms.Android
                     if (!_cameraView.IsScanning)
                         return;
 
-                    var imageData = new byte[0];
+                    var imageData = Array.Empty<byte>();
                     if (_cameraView.ReturnBarcodeImage)
                     {
                         imageData = NV21toJPEG(YUV_420_888toNV21(mediaImage), mediaImage.Width, mediaImage.Height);
@@ -124,7 +123,7 @@ namespace BarcodeScanner.Mobile.Platforms.Android
         /// </summary>
         private static byte[] NV21toJPEG(byte[] nv21, int width, int height)
         {
-            MemoryStream outstran = new MemoryStream();
+            using MemoryStream outstran = new MemoryStream();
             YuvImage yuv = new YuvImage(nv21, ImageFormatType.Nv21, width, height, null);
             yuv.CompressToJpeg(new global::Android.Graphics.Rect(0, 0, width, height), 100, outstran);
             return outstran.ToArray();

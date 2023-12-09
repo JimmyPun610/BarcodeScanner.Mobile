@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace BarcodeScanner.Mobile
+﻿namespace BarcodeScanner.Mobile
 {
     public class OnDetectedEventArg : EventArgs
     {

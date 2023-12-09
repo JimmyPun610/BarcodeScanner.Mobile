@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
+﻿using System.Windows.Input;
 
 namespace BarcodeScanner.Mobile
 {
@@ -13,18 +8,6 @@ namespace BarcodeScanner.Mobile
         public ICommand OnDetectedCommand { get; set; }
         public static BindableProperty VibrationOnDetectedProperty { get; set; }
         public bool VibrationOnDetected { get; set; }
-
-        public static BindableProperty PreviewHeightProperty { get; set; }
-        /// <summary>
-        /// Only Android will be reflected this setting
-        /// </summary>
-        public int? PreviewHeight { get; set; }
-
-        public static BindableProperty PreviewWidthProperty { get; set; }
-        /// <summary>
-        /// Only Android will be reflected this setting
-        /// </summary>
-        public int? PreviewWidth { get; set; }
 
         public static BindableProperty RequestedFPSProperty { get; set; }
         /// <summary>
