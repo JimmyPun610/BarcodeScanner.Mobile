@@ -1,12 +1,10 @@
-using Android.Graphics;
 using Android.Runtime;
 using Android.Util;
 using AndroidX.Camera.Core;
-using Java.Nio;
+using AndroidX.Camera.Core.Internal.Utils;
 using Xamarin.Google.MLKit.Vision.BarCode;
 using Xamarin.Google.MLKit.Vision.Common;
 using Xamarin.Google.MLKit.Vision.Text;
-using static BarcodeScanner.Mobile.OCRMethods;
 using Size = Android.Util.Size;
 
 namespace BarcodeScanner.Mobile
@@ -69,10 +67,7 @@ namespace BarcodeScanner.Mobile
 
                     var imageData = Array.Empty<byte>();
                     if (_cameraView.ReturnBarcodeImage)
-                    {
-                        imageData = NV21toJPEG(YUV_420_888toNV21(mediaImage), mediaImage.Width, mediaImage.Height);
-                        imageData = RotateJpeg(imageData, GetImageRotationCorrectionDegrees());
-                    }
+                        imageData = ImageUtil.YuvImageToJpegByteArray(proxy, new Android.Graphics.Rect(0, 0, mediaImage.Width, mediaImage.Height), 100, GetImageRotationCorrectionDegrees());
 
                     _cameraView.IsScanning = false;
                     _cameraView.TriggerOnDetected(ocrFinalResult, barcodeFinalResult, imageData);
@@ -92,56 +87,6 @@ namespace BarcodeScanner.Mobile
             {
                 SafeCloseImageProxy(proxy);
             }
-        }
-
-        /// <summary>
-        /// https://stackoverflow.com/a/45926852
-        /// </summary>
-        private static byte[] YUV_420_888toNV21(global::Android.Media.Image image)
-        {
-            byte[] nv21;
-            ByteBuffer yBuffer = image.GetPlanes()[0].Buffer;
-            ByteBuffer uBuffer = image.GetPlanes()[1].Buffer;
-            ByteBuffer vBuffer = image.GetPlanes()[2].Buffer;
-
-            int ySize = yBuffer.Remaining();
-            int uSize = uBuffer.Remaining();
-            int vSize = vBuffer.Remaining();
-
-            nv21 = new byte[ySize + uSize + vSize];
-
-            //U and V are swapped
-            yBuffer.Get(nv21, 0, ySize);
-            vBuffer.Get(nv21, ySize, vSize);
-            uBuffer.Get(nv21, ySize + vSize, uSize);
-
-            return nv21;
-        }
-
-        /// <summary>
-        /// https://stackoverflow.com/a/45926852
-        /// </summary>
-        private static byte[] NV21toJPEG(byte[] nv21, int width, int height)
-        {
-            using MemoryStream outstran = new MemoryStream();
-            YuvImage yuv = new YuvImage(nv21, ImageFormatType.Nv21, width, height, null);
-            yuv.CompressToJpeg(new global::Android.Graphics.Rect(0, 0, width, height), 100, outstran);
-            return outstran.ToArray();
-        }
-
-        /// <summary>
-        /// https://stackoverflow.com/a/44323834
-        /// </summary>
-        private static byte[] RotateJpeg(byte[] jpegData, int rotationDegrees)
-        {
-            var bmp = BitmapFactory.DecodeByteArray(jpegData, 0, jpegData.Length);
-            var matrix = new Matrix();
-            matrix.PostRotate(rotationDegrees);
-            bmp = Bitmap.CreateBitmap(bmp, 0, 0, bmp.Width, bmp.Height, matrix, true);
-
-            var ms = new MemoryStream();
-            bmp.Compress(Bitmap.CompressFormat.Jpeg, 100, ms);
-            return ms.ToArray();
         }
 
         private static int GetImageRotationCorrectionDegrees()
