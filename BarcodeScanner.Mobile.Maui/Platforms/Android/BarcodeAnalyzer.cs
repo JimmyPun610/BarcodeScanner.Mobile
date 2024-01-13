@@ -5,6 +5,7 @@ using AndroidX.Camera.Core.Internal.Utils;
 using Xamarin.Google.MLKit.Vision.BarCode;
 using Xamarin.Google.MLKit.Vision.Common;
 using Xamarin.Google.MLKit.Vision.Text;
+using static BarcodeScanner.Mobile.OCRMethods;
 using Size = Android.Util.Size;
 
 namespace BarcodeScanner.Mobile
