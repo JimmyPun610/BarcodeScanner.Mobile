@@ -111,6 +111,17 @@ namespace SampleApp.XF.Mvvm
             }
         }
 
+        private float _zoom { get; set; }
+        public float Zoom
+        {
+            get { return _zoom; }
+            set
+            {
+                _zoom = value;
+                OnPropertyChanged(nameof(Zoom));
+            }
+        }
+
         public MvvmDemoViewModel()
         {
             this.TorchOn = true;

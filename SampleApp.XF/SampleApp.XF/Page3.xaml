@@ -13,6 +13,7 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
             <ScrollView Grid.Row="0" Orientation="Horizontal">
             <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
@@ -28,11 +29,20 @@
             </ScrollView>
             <!--Fill the screen with CameraView-->
             <gv:CameraView HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" OnDetected="CameraView_OnDetected" Grid.Row="1"
-                           TorchOn="True" VibrationOnDetected="True" IsScanning="False" CaptureQuality="High" x:Name="Camera"/>
+                           TorchOn="True" VibrationOnDetected="True" IsScanning="False" CaptureQuality="High" x:Name="Camera" Zoom="{Binding Source={Reference ZoomSlider}, Path=Value}"/>
             <!--Customized Size-->
             <!--<gv:CameraView HorizontalOptions="Center" WidthRequest="200" HeightRequest="200" OnDetected="CameraView_OnDetected" Grid.Row="1"/>-->
             <Label Text="Scan QRCode" FontSize="Medium" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Center" Grid.Row="2"
                    TextColor="Red"/>
+
+            <StackLayout Grid.Row="3">
+                <Label Text="Zoom" TextColor="White" />
+                <Slider
+                    x:Name="ZoomSlider"
+                    HeightRequest="50"
+                    Maximum="1"
+                    Minimum="0" />
+            </StackLayout>
         </Grid>
 
     </ContentPage.Content>
