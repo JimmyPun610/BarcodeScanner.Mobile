@@ -14,6 +14,7 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="30"/>
@@ -64,12 +65,22 @@
                            OnDetectedCommand="{Binding OnDetectCommand}" 
                            IsScanning="{Binding IsScanning}" 
                            TorchOn="{Binding TorchOn}" VibrationOnDetected="{Binding VibrationOnDetected}" ScanInterval="{Binding ScanInterval}"
-                           x:Name="Camera" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
+                           x:Name="Camera" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Zoom="{Binding Zoom}"/>
             <!--Customized Size-->
             <!--<gv:CameraView HorizontalOptions="Center" WidthRequest="200" HeightRequest="200" OnDetected="CameraView_OnDetected" Grid.Row="1"/>-->
             <StackLayout Grid.Row="2" HeightRequest="120" Grid.ColumnSpan="3">
                 <Label Text="Result" TextColor="Red"></Label>
                 <Label Text="{Binding Result}" TextColor="Black"></Label>
+            </StackLayout>
+
+            <StackLayout Grid.Row="3" Grid.ColumnSpan="3">
+                <Label Text="Zoom" TextColor="White" />
+                <Slider
+                    x:Name="ZoomSlider"
+                    HeightRequest="50"
+                    Value="{Binding Zoom}"
+                    Maximum="1"
+                    Minimum="0" />
             </StackLayout>
         </Grid>
     </ContentPage.Content>

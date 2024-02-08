@@ -17,6 +17,7 @@ namespace BarcodeScanner.Mobile
         public static PropertyMapper<ICameraView, CameraViewHandler> CameraViewMapper = new()
         {
             [nameof(ICameraView.TorchOn)] = (handler, virtualView) => handler.HandleTorch(),
+            [nameof(ICameraView.Zoom)] = (handler, virtualView) => handler.HandleZoom(),
 #if ANDROID
             [nameof(ICameraView.CameraFacing)] = (handler, virtualView) => handler.CameraCallback(),
             [nameof(ICameraView.CaptureQuality)] = (handler, virtualView) => handler.CameraCallback()

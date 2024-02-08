@@ -13,6 +13,7 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
             <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Grid.Row="0">
                 <Button x:Name="CancelButton" Text="Cancel" BackgroundColor="#FF0000" TextColor="White" Clicked="CancelButton_Clicked" HorizontalOptions="StartAndExpand"
@@ -24,7 +25,7 @@
             </StackLayout>
             <!--Fill the screen with CameraView-->
             <gv:CameraView HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" OnDetected="CameraView_OnDetected" Grid.Row="1"
-                           TorchOn="False" VibrationOnDetected="False" ScanInterval="50" x:Name="Camera"/>
+                           TorchOn="False" VibrationOnDetected="False" ScanInterval="50" x:Name="Camera" Zoom="{Binding Source={Reference ZoomSlider}, Path=Value}"/>
 
             <!--IgnorePixelScaling: Make sure it is set to true. Ensures density is properly calculated-->
             <!--<skia:SKCanvasView
@@ -39,6 +40,15 @@
             <!--<gv:CameraView HorizontalOptions="Center" WidthRequest="200" HeightRequest="200" OnDetected="CameraView_OnDetected" Grid.Row="1"/>-->
             <Label Text="Scan QRCode" FontSize="Medium" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Center" Grid.Row="2"
                    TextColor="Red"/>
+
+            <StackLayout Grid.Row="3">
+                <Label Text="Zoom" TextColor="White" />
+                <Slider
+                    x:Name="ZoomSlider"
+                    HeightRequest="50"
+                    Maximum="1"
+                    Minimum="0" />
+            </StackLayout>
         </Grid>
      
     </ContentPage.Content>

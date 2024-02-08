@@ -14,7 +14,7 @@ namespace BarcodeScanner.Mobile.Renderer
         protected override void OnElementChanged(ElementChangedEventArgs<CameraView> e)
         {
             if (Runtime.Arch == Arch.SIMULATOR) return;
-            
+
             base.OnElementChanged(e);
             if (e.OldElement != null || Element == null)
             {
@@ -38,7 +38,7 @@ namespace BarcodeScanner.Mobile.Renderer
         protected override void OnElementPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             if (Runtime.Arch == Arch.SIMULATOR) return;
-            
+
             base.OnElementPropertyChanged(sender, e);
             if (e.PropertyName == CameraView.TorchOnProperty.PropertyName)
             {
@@ -51,6 +51,10 @@ namespace BarcodeScanner.Mobile.Renderer
             else if (e.PropertyName == CameraView.CaptureQualityProperty.PropertyName)
             {
                 liveCameraStream.ChangeSessionPreset(Element.CaptureQuality);
+            }
+            else if (e.PropertyName == CameraView.ZoomProperty.PropertyName)
+            {
+                liveCameraStream.SetZoom(Element.Zoom);
             }
         }
 

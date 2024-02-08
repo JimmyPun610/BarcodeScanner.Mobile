@@ -23,13 +23,13 @@ namespace BarcodeScanner.Mobile
         protected override UICameraPreview CreatePlatformView()
         {
             CaptureSession = new AVCaptureSession
-            { 
+            {
                 SessionPreset = AVCaptureSession.Preset640x480
             };
 
             VideoPreviewLayer = new AVCaptureVideoPreviewLayer(CaptureSession);
             VideoPreviewLayer.VideoGravity = AVLayerVideoGravity.ResizeAspectFill;
-          
+
             _uiCameraPerview = new UICameraPreview(VideoPreviewLayer);
             return _uiCameraPerview;
         }
@@ -41,7 +41,7 @@ namespace BarcodeScanner.Mobile
 
             ChangeCameraFacing();
             ChangeCameraQuality();
-            
+
             if (VideoDataOutput == null)
             {
                 VideoDataOutput = new AVCaptureVideoDataOutput
@@ -97,7 +97,7 @@ namespace BarcodeScanner.Mobile
                     CaptureSession.StopRunning();
                 }
 
-                if(VideoDataOutput != null)
+                if (VideoDataOutput != null)
                 {
                     VideoDataOutput.Dispose();
                     VideoDataOutput = null;
@@ -108,7 +108,7 @@ namespace BarcodeScanner.Mobile
 
             }
         }
-    
+
         NSString GetCaptureSessionResolution(CaptureQuality captureQuality)
         {
             return captureQuality switch
@@ -124,7 +124,8 @@ namespace BarcodeScanner.Mobile
         }
         public void SetFocusMode(AVCaptureFocusMode focusMode = AVCaptureFocusMode.ContinuousAutoFocus)
         {
-            Microsoft.Maui.Controls.Application.Current.Dispatcher.Dispatch(() => {
+            Microsoft.Maui.Controls.Application.Current.Dispatcher.Dispatch(() =>
+            {
                 var videoDevice = AVCaptureDevice.GetDefaultDevice(AVFoundation.AVMediaTypes.Video);
                 if (videoDevice == null) return;
 
@@ -183,6 +184,48 @@ namespace BarcodeScanner.Mobile
             });
         }
 
+        private void HandleZoom()
+        {
+            Application.Current.Dispatcher.Dispatch(() =>
+            {
+                if (CaptureDevice == null)
+                    return;
+
+                if (CaptureDevice.LockForConfiguration(out NSError error))
+                {
+                    // Set the desired zoom factor
+                    // We need to translate the zoomRequest because the Android implementation uses the SetLinearZoom which accepts values in range of 0.0 - 1.0.
+                    // We should consider to change or implement an alternative zoom option for consistent zoom value setting in both Android and iOS platforms
+                    // in the form of scaling by using in the method SetZoomRatio() in Android which accepts the same values as VideoZoomFactor here
+                    CaptureDevice.VideoZoomFactor = TranslateZoom(VirtualView.Zoom);
+
+                    // Apply the configuration
+                    CaptureDevice.UnlockForConfiguration();
+                }
+            });
+        }
+
+        /// <summary>
+        /// Translates a zoom request of the range 0.0 - 1.0 to iOS VideoZoomFactor acceptable value of scale x1 - x4.
+        /// </summary>
+        /// <param name="zoomRequest"></param>
+        /// <param name="maxZoomFactor"></param>
+        /// <returns></returns>
+        private float TranslateZoom(float zoomRequest)
+        {
+            float zoom = 1F;
+
+            // For values 0.00 - 0.49 apply zoom of x1 - x2 for better experience
+            if (zoomRequest < 0.5F)
+                zoom = (zoomRequest + 0.5F) * 2F;
+
+            // For values of 0.50 - 1.00 apply zoom of x2 - x4
+            if (zoomRequest >= 0.5F)
+                zoom = zoomRequest * 4;
+
+            return zoom;
+        }
+
         public void ChangeCameraFacing()
         {
 
@@ -234,7 +277,7 @@ namespace BarcodeScanner.Mobile
 
                 CaptureSession.CommitConfiguration();
             }
-    
+
         }
 
         private AVCaptureDevice GetCamera(AVCaptureDevicePosition position)
