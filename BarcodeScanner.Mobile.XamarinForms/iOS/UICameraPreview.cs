@@ -483,6 +483,46 @@ namespace BarcodeScanner.Mobile
             }
         }
 
+        public void SetZoom(float zoomRequest)
+        {
+            var captureDevice = CaptureSession?.Inputs
+                        .OfType<AVCaptureDeviceInput>()
+                        .FirstOrDefault()?
+                        .Device;
+
+            if (captureDevice != null && captureDevice.LockForConfiguration(out NSError error))
+            {
+                // Set the desired zoom factor
+                // We need to translate the zoomRequest because the Android implementation uses the SetLinearZoom which accepts values in range of 0.0 - 1.0.
+                // We should consider to change or implement an alternative zoom option for consistent zoom value setting in both Android and iOS platforms
+                // in the form of scaling by using in the method SetZoomRatio() in Android which accepts the same values as VideoZoomFactor here
+                captureDevice.VideoZoomFactor = TranslateZoom(zoomRequest);
+
+                // Apply the configuration
+                captureDevice.UnlockForConfiguration();
+            }
+        }
+
+        /// <summary>
+        /// Translates a zoom request of the range 0.0 - 1.0 to iOS VideoZoomFactor acceptable value of scale x1 - x4.
+        /// </summary>
+        /// <param name="zoomRequest"></param>
+        /// <param name="maxZoomFactor"></param>
+        /// <returns></returns>
+        private float TranslateZoom(float zoomRequest)
+        {
+            float zoom = 1F;
+
+            // For values 0.00 - 0.49 apply zoom of x1 - x2 for better experience
+            if (zoomRequest < 0.5F)
+                zoom = (zoomRequest + 0.5F) * 2F;
+
+            // For values of 0.50 - 1.00 apply zoom of x2 - x4
+            if (zoomRequest >= 0.5F)
+                zoom = zoomRequest * 4;
+
+            return zoom;
+        }
     }
 }
 

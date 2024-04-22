@@ -163,6 +163,14 @@ namespace BarcodeScanner.Mobile
             _camera.CameraControl.EnableTorch(VirtualView.TorchOn);
         }
 
+        private void HandleZoom()
+        {
+            if (_camera == null)
+                return;
+
+            _camera.CameraControl.SetLinearZoom(VirtualView.Zoom);
+        }
+
         private void DisableTorchIfNeeded()
         {
             if (_camera == null || !_camera.CameraInfo.HasFlashUnit || (int)_camera.CameraInfo.TorchState?.Value != TorchState.On)

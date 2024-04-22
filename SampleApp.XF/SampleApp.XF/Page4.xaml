@@ -8,6 +8,7 @@
             <RowDefinition Height="100"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <FlexLayout Grid.Row="0" Wrap="Wrap" Direction="Row" JustifyContent="SpaceEvenly" AlignItems="Center">
             <Button Text="Cancel" BackgroundColor="#FF0000" TextColor="White" Clicked="CancelButton_Clicked" />
@@ -18,10 +19,19 @@
         </FlexLayout>
         <!--Fill the screen with CameraView-->
         <gv:CameraView OnDetected="CameraView_OnDetected" Grid.Row="1"
-                       TorchOn="True" VibrationOnDetected="True" IsScanning="False" x:Name="Camera"/>
+                       TorchOn="True" VibrationOnDetected="True" IsScanning="False" x:Name="Camera" Zoom="{Binding Source={Reference ZoomSlider}, Path=Value}"/>
         <!--Customized Size-->
         <!--<gv:CameraView HorizontalOptions="Center" WidthRequest="200" HeightRequest="200" OnDetected="CameraView_OnDetected" Grid.Row="1"/>-->
         <Label Text="Scan QRCode" FontSize="Medium" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Center" Grid.Row="2"
                TextColor="Red"/>
+
+        <StackLayout Grid.Row="3">
+            <Label Text="Zoom" TextColor="White" />
+            <Slider
+                    x:Name="ZoomSlider"
+                    HeightRequest="50"
+                    Maximum="1"
+                    Minimum="0" />
+        </StackLayout>
     </Grid>
 </ContentPage>
