@@ -19,9 +19,9 @@
 		<RootNamespace>BarcodeScanner.Mobile.Maui</RootNamespace>
 
 		<Product></Product>
-		<AssemblyVersion>8.0.0.1</AssemblyVersion>
-		<AssemblyFileVersion>8.0.0.1</AssemblyFileVersion>
-		<Version>8.0.0.1</Version>
+		<AssemblyVersion>8.0.0.2</AssemblyVersion>
+		<AssemblyFileVersion>8.0.0.2</AssemblyFileVersion>
+		<Version>8.0.0.2</Version>
 		<NeutralLanguage>en</NeutralLanguage>
 
 		<!--Version of C# to use -->
@@ -38,6 +38,7 @@
 		<PackageReleaseNotes>1. Merged pull request #213, #216 </PackageReleaseNotes>
 		<Copyright>Copyright 2023</Copyright>
 		<PackOnBuild>true</PackOnBuild>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
 	</PropertyGroup>
 
 
@@ -84,6 +85,7 @@
 	  <Compile Update="Platforms\Android\TorchStateObserver.cs">
 	    <ExcludeFromCurrentConfiguration>false</ExcludeFromCurrentConfiguration>
 	  </Compile>
+		<None Include="..\README.md" Pack="true" PackagePath="\"/>
 	</ItemGroup>
 
 	<ItemGroup>

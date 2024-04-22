@@ -11,9 +11,9 @@
 		<RootNamespace>BarcodeScanner.Mobile.XamarinForms</RootNamespace>
 
 		<Product></Product>
-		<AssemblyVersion>6.3.0.30</AssemblyVersion>
-		<AssemblyFileVersion>6.3.0.30</AssemblyFileVersion>
-		<Version>6.3.0.30</Version>
+		<AssemblyVersion>6.3.0.31</AssemblyVersion>
+		<AssemblyFileVersion>6.3.0.31</AssemblyFileVersion>
+		<Version>6.3.0.31</Version>
 		<NeutralLanguage>en</NeutralLanguage>
 
 		<!--Don't auto add files for me, I will tell you -->
@@ -38,6 +38,7 @@
 		<PackageReleaseNotes>1. Merge pull request 2. Update to MonoAndroid13</PackageReleaseNotes>
 		<Copyright>Copyright 2023</Copyright>
 		<PackOnBuild>true</PackOnBuild>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -46,6 +47,7 @@
 
 		<!-- We will compile anything ending in .shared.cs  You can change this -->
 		<Compile Include="Shared\*.cs" />
+		<None Include="..\README.md" Pack="true" PackagePath="\"/>
 
 		<PackageReference Include="Xamarin.Build.Download" Version="0.11.4" />
 		<PackageReference Include="Xamarin.Forms" Version="5.0.0.2612" />
