@@ -1,11 +1,11 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
 		<TargetFrameworks>net8.0;net8.0-android;net8.0-ios;</TargetFrameworks>
 		<!-- Uncomment to also build the tizen app. You will need to install tizen by following this: https://github.com/Samsung/Tizen.NET -->
 		<!-- <TargetFrameworks>$(TargetFrameworks);net6.0-tizen</TargetFrameworks> -->
 		<UseMaui>true</UseMaui>
-		<MauiVersion>8.0.3</MauiVersion>
+		<MauiVersion>8.0.21</MauiVersion>
 		<SingleProject>true</SingleProject>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">14.0</SupportedOSPlatformVersion>
@@ -19,9 +19,9 @@
 		<RootNamespace>BarcodeScanner.Mobile.Maui</RootNamespace>
 
 		<Product></Product>
-		<AssemblyVersion>8.0.0.2</AssemblyVersion>
-		<AssemblyFileVersion>8.0.0.2</AssemblyFileVersion>
-		<Version>8.0.0.2</Version>
+		<AssemblyVersion>8.0.21</AssemblyVersion>
+		<AssemblyFileVersion>8.0.21</AssemblyFileVersion>
+		<Version>8.0.21</Version>
 		<NeutralLanguage>en</NeutralLanguage>
 
 		<!--Version of C# to use -->
@@ -50,23 +50,21 @@
 		</PackageReference>
 		<PackageReference Include="Xamarin.AndroidX.Camera.View" Version="1.3.0.1">
 		</PackageReference>
-		<PackageReference Include="Xamarin.Google.MLKit.BarcodeScanning" Version="117.2.0.2">
+		<PackageReference Include="Xamarin.Google.MLKit.BarcodeScanning" Version="117.2.0.4">
 		</PackageReference>
-		<PackageReference Include="Xamarin.GooglePlayServices.MLKit.Text.Recognition" Version="119.0.0.4">			
+		<PackageReference Include="Xamarin.GooglePlayServices.MLKit.Text.Recognition" Version="119.0.0.6">			
 		</PackageReference>
 	</ItemGroup>
 
 	<ItemGroup Condition="( '$(TargetFramework)' == 'net8.0-ios' )">
 		<PackageReference Include="System.Numerics.Vectors" Version="4.5.0">
 		</PackageReference>
-		<PackageReference Include="Xamarin.Firebase.iOS.Core" Version="8.10.0.3">
+		<PackageReference Include="Xamarin.MLKit.iOS.BarcodeScanning.JimmyPun610" Version="2.2.0.1">
 		</PackageReference>
-		<PackageReference Include="Xamarin.MLKit.iOS.BarcodeScanning.JimmyPun610" Version="1.6.0.1">
-		</PackageReference>
-		<PackageReference Include="Xamarin.MLKit.iOS.Core.JimmyPun610" Version="5.0.0.1">
-		</PackageReference>
-	</ItemGroup>
+		<PackageReference Include="Xamarin.MLKit.iOS.Core.JimmyPun610" Version="8.0.0" />
+		<BundleResource Include="Platforms\iOS\PrivacyInfo.xcprivacy" LogicalName="PrivacyInfo.xcprivacy" />
 
+	</ItemGroup>
 	<ItemGroup>
 		<!-- We will compile anything ending in .shared.cs  You can change this -->
 		<PackageReference Include="Xamarin.Build.Download" Version="0.11.4" />
