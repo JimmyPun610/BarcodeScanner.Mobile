@@ -3,14 +3,9 @@ echo "##[warning][Post-clone Action] - Lets do some Post clone transformations..
 # Calling main script in solution root
 # This post clone script is to fix issue on XCode 15
 # https://github.com/microsoft/appcenter/issues/2610#issuecomment-1910734646
-echo $APPCENTER_SOURCE_DIRECTORY/SampleApp.XF/SampleApp.XF.Android/SampleApp.XF.Android.csproj
-echo $APPCENTER_SOURCE_DIRECTORY/BarcodeScanner.Mobile.Maui/BarcodeScanner.Mobile.Maui.csproj
-echo $APPCENTER_SOURCE_DIRECTORY/SampleApp.Maui/SampleApp.Maui.csproj
+ROOT_FOLDER=$APPCENTER_SOURCE_DIRECTORY/
 
-echo $APPCENTER_SOURCE_DIRECTORY/BarcodeScanner.Mobile.sln
-
-dotnet sln "$APPCENTER_SOURCE_DIRECTORY/BarcodeScanner.Mobile.sln" "list"
-
-dotnet sln $APPCENTER_SOURCE_DIRECTORY/BarcodeScanner.Mobile.sln remove $APPCENTER_SOURCE_DIRECTORY/SampleApp.XF/SampleApp.XF.Android/SampleApp.XF.Android.csproj
-dotnet sln $APPCENTER_SOURCE_DIRECTORY/BarcodeScanner.Mobile.sln remove $APPCENTER_SOURCE_DIRECTORY/BarcodeScanner.Mobile.Maui/BarcodeScanner.Mobile.Maui.csproj
-dotnet sln $APPCENTER_SOURCE_DIRECTORY/BarcodeScanner.Mobile.sln remove $APPCENTER_SOURCE_DIRECTORY/SampleApp.Maui/SampleApp.Maui.csproj
+dotnet sln $ROOT_FOLDER/BarcodeScanner.Mobile.sln remove $ROOT_FOLDER/BarcodeScanner.Mobile.Maui/BarcodeScanner.Mobile.Maui.csproj
+dotnet sln $ROOT_FOLDER/BarcodeScanner.Mobile.sln remove $ROOT_FOLDER/OCR.Mobile.Maui/OCR.Mobile.Maui.csproj
+dotnet sln $ROOT_FOLDER/BarcodeScanner.Mobile.sln remove $ROOT_FOLDER/SampleApp.Maui/SampleApp.Maui.csproj
+dotnet sln $ROOT_FOLDER/BarcodeScanner.Mobile.sln remove $ROOT_FOLDER/SampleApp.XF/SampleApp.XF.Android/SampleApp.XF.Android.csproj
