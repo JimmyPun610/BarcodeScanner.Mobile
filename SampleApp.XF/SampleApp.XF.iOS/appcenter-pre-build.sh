@@ -10,3 +10,4 @@ then
     echo "##[section][Pre-Build Action] - Info.plist File content:" 
     cat $INFO_PLIST_FILE 
     echo "##[section][Pre-Build Action] - Info.plist EOF" 
+fi
