@@ -27,7 +27,7 @@ namespace SampleApp.XF.iOS
 
 
             BarcodeScanner.Mobile.iOS.Initializer.Init();
-            Firebase.Core.App.Configure();
+            //Firebase.Core.App.Configure();
 
             return base.FinishedLaunching(app, options);
         }
