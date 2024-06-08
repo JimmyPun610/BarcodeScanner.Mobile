@@ -59,9 +59,8 @@
 	<ItemGroup Condition="( '$(TargetFramework)' == 'net8.0-ios' )">
 		<PackageReference Include="System.Numerics.Vectors" Version="4.5.0">
 		</PackageReference>
-		<PackageReference Include="AdamE.MLKit.iOS.BarcodeScanning.JimmyPun610" Version="5.0.0">
+		<PackageReference Include="AdamE.MLKit.iOS.BarcodeScanning.JimmyPun610" Version="5.0.1">
 		</PackageReference>
-		<PackageReference Include="AdamE.MLKit.iOS.Core.JimmyPun610" Version="6.0.0" />
 		<BundleResource Include="Platforms\iOS\PrivacyInfo.xcprivacy" LogicalName="PrivacyInfo.xcprivacy" />
 
 	</ItemGroup>
