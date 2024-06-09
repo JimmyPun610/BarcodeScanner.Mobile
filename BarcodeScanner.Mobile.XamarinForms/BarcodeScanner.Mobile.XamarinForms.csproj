@@ -1,10 +1,11 @@
-<?xml version="1.0" encoding="utf-7"?>
+﻿<?xml version="1.0" encoding="utf-7"?>
 <Project Sdk="MSBuild.Sdk.Extras/3.0.44">
 
 	<PropertyGroup>
 
 		<!--Update with your target such as: Xamarin.iOS10 or MonoAndroid80 or Xamarin.Mac20-->
 		<TargetFrameworks>Xamarin.iOS10;MonoAndroid13.0;netstandard2.0</TargetFrameworks>
+
 		<!--Assembly and Namespace info -->
 		<id>BarcodeScanner.Mobile.XamarinForms</id>
 		<AssemblyName>BarcodeScanner.Mobile.XamarinForms</AssemblyName>
@@ -54,16 +55,16 @@
 		<PackageReference Include="Xamarin.Essentials" Version="1.8.1" />
 
 	</ItemGroup>
-	
+
 	<ItemGroup Condition=" $(TargetFramework.StartsWith('netstandard')) ">
 		<Compile Include="NetStandard\*.cs" />
-	
+
 	</ItemGroup>
 
 	<ItemGroup Condition="( '$(TargetFramework)' == 'MonoAndroid13.0' )">
 		<Compile Include="Android\*.cs" />
 		<Compile Include="Android\**\*.cs" />
-	
+
 		<PackageReference Include="Xamarin.AndroidX.MediaRouter" Version="1.6.0">
 		</PackageReference>
 		<PackageReference Include="Xamarin.AndroidX.Lifecycle.LiveData" Version="2.6.2.1">
@@ -91,7 +92,7 @@
 		<PackageReference Include="Xamarin.AndroidX.Collection" Version="1.4.0.2" />
 		<PackageReference Include="Xamarin.AndroidX.Collection.Ktx" Version="1.4.0.1" />
 		<PackageReference Include="Xamarin.AndroidX.Collection.Jvm" Version="1.4.0.1" />
-		
+
 	</ItemGroup>
 	<ItemGroup Condition=" $(TargetFramework.StartsWith('Xamarin.iOS')) ">
 		<Compile Include="iOS\*.cs" />
@@ -100,8 +101,7 @@
 
 		<PackageReference Include="System.Numerics.Vectors" Version="4.5.0">
 		</PackageReference>
-		<PackageReference Include="AdamE.MLKit.iOS.BarcodeScanning.JimmyPun610" Version="5.0.1">
-		</PackageReference> 
+		<PackageReference Include="AdamE.MLKit.iOS.BarcodeScanning" Version="5.0.0-alpha1">
 		</PackageReference>
 	</ItemGroup>
 
