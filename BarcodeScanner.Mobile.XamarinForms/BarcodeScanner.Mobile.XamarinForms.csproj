@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-7"?>
+<?xml version="1.0" encoding="utf-7"?>
 <Project Sdk="MSBuild.Sdk.Extras/3.0.44">
 
 	<PropertyGroup>
@@ -36,8 +36,8 @@
 		<PackageLicenseUrl>https://github.com/JimmyPun610/BarcodeScanner.Mobile</PackageLicenseUrl>
 		<RepositoryType></RepositoryType>
 		<PackageTags>Xamarin.Forms Barcode Scanning Tools</PackageTags>
-		<PackageReleaseNotes>1. Merge pull request 2. Update to MonoAndroid13</PackageReleaseNotes>
-		<Copyright>Copyright 2023</Copyright>
+		<PackageReleaseNotes>1. Updating to AdamE.MLKit.iOS.BarcodeScanning</PackageReleaseNotes>
+		<Copyright>Copyright 2024</Copyright>
 		<PackOnBuild>true</PackOnBuild>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
 	</PropertyGroup>
