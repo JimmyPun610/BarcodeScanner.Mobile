@@ -5,7 +5,7 @@
 		<!-- Uncomment to also build the tizen app. You will need to install tizen by following this: https://github.com/Samsung/Tizen.NET -->
 		<!-- <TargetFrameworks>$(TargetFrameworks);net6.0-tizen</TargetFrameworks> -->
 		<UseMaui>true</UseMaui>
-		<MauiVersion>8.0.21</MauiVersion>
+		<MauiVersion>8.0.40</MauiVersion>
 		<SingleProject>true</SingleProject>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">14.0</SupportedOSPlatformVersion>
@@ -19,9 +19,9 @@
 		<RootNamespace>BarcodeScanner.Mobile.Maui</RootNamespace>
 
 		<Product></Product>
-		<AssemblyVersion>8.0.21</AssemblyVersion>
-		<AssemblyFileVersion>8.0.21</AssemblyFileVersion>
-		<Version>8.0.21</Version>
+		<AssemblyVersion>8.0.40</AssemblyVersion>
+		<AssemblyFileVersion>8.0.40</AssemblyFileVersion>
+		<Version>8.0.40</Version>
 		<NeutralLanguage>en</NeutralLanguage>
 
 		<!--Version of C# to use -->
@@ -59,7 +59,7 @@
 	<ItemGroup Condition="( '$(TargetFramework)' == 'net8.0-ios' )">
 		<PackageReference Include="System.Numerics.Vectors" Version="4.5.0">
 		</PackageReference>
-		<PackageReference Include="AdamE.MLKit.iOS.BarcodeScanning.JimmyPun610" Version="5.0.1">
+		<PackageReference Include="AdamE.MLKit.iOS.BarcodeScanning" Version="5.0.0-alpha1">
 		</PackageReference>
 		<BundleResource Include="Platforms\iOS\PrivacyInfo.xcprivacy" LogicalName="PrivacyInfo.xcprivacy" />
 
