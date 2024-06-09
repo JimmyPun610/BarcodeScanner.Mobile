@@ -9,11 +9,10 @@
 		<RuntimeIdentifier>ios-arm64</RuntimeIdentifier>
 		<PlatformTarget>arm64</PlatformTarget>-->
 		<!-- -->
-		<MauiVersion>8.0.3</MauiVersion>
+		<MauiVersion>8.0.40</MauiVersion>
 		<OutputType>Exe</OutputType>
 		<RootNamespace>SampleApp.Maui</RootNamespace>
 		<UseMaui>true</UseMaui>
-		<MauiVersion>8.0.3</MauiVersion>
 		<SingleProject>true</SingleProject>
 		<ImplicitUsings>enable</ImplicitUsings>
 
