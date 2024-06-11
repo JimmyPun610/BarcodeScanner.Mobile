@@ -1,4 +1,4 @@
-﻿<Project Sdk="MSBuild.Sdk.Extras/3.0.44">
+<Project Sdk="MSBuild.Sdk.Extras/3.0.44">
 	<PropertyGroup>
 
 		<!--Update with your target such as: Xamarin.iOS10 or MonoAndroid80 or Xamarin.Mac20-->
@@ -10,9 +10,9 @@
 		<RootNamespace>BarcodeScanner.Mobile.XamarinForms</RootNamespace>
 
 		<Product></Product>
-		<AssemblyVersion>6.3.1</AssemblyVersion>
-		<AssemblyFileVersion>6.3.1</AssemblyFileVersion>
-		<Version>6.3.1</Version>
+		<AssemblyVersion>6.4.0</AssemblyVersion>
+		<AssemblyFileVersion>6.4.0</AssemblyFileVersion>
+		<Version>6.4.0</Version>
 		<NeutralLanguage>en</NeutralLanguage>
 
 		<!--Don't auto add files for me, I will tell you -->
@@ -34,7 +34,7 @@
 		<PackageLicenseUrl>https://github.com/JimmyPun610/BarcodeScanner.Mobile</PackageLicenseUrl>
 		<RepositoryType></RepositoryType>
 		<PackageTags>Xamarin.Forms Barcode Scanning Tools</PackageTags>
-		<PackageReleaseNotes>1. Merge pull request 2. Update to MonoAndroid13</PackageReleaseNotes>
+		<PackageReleaseNotes>1. Switch to AdamE.* for iOS packages, 2. Update AndroidX dependencies</PackageReleaseNotes>
 		<Copyright>Copyright 2023</Copyright>
 		<PackOnBuild>true</PackOnBuild>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
