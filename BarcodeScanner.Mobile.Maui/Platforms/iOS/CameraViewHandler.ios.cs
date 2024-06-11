@@ -1,7 +1,10 @@
-﻿using AVFoundation;
+﻿using System.Runtime.Intrinsics.X86;
+using AVFoundation;
 using BarcodeScanner.Mobile.Platforms.iOS;
 using CoreVideo;
 using Foundation;
+using Intents;
+using Microsoft.Maui.Controls.PlatformConfiguration;
 using UIKit;
 
 namespace BarcodeScanner.Mobile
@@ -292,7 +295,20 @@ namespace BarcodeScanner.Mobile
                 return AVCaptureDevice.GetDefaultDevice(AVCaptureDeviceType.BuiltInDualCamera, AVMediaTypes.Video, position);
             }
 
-            return AVCaptureDevice.DevicesWithMediaType(AVMediaTypes.Video.GetConstant()).FirstOrDefault(d => d.Position == position);
+            using var session = AVCaptureDeviceDiscoverySession.Create(
+                                    new[] {
+                                        AVCaptureDeviceType.BuiltInDualCamera,
+                                        AVCaptureDeviceType.BuiltInTripleCamera,
+                                        AVCaptureDeviceType.BuiltInTrueDepthCamera,
+                                        AVCaptureDeviceType.BuiltInDualWideCamera,
+                                        AVCaptureDeviceType.BuiltInWideAngleCamera,
+                                        AVCaptureDeviceType.BuiltInUltraWideCamera,
+                                        AVCaptureDeviceType.BuiltInTelephotoCamera
+                                    },
+                                    AVMediaTypes.Video,
+                                    position);
+            
+            return session.Devices.FirstOrDefault();
         }
     }
 }

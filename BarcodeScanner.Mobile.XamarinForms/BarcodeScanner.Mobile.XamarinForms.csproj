@@ -1,6 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-7"?>
-<Project Sdk="MSBuild.Sdk.Extras/3.0.44">
-
+﻿<Project Sdk="MSBuild.Sdk.Extras/3.0.44">
 	<PropertyGroup>
 
 		<!--Update with your target such as: Xamarin.iOS10 or MonoAndroid80 or Xamarin.Mac20-->
@@ -40,6 +38,7 @@
 		<Copyright>Copyright 2023</Copyright>
 		<PackOnBuild>true</PackOnBuild>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<BuildWithMSBuildOnMono>true</BuildWithMSBuildOnMono>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -54,6 +53,7 @@
 		<PackageReference Include="Xamarin.Forms" Version="5.0.0.2662" />
 		<PackageReference Include="Xamarin.Essentials" Version="1.8.1" />
 
+		<PackageReference Include="AdamE.MLKit.iOS.BarcodeScanning" Version="5.0.0-alpha2" />
 	</ItemGroup>
 	
 	<ItemGroup Condition=" $(TargetFramework.StartsWith('netstandard')) ">
@@ -67,7 +67,7 @@
 	
 		<PackageReference Include="Xamarin.AndroidX.MediaRouter" Version="1.6.0">
 		</PackageReference>
-		<PackageReference Include="Xamarin.AndroidX.Lifecycle.LiveData" Version="2.6.2.1">
+		<PackageReference Include="Xamarin.AndroidX.Lifecycle.LiveData" Version="2.7.0.1">
 		</PackageReference>
 		<PackageReference Include="Xamarin.AndroidX.Browser" Version="1.5.0.3">
 		</PackageReference>
@@ -75,15 +75,15 @@
 		</PackageReference>
 		<PackageReference Include="Xamarin.AndroidX.Palette" Version="1.0.0.20">
 		</PackageReference>
-		<PackageReference Include="Xamarin.AndroidX.Core" Version="1.12.0.3">
+		<PackageReference Include="Xamarin.AndroidX.Core" Version="1.13.0">
 		</PackageReference>
 		<PackageReference Include="Xamarin.AndroidX.RecyclerView" Version="1.3.1.1">
 		</PackageReference>
-		<PackageReference Include="Xamarin.AndroidX.Camera.Camera2" Version="1.2.3.2">
+		<PackageReference Include="Xamarin.AndroidX.Camera.Camera2" Version="1.3.3">
 		</PackageReference>
-		<PackageReference Include="Xamarin.AndroidX.Camera.Lifecycle" Version="1.2.3.2">
+		<PackageReference Include="Xamarin.AndroidX.Camera.Lifecycle" Version="1.3.3">
 		</PackageReference>
-		<PackageReference Include="Xamarin.AndroidX.Camera.View" Version="1.2.3.2">
+		<PackageReference Include="Xamarin.AndroidX.Camera.View" Version="1.3.3">
 		</PackageReference>
 		<PackageReference Include="Xamarin.Google.Dagger" Version="2.46.1.2">
 		</PackageReference>
@@ -92,7 +92,6 @@
 		<PackageReference Include="Xamarin.AndroidX.Collection" Version="1.4.0.2" />
 		<PackageReference Include="Xamarin.AndroidX.Collection.Ktx" Version="1.4.0.1" />
 		<PackageReference Include="Xamarin.AndroidX.Collection.Jvm" Version="1.4.0.1" />
-		
 	</ItemGroup>
 	<ItemGroup Condition=" $(TargetFramework.StartsWith('Xamarin.iOS')) ">
 		<Compile Include="iOS\*.cs" />
@@ -101,12 +100,7 @@
 
 		<PackageReference Include="System.Numerics.Vectors" Version="4.5.0">
 		</PackageReference>
-		<PackageReference Include="Xamarin.MLKit.iOS.BarcodeScanning.JimmyPun610" Version="2.2.0.1">
+		<PackageReference Include="AdamE.MLKit.iOS.BarcodeScanning" Version="5.0.0-alpha2">
 		</PackageReference>
-		<PackageReference Include="Xamarin.MLKit.iOS.Core.JimmyPun610" Version="8.0.0" />
 	</ItemGroup>
-
-
-
-
 </Project>
