@@ -3,6 +3,7 @@
 	<PropertyGroup>
 		<TargetFramework>netstandard2.0</TargetFramework>
 		<ProduceReferenceAssembly>true</ProduceReferenceAssembly>
+		<BuildWithMSBuildOnMono>true</BuildWithMSBuildOnMono>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -14,7 +15,6 @@
 		<PackageReference Include="Xam.Plugin.Media" Version="6.0.2" />
 		<PackageReference Include="Xamarin.Forms" Version="5.0.0.2662" />
 		<PackageReference Include="Xamarin.Essentials" Version="1.8.1" />
-		<PackageReference Include="BarcodeScanner.Mobile.XamarinForms" Version="6.3.2" />
 	</ItemGroup>
 	<ItemGroup>
 		<EmbeddedResource Update="Mvvm\MvvmDemo.xaml">
@@ -32,5 +32,8 @@
 		<EmbeddedResource Update="Page4.xaml">
 		  <Generator>MSBuild:Compile</Generator>
 		</EmbeddedResource>
+	</ItemGroup>
+	<ItemGroup>
+	  <ProjectReference Include="..\..\BarcodeScanner.Mobile.XamarinForms\BarcodeScanner.Mobile.XamarinForms.csproj" />
 	</ItemGroup>
 </Project>
