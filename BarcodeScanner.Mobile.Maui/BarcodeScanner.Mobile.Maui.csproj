@@ -17,9 +17,9 @@
 		<RootNamespace>BarcodeScanner.Mobile.Maui</RootNamespace>
 
 		<Product></Product>
-		<AssemblyVersion>8.0.40</AssemblyVersion>
-		<AssemblyFileVersion>8.0.40</AssemblyFileVersion>
-		<Version>8.0.40</Version>
+		<AssemblyVersion>8.0.40.1</AssemblyVersion>
+		<AssemblyFileVersion>8.0.40.1</AssemblyFileVersion>
+		<Version>8.0.40.1</Version>
 		<NeutralLanguage>en</NeutralLanguage>
 
 		<!--Version of C# to use -->
@@ -33,10 +33,10 @@
 		<RepositoryType></RepositoryType>
 		<PackageTags>MAUI Barcode Scanning Tools</PackageTags>
 		<PackageReleaseNotes></PackageReleaseNotes>
-		<Copyright>Copyright 2023</Copyright>
+		<Copyright>Copyright 2024</Copyright>
 		<PackOnBuild>true</PackOnBuild>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
-		<PackageVersion>8.0.40-alpha1</PackageVersion>
+		<PackageVersion>8.0.40.1</PackageVersion>
 	</PropertyGroup>
 
 	<!-- Going to use latest version library in MAUI -->
