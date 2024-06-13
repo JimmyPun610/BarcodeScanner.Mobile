@@ -23,6 +23,7 @@ using Xamarin.Google.MLKit.Vision.BarCode;
 using Xamarin.Google.MLKit.Vision.Common;
 using Exception = Java.Lang.Exception;
 using Android.Runtime;
+using AndroidX.Camera.Core.ResolutionSelector;
 
 [assembly: ExportRenderer(typeof(BarcodeScanner.Mobile.CameraView), typeof(BarcodeScanner.Mobile.Renderer.CameraViewRenderer))]
 namespace BarcodeScanner.Mobile.Renderer
@@ -93,8 +94,13 @@ namespace BarcodeScanner.Mobile.Renderer
                 return;
 
             // Preview
+            ResolutionSelector resolutionSelector = new ResolutionSelector.Builder().SetResolutionStrategy(GetResolutionStrategy()).Build();
+             
             var previewBuilder = new Preview.Builder();
-            var preview = previewBuilder.Build();
+            var preview = previewBuilder
+                .SetResolutionSelector(resolutionSelector)
+                .Build();
+
             preview.SetSurfaceProvider(Control.SurfaceProvider);
 
             // Frame by frame analyze
@@ -105,11 +111,10 @@ namespace BarcodeScanner.Mobile.Renderer
                 ext.SetCaptureRequestOption(CaptureRequest.ControlAeMode, 0);
                 ext.SetCaptureRequestOption(CaptureRequest.ControlAeTargetFpsRange, new Android.Util.Range((int)Element.RequestedFPS.Value, (int)Element.RequestedFPS.Value));
             }
-
             //https://developers.google.com/ml-kit/vision/barcode-scanning/android#input-image-guidelines
             var imageAnalyzer = imageAnalyzerBuilder
                                 .SetBackpressureStrategy(ImageAnalysis.StrategyKeepOnlyLatest) //<!-- only one image will be delivered for analysis at a time
-                                .SetTargetResolution(TargetResolution())
+                                .SetResolutionSelector(resolutionSelector)
                                 .Build();
 
             imageAnalyzer.SetAnalyzer(_cameraExecutor, new BarcodeAnalyzer(this));
@@ -131,7 +136,6 @@ namespace BarcodeScanner.Mobile.Renderer
                 // Bind use cases to camera
                 _camera = cameraProvider.BindToLifecycle(lifecycleOwner, cameraSelector, preview, imageAnalyzer);
 
-                HandleCustomPreviewSize(preview);
                 HandleTorch();
                 HandleAutoFoucs();
             }
@@ -156,29 +160,24 @@ namespace BarcodeScanner.Mobile.Renderer
 
             throw new NotSupportedException("Back camera is not supported in this device");
         }
-
-        private Android.Util.Size TargetResolution()
+        private ResolutionStrategy GetResolutionStrategy()
         {
-            return Element.CaptureQuality switch
+            switch (Element.CaptureQuality)
             {
-                CaptureQuality.Lowest => new Android.Util.Size(352, 288),
-                CaptureQuality.Low => new Android.Util.Size(640, 480),
-                CaptureQuality.Medium => new Android.Util.Size(1280, 720),
-                CaptureQuality.High => new Android.Util.Size(1920, 1080),
-                CaptureQuality.Highest => new Android.Util.Size(3840, 2160),
-                _ => throw new ArgumentOutOfRangeException(nameof(CaptureQuality))
-            };
-        }
-
-        private void HandleCustomPreviewSize(Preview preview)
-        {
-            if (Element.PreviewWidth.HasValue && Element.PreviewHeight.HasValue)
-            {
-                var width = Element.PreviewWidth.Value;
-                var height = Element.PreviewHeight.Value;
-                preview.UpdateSuggestedResolution(new Android.Util.Size(width, height));
+                case CaptureQuality.Lowest:
+                    return new ResolutionStrategy(new Android.Util.Size(352, 288), 0);
+                case CaptureQuality.Low:
+                    return new ResolutionStrategy(new Android.Util.Size(640, 480), 0);
+                case CaptureQuality.Medium:
+                    return new ResolutionStrategy(new Android.Util.Size(1280, 720), 0);
+                case CaptureQuality.High:
+                    return new ResolutionStrategy(new Android.Util.Size(1920, 1080), 0);
+                case CaptureQuality.Highest:
+                    return new ResolutionStrategy(new Android.Util.Size(3840, 2160), 0);
+                default: throw new ArgumentOutOfRangeException(nameof(CaptureQuality));
             }
         }
+   
         /// <summary>
         /// Logic from https://stackoverflow.com/a/66659592/9032777
         /// Focus every 3s
@@ -449,10 +448,7 @@ namespace BarcodeScanner.Mobile.Renderer
                 }
             }
 
-            /// <summary>
-            /// Fix for https://github.com/xamarin/AndroidX/issues/767
-            /// </summary>
-            public Android.Util.Size DefaultTargetResolution => _renderer.TargetResolution();
+      
 
             private void SafeCloseImageProxy(IImageProxy proxy)
             {
