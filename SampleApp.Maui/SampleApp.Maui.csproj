@@ -56,13 +56,9 @@
 	  <PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="$(MauiVersion)" />
 	  <PackageReference Include="Xamarin.AndroidX.Activity" Version="1.9.0.2" Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'" />
 	  <PackageReference Include="Xamarin.AndroidX.Activity.Ktx" Version="1.9.0.2" Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'" />
+	  <PackageReference Include="BarcodeScanner.Mobile.Maui" Version="8.0.40.1" />
 	</ItemGroup>
 
-
-	<ItemGroup>
-	  <ProjectReference Include="..\BarcodeScanner.Mobile.Maui\BarcodeScanner.Mobile.Maui.csproj" />
-	</ItemGroup>
-	
 	<ItemGroup>
 	  <Compile Update="OCRImageCapture\OCRImageCaptureDemo.xaml.cs">
 	    <DependentUpon>OCRImageCaptureDemo.xaml</DependentUpon>
