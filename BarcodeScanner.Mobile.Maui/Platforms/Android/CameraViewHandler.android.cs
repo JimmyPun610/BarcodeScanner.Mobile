@@ -18,9 +18,9 @@ namespace BarcodeScanner.Mobile
     public partial class CameraViewHandler
     {
         private bool _isDisposed;
-
         private IListenableFuture _cameraFuture;
         private IExecutorService _cameraExecutor;
+        private bool _isAutofocusRunning = false;
 
         private ICamera _camera;
 
@@ -35,6 +35,7 @@ namespace BarcodeScanner.Mobile
 
         private void Connect()
         {
+            _isDisposed = false;
             _cameraExecutor = Executors.NewSingleThreadExecutor();
             _cameraFuture = ProcessCameraProvider.GetInstance(Context);
             _cameraFuture.AddListener(new Runnable(CameraCallback), ContextCompat.GetMainExecutor(Context));
@@ -74,7 +75,7 @@ namespace BarcodeScanner.Mobile
                                 .Build();
 
 
-            imageAnalyzer.SetAnalyzer(_cameraExecutor, new BarcodeAnalyzer(VirtualView));
+            imageAnalyzer.SetAnalyzer(_cameraExecutor, new BarcodeAnalyzer(VirtualView, () => MainThread.BeginInvokeOnMainThread(() => CameraCallback())));
 
             var cameraSelector = SelectCamera(cameraProvider);
 
@@ -94,7 +95,8 @@ namespace BarcodeScanner.Mobile
                 _camera = cameraProvider.BindToLifecycle(lifecycleOwner, cameraSelector, preview, imageAnalyzer);
 
                 HandleTorch();
-                HandleAutoFocus();
+                if (!_isAutofocusRunning)
+                    Task.Run(HandleAutoFocus);
             }
             catch (Exception exc)
             {
@@ -124,7 +126,9 @@ namespace BarcodeScanner.Mobile
         /// </summary>
         private async void HandleAutoFocus()
         {
-            while (true)
+            _isAutofocusRunning = true;
+
+            while (!_isDisposed)
             {
                 try
                 {
@@ -145,15 +149,17 @@ namespace BarcodeScanner.Mobile
                     MeteringPoint aePoint = pointFactory.CreatePoint(x, y, aePointWidth);
 
                     _camera.CameraControl.StartFocusAndMetering(
-                new FocusMeteringAction.Builder(afPoint,
-                        FocusMeteringAction.FlagAf).AddPoint(aePoint,
-                        FocusMeteringAction.FlagAe).Build());
+                        new FocusMeteringAction.Builder(afPoint, FocusMeteringAction.FlagAf)
+                        .AddPoint(aePoint, FocusMeteringAction.FlagAe)
+                        .Build());
                 }
                 catch (Exception ex)
                 {
-
+                    Log.Debug($"{nameof(CameraViewHandler)}-{nameof(HandleAutoFocus)}", ex.ToString());
                 }
             }
+
+            _isAutofocusRunning = false;
         }
 
         private void HandleTorch()
@@ -214,7 +220,5 @@ namespace BarcodeScanner.Mobile
                 Log.Debug($"{nameof(CameraViewHandler)}-{nameof(ClearCameraProvider)}", ex.ToString());
             }
         }
-
-
     }
 }
