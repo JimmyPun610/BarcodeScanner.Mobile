@@ -15,7 +15,7 @@ using Exception = System.Exception;
 
 namespace BarcodeScanner.Mobile
 {
-    public partial class CameraViewHandler
+    public partial class CameraViewHandler : IDisposable
     {
         private bool _isDisposed;
         private IListenableFuture _cameraFuture;
@@ -124,7 +124,7 @@ namespace BarcodeScanner.Mobile
         /// Logic from https://stackoverflow.com/a/66659592/9032777
         /// Focus every 3s
         /// </summary>
-        private async void HandleAutoFocus()
+        private async Task HandleAutoFocus()
         {
             _isAutofocusRunning = true;
 
@@ -132,12 +132,10 @@ namespace BarcodeScanner.Mobile
             {
                 try
                 {
-                    await Task.Delay(3000);
+                    await Task.Delay(Configuration.AutofocusInterval);
 
                     if (_camera == null || _previewView == null)
-                    {
                         continue;
-                    }
 
                     float x = _previewView.GetX() + _previewView.Width / 2f;
                     float y = _previewView.GetY() + _previewView.Height / 2f;
@@ -148,10 +146,10 @@ namespace BarcodeScanner.Mobile
                     MeteringPoint afPoint = pointFactory.CreatePoint(x, y, afPointWidth);
                     MeteringPoint aePoint = pointFactory.CreatePoint(x, y, aePointWidth);
 
-                    _camera.CameraControl.StartFocusAndMetering(
+                    MainThread.BeginInvokeOnMainThread(() => _camera.CameraControl.StartFocusAndMetering(
                         new FocusMeteringAction.Builder(afPoint, FocusMeteringAction.FlagAf)
-                        .AddPoint(aePoint, FocusMeteringAction.FlagAe)
-                        .Build());
+                            .AddPoint(aePoint, FocusMeteringAction.FlagAe)
+                            .Build()));
                 }
                 catch (Exception ex)
                 {
@@ -184,9 +182,15 @@ namespace BarcodeScanner.Mobile
             _camera.CameraControl.EnableTorch(false);
         }
 
-        private void Dispose()
+
+        public void Dispose() => Dispose(true);
+
+        protected virtual void Dispose(bool disposing)
         {
             if (_isDisposed)
+                return;
+
+            if (!disposing)
                 return;
 
             DisableTorchIfNeeded();
@@ -200,6 +204,9 @@ namespace BarcodeScanner.Mobile
             _cameraFuture?.Cancel(true);
             _cameraFuture?.Dispose();
             _cameraFuture = null;
+
+            _camera.Dispose();
+            _camera = null;
 
             _isDisposed = true;
         }
