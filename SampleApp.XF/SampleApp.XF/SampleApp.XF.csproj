@@ -15,8 +15,10 @@
 		<PackageReference Include="Xam.Plugin.Media" Version="6.0.2" />
 		<PackageReference Include="Xamarin.Forms" Version="5.0.0.2662" />
 		<PackageReference Include="Xamarin.Essentials" Version="1.8.1" />
-	  	<PackageReference Include="BarcodeScanner.Mobile.XamarinForms" Version="6.4.0.2" />
+	</ItemGroup>
 
+	<ItemGroup>
+	  <ProjectReference Include="..\..\BarcodeScanner.Mobile.XamarinForms\BarcodeScanner.Mobile.XamarinForms.csproj" />
 	</ItemGroup>
 	<ItemGroup>
 		<EmbeddedResource Update="Mvvm\MvvmDemo.xaml">

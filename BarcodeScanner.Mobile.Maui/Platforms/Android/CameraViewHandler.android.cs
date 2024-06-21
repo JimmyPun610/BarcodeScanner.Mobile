@@ -75,7 +75,7 @@ namespace BarcodeScanner.Mobile
                                 .Build();
 
 
-            imageAnalyzer.SetAnalyzer(_cameraExecutor, new BarcodeAnalyzer(VirtualView, () => MainThread.BeginInvokeOnMainThread(() => CameraCallback())));
+            imageAnalyzer.SetAnalyzer(_cameraExecutor, new BarcodeAnalyzer(VirtualView, () => MainThread.BeginInvokeOnMainThread(CameraCallback)));
 
             var cameraSelector = SelectCamera(cameraProvider);
 
