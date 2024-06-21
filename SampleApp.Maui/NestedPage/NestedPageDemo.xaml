@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SampleApp.Maui.NestedPage.NestedPageDemo"
+             xmlns:gv="clr-namespace:BarcodeScanner.Mobile;assembly=BarcodeScanner.Mobile.Maui"
+             Title="NestedPageDemo">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <StackLayout Orientation="Horizontal" 
+                     Grid.Row="0">
+            <Button Text="Cancel" 
+                    BackgroundColor="#FF0000" 
+                    TextColor="White"
+                    Clicked="CancelButton_Clicked"
+                    HorizontalOptions="StartAndExpand"
+                    CornerRadius="0"/>
+            <Button Text="Next Page"
+                    BackgroundColor="#0075FF"
+                    TextColor="White"
+                    Clicked="NextPage_Clicked"
+                    HorizontalOptions="EndAndExpand"                    
+                    CornerRadius="0"/>
+        </StackLayout>
+
+        <!--Fill the screen with CameraView-->
+        <gv:CameraView OnDetected="CameraView_OnDetected" 
+                       Grid.Row="1"
+                       TorchOn="False" 
+                       VibrationOnDetected="False" 
+                       ScanInterval="50" x:Name="Camera"/>
+
+        <Label Text="Scan QRCode"
+               FontSize="Medium" 
+               HorizontalTextAlignment="Center" 
+               Grid.Row="2"
+               TextColor="Red"/>
+    </Grid>
+</ContentPage>

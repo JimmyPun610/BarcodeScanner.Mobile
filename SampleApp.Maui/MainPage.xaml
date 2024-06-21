@@ -16,6 +16,7 @@
             <Button Text="Image Capture Demo" Clicked="Button7_Clicked"/>
             <Button Text="OCR Image Capture Demo" Clicked="Button8_Clicked"/>
             <Button Text="OCR from image" Clicked="Button9_Clicked"/>
+            <Button Text="Nested Page" Clicked="Button10_Clicked"/>
         </StackLayout>
     </ScrollView>
 

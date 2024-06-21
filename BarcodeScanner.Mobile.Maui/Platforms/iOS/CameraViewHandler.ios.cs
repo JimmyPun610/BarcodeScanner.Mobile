@@ -1,11 +1,7 @@
-﻿using System.Runtime.Intrinsics.X86;
-using AVFoundation;
+﻿using AVFoundation;
 using BarcodeScanner.Mobile.Platforms.iOS;
 using CoreVideo;
 using Foundation;
-using Intents;
-using Microsoft.Maui.Controls.PlatformConfiguration;
-using UIKit;
 
 namespace BarcodeScanner.Mobile
 {
@@ -307,7 +303,7 @@ namespace BarcodeScanner.Mobile
                                     },
                                     AVMediaTypes.Video,
                                     position);
-            
+
             return session.Devices.FirstOrDefault();
         }
     }

@@ -129,10 +129,13 @@
     <PackageReference Include="Xam.Plugin.Media" Version="6.0.2" />
     <PackageReference Include="Xamarin.Forms" Version="5.0.0.2662" />
     <PackageReference Include="Xamarin.Essentials" Version="1.8.1" />
-	  <PackageReference Include="BarcodeScanner.Mobile.XamarinForms" Version="6.4.0.2" />
   </ItemGroup>
-  <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" /> 
   <ItemGroup>
+    <ProjectReference Include="..\..\BarcodeScanner.Mobile.XamarinForms\BarcodeScanner.Mobile.XamarinForms.csproj">
+      <Project>{61557ff8-acd6-4c66-a5b1-b0d461a3dad3}</Project>
+      <Name>BarcodeScanner.Mobile.XamarinForms</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SampleApp.XF\SampleApp.XF.csproj">
       <Project>{3C1F0740-EA98-4954-9173-240188AEC83B}</Project>
       <Name>SampleApp.XF</Name>

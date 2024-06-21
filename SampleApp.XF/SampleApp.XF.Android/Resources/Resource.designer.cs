@@ -53,10 +53,6 @@ namespace SampleApp.XF.Droid
 			global::BarcodeScanner.Mobile.XamarinForms.Resource.Animation.design_bottom_sheet_slide_out = global::SampleApp.XF.Droid.Resource.Animation.design_bottom_sheet_slide_out;
 			global::BarcodeScanner.Mobile.XamarinForms.Resource.Animation.design_snackbar_in = global::SampleApp.XF.Droid.Resource.Animation.design_snackbar_in;
 			global::BarcodeScanner.Mobile.XamarinForms.Resource.Animation.design_snackbar_out = global::SampleApp.XF.Droid.Resource.Animation.design_snackbar_out;
-			global::BarcodeScanner.Mobile.XamarinForms.Resource.Animation.EnterFromLeft = global::SampleApp.XF.Droid.Resource.Animation.EnterFromLeft;
-			global::BarcodeScanner.Mobile.XamarinForms.Resource.Animation.EnterFromRight = global::SampleApp.XF.Droid.Resource.Animation.EnterFromRight;
-			global::BarcodeScanner.Mobile.XamarinForms.Resource.Animation.ExitToLeft = global::SampleApp.XF.Droid.Resource.Animation.ExitToLeft;
-			global::BarcodeScanner.Mobile.XamarinForms.Resource.Animation.ExitToRight = global::SampleApp.XF.Droid.Resource.Animation.ExitToRight;
 			global::BarcodeScanner.Mobile.XamarinForms.Resource.Animation.fragment_fast_out_extra_slow_in = global::SampleApp.XF.Droid.Resource.Animation.fragment_fast_out_extra_slow_in;
 			global::BarcodeScanner.Mobile.XamarinForms.Resource.Animation.mtrl_bottom_sheet_slide_in = global::SampleApp.XF.Droid.Resource.Animation.mtrl_bottom_sheet_slide_in;
 			global::BarcodeScanner.Mobile.XamarinForms.Resource.Animation.mtrl_bottom_sheet_slide_out = global::SampleApp.XF.Droid.Resource.Animation.mtrl_bottom_sheet_slide_out;
@@ -308,7 +304,6 @@ namespace SampleApp.XF.Droid
 			global::BarcodeScanner.Mobile.XamarinForms.Resource.Attribute.collapsedTitleTextAppearance = global::SampleApp.XF.Droid.Resource.Attribute.collapsedTitleTextAppearance;
 			global::BarcodeScanner.Mobile.XamarinForms.Resource.Attribute.collapseIcon = global::SampleApp.XF.Droid.Resource.Attribute.collapseIcon;
 			global::BarcodeScanner.Mobile.XamarinForms.Resource.Attribute.collapsingToolbarLayoutStyle = global::SampleApp.XF.Droid.Resource.Attribute.collapsingToolbarLayoutStyle;
-			global::BarcodeScanner.Mobile.XamarinForms.Resource.Attribute.collectionViewStyle = global::SampleApp.XF.Droid.Resource.Attribute.collectionViewStyle;
 			global::BarcodeScanner.Mobile.XamarinForms.Resource.Attribute.color = global::SampleApp.XF.Droid.Resource.Attribute.color;
 			global::BarcodeScanner.Mobile.XamarinForms.Resource.Attribute.colorAccent = global::SampleApp.XF.Droid.Resource.Attribute.colorAccent;
 			global::BarcodeScanner.Mobile.XamarinForms.Resource.Attribute.colorBackgroundFloating = global::SampleApp.XF.Droid.Resource.Attribute.colorBackgroundFloating;
@@ -931,7 +926,6 @@ namespace SampleApp.XF.Droid
 			global::BarcodeScanner.Mobile.XamarinForms.Resource.Attribute.scrimAnimationDuration = global::SampleApp.XF.Droid.Resource.Attribute.scrimAnimationDuration;
 			global::BarcodeScanner.Mobile.XamarinForms.Resource.Attribute.scrimBackground = global::SampleApp.XF.Droid.Resource.Attribute.scrimBackground;
 			global::BarcodeScanner.Mobile.XamarinForms.Resource.Attribute.scrimVisibleHeightTrigger = global::SampleApp.XF.Droid.Resource.Attribute.scrimVisibleHeightTrigger;
-			global::BarcodeScanner.Mobile.XamarinForms.Resource.Attribute.scrollViewStyle = global::SampleApp.XF.Droid.Resource.Attribute.scrollViewStyle;
 			global::BarcodeScanner.Mobile.XamarinForms.Resource.Attribute.searchHintIcon = global::SampleApp.XF.Droid.Resource.Attribute.searchHintIcon;
 			global::BarcodeScanner.Mobile.XamarinForms.Resource.Attribute.searchIcon = global::SampleApp.XF.Droid.Resource.Attribute.searchIcon;
 			global::BarcodeScanner.Mobile.XamarinForms.Resource.Attribute.searchViewStyle = global::SampleApp.XF.Droid.Resource.Attribute.searchViewStyle;
@@ -2360,8 +2354,6 @@ namespace SampleApp.XF.Droid
 			global::BarcodeScanner.Mobile.XamarinForms.Resource.Id.bestChoice = global::SampleApp.XF.Droid.Resource.Id.bestChoice;
 			global::BarcodeScanner.Mobile.XamarinForms.Resource.Id.blocking = global::SampleApp.XF.Droid.Resource.Id.blocking;
 			global::BarcodeScanner.Mobile.XamarinForms.Resource.Id.bottom = global::SampleApp.XF.Droid.Resource.Id.bottom;
-			global::BarcodeScanner.Mobile.XamarinForms.Resource.Id.bottomtab_navarea = global::SampleApp.XF.Droid.Resource.Id.bottomtab_navarea;
-			global::BarcodeScanner.Mobile.XamarinForms.Resource.Id.bottomtab_tabbar = global::SampleApp.XF.Droid.Resource.Id.bottomtab_tabbar;
 			global::BarcodeScanner.Mobile.XamarinForms.Resource.Id.BOTTOM_END = global::SampleApp.XF.Droid.Resource.Id.BOTTOM_END;
 			global::BarcodeScanner.Mobile.XamarinForms.Resource.Id.BOTTOM_START = global::SampleApp.XF.Droid.Resource.Id.BOTTOM_START;
 			global::BarcodeScanner.Mobile.XamarinForms.Resource.Id.bounce = global::SampleApp.XF.Droid.Resource.Id.bounce;
@@ -2474,7 +2466,6 @@ namespace SampleApp.XF.Droid
 			global::BarcodeScanner.Mobile.XamarinForms.Resource.Id.@fixed = global::SampleApp.XF.Droid.Resource.Id.@fixed;
 			global::BarcodeScanner.Mobile.XamarinForms.Resource.Id.flip = global::SampleApp.XF.Droid.Resource.Id.flip;
 			global::BarcodeScanner.Mobile.XamarinForms.Resource.Id.floating = global::SampleApp.XF.Droid.Resource.Id.floating;
-			global::BarcodeScanner.Mobile.XamarinForms.Resource.Id.flyoutcontent_appbar = global::SampleApp.XF.Droid.Resource.Id.flyoutcontent_appbar;
 			global::BarcodeScanner.Mobile.XamarinForms.Resource.Id.forever = global::SampleApp.XF.Droid.Resource.Id.forever;
 			global::BarcodeScanner.Mobile.XamarinForms.Resource.Id.fragment_container_view_tag = global::SampleApp.XF.Droid.Resource.Id.fragment_container_view_tag;
 			global::BarcodeScanner.Mobile.XamarinForms.Resource.Id.frost = global::SampleApp.XF.Droid.Resource.Id.frost;
@@ -2524,10 +2515,6 @@ namespace SampleApp.XF.Droid
 			global::BarcodeScanner.Mobile.XamarinForms.Resource.Id.linear = global::SampleApp.XF.Droid.Resource.Id.linear;
 			global::BarcodeScanner.Mobile.XamarinForms.Resource.Id.listMode = global::SampleApp.XF.Droid.Resource.Id.listMode;
 			global::BarcodeScanner.Mobile.XamarinForms.Resource.Id.list_item = global::SampleApp.XF.Droid.Resource.Id.list_item;
-			global::BarcodeScanner.Mobile.XamarinForms.Resource.Id.main_appbar = global::SampleApp.XF.Droid.Resource.Id.main_appbar;
-			global::BarcodeScanner.Mobile.XamarinForms.Resource.Id.main_tablayout = global::SampleApp.XF.Droid.Resource.Id.main_tablayout;
-			global::BarcodeScanner.Mobile.XamarinForms.Resource.Id.main_toolbar = global::SampleApp.XF.Droid.Resource.Id.main_toolbar;
-			global::BarcodeScanner.Mobile.XamarinForms.Resource.Id.main_viewpager = global::SampleApp.XF.Droid.Resource.Id.main_viewpager;
 			global::BarcodeScanner.Mobile.XamarinForms.Resource.Id.masked = global::SampleApp.XF.Droid.Resource.Id.masked;
 			global::BarcodeScanner.Mobile.XamarinForms.Resource.Id.match_constraint = global::SampleApp.XF.Droid.Resource.Id.match_constraint;
 			global::BarcodeScanner.Mobile.XamarinForms.Resource.Id.match_parent = global::SampleApp.XF.Droid.Resource.Id.match_parent;
@@ -2728,8 +2715,6 @@ namespace SampleApp.XF.Droid
 			global::BarcodeScanner.Mobile.XamarinForms.Resource.Id.select_dialog_listview = global::SampleApp.XF.Droid.Resource.Id.select_dialog_listview;
 			global::BarcodeScanner.Mobile.XamarinForms.Resource.Id.sharedValueSet = global::SampleApp.XF.Droid.Resource.Id.sharedValueSet;
 			global::BarcodeScanner.Mobile.XamarinForms.Resource.Id.sharedValueUnset = global::SampleApp.XF.Droid.Resource.Id.sharedValueUnset;
-			global::BarcodeScanner.Mobile.XamarinForms.Resource.Id.shellcontent_appbar = global::SampleApp.XF.Droid.Resource.Id.shellcontent_appbar;
-			global::BarcodeScanner.Mobile.XamarinForms.Resource.Id.shellcontent_toolbar = global::SampleApp.XF.Droid.Resource.Id.shellcontent_toolbar;
 			global::BarcodeScanner.Mobile.XamarinForms.Resource.Id.SHIFT = global::SampleApp.XF.Droid.Resource.Id.SHIFT;
 			global::BarcodeScanner.Mobile.XamarinForms.Resource.Id.shortcut = global::SampleApp.XF.Droid.Resource.Id.shortcut;
 			global::BarcodeScanner.Mobile.XamarinForms.Resource.Id.showCustom = global::SampleApp.XF.Droid.Resource.Id.showCustom;
@@ -2742,7 +2727,6 @@ namespace SampleApp.XF.Droid
 			global::BarcodeScanner.Mobile.XamarinForms.Resource.Id.skipCollapsed = global::SampleApp.XF.Droid.Resource.Id.skipCollapsed;
 			global::BarcodeScanner.Mobile.XamarinForms.Resource.Id.skipped = global::SampleApp.XF.Droid.Resource.Id.skipped;
 			global::BarcodeScanner.Mobile.XamarinForms.Resource.Id.slide = global::SampleApp.XF.Droid.Resource.Id.slide;
-			global::BarcodeScanner.Mobile.XamarinForms.Resource.Id.sliding_tabs = global::SampleApp.XF.Droid.Resource.Id.sliding_tabs;
 			global::BarcodeScanner.Mobile.XamarinForms.Resource.Id.snackbar_action = global::SampleApp.XF.Droid.Resource.Id.snackbar_action;
 			global::BarcodeScanner.Mobile.XamarinForms.Resource.Id.snackbar_text = global::SampleApp.XF.Droid.Resource.Id.snackbar_text;
 			global::BarcodeScanner.Mobile.XamarinForms.Resource.Id.snap = global::SampleApp.XF.Droid.Resource.Id.snap;
@@ -2814,7 +2798,6 @@ namespace SampleApp.XF.Droid
 			global::BarcodeScanner.Mobile.XamarinForms.Resource.Id.titleDividerNoCustom = global::SampleApp.XF.Droid.Resource.Id.titleDividerNoCustom;
 			global::BarcodeScanner.Mobile.XamarinForms.Resource.Id.title_template = global::SampleApp.XF.Droid.Resource.Id.title_template;
 			global::BarcodeScanner.Mobile.XamarinForms.Resource.Id.toggle = global::SampleApp.XF.Droid.Resource.Id.toggle;
-			global::BarcodeScanner.Mobile.XamarinForms.Resource.Id.toolbar = global::SampleApp.XF.Droid.Resource.Id.toolbar;
 			global::BarcodeScanner.Mobile.XamarinForms.Resource.Id.top = global::SampleApp.XF.Droid.Resource.Id.top;
 			global::BarcodeScanner.Mobile.XamarinForms.Resource.Id.topPanel = global::SampleApp.XF.Droid.Resource.Id.topPanel;
 			global::BarcodeScanner.Mobile.XamarinForms.Resource.Id.TOP_END = global::SampleApp.XF.Droid.Resource.Id.TOP_END;
@@ -2929,7 +2912,6 @@ namespace SampleApp.XF.Droid
 			global::BarcodeScanner.Mobile.XamarinForms.Resource.Layout.abc_search_view = global::SampleApp.XF.Droid.Resource.Layout.abc_search_view;
 			global::BarcodeScanner.Mobile.XamarinForms.Resource.Layout.abc_select_dialog_material = global::SampleApp.XF.Droid.Resource.Layout.abc_select_dialog_material;
 			global::BarcodeScanner.Mobile.XamarinForms.Resource.Layout.abc_tooltip = global::SampleApp.XF.Droid.Resource.Layout.abc_tooltip;
-			global::BarcodeScanner.Mobile.XamarinForms.Resource.Layout.BottomTabLayout = global::SampleApp.XF.Droid.Resource.Layout.BottomTabLayout;
 			global::BarcodeScanner.Mobile.XamarinForms.Resource.Layout.browser_actions_context_menu_page = global::SampleApp.XF.Droid.Resource.Layout.browser_actions_context_menu_page;
 			global::BarcodeScanner.Mobile.XamarinForms.Resource.Layout.browser_actions_context_menu_row = global::SampleApp.XF.Droid.Resource.Layout.browser_actions_context_menu_row;
 			global::BarcodeScanner.Mobile.XamarinForms.Resource.Layout.custom_dialog = global::SampleApp.XF.Droid.Resource.Layout.custom_dialog;
@@ -2949,9 +2931,6 @@ namespace SampleApp.XF.Droid
 			global::BarcodeScanner.Mobile.XamarinForms.Resource.Layout.design_text_input_end_icon = global::SampleApp.XF.Droid.Resource.Layout.design_text_input_end_icon;
 			global::BarcodeScanner.Mobile.XamarinForms.Resource.Layout.design_text_input_start_icon = global::SampleApp.XF.Droid.Resource.Layout.design_text_input_start_icon;
 			global::BarcodeScanner.Mobile.XamarinForms.Resource.Layout.expand_button = global::SampleApp.XF.Droid.Resource.Layout.expand_button;
-			global::BarcodeScanner.Mobile.XamarinForms.Resource.Layout.FallbackTabbarDoNotUse = global::SampleApp.XF.Droid.Resource.Layout.FallbackTabbarDoNotUse;
-			global::BarcodeScanner.Mobile.XamarinForms.Resource.Layout.FallbackToolbarDoNotUse = global::SampleApp.XF.Droid.Resource.Layout.FallbackToolbarDoNotUse;
-			global::BarcodeScanner.Mobile.XamarinForms.Resource.Layout.FlyoutContent = global::SampleApp.XF.Droid.Resource.Layout.FlyoutContent;
 			global::BarcodeScanner.Mobile.XamarinForms.Resource.Layout.image_frame = global::SampleApp.XF.Droid.Resource.Layout.image_frame;
 			global::BarcodeScanner.Mobile.XamarinForms.Resource.Layout.ime_base_split_test_activity = global::SampleApp.XF.Droid.Resource.Layout.ime_base_split_test_activity;
 			global::BarcodeScanner.Mobile.XamarinForms.Resource.Layout.ime_secondary_split_test_activity = global::SampleApp.XF.Droid.Resource.Layout.ime_secondary_split_test_activity;
@@ -3044,13 +3023,10 @@ namespace SampleApp.XF.Droid
 			global::BarcodeScanner.Mobile.XamarinForms.Resource.Layout.preference_widget_seekbar_material = global::SampleApp.XF.Droid.Resource.Layout.preference_widget_seekbar_material;
 			global::BarcodeScanner.Mobile.XamarinForms.Resource.Layout.preference_widget_switch = global::SampleApp.XF.Droid.Resource.Layout.preference_widget_switch;
 			global::BarcodeScanner.Mobile.XamarinForms.Resource.Layout.preference_widget_switch_compat = global::SampleApp.XF.Droid.Resource.Layout.preference_widget_switch_compat;
-			global::BarcodeScanner.Mobile.XamarinForms.Resource.Layout.RootLayout = global::SampleApp.XF.Droid.Resource.Layout.RootLayout;
 			global::BarcodeScanner.Mobile.XamarinForms.Resource.Layout.select_dialog_item_material = global::SampleApp.XF.Droid.Resource.Layout.select_dialog_item_material;
 			global::BarcodeScanner.Mobile.XamarinForms.Resource.Layout.select_dialog_multichoice_material = global::SampleApp.XF.Droid.Resource.Layout.select_dialog_multichoice_material;
 			global::BarcodeScanner.Mobile.XamarinForms.Resource.Layout.select_dialog_singlechoice_material = global::SampleApp.XF.Droid.Resource.Layout.select_dialog_singlechoice_material;
-			global::BarcodeScanner.Mobile.XamarinForms.Resource.Layout.ShellContent = global::SampleApp.XF.Droid.Resource.Layout.ShellContent;
 			global::BarcodeScanner.Mobile.XamarinForms.Resource.Layout.support_simple_spinner_dropdown_item = global::SampleApp.XF.Droid.Resource.Layout.support_simple_spinner_dropdown_item;
-			global::BarcodeScanner.Mobile.XamarinForms.Resource.Layout.Tabbar = global::SampleApp.XF.Droid.Resource.Layout.Tabbar;
 			global::BarcodeScanner.Mobile.XamarinForms.Resource.Layout.test_action_chip = global::SampleApp.XF.Droid.Resource.Layout.test_action_chip;
 			global::BarcodeScanner.Mobile.XamarinForms.Resource.Layout.test_chip_zero_corner_radius = global::SampleApp.XF.Droid.Resource.Layout.test_chip_zero_corner_radius;
 			global::BarcodeScanner.Mobile.XamarinForms.Resource.Layout.test_design_checkbox = global::SampleApp.XF.Droid.Resource.Layout.test_design_checkbox;
@@ -3066,7 +3042,6 @@ namespace SampleApp.XF.Droid
 			global::BarcodeScanner.Mobile.XamarinForms.Resource.Layout.text_view_with_line_height_from_layout = global::SampleApp.XF.Droid.Resource.Layout.text_view_with_line_height_from_layout;
 			global::BarcodeScanner.Mobile.XamarinForms.Resource.Layout.text_view_with_line_height_from_style = global::SampleApp.XF.Droid.Resource.Layout.text_view_with_line_height_from_style;
 			global::BarcodeScanner.Mobile.XamarinForms.Resource.Layout.text_view_with_theme_line_height = global::SampleApp.XF.Droid.Resource.Layout.text_view_with_theme_line_height;
-			global::BarcodeScanner.Mobile.XamarinForms.Resource.Layout.Toolbar = global::SampleApp.XF.Droid.Resource.Layout.Toolbar;
 			global::BarcodeScanner.Mobile.XamarinForms.Resource.Plurals.mtrl_badge_content_description = global::SampleApp.XF.Droid.Resource.Plurals.mtrl_badge_content_description;
 			global::BarcodeScanner.Mobile.XamarinForms.Resource.String.abc_action_bar_home_description = global::SampleApp.XF.Droid.Resource.String.abc_action_bar_home_description;
 			global::BarcodeScanner.Mobile.XamarinForms.Resource.String.abc_action_bar_up_description = global::SampleApp.XF.Droid.Resource.String.abc_action_bar_up_description;
@@ -3235,7 +3210,6 @@ namespace SampleApp.XF.Droid
 			global::BarcodeScanner.Mobile.XamarinForms.Resource.String.nav_app_bar_navigate_up_description = global::SampleApp.XF.Droid.Resource.String.nav_app_bar_navigate_up_description;
 			global::BarcodeScanner.Mobile.XamarinForms.Resource.String.nav_app_bar_open_drawer_description = global::SampleApp.XF.Droid.Resource.String.nav_app_bar_open_drawer_description;
 			global::BarcodeScanner.Mobile.XamarinForms.Resource.String.not_set = global::SampleApp.XF.Droid.Resource.String.not_set;
-			global::BarcodeScanner.Mobile.XamarinForms.Resource.String.overflow_tab_title = global::SampleApp.XF.Droid.Resource.String.overflow_tab_title;
 			global::BarcodeScanner.Mobile.XamarinForms.Resource.String.password_toggle_content_description = global::SampleApp.XF.Droid.Resource.String.password_toggle_content_description;
 			global::BarcodeScanner.Mobile.XamarinForms.Resource.String.path_password_eye = global::SampleApp.XF.Droid.Resource.String.path_password_eye;
 			global::BarcodeScanner.Mobile.XamarinForms.Resource.String.path_password_eye_mask_strike_through = global::SampleApp.XF.Droid.Resource.String.path_password_eye_mask_strike_through;
@@ -3255,7 +3229,6 @@ namespace SampleApp.XF.Droid
 			global::BarcodeScanner.Mobile.XamarinForms.Resource.Style.Animation_AppCompat_Tooltip = global::SampleApp.XF.Droid.Resource.Style.Animation_AppCompat_Tooltip;
 			global::BarcodeScanner.Mobile.XamarinForms.Resource.Style.Animation_Design_BottomSheetDialog = global::SampleApp.XF.Droid.Resource.Style.Animation_Design_BottomSheetDialog;
 			global::BarcodeScanner.Mobile.XamarinForms.Resource.Style.Animation_MaterialComponents_BottomSheetDialog = global::SampleApp.XF.Droid.Resource.Style.Animation_MaterialComponents_BottomSheetDialog;
-			global::BarcodeScanner.Mobile.XamarinForms.Resource.Style.AppCompatDialogStyle = global::SampleApp.XF.Droid.Resource.Style.AppCompatDialogStyle;
 			global::BarcodeScanner.Mobile.XamarinForms.Resource.Style.Base_AlertDialog_AppCompat = global::SampleApp.XF.Droid.Resource.Style.Base_AlertDialog_AppCompat;
 			global::BarcodeScanner.Mobile.XamarinForms.Resource.Style.Base_AlertDialog_AppCompat_Light = global::SampleApp.XF.Droid.Resource.Style.Base_AlertDialog_AppCompat_Light;
 			global::BarcodeScanner.Mobile.XamarinForms.Resource.Style.Base_Animation_AppCompat_Dialog = global::SampleApp.XF.Droid.Resource.Style.Base_Animation_AppCompat_Dialog;
@@ -3479,10 +3452,7 @@ namespace SampleApp.XF.Droid
 			global::BarcodeScanner.Mobile.XamarinForms.Resource.Style.CardView = global::SampleApp.XF.Droid.Resource.Style.CardView;
 			global::BarcodeScanner.Mobile.XamarinForms.Resource.Style.CardView_Dark = global::SampleApp.XF.Droid.Resource.Style.CardView_Dark;
 			global::BarcodeScanner.Mobile.XamarinForms.Resource.Style.CardView_Light = global::SampleApp.XF.Droid.Resource.Style.CardView_Light;
-			global::BarcodeScanner.Mobile.XamarinForms.Resource.Style.collectionViewTheme = global::SampleApp.XF.Droid.Resource.Style.collectionViewTheme;
 			global::BarcodeScanner.Mobile.XamarinForms.Resource.Style.EmptyTheme = global::SampleApp.XF.Droid.Resource.Style.EmptyTheme;
-			global::BarcodeScanner.Mobile.XamarinForms.Resource.Style.MainTheme = global::SampleApp.XF.Droid.Resource.Style.MainTheme;
-			global::BarcodeScanner.Mobile.XamarinForms.Resource.Style.MainTheme_Base = global::SampleApp.XF.Droid.Resource.Style.MainTheme_Base;
 			global::BarcodeScanner.Mobile.XamarinForms.Resource.Style.MaterialAlertDialog_MaterialComponents = global::SampleApp.XF.Droid.Resource.Style.MaterialAlertDialog_MaterialComponents;
 			global::BarcodeScanner.Mobile.XamarinForms.Resource.Style.MaterialAlertDialog_MaterialComponents_Body_Text = global::SampleApp.XF.Droid.Resource.Style.MaterialAlertDialog_MaterialComponents_Body_Text;
 			global::BarcodeScanner.Mobile.XamarinForms.Resource.Style.MaterialAlertDialog_MaterialComponents_Picker_Date_Calendar = global::SampleApp.XF.Droid.Resource.Style.MaterialAlertDialog_MaterialComponents_Picker_Date_Calendar;
@@ -3555,8 +3525,6 @@ namespace SampleApp.XF.Droid
 			global::BarcodeScanner.Mobile.XamarinForms.Resource.Style.RtlOverlay_Widget_AppCompat_Search_DropDown_Text = global::SampleApp.XF.Droid.Resource.Style.RtlOverlay_Widget_AppCompat_Search_DropDown_Text;
 			global::BarcodeScanner.Mobile.XamarinForms.Resource.Style.RtlUnderlay_Widget_AppCompat_ActionButton = global::SampleApp.XF.Droid.Resource.Style.RtlUnderlay_Widget_AppCompat_ActionButton;
 			global::BarcodeScanner.Mobile.XamarinForms.Resource.Style.RtlUnderlay_Widget_AppCompat_ActionButton_Overflow = global::SampleApp.XF.Droid.Resource.Style.RtlUnderlay_Widget_AppCompat_ActionButton_Overflow;
-			global::BarcodeScanner.Mobile.XamarinForms.Resource.Style.scrollViewScrollBars = global::SampleApp.XF.Droid.Resource.Style.scrollViewScrollBars;
-			global::BarcodeScanner.Mobile.XamarinForms.Resource.Style.scrollViewTheme = global::SampleApp.XF.Droid.Resource.Style.scrollViewTheme;
 			global::BarcodeScanner.Mobile.XamarinForms.Resource.Style.ShapeAppearanceOverlay = global::SampleApp.XF.Droid.Resource.Style.ShapeAppearanceOverlay;
 			global::BarcodeScanner.Mobile.XamarinForms.Resource.Style.ShapeAppearanceOverlay_BottomLeftDifferentCornerSize = global::SampleApp.XF.Droid.Resource.Style.ShapeAppearanceOverlay_BottomLeftDifferentCornerSize;
 			global::BarcodeScanner.Mobile.XamarinForms.Resource.Style.ShapeAppearanceOverlay_BottomRightCut = global::SampleApp.XF.Droid.Resource.Style.ShapeAppearanceOverlay_BottomRightCut;
@@ -5109,8 +5077,6 @@ namespace SampleApp.XF.Droid
 			global::BarcodeScanner.Mobile.XamarinForms.Resource.Styleable.Insets_paddingLeftSystemWindowInsets = global::SampleApp.XF.Droid.Resource.Styleable.Insets_paddingLeftSystemWindowInsets;
 			global::BarcodeScanner.Mobile.XamarinForms.Resource.Styleable.Insets_paddingRightSystemWindowInsets = global::SampleApp.XF.Droid.Resource.Styleable.Insets_paddingRightSystemWindowInsets;
 			global::BarcodeScanner.Mobile.XamarinForms.Resource.Styleable.Insets_paddingTopSystemWindowInsets = global::SampleApp.XF.Droid.Resource.Styleable.Insets_paddingTopSystemWindowInsets;
-			global::BarcodeScanner.Mobile.XamarinForms.Resource.Styleable.ItemsViewRendererTheme = global::SampleApp.XF.Droid.Resource.Styleable.ItemsViewRendererTheme;
-			global::BarcodeScanner.Mobile.XamarinForms.Resource.Styleable.ItemsViewRendererTheme_collectionViewStyle = global::SampleApp.XF.Droid.Resource.Styleable.ItemsViewRendererTheme_collectionViewStyle;
 			global::BarcodeScanner.Mobile.XamarinForms.Resource.Styleable.KeyAttribute = global::SampleApp.XF.Droid.Resource.Styleable.KeyAttribute;
 			global::BarcodeScanner.Mobile.XamarinForms.Resource.Styleable.KeyAttribute_android_alpha = global::SampleApp.XF.Droid.Resource.Styleable.KeyAttribute_android_alpha;
 			global::BarcodeScanner.Mobile.XamarinForms.Resource.Styleable.KeyAttribute_android_elevation = global::SampleApp.XF.Droid.Resource.Styleable.KeyAttribute_android_elevation;
@@ -5736,8 +5702,6 @@ namespace SampleApp.XF.Droid
 			global::BarcodeScanner.Mobile.XamarinForms.Resource.Styleable.ScrimInsetsFrameLayout_insetForeground = global::SampleApp.XF.Droid.Resource.Styleable.ScrimInsetsFrameLayout_insetForeground;
 			global::BarcodeScanner.Mobile.XamarinForms.Resource.Styleable.ScrollingViewBehavior_Layout = global::SampleApp.XF.Droid.Resource.Styleable.ScrollingViewBehavior_Layout;
 			global::BarcodeScanner.Mobile.XamarinForms.Resource.Styleable.ScrollingViewBehavior_Layout_behavior_overlapTop = global::SampleApp.XF.Droid.Resource.Styleable.ScrollingViewBehavior_Layout_behavior_overlapTop;
-			global::BarcodeScanner.Mobile.XamarinForms.Resource.Styleable.ScrollViewRendererTheme = global::SampleApp.XF.Droid.Resource.Styleable.ScrollViewRendererTheme;
-			global::BarcodeScanner.Mobile.XamarinForms.Resource.Styleable.ScrollViewRendererTheme_scrollViewStyle = global::SampleApp.XF.Droid.Resource.Styleable.ScrollViewRendererTheme_scrollViewStyle;
 			global::BarcodeScanner.Mobile.XamarinForms.Resource.Styleable.SearchView = global::SampleApp.XF.Droid.Resource.Styleable.SearchView;
 			global::BarcodeScanner.Mobile.XamarinForms.Resource.Styleable.SearchView_android_focusable = global::SampleApp.XF.Droid.Resource.Styleable.SearchView_android_focusable;
 			global::BarcodeScanner.Mobile.XamarinForms.Resource.Styleable.SearchView_android_imeOptions = global::SampleApp.XF.Droid.Resource.Styleable.SearchView_android_imeOptions;
@@ -6131,7 +6095,6 @@ namespace SampleApp.XF.Droid
 			global::BarcodeScanner.Mobile.XamarinForms.Resource.Xml.standalone_badge_gravity_bottom_start = global::SampleApp.XF.Droid.Resource.Xml.standalone_badge_gravity_bottom_start;
 			global::BarcodeScanner.Mobile.XamarinForms.Resource.Xml.standalone_badge_gravity_top_start = global::SampleApp.XF.Droid.Resource.Xml.standalone_badge_gravity_top_start;
 			global::BarcodeScanner.Mobile.XamarinForms.Resource.Xml.standalone_badge_offset = global::SampleApp.XF.Droid.Resource.Xml.standalone_badge_offset;
-			global::BarcodeScanner.Mobile.XamarinForms.Resource.Xml.xamarin_essentials_fileprovider_file_paths = global::SampleApp.XF.Droid.Resource.Xml.xamarin_essentials_fileprovider_file_paths;
 			global::Plugin.Media.Resource.Attribute.alpha = global::SampleApp.XF.Droid.Resource.Attribute.alpha;
 			global::Plugin.Media.Resource.Attribute.font = global::SampleApp.XF.Droid.Resource.Attribute.font;
 			global::Plugin.Media.Resource.Attribute.fontProviderAuthority = global::SampleApp.XF.Droid.Resource.Attribute.fontProviderAuthority;

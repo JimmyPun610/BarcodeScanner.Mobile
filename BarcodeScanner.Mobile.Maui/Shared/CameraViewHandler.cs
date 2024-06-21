@@ -27,9 +27,6 @@ namespace BarcodeScanner.Mobile
 #endif
         };
 
-        public static CommandMapper<ICameraView, CameraViewHandler> CameraCommandMapper = new()
-        {
-        };
 
         public CameraViewHandler() : base(CameraViewMapper)
         {
@@ -42,13 +39,27 @@ namespace BarcodeScanner.Mobile
 
         protected override void ConnectHandler(NativeCameraView nativeView)
         {
+            if (VirtualView is View view)
+            {
+                view.Loaded += ViewOnLoaded;
+                view.Unloaded += ViewOnUnloaded;
+            }
             base.ConnectHandler(nativeView);
-            this.Connect();
         }
+
+        private void ViewOnUnloaded(object sender, EventArgs e) => Dispose();
+        private void ViewOnLoaded(object sender, EventArgs e) => Connect();
 
         protected override void DisconnectHandler(NativeCameraView platformView)
         {
-            this.Dispose();
+            if (VirtualView is View view)
+            {
+                view.Loaded -= ViewOnLoaded;
+                view.Unloaded -= ViewOnUnloaded;
+            }
+
+            Dispose();
+            platformView.Dispose();
             base.DisconnectHandler(platformView);
         }
     }

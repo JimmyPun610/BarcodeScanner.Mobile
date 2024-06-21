@@ -23,8 +23,6 @@ using Xamarin.Google.MLKit.Vision.BarCode;
 using Xamarin.Google.MLKit.Vision.Common;
 using Exception = Java.Lang.Exception;
 using Android.Runtime;
-using Android.Hardware;
-using Java.Util;
 
 [assembly: ExportRenderer(typeof(BarcodeScanner.Mobile.CameraView), typeof(BarcodeScanner.Mobile.Renderer.CameraViewRenderer))]
 namespace BarcodeScanner.Mobile.Renderer
@@ -38,6 +36,7 @@ namespace BarcodeScanner.Mobile.Renderer
         private IExecutorService _cameraExecutor;
 
         private ICamera _camera;
+        private bool _isAutofocusRunning = false;
 
         public static void Init() { }
 
@@ -135,7 +134,8 @@ namespace BarcodeScanner.Mobile.Renderer
 
                 HandleCustomPreviewSize(preview);
                 HandleTorch();
-                HandleAutoFoucs();
+                if (!_isAutofocusRunning)
+                    System.Threading.Tasks.Task.Run(HandleAutoFocus);
             }
             catch (Exception exc)
             {
@@ -181,22 +181,19 @@ namespace BarcodeScanner.Mobile.Renderer
                 preview.UpdateSuggestedResolution(new Android.Util.Size(width, height));
             }
         }
-        /// <summary>
-        /// Logic from https://stackoverflow.com/a/66659592/9032777
-        /// Focus every 3s
-        /// </summary>
-        public async void HandleAutoFoucs()
+
+        private async System.Threading.Tasks.Task HandleAutoFocus()
         {
-            while (true)
+            _isAutofocusRunning = true;
+
+            while (!_isDisposed)
             {
                 try
                 {
-                    await System.Threading.Tasks.Task.Delay(3000);
+                    await System.Threading.Tasks.Task.Delay(Configuration.AutofocusInterval);
 
                     if (_camera == null || Element == null || Control == null)
-                    {
                         continue;
-                    }
 
                     float x = Control.GetX() + Control.Width / 2f;
                     float y = Control.GetY() + Control.Height / 2f;
@@ -207,19 +204,20 @@ namespace BarcodeScanner.Mobile.Renderer
                     MeteringPoint afPoint = pointFactory.CreatePoint(x, y, afPointWidth);
                     MeteringPoint aePoint = pointFactory.CreatePoint(x, y, aePointWidth);
 
-                    _camera.CameraControl.StartFocusAndMetering(
-                new FocusMeteringAction.Builder(afPoint,
-                        FocusMeteringAction.FlagAf).AddPoint(aePoint,
-                        FocusMeteringAction.FlagAe).Build());
+                    Xamarin.Essentials.MainThread.BeginInvokeOnMainThread(() => _camera.CameraControl.StartFocusAndMetering(
+                        new FocusMeteringAction.Builder(afPoint, FocusMeteringAction.FlagAf)
+                            .AddPoint(aePoint, FocusMeteringAction.FlagAe)
+                            .Build()));
                 }
-
                 catch (Exception ex)
                 {
-
+                    Log.Debug($"{nameof(CameraViewRenderer)}-{nameof(HandleAutoFocus)}", ex.ToString());
                 }
-
             }
+
+            _isAutofocusRunning = false;
         }
+
         private void HandleTorch()
         {
             if (_camera == null || Element == null || !_camera.CameraInfo.HasFlashUnit) return;
@@ -270,6 +268,9 @@ namespace BarcodeScanner.Mobile.Renderer
                 _cameraFuture?.Cancel(true);
                 _cameraFuture?.Dispose();
                 _cameraFuture = null;
+
+                _camera.Dispose();
+                _camera = null;
             }
 
             _isDisposed = true;
@@ -467,6 +468,7 @@ namespace BarcodeScanner.Mobile.Renderer
                 catch (ArgumentException)
                 {
                     //Ignore argument exception, it will be thrown if BarcodeAnalyzer get disposed during processing
+                    Xamarin.Essentials.MainThread.BeginInvokeOnMainThread(_renderer.CameraCallback);
                 }
             }
         }
