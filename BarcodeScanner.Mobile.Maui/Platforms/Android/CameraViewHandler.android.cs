@@ -95,6 +95,7 @@ namespace BarcodeScanner.Mobile
 
                 HandleTorch();
                 HandleAutoFocus();
+                HandleZoom();
             }
             catch (Exception exc)
             {
