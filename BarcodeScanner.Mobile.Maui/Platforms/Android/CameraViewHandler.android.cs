@@ -57,7 +57,7 @@ namespace BarcodeScanner.Mobile
             var previewBuilder = new Preview.Builder()
                 .SetResolutionSelector(selector);
             var preview = previewBuilder.Build();
-            preview.SetSurfaceProvider(_previewView.SurfaceProvider);
+            preview.SurfaceProvider = _previewView.SurfaceProvider;
 
             var imageAnalyzerBuilder = new ImageAnalysis.Builder();
             // Frame by frame analyze
@@ -128,33 +128,37 @@ namespace BarcodeScanner.Mobile
         {
             _isAutofocusRunning = true;
 
-            while (!_isDisposed)
+            while (!_isDisposed && _previewView != null)
             {
-                try
+
+                await Task.Delay(Configuration.AutofocusInterval);
+
+                if (_camera == null || _previewView == null)
+                    continue;
+
+                MainThread.BeginInvokeOnMainThread(() =>
                 {
-                    await Task.Delay(Configuration.AutofocusInterval);
+                    try
+                    {
+                        float x = _previewView.GetX() + _previewView.Width / 2f;
+                        float y = _previewView.GetY() + _previewView.Height / 2f;
 
-                    if (_camera == null || _previewView == null)
-                        continue;
+                        MeteringPointFactory pointFactory = _previewView.MeteringPointFactory;
+                        float afPointWidth = 1.0f / 6.0f;  // 1/6 total area
+                        float aePointWidth = afPointWidth * 1.5f;
+                        MeteringPoint afPoint = pointFactory.CreatePoint(x, y, afPointWidth);
+                        MeteringPoint aePoint = pointFactory.CreatePoint(x, y, aePointWidth);
 
-                    float x = _previewView.GetX() + _previewView.Width / 2f;
-                    float y = _previewView.GetY() + _previewView.Height / 2f;
-
-                    MeteringPointFactory pointFactory = _previewView.MeteringPointFactory;
-                    float afPointWidth = 1.0f / 6.0f;  // 1/6 total area
-                    float aePointWidth = afPointWidth * 1.5f;
-                    MeteringPoint afPoint = pointFactory.CreatePoint(x, y, afPointWidth);
-                    MeteringPoint aePoint = pointFactory.CreatePoint(x, y, aePointWidth);
-
-                    MainThread.BeginInvokeOnMainThread(() => _camera.CameraControl.StartFocusAndMetering(
-                        new FocusMeteringAction.Builder(afPoint, FocusMeteringAction.FlagAf)
-                            .AddPoint(aePoint, FocusMeteringAction.FlagAe)
-                            .Build()));
-                }
-                catch (Exception ex)
-                {
-                    Log.Debug($"{nameof(CameraViewHandler)}-{nameof(HandleAutoFocus)}", ex.ToString());
-                }
+                        _camera.CameraControl.StartFocusAndMetering(
+                           new FocusMeteringAction.Builder(afPoint, FocusMeteringAction.FlagAf)
+                               .AddPoint(aePoint, FocusMeteringAction.FlagAe)
+                               .Build());
+                    }
+                    catch (Exception e)
+                    {
+                        Log.Debug($"{nameof(CameraViewHandler)}-{nameof(HandleAutoFocus)}", e.ToString());
+                    }
+                });
             }
 
             _isAutofocusRunning = false;
@@ -194,6 +198,7 @@ namespace BarcodeScanner.Mobile
                 return;
 
             DisableTorchIfNeeded();
+
 
             _cameraExecutor?.Shutdown();
             _cameraExecutor?.Dispose();
