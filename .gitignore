@@ -8,3 +8,4 @@ bin
 /.vs/BarcodeScanner.Mobile/v17
 /.vs/BarcodeScanner.Mobile/project-colors.json
 /.vs/BarcodeScanner.Mobile
+/.vs/*
