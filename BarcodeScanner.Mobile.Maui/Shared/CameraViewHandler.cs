@@ -39,25 +39,12 @@ namespace BarcodeScanner.Mobile
 
         protected override void ConnectHandler(NativeCameraView nativeView)
         {
-            if (VirtualView is View view)
-            {
-                view.Loaded += ViewOnLoaded;
-                view.Unloaded += ViewOnUnloaded;
-            }
             base.ConnectHandler(nativeView);
+            Connect();
         }
-
-        private void ViewOnUnloaded(object sender, EventArgs e) => Dispose();
-        private void ViewOnLoaded(object sender, EventArgs e) => Connect();
 
         protected override void DisconnectHandler(NativeCameraView platformView)
         {
-            if (VirtualView is View view)
-            {
-                view.Loaded -= ViewOnLoaded;
-                view.Unloaded -= ViewOnUnloaded;
-            }
-
             Dispose();
             platformView.Dispose();
             base.DisconnectHandler(platformView);

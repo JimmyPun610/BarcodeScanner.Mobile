@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.12.35707.178
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BarcodeScanner.Mobile.Maui", "BarcodeScanner.Mobile.Maui\BarcodeScanner.Mobile.Maui.csproj", "{DC50D165-EAE6-47CF-8916-6CA8876173E5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleApp.Maui", "SampleApp.Maui\SampleApp.Maui.csproj", "{9C07CD5A-0132-4147-A459-AFE8CF908FDB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DC50D165-EAE6-47CF-8916-6CA8876173E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DC50D165-EAE6-47CF-8916-6CA8876173E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DC50D165-EAE6-47CF-8916-6CA8876173E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DC50D165-EAE6-47CF-8916-6CA8876173E5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9C07CD5A-0132-4147-A459-AFE8CF908FDB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9C07CD5A-0132-4147-A459-AFE8CF908FDB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9C07CD5A-0132-4147-A459-AFE8CF908FDB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9C07CD5A-0132-4147-A459-AFE8CF908FDB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
