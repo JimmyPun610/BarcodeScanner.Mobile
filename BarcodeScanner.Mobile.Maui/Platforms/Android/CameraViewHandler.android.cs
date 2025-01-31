@@ -128,7 +128,7 @@ namespace BarcodeScanner.Mobile
         {
             _isAutofocusRunning = true;
 
-            while (!_isDisposed && _previewView != null)
+            while (!_isDisposed)
             {
 
                 await Task.Delay(Configuration.AutofocusInterval);
@@ -156,7 +156,7 @@ namespace BarcodeScanner.Mobile
                     }
                     catch (Exception e)
                     {
-                        Log.Debug($"{nameof(CameraViewHandler)}-{nameof(HandleAutoFocus)}", e.ToString());
+                        Log.Warn($"{nameof(CameraViewHandler)}-{nameof(HandleAutoFocus)}", e.ToString());
                     }
                 });
             }
@@ -229,7 +229,7 @@ namespace BarcodeScanner.Mobile
             }
             catch (Exception ex)
             {
-                Log.Debug($"{nameof(CameraViewHandler)}-{nameof(ClearCameraProvider)}", ex.ToString());
+                Log.Warn($"{nameof(CameraViewHandler)}-{nameof(ClearCameraProvider)}", ex.ToString());
             }
         }
     }
