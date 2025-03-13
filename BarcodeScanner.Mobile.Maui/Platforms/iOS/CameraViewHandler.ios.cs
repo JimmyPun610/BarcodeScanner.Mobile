@@ -75,6 +75,7 @@ namespace BarcodeScanner.Mobile
             CaptureSession.StartRunning();
             HandleTorch();
             SetFocusMode();
+            HandleZoom();
         }
 
         public void Dispose()

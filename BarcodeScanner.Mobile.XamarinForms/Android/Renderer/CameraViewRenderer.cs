@@ -136,6 +136,7 @@ namespace BarcodeScanner.Mobile.Renderer
                 HandleCustomPreviewSize(preview);
                 HandleTorch();
                 HandleAutoFoucs();
+                HandleZoom();
             }
             catch (Exception exc)
             {

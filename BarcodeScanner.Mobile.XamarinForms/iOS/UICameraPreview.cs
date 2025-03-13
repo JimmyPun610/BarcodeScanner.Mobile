@@ -224,6 +224,7 @@ namespace BarcodeScanner.Mobile
                     if (renderer.Element.TorchOn && !IsTorchOn())
                         ToggleFlashlight();
                     SetFocusMode();
+                    SetZoom(renderer.Element.Zoom);
                 }
             });
         }
