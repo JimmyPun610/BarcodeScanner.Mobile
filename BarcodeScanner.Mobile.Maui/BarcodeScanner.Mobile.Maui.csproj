@@ -5,7 +5,7 @@
 		<!-- Uncomment to also build the tizen app. You will need to install tizen by following this: https://github.com/Samsung/Tizen.NET -->
 		<!-- <TargetFrameworks>$(TargetFrameworks);net6.0-tizen</TargetFrameworks> -->
 		<UseMaui>true</UseMaui>
-		<MauiVersion>9.0.30</MauiVersion>
+		<MauiVersion>9.0.50</MauiVersion>
 		<SingleProject>true</SingleProject>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">14.0</SupportedOSPlatformVersion>
@@ -17,9 +17,9 @@
 		<RootNamespace>BarcodeScanner.Mobile.Maui</RootNamespace>
 
 		<Product></Product>
-		<AssemblyVersion>9.0.0.1</AssemblyVersion>
-		<AssemblyFileVersion>9.0.0.1</AssemblyFileVersion>
-		<Version>9.0.0.1</Version>
+		<AssemblyVersion>9.0.0.2</AssemblyVersion>
+		<AssemblyFileVersion>9.0.0.2</AssemblyFileVersion>
+		<Version>9.0.0.2</Version>
 		<NeutralLanguage>en</NeutralLanguage>
 
 		<!--Version of C# to use -->
@@ -33,10 +33,10 @@
 		<RepositoryType></RepositoryType>
 		<PackageTags>MAUI Barcode Scanning Tools</PackageTags>
 		<PackageReleaseNotes></PackageReleaseNotes>
-		<Copyright>Copyright 2024</Copyright>
+		<Copyright>Copyright 2025</Copyright>
 		<PackOnBuild>true</PackOnBuild>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
-		<PackageVersion>9.0.0.1</PackageVersion>
+		<PackageVersion>9.0.0.2</PackageVersion>
 	</PropertyGroup>
 
 	<!-- Going to use latest version library in MAUI -->
