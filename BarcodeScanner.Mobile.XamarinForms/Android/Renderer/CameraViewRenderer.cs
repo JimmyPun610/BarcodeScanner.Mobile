@@ -136,6 +136,7 @@ namespace BarcodeScanner.Mobile.Renderer
                 HandleTorch();
                 if (!_isAutofocusRunning)
                     System.Threading.Tasks.Task.Run(HandleAutoFocus);
+                HandleZoom();
             }
             catch (Exception exc)
             {

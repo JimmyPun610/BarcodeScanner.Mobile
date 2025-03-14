@@ -1,4 +1,4 @@
-﻿using AVFoundation;
+using AVFoundation;
 using BarcodeScanner.Mobile.Platforms.iOS;
 using CoreVideo;
 using Foundation;
@@ -71,6 +71,7 @@ namespace BarcodeScanner.Mobile
             CaptureSession.StartRunning();
             HandleTorch();
             SetFocusMode();
+            HandleZoom();
         }
 
         public void Dispose()
