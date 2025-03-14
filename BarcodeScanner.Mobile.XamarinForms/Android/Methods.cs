@@ -84,6 +84,9 @@ namespace BarcodeScanner.Mobile
             return formats;
         }
 
+
+        public static void SetAutofocusInterval(int interval) => Configuration.AutofocusInterval = interval;
+
         public static async Task<bool> AskForRequiredPermission()
         {
             try

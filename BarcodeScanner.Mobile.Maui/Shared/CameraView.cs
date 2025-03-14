@@ -189,20 +189,5 @@ namespace BarcodeScanner.Mobile
                 OnDetectedCommand?.Execute(new OnDetectedEventArg { OCRResult = ocrResult, BarcodeResults = barCodeResults, ImageData = imageData });
             });
         }
-
-        public CameraView()
-        {
-            this.Unloaded += CameraView_Unloaded;
-        }
-        /// <summary>
-        /// Due to DisconnectHandler has to be called manually...we do it when the Window unloaded
-        /// https://github.com/dotnet/maui/issues/3604
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void CameraView_Unloaded(object sender, EventArgs e)
-        {
-            Handler?.DisconnectHandler();
-        }
     }
 }

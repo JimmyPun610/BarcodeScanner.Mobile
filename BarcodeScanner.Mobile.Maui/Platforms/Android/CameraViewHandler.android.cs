@@ -15,12 +15,12 @@ using Exception = System.Exception;
 
 namespace BarcodeScanner.Mobile
 {
-    public partial class CameraViewHandler
+    public partial class CameraViewHandler : IDisposable
     {
         private bool _isDisposed;
-
         private IListenableFuture _cameraFuture;
         private IExecutorService _cameraExecutor;
+        private bool _isAutofocusRunning = false;
 
         private ICamera _camera;
 
@@ -35,6 +35,7 @@ namespace BarcodeScanner.Mobile
 
         private void Connect()
         {
+            _isDisposed = false;
             _cameraExecutor = Executors.NewSingleThreadExecutor();
             _cameraFuture = ProcessCameraProvider.GetInstance(Context);
             _cameraFuture.AddListener(new Runnable(CameraCallback), ContextCompat.GetMainExecutor(Context));
@@ -56,7 +57,7 @@ namespace BarcodeScanner.Mobile
             var previewBuilder = new Preview.Builder()
                 .SetResolutionSelector(selector);
             var preview = previewBuilder.Build();
-            preview.SetSurfaceProvider(_previewView.SurfaceProvider);
+            preview.SurfaceProvider = _previewView.SurfaceProvider;
 
             var imageAnalyzerBuilder = new ImageAnalysis.Builder();
             // Frame by frame analyze
@@ -74,7 +75,7 @@ namespace BarcodeScanner.Mobile
                                 .Build();
 
 
-            imageAnalyzer.SetAnalyzer(_cameraExecutor, new BarcodeAnalyzer(VirtualView));
+            imageAnalyzer.SetAnalyzer(_cameraExecutor, new BarcodeAnalyzer(VirtualView, () => MainThread.BeginInvokeOnMainThread(CameraCallback)));
 
             var cameraSelector = SelectCamera(cameraProvider);
 
@@ -94,7 +95,8 @@ namespace BarcodeScanner.Mobile
                 _camera = cameraProvider.BindToLifecycle(lifecycleOwner, cameraSelector, preview, imageAnalyzer);
 
                 HandleTorch();
-                HandleAutoFocus();
+                if (!_isAutofocusRunning)
+                    Task.Run(HandleAutoFocus);
                 HandleZoom();
             }
             catch (Exception exc)
@@ -123,38 +125,44 @@ namespace BarcodeScanner.Mobile
         /// Logic from https://stackoverflow.com/a/66659592/9032777
         /// Focus every 3s
         /// </summary>
-        private async void HandleAutoFocus()
+        private async Task HandleAutoFocus()
         {
-            while (true)
+            _isAutofocusRunning = true;
+
+            while (!_isDisposed)
             {
-                try
-                {
-                    await Task.Delay(3000);
 
-                    if (_camera == null || _previewView == null)
+                await Task.Delay(Configuration.AutofocusInterval);
+
+                if (_camera == null || _previewView == null)
+                    continue;
+
+                MainThread.BeginInvokeOnMainThread(() =>
+                {
+                    try
                     {
-                        continue;
+                        float x = _previewView.GetX() + _previewView.Width / 2f;
+                        float y = _previewView.GetY() + _previewView.Height / 2f;
+
+                        MeteringPointFactory pointFactory = _previewView.MeteringPointFactory;
+                        float afPointWidth = 1.0f / 6.0f;  // 1/6 total area
+                        float aePointWidth = afPointWidth * 1.5f;
+                        MeteringPoint afPoint = pointFactory.CreatePoint(x, y, afPointWidth);
+                        MeteringPoint aePoint = pointFactory.CreatePoint(x, y, aePointWidth);
+
+                        _camera.CameraControl.StartFocusAndMetering(
+                           new FocusMeteringAction.Builder(afPoint, FocusMeteringAction.FlagAf)
+                               .AddPoint(aePoint, FocusMeteringAction.FlagAe)
+                               .Build());
                     }
-
-                    float x = _previewView.GetX() + _previewView.Width / 2f;
-                    float y = _previewView.GetY() + _previewView.Height / 2f;
-
-                    MeteringPointFactory pointFactory = _previewView.MeteringPointFactory;
-                    float afPointWidth = 1.0f / 6.0f;  // 1/6 total area
-                    float aePointWidth = afPointWidth * 1.5f;
-                    MeteringPoint afPoint = pointFactory.CreatePoint(x, y, afPointWidth);
-                    MeteringPoint aePoint = pointFactory.CreatePoint(x, y, aePointWidth);
-
-                    _camera.CameraControl.StartFocusAndMetering(
-                new FocusMeteringAction.Builder(afPoint,
-                        FocusMeteringAction.FlagAf).AddPoint(aePoint,
-                        FocusMeteringAction.FlagAe).Build());
-                }
-                catch (Exception ex)
-                {
-
-                }
+                    catch (Exception e)
+                    {
+                        Log.Warn($"{nameof(CameraViewHandler)}-{nameof(HandleAutoFocus)}", e.ToString());
+                    }
+                });
             }
+
+            _isAutofocusRunning = false;
         }
 
         private void HandleTorch()
@@ -179,12 +187,19 @@ namespace BarcodeScanner.Mobile
             _camera.CameraControl.EnableTorch(false);
         }
 
-        private void Dispose()
+
+        public void Dispose() => Dispose(true);
+
+        protected virtual void Dispose(bool disposing)
         {
             if (_isDisposed)
                 return;
 
+            if (!disposing)
+                return;
+
             DisableTorchIfNeeded();
+
 
             _cameraExecutor?.Shutdown();
             _cameraExecutor?.Dispose();
@@ -195,6 +210,9 @@ namespace BarcodeScanner.Mobile
             _cameraFuture?.Cancel(true);
             _cameraFuture?.Dispose();
             _cameraFuture = null;
+
+            _camera.Dispose();
+            _camera = null;
 
             _isDisposed = true;
         }
@@ -212,10 +230,8 @@ namespace BarcodeScanner.Mobile
             }
             catch (Exception ex)
             {
-                Log.Debug($"{nameof(CameraViewHandler)}-{nameof(ClearCameraProvider)}", ex.ToString());
+                Log.Warn($"{nameof(CameraViewHandler)}-{nameof(ClearCameraProvider)}", ex.ToString());
             }
         }
-
-
     }
 }

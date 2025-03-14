@@ -11,8 +11,6 @@ namespace BarcodeScanner.Mobile
     // All the code in this file is only included on Android.
     public class Methods
     {
-       
-
         internal static BarcodeTypes ConvertBarcodeResultTypes(int barcodeValueType)
         {
             switch (barcodeValueType)
@@ -82,6 +80,8 @@ namespace BarcodeScanner.Mobile
             return formats;
         }
         #region Public Methods
+
+        public static void SetAutofocusInterval(int interval) => Configuration.AutofocusInterval = interval;
 
         public static void SetSupportBarcodeFormat(BarcodeFormats barcodeFormats)
         {

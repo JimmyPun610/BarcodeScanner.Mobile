@@ -12,7 +12,7 @@
 	<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 	<!-- .net 7 maui has some unresolved permissions issues with api 33. Barcode scanning issues with version 32+ -->
-	<uses-sdk android:minSdkVersion="21" android:targetSdkVersion="34" />
+	<uses-sdk android:minSdkVersion="21" android:targetSdkVersion="35" />
 	<queries>
 		<intent>
 			<action android:name="android.media.action.IMAGE_CAPTURE" />

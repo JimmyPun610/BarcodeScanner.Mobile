@@ -1,11 +1,11 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFrameworks>net8.0;net8.0-android;net8.0-ios;</TargetFrameworks>
+		<TargetFrameworks>net9.0;net9.0-android;net9.0-ios;</TargetFrameworks>
 		<!-- Uncomment to also build the tizen app. You will need to install tizen by following this: https://github.com/Samsung/Tizen.NET -->
 		<!-- <TargetFrameworks>$(TargetFrameworks);net6.0-tizen</TargetFrameworks> -->
 		<UseMaui>true</UseMaui>
-		<MauiVersion>8.0.40</MauiVersion>
+		<MauiVersion>9.0.30</MauiVersion>
 		<SingleProject>true</SingleProject>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">14.0</SupportedOSPlatformVersion>
@@ -17,9 +17,9 @@
 		<RootNamespace>BarcodeScanner.Mobile.Maui</RootNamespace>
 
 		<Product></Product>
-		<AssemblyVersion>8.0.40.1</AssemblyVersion>
-		<AssemblyFileVersion>8.0.40.1</AssemblyFileVersion>
-		<Version>8.0.40.1</Version>
+		<AssemblyVersion>9.0.0.1</AssemblyVersion>
+		<AssemblyFileVersion>9.0.0.1</AssemblyFileVersion>
+		<Version>9.0.0.1</Version>
 		<NeutralLanguage>en</NeutralLanguage>
 
 		<!--Version of C# to use -->
@@ -36,31 +36,31 @@
 		<Copyright>Copyright 2024</Copyright>
 		<PackOnBuild>true</PackOnBuild>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
-		<PackageVersion>8.0.40.1</PackageVersion>
+		<PackageVersion>9.0.0.1</PackageVersion>
 	</PropertyGroup>
 
 	<!-- Going to use latest version library in MAUI -->
-	<ItemGroup Condition="( '$(TargetFramework)' == 'net8.0-android' )">
-		<PackageReference Include="Xamarin.AndroidX.Collection" Version="1.4.0.4" />
-		<PackageReference Include="Xamarin.AndroidX.Collection.Jvm" Version="1.4.0.3" />
-		<PackageReference Include="Xamarin.AndroidX.Collection.Ktx" Version="1.4.0.3" />
-		<PackageReference Include="Xamarin.AndroidX.Camera.Camera2" Version="1.3.3.2">
+	<ItemGroup Condition="( '$(TargetFramework)' == 'net9.0-android' )">
+		<PackageReference Include="Xamarin.AndroidX.Collection" Version="1.4.5.2" />
+		<PackageReference Include="Xamarin.AndroidX.Collection.Jvm" Version="1.4.5.2" />
+		<PackageReference Include="Xamarin.AndroidX.Collection.Ktx" Version="1.4.5.2" />
+		<PackageReference Include="Xamarin.AndroidX.Camera.Camera2" Version="1.4.1.1">
 		</PackageReference>
-		<PackageReference Include="Xamarin.AndroidX.Camera.Lifecycle" Version="1.3.3.2">
+		<PackageReference Include="Xamarin.AndroidX.Camera.Lifecycle" Version="1.4.1.1">
 		</PackageReference>
-		<PackageReference Include="Xamarin.AndroidX.Camera.View" Version="1.3.3.2">
+		<PackageReference Include="Xamarin.AndroidX.Camera.View" Version="1.4.1.1">
 		</PackageReference>
-        <PackageReference Include="Xamarin.Google.MLKit.Common" Version="118.10.0.2" />
-		<PackageReference Include="Xamarin.Google.MLKit.Vision.Common" Version="117.3.0.8" />
-		<PackageReference Include="Xamarin.Google.MLKit.BarcodeScanning" Version="117.2.0.4">
+        <PackageReference Include="Xamarin.Google.MLKit.Common" Version="118.11.0.2" />
+		<PackageReference Include="Xamarin.Google.MLKit.Vision.Common" Version="117.3.0.13" />
+		<PackageReference Include="Xamarin.Google.MLKit.BarcodeScanning" Version="117.3.0.2">
 		</PackageReference>
-		<PackageReference Include="Xamarin.GooglePlayServices.MLKit.Text.Recognition" Version="119.0.0.6">			
+		<PackageReference Include="Xamarin.GooglePlayServices.MLKit.Text.Recognition" Version="119.0.1.2">			
 		</PackageReference>
 	</ItemGroup>
 
-	<ItemGroup Condition="( '$(TargetFramework)' == 'net8.0-ios' )">
-		<PackageReference Include="System.Numerics.Vectors" Version="4.5.0" />
-		<PackageReference Include="AdamE.MLKit.iOS.BarcodeScanning" Version="5.0.0-alpha2" />
+	<ItemGroup Condition="( '$(TargetFramework)' == 'net9.0-ios' )">
+		<PackageReference Include="System.Numerics.Vectors" Version="4.6.0" />
+		<PackageReference Include="AdamE.MLKit.iOS.BarcodeScanning" Version="6.0.0" />
 		<BundleResource Include="Platforms\iOS\PrivacyInfo.xcprivacy" LogicalName="PrivacyInfo.xcprivacy" />
 	</ItemGroup>
 	<ItemGroup>

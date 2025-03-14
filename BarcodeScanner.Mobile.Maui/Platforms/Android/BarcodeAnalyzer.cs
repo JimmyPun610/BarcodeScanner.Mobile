@@ -16,10 +16,12 @@ namespace BarcodeScanner.Mobile
         private readonly ICameraView _cameraView;
         private long _lastRunTime = DateTimeOffset.Now.ToUnixTimeMilliseconds();
         private long _lastAnalysisTime = DateTimeOffset.MinValue.ToUnixTimeMilliseconds();
+        private Action _barcodeDisposed;
 
 
-        public BarcodeAnalyzer(ICameraView cameraView)
+        public BarcodeAnalyzer(ICameraView cameraView, Action barcodeDisposed)
         {
+            _barcodeDisposed = barcodeDisposed;
             _cameraView = cameraView;
             if (_cameraView != null && _cameraView.ScanInterval < 100)
                 _cameraView.ScanInterval = 500;
@@ -130,6 +132,7 @@ namespace BarcodeScanner.Mobile
             catch (ArgumentException)
             {
                 //Ignore argument exception, it will be thrown if BarcodeAnalyzer get disposed during processing
+                _barcodeDisposed?.Invoke();
             }
         }
 

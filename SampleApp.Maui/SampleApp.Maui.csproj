@@ -1,11 +1,11 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFrameworks>net8.0-ios;net8.0-android</TargetFrameworks>
+		<TargetFrameworks>net9.0-ios;net9.0-android</TargetFrameworks>
 		<RuntimeIdentifier Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">ios-arm64</RuntimeIdentifier>
 		<PlatformTarget>arm64</PlatformTarget>
 
-		<MauiVersion>8.0.40</MauiVersion>
+		<MauiVersion>9.0.30</MauiVersion>
 		<OutputType>Exe</OutputType>
 		<RootNamespace>SampleApp.Maui</RootNamespace>
 		<UseMaui>true</UseMaui>
@@ -26,9 +26,9 @@
 		<ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
 		<ApplicationVersion>1</ApplicationVersion>
 
-		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">12.0</SupportedOSPlatformVersion>
+		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">12.2</SupportedOSPlatformVersion>
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">21.0</SupportedOSPlatformVersion>
-		
+
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -52,32 +52,42 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
-	  <PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="$(MauiVersion)" />
-	  <PackageReference Include="Xamarin.AndroidX.Activity" Version="1.9.0.2" Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'" />
-	  <PackageReference Include="Xamarin.AndroidX.Activity.Ktx" Version="1.9.0.2" Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'" />
-	  <PackageReference Include="BarcodeScanner.Mobile.Maui" Version="8.0.40.1" />
+		<PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
+		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="$(MauiVersion)" />
+		<PackageReference Include="Xamarin.AndroidX.Activity" Version="1.9.3.2" Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'" />
+		<PackageReference Include="Xamarin.AndroidX.Activity.Ktx" Version="1.9.3.2" Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Compile Update="OCRImageCapture\OCRImageCaptureDemo.xaml.cs">
-	    <DependentUpon>OCRImageCaptureDemo.xaml</DependentUpon>
-	  </Compile>
+		<ProjectReference Include="..\BarcodeScanner.Mobile.Maui\BarcodeScanner.Mobile.Maui.csproj" />
 	</ItemGroup>
-	
+
+	<ItemGroup>
+		<Compile Update="NestedPage\NestedPageDemo.xaml.cs">
+			<DependentUpon>NestedPageDemo.xaml</DependentUpon>
+		</Compile>
+		<Compile Update="OCRImageCapture\OCRImageCaptureDemo.xaml.cs">
+			<DependentUpon>OCRImageCaptureDemo.xaml</DependentUpon>
+		</Compile>
+	</ItemGroup>
+
 	<ItemGroup>
 
-	  <MauiXaml Update="OCRImageCapture\OCRImageCaptureDemo.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
+		<MauiXaml Update="NestedPage\NestedPageDemo.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
 
-	  <MauiXaml Update="Resources\Styles\Colors.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
+		<MauiXaml Update="OCRImageCapture\OCRImageCaptureDemo.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
 
-	  <MauiXaml Update="Resources\Styles\Styles.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
+		<MauiXaml Update="Resources\Styles\Colors.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+
+		<MauiXaml Update="Resources\Styles\Styles.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
 
 	</ItemGroup>
 </Project>
